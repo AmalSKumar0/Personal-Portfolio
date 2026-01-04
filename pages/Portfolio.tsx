@@ -2,10 +2,12 @@ import React from 'react';
 import { Layout } from '../components/Layout';
 import { Footer } from '../components/Footer';
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 
 export const Portfolio: React.FC = () => {
     return (
         <Layout>
+            <SEO title="Portfolio" description="My Projects - Email Bots, Taxi Booking Apps, API Services, and more built with Python and React." />
             {/* banner */}
             <div className="mil-inner-banner">
                 <div className="mil-banner-content mil-up">

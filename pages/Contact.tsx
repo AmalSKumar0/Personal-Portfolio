@@ -2,10 +2,12 @@ import React from 'react';
 import { Layout } from '../components/Layout';
 import { Footer } from '../components/Footer';
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 
 export const Contact: React.FC = () => {
     return (
         <Layout>
+            <SEO title="Contact" description="Get in touch with Amal S Kumar for your next web development project. Based in Kochi, Kerala." />
             {/* banner */}
             <div className="mil-inner-banner mil-p-0-120">
                 <div className="mil-banner-content mil-center mil-up">

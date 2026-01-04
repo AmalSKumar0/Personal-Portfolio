@@ -2,10 +2,15 @@ import React from 'react';
 import { Layout } from '../components/Layout';
 import { Footer } from '../components/Footer';
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 
 export const Home: React.FC = () => {
     return (
         <Layout>
+            <SEO
+                title="Home"
+                description="Amal S Kumar - Freelance Full-Stack Developer specializing in Python, Django, React, and AI-driven solutions."
+            />
             <section className="mil-banner mil-dark-bg">
                 <div className="mi-invert-fix">
                     <div className="mil-animation-frame">

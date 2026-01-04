@@ -2,10 +2,12 @@ import React from 'react';
 import { Layout } from '../components/Layout';
 import { Footer } from '../components/Footer';
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 
 export const Blog: React.FC = () => {
     return (
         <Layout>
+            <SEO title="Blog" description="Tech insights and updates from Amal S Kumar." />
             {/* banner */}
             <div className="mil-inner-banner mil-p-0-120">
                 <div className="mil-banner-content mil-up">

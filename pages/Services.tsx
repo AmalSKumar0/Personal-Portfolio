@@ -2,10 +2,12 @@ import React from 'react';
 import { Layout } from '../components/Layout';
 import { Footer } from '../components/Footer';
 import { Link } from 'react-router-dom';
+import { SEO } from '../components/SEO';
 
 export const Services: React.FC = () => {
     return (
         <Layout>
+            <SEO title="Services" description="Web Development Services - Backend (Python/Django), Frontend (React), and Intelligent Automation solutions." />
             {/* banner */}
             <div className="mil-dark-bg">
                 <div className="mil-inner-banner">
