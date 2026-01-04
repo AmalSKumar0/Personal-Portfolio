@@ -19,19 +19,19 @@ export const Home: React.FC = () => {
                     <div className="container">
                         <div className="mil-banner-content mil-up">
 
-                            <h1 className="mil-muted mil-mb-60">Designing <span className="mil-thin">a Better</span><br /> World <span className="mil-thin">Today</span></h1>
+                            <h1 className="mil-muted mil-mb-60">Amal <span className="mil-thin">S Kumar</span><br /> Full-Stack <span className="mil-thin">Developer</span></h1>
                             <div className="row">
                                 <div className="col-md-7 col-lg-5">
-                                    <p className="mil-light-soft mil-mb-60">Welcome to our world of endless imagination and boundless creativity. Together, let's embark on a remarkable journey where dreams become tangible realities.</p>
+                                    <p className="mil-light-soft mil-mb-60">Technology should solve real problems — I build systems that make that happen. From backend architecture to polished UI, I enjoy every part of the development process.</p>
                                 </div>
                             </div>
 
-                            <Link to="/services" className="mil-button mil-arrow-place mil-btn-space">
-                                <span>What we do</span>
+                            <Link to="/portfolio" className="mil-button mil-arrow-place mil-btn-space">
+                                <span>Check my work</span>
                             </Link>
 
-                            <Link to="/portfolio" className="mil-link mil-muted mil-arrow-place">
-                                <span>View works</span>
+                            <Link to="/contact" className="mil-link mil-muted mil-arrow-place">
+                                <span>Contact Me</span>
                             </Link>
 
                             <div className="mil-circle-text">
@@ -61,16 +61,16 @@ export const Home: React.FC = () => {
                         <div className="col-lg-6 col-xl-5">
 
                             <div className="mil-mb-90">
-                                <h2 className="mil-up mil-mb-60">Discover <br />Our <span className="mil-thin">Studio</span></h2>
-                                <p className="mil-up mil-mb-30">At our design studio, we are a collective of talented individuals ignited by our unwavering passion for transforming ideas into reality. With a harmonious blend of diverse backgrounds and a vast array of skill sets, we join forces to create compelling solutions for our esteemed clients.</p>
+                                <h2 className="mil-up mil-mb-60">About <br /><span className="mil-thin">Me</span></h2>
+                                <p className="mil-up mil-mb-30">I’m a Computer Applications graduate passionate about designing and building systems that solve real-world problems. My core focus is on Python (Django), PHP, and exploring AI/ML integration for intelligent automation.</p>
 
-                                <p className="mil-up mil-mb-60">Collaboration is at the heart of what we do. Our team thrives on the synergy that arises when unique perspectives converge, fostering an environment of boundless creativity. By harnessing our collective expertise, we produce extraordinary results that consistently surpass expectations.</p>
+                                <p className="mil-up mil-mb-60">Whether it's creating a robust API, a dynamic frontend, or automating a workflow, I bring a detail-oriented approach to every project. Currently open to new opportunities.</p>
 
                                 <div className="mil-about-quote">
                                     <div className="mil-avatar mil-up">
-                                        <img src="/assets/img/faces/customers/2.jpg" alt="Founder" />
+                                        <img src="/assets/img/faces/customers/2.jpg" alt="Amal S Kumar" />
                                     </div>
-                                    <h6 className="mil-quote mil-up">Passionately Creating <span className="mil-thin">Design Wonders:</span> Unleashing <span className="mil-thin">Boundless Creativity</span></h6>
+                                    <h6 className="mil-quote mil-up">"Technology should solve <span className="mil-thin">real problems.</span>"</h6>
                                 </div>
                             </div>
 
@@ -100,17 +100,17 @@ export const Home: React.FC = () => {
                         <div className="mil-mb-120">
                             <div className="row">
                                 <div className="col-lg-10">
-                                    <span className="mil-suptitle mil-light-soft mil-suptitle-right mil-up">Professionals focused on helping your brand<br /> grow and move forward.</span>
+                                    <span className="mil-suptitle mil-light-soft mil-suptitle-right mil-up">Exploring AI <br /> and Modern Web Technologies.</span>
                                 </div>
                             </div>
 
                             <div className="mil-complex-text justify-content-center mil-up mil-mb-15">
                                 <span className="mil-text-image"><img src="/assets/img/photo/2.jpg" alt="team" /></span>
-                                <h2 className="mil-h1 mil-muted mil-center">Unique <span className="mil-thin">Ideas</span></h2>
+                                <h2 className="mil-h1 mil-muted mil-center">Intelligent <span className="mil-thin">Automation</span></h2>
                             </div>
                             <div className="mil-complex-text justify-content-center mil-up">
-                                <h2 className="mil-h1 mil-muted mil-center">For Your <span className="mil-thin">Business.</span></h2>
-                                <Link to="/services" className="mil-services-button mil-button mil-arrow-place"><span>What we do</span></Link>
+                                <h2 className="mil-h1 mil-muted mil-center">For Real <span className="mil-thin">Impact.</span></h2>
+                                <Link to="/services" className="mil-services-button mil-button mil-arrow-place"><span>My Skills</span></Link>
                             </div>
                         </div>
 

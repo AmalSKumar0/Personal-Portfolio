@@ -40,64 +40,52 @@ export const Services: React.FC = () => {
                                 <div className="col-lg-7">
                                     <div className="row">
                                         <div className="col-md-6 col-lg-6">
-                                            <Link to="/services" className="mil-service-card-lg mil-more mil-accent-cursor mil-offset">
-                                                <h4 className="mil-muted mil-up mil-mb-30">Branding and <br />Identity Design</h4>
-                                                <p className="mil-descr mil-light-soft mil-up mil-mb-30">Our creative agency is a team of professionals focused on helping your brand grow.</p>
+                                            <div className="mil-service-card-lg mil-more mil-accent-cursor mil-offset">
+                                                <h4 className="mil-muted mil-up mil-mb-30">Backend <br />Development</h4>
+                                                <p className="mil-descr mil-light-soft mil-up mil-mb-30">Robust and scalable server-side systems using industry-standard frameworks.</p>
                                                 <ul className="mil-service-list mil-light mil-mb-30">
-                                                    <li className="mil-up">UX Audits</li>
-                                                    <li className="mil-up">Design thinking</li>
-                                                    <li className="mil-up">Methodologies</li>
-                                                    <li className="mil-up">Wireframing</li>
+                                                    <li className="mil-up">Python (Django, Flask)</li>
+                                                    <li className="mil-up">PHP (Laravel)</li>
+                                                    <li className="mil-up">REST APIs</li>
+                                                    <li className="mil-up">MySQL & SQLite</li>
                                                 </ul>
-                                                <div className="mil-link mil-accent mil-arrow-place mil-up">
-                                                    <span>Read more</span>
-                                                </div>
-                                            </Link>
+                                            </div>
                                         </div>
                                         <div className="col-md-6 col-lg-6">
-                                            <Link to="/services" className="mil-service-card-lg mil-more mil-accent-cursor">
-                                                <h4 className="mil-muted mil-up mil-mb-30">Website Design <br />and Development</h4>
-                                                <p className="mil-descr mil-light-soft mil-up mil-mb-30">Our creative agency is a team of professionals focused on helping your brand grow.</p>
+                                            <div className="mil-service-card-lg mil-more mil-accent-cursor">
+                                                <h4 className="mil-muted mil-up mil-mb-30">Frontend <br />Engineering</h4>
+                                                <p className="mil-descr mil-light-soft mil-up mil-mb-30">Modern, responsive, and interactive user interfaces built for performance.</p>
                                                 <ul className="mil-service-list mil-light mil-mb-30">
-                                                    <li className="mil-up">UX Audits</li>
-                                                    <li className="mil-up">Design thinking</li>
-                                                    <li className="mil-up">Methodologies</li>
-                                                    <li className="mil-up">Wireframing</li>
+                                                    <li className="mil-up">React.js</li>
+                                                    <li className="mil-up">Tailwind CSS</li>
+                                                    <li className="mil-up">JavaScript & TypeScript</li>
+                                                    <li className="mil-up">Electron.js</li>
                                                 </ul>
-                                                <div className="mil-link mil-accent mil-arrow-place mil-up">
-                                                    <span>Read more</span>
-                                                </div>
-                                            </Link>
+                                            </div>
                                         </div>
                                         <div className="col-md-6 col-lg-6">
-                                            <Link to="/services" className="mil-service-card-lg mil-more mil-accent-cursor mil-offset">
-                                                <h4 className="mil-muted mil-up mil-mb-30">Advertising and <br />Marketing Campaigns</h4>
-                                                <p className="mil-descr mil-light-soft mil-up mil-mb-30">Our creative agency is a team of professionals focused on helping your brand grow.</p>
+                                            <div className="mil-service-card-lg mil-more mil-accent-cursor mil-offset">
+                                                <h4 className="mil-muted mil-up mil-mb-30">Freelance <br />Experience</h4>
+                                                <p className="mil-descr mil-light-soft mil-up mil-mb-30">Delivering high-quality freelance solutions for international clients.</p>
                                                 <ul className="mil-service-list mil-light mil-mb-30">
-                                                    <li className="mil-up">UX Audits</li>
-                                                    <li className="mil-up">Design thinking</li>
-                                                    <li className="mil-up">Methodologies</li>
-                                                    <li className="mil-up">Wireframing</li>
+                                                    <li className="mil-up">Hope and Heal (Australia)</li>
+                                                    <li className="mil-up">HOC Art Cafe (Bangalore)</li>
+                                                    <li className="mil-up">WordPress Development</li>
+                                                    <li className="mil-up">Custom Web Solutions</li>
                                                 </ul>
-                                                <div className="mil-link mil-accent mil-arrow-place mil-up">
-                                                    <span>Read more</span>
-                                                </div>
-                                            </Link>
+                                            </div>
                                         </div>
                                         <div className="col-md-6 col-lg-6">
-                                            <Link to="/services" className="mil-service-card-lg mil-more mil-accent-cursor">
-                                                <h4 className="mil-muted mil-up mil-mb-30">Creative Consulting <br />Concept Development</h4>
-                                                <p className="mil-descr mil-light-soft mil-up mil-mb-30">Our creative agency is a team of professionals focused on helping your brand grow.</p>
+                                            <div className="mil-service-card-lg mil-more mil-accent-cursor">
+                                                <h4 className="mil-muted mil-up mil-mb-30">Achievements <br />& Education</h4>
+                                                <p className="mil-descr mil-light-soft mil-up mil-mb-30">Continuous learning and recognition in the field.</p>
                                                 <ul className="mil-service-list mil-light mil-mb-30">
-                                                    <li className="mil-up">UX Audits</li>
-                                                    <li className="mil-up">Design thinking</li>
-                                                    <li className="mil-up">Methodologies</li>
-                                                    <li className="mil-up">Wireframing</li>
+                                                    <li className="mil-up">BCA (Mahatma Gandhi University)</li>
+                                                    <li className="mil-up">10+ Full-Stack Apps</li>
+                                                    <li className="mil-up">2nd Prize Idea Pitching (MES)</li>
+                                                    <li className="mil-up">Central Govt Bootcamp Participant</li>
                                                 </ul>
-                                                <div className="mil-link mil-accent mil-arrow-place mil-up">
-                                                    <span>Read more</span>
-                                                </div>
-                                            </Link>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
                 <div className="container mil-p-120-60">
                     <div className="row justify-content-between">
                         <div className="col-md-4 col-lg-4 mil-mb-60">
-                            <div className="mil-muted mil-logo mil-up mil-mb-30">Ashley.</div>
+                            <div className="mil-muted mil-logo mil-up mil-mb-30">Amal.</div>
                             <p className="mil-light-soft mil-up mil-mb-30">Subscribe our newsletter:</p>
                             <form className="mil-subscribe-form mil-up">
                                 <input type="text" placeholder="Enter our email" />
@@ -53,12 +53,12 @@ export const Footer: React.FC = () => {
                         <div className="col-md-7 col-lg-6">
                             <div className="row justify-content-between">
                                 <div className="col-md-6 col-lg-5 mil-mb-60">
-                                    <h6 className="mil-muted mil-up mil-mb-30">Canada</h6>
-                                    <p className="mil-light-soft mil-up">71 South Los Carneros Road, California <span className="mil-no-wrap">+51 174 705 812</span></p>
+                                    <h6 className="mil-muted mil-up mil-mb-30">Location</h6>
+                                    <p className="mil-light-soft mil-up">Kochi, Kerala, India</p>
                                 </div>
                                 <div className="col-md-6 col-lg-5 mil-mb-60">
-                                    <h6 className="mil-muted mil-up mil-mb-30">Germany</h6>
-                                    <p className="mil-light-soft mil-up">Leehove 40, 2678 MC De Lier, Netherlands <span className="mil-no-wrap">+31 174 705 811</span></p>
+                                    <h6 className="mil-muted mil-up mil-mb-30">Contact</h6>
+                                    <p className="mil-light-soft mil-up">amalskumarofficialz@gmail.com <span className="mil-no-wrap">+91 85907 74603</span></p>
                                 </div>
                             </div>
                         </div>
@@ -66,13 +66,12 @@ export const Footer: React.FC = () => {
                             <div className="mil-vert-between">
                                 <div className="mil-mb-30">
                                     <ul className="mil-social-icons mil-up">
-                                        <li><a href="#." target="_blank" className="social-icon"> <i className="far fa-circle"></i></a></li>
-                                        <li><a href="#." target="_blank" className="social-icon"> <i className="far fa-circle"></i></a></li>
-                                        <li><a href="#." target="_blank" className="social-icon"> <i className="far fa-circle"></i></a></li>
-                                        <li><a href="#." target="_blank" className="social-icon"> <i className="far fa-circle"></i></a></li>
+                                        <li><a href="https://www.linkedin.com/in/amal-fsd/" target="_blank" className="social-icon"> <i className="fab fa-linkedin-in"></i></a></li>
+                                        <li><a href="https://github.com/AmalSKumar0" target="_blank" className="social-icon"> <i className="fab fa-github"></i></a></li>
+                                        <li><a href="mailto:amalskumarofficialz@gmail.com" target="_blank" className="social-icon"> <i className="fas fa-envelope"></i></a></li>
                                     </ul>
                                 </div>
-                                <p className="mil-light-soft mil-up">© Copyright 2023 - Mil. All Rights Reserved.</p>
+                                <p className="mil-light-soft mil-up">© Copyright 2026 - Amal S Kumar. All Rights Reserved.</p>
                             </div>
                         </div>
                     </div>

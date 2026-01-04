@@ -41,7 +41,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                     <div className="mil-pos-abs mil-animation-2">
                         <div className="mil-reveal-frame">
                             <p className="mil-reveal-box"></p>
-                            <p className="mil-h3 mil-muted mil-thin">ashley.com</p>
+                            <p className="mil-h3 mil-muted mil-thin">amalskumar.co.in</p>
                         </div>
                     </div>
                 </div>

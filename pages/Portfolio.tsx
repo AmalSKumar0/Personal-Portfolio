@@ -33,101 +33,73 @@ export const Portfolio: React.FC = () => {
                     <div className="mil-lines-place mil-lines-long"></div>
 
                     <div className="row justify-content-between align-items-center">
-                        <div className="col-lg-5">
-                            <Link to="/portfolio" className="mil-portfolio-item mil-more mil-mb-60">
-                                <div className="mil-cover-frame mil-vert mil-up">
-                                    <div className="mil-cover">
-                                        <img src="/assets/img/works/1.jpg" alt="cover" />
-                                    </div>
-                                </div>
-                                <div className="mil-descr">
-                                    <div className="mil-labels mil-up mil-mb-15">
-                                        <div className="mil-label mil-upper mil-accent">Branding</div>
-                                        <div className="mil-label mil-upper">may 24 2023</div>
-                                    </div>
-                                    <h4 className="mil-up">Interior design studio</h4>
-                                </div>
-                            </Link>
-                        </div>
                         <div className="col-lg-6">
-                            <Link to="/portfolio" className="mil-portfolio-item mil-more mil-parallax mil-mb-60" data-value-1="60" data-value-2="-60">
+                            <div className="mil-portfolio-item mil-more mil-mb-60">
                                 <div className="mil-cover-frame mil-hori mil-up">
                                     <div className="mil-cover">
-                                        <img src="/assets/img/works/2.jpg" alt="cover" />
+                                        <img src="/assets/img/projects/email_bot.png" alt="EmailToTelegramBot" />
                                     </div>
                                 </div>
                                 <div className="mil-descr">
                                     <div className="mil-labels mil-up mil-mb-15">
-                                        <div className="mil-label mil-upper mil-accent">Design</div>
-                                        <div className="mil-label mil-upper">may 24 2023</div>
+                                        <div className="mil-label mil-upper mil-accent">Python</div>
+                                        <div className="mil-label mil-upper">AI</div>
                                     </div>
-                                    <h4 className="mil-up">Home Security Camera</h4>
+                                    <h4 className="mil-up">EmailToTelegramBot</h4>
+                                    <p className="mil-up">A bot that forwards unread emails to Telegram and uses AI to generate concise summaries.</p>
                                 </div>
-                            </Link>
+                            </div>
                         </div>
                         <div className="col-lg-6">
-                            <Link to="/portfolio" className="mil-portfolio-item mil-more mil-parallax mil-mb-60" data-value-1="60" data-value-2="-60">
+                            <div className="mil-portfolio-item mil-more mil-mb-60">
                                 <div className="mil-cover-frame mil-hori mil-up">
                                     <div className="mil-cover">
-                                        <img src="/assets/img/works/3.jpg" alt="cover" />
+                                        <img src="/assets/img/projects/ridenow.png" alt="RideNow" />
                                     </div>
                                 </div>
                                 <div className="mil-descr">
                                     <div className="mil-labels mil-up mil-mb-15">
-                                        <div className="mil-label mil-upper mil-accent">Design</div>
-                                        <div className="mil-label mil-upper">may 24 2023</div>
+                                        <div className="mil-label mil-upper mil-accent">Django</div>
+                                        <div className="mil-label mil-upper">SQLite</div>
                                     </div>
-                                    <h4 className="mil-up">Kemia Honest Skincare</h4>
+                                    <h4 className="mil-up">RideNow</h4>
+                                    <p className="mil-up">Multi-vehicle taxi booking application designed for efficient ride management.</p>
                                 </div>
-                            </Link>
-                        </div>
-                        <div className="col-lg-5">
-                            <Link to="/portfolio" className="mil-portfolio-item mil-more mil-mb-60">
-                                <div className="mil-cover-frame mil-vert mil-up">
-                                    <div className="mil-cover">
-                                        <img src="/assets/img/works/4.jpg" alt="cover" />
-                                    </div>
-                                </div>
-                                <div className="mil-descr">
-                                    <div className="mil-labels mil-up mil-mb-15">
-                                        <div className="mil-label mil-upper mil-accent">Photography</div>
-                                        <div className="mil-label mil-upper">may 24 2023</div>
-                                    </div>
-                                    <h4 className="mil-up">Cascade of Lava</h4>
-                                </div>
-                            </Link>
-                        </div>
-                        <div className="col-lg-5">
-                            <Link to="/portfolio" className="mil-portfolio-item mil-more mil-mb-60">
-                                <div className="mil-cover-frame mil-vert mil-up">
-                                    <div className="mil-cover">
-                                        <img src="/assets/img/works/5.jpg" alt="cover" />
-                                    </div>
-                                </div>
-                                <div className="mil-descr">
-                                    <div className="mil-labels mil-up mil-mb-15">
-                                        <div className="mil-label mil-upper mil-accent">Design</div>
-                                        <div className="mil-label mil-upper">may 24 2023</div>
-                                    </div>
-                                    <h4 className="mil-up">Air Pro by Molekule</h4>
-                                </div>
-                            </Link>
+                            </div>
                         </div>
                         <div className="col-lg-6">
-                            <Link to="/portfolio" className="mil-portfolio-item mil-more mil-parallax mil-mb-60" data-value-1="60" data-value-2="-60">
+                            <div className="mil-portfolio-item mil-more mil-mb-60">
                                 <div className="mil-cover-frame mil-hori mil-up">
                                     <div className="mil-cover">
-                                        <img src="/assets/img/works/6.jpg" alt="cover" />
+                                        <img src="/assets/img/projects/pincode_api.png" alt="Pincode API" />
                                     </div>
                                 </div>
                                 <div className="mil-descr">
                                     <div className="mil-labels mil-up mil-mb-15">
-                                        <div className="mil-label mil-upper mil-accent">Design</div>
-                                        <div className="mil-label mil-upper">may 24 2023</div>
+                                        <div className="mil-label mil-upper mil-accent">Python</div>
+                                        <div className="mil-label mil-upper">API</div>
                                     </div>
-                                    <h4 className="mil-up">Tony's Chocolonely</h4>
+                                    <h4 className="mil-up">Pincode API</h4>
+                                    <p className="mil-up">A dedicated API service for retrieving and validating location data based on pincodes.</p>
                                 </div>
-                            </Link>
+                            </div>
+                        </div>
+                        <div className="col-lg-6">
+                            <div className="mil-portfolio-item mil-more mil-mb-60">
+                                <div className="mil-cover-frame mil-hori mil-up">
+                                    <div className="mil-cover">
+                                        <img src="/assets/img/projects/portfolio.png" alt="Portfolio" />
+                                    </div>
+                                </div>
+                                <div className="mil-descr">
+                                    <div className="mil-labels mil-up mil-mb-15">
+                                        <div className="mil-label mil-upper mil-accent">Django</div>
+                                        <div className="mil-label mil-upper">HTML</div>
+                                    </div>
+                                    <h4 className="mil-up">AmalSKumar Portfolio</h4>
+                                    <p className="mil-up">A personal portfolio website built with Python Django to showcase projects and skills.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
