@@ -6,6 +6,7 @@ import { Features } from './components/Features';
 import { Testimonials } from './components/Testimonials';
 import { Footer } from './components/Footer';
 import { TelemetrySection } from './components/TelemetrySection';
+import { SkillsBelt } from './components/SkillsBelt';
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Hero />
         <DemoSection />
         <TelemetrySection />
+        <SkillsBelt />
         <Features />
         <Testimonials />
       </main>
