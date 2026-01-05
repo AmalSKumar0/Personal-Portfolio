@@ -1,25 +1,23 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
-import { Home } from './pages/Home';
-import { Services } from './pages/Services';
-import { Portfolio } from './pages/Portfolio';
-import { Contact } from './pages/Contact';
-import { Blog } from './pages/Blog';
+import { Navbar } from './components/Navbar';
+import { Hero } from './components/Hero';
+import { DemoSection } from './components/DemoSection';
+import { Features } from './components/Features';
+import { Testimonials } from './components/Testimonials';
+import { Footer } from './components/Footer';
 
 const App: React.FC = () => {
   return (
-    <HelmetProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/blog" element={<Blog />} />
-        </Routes>
-      </Router>
-    </HelmetProvider>
+    <div className="min-h-screen bg-cream font-sans overflow-x-hidden selection:bg-flow-purple selection:text-flow-dark">
+      <Navbar />
+      <main>
+        <Hero />
+        <DemoSection />
+        <Features />
+        <Testimonials />
+      </main>
+      <Footer />
+    </div>
   );
 };
 
