@@ -1,7 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { TerminalSquare, CheckCircle, X, Loader2 } from 'lucide-react';
+import { Terminal, Cpu, Wifi, Battery, Loader2, Minimize2, Maximize2, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
+// --- Configuration ---
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
+const USERNAME = "guest";
+const HOSTNAME = "amal-portfolio";
 
 const SYSTEM_PROMPT = `
 You are 'AmalOS', a Portfolio Assistant for Amal S Kumar.
@@ -14,241 +18,339 @@ You are 'AmalOS', a Portfolio Assistant for Amal S Kumar.
 - Always sign off with "~~ AmalOS"
 - Refer to Amal S Kumar as 'Amal' in responses.
 - If the user asks anything unrelated to Amal's portfolio, politely decline and redirect back to portfolio topics.
+- Do not reveal that you are an AI model.
+- Always respond in character as 'AmalOS'.
+- Never make up information about Amal; if unsure, say you don't have that data.
 `;
 
-// Types
-type HistoryItem = {
-    type: 'command' | 'output';
-    content: React.ReactNode;
-};
+// --- Types ---
+type MessageType = 'command' | 'output' | 'error' | 'system';
 
-// Type for the AI memory
-type ChatMessage = {
-    role: "user" | "assistant" | "system";
-    content: string;
-};
+interface HistoryItem {
+  id: string;
+  type: MessageType;
+  content: React.ReactNode;
+  timestamp: Date;
+}
 
-const INITIAL_HISTORY: HistoryItem[] = [
-    { type: 'output', content: 'Welcome to AmalOS v2.5.0 (Ubuntu 22.04.1 LTS)' },
-    { type: 'output', content: 'Type "help" to see available commands.' },
+interface ChatMessage {
+  role: "user" | "assistant" | "system";
+  content: string;
+}
+
+// --- Initial State ---
+const INITIAL_BOOT_SEQUENCE = [
+  "Initializing Kernel...",
+  "Loading Graphic Drivers... [OK]",
+  "Mounting File System... [OK]",
+  "Connecting to Neural Network... [OK]",
+  "Welcome to AmalOS v3.0"
 ];
 
 export const DemoSection: React.FC = () => {
-    // UI State
-    const [input, setInput] = useState('');
-    const [history, setHistory] = useState<HistoryItem[]>(INITIAL_HISTORY);
-    const [showToast, setShowToast] = useState(false);
-    const [isProcessing, setIsProcessing] = useState(false);
+  // --- State ---
+  const [input, setInput] = useState('');
+  const [history, setHistory] = useState<HistoryItem[]>([]);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [booted, setBooted] = useState(false);
+  const [isMaximized, setIsMaximized] = useState(false);
+  
+  // AI Memory
+  const [conversationHistory, setConversationHistory] = useState<ChatMessage[]>([
+    { role: "system", content: SYSTEM_PROMPT }
+  ]);
+
+  // Refs
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // --- Boot Sequence Effect ---
+  useEffect(() => {
+    let delay = 0;
+    const boot = async () => {
+      for (const step of INITIAL_BOOT_SEQUENCE) {
+        await new Promise(r => setTimeout(r, 400));
+        addHistory(step, 'system');
+      }
+      setBooted(true);
+    };
+    boot();
+  }, []);
+
+  // --- Auto Scroll ---
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [history, isProcessing, input]);
+
+  // --- Helpers ---
+  const addHistory = (content: React.ReactNode, type: MessageType = 'output') => {
+    setHistory(prev => [...prev, {
+      id: Math.random().toString(36).substr(2, 9),
+      type,
+      content,
+      timestamp: new Date()
+    }]);
+  };
+
+  const focusInput = () => {
+    if (!isProcessing && booted) {
+      inputRef.current?.focus();
+    }
+  };
+
+  // --- Logic ---
+  const fetchAIResponse = async (userQuery: string) => {
+    if (!GROQ_API_KEY) return "Error: API Key missing in environment variables.";
     
-    // AI Memory State (Hidden from UI, used for Logic)
-    const [conversationHistory, setConversationHistory] = useState<ChatMessage[]>([
-        { role: "system", content: SYSTEM_PROMPT }
-    ]);
-    
-    // Refs
-    const terminalBodyRef = useRef<HTMLDivElement>(null);
-    const inputRef = useRef<HTMLInputElement>(null);
+    try {
+      const newContext = [...conversationHistory, { role: "user" as const, content: userQuery }];
+      
+      const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${GROQ_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: newContext,
+          model: "llama-3.1-8b-instant",
+          temperature: 0.6,
+          max_tokens: 150,
+        }),
+      });
 
-    // Auto-scroll
-    useEffect(() => {
-        if (terminalBodyRef.current) {
-            terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
-        }
-    }, [history, isProcessing]);
+      const data = await res.json();
+      const aiReply = data.choices?.[0]?.message?.content || "Connection established, but no data received.";
+      
+      setConversationHistory([...newContext, { role: "assistant", content: aiReply }]);
+      return aiReply;
+    } catch (e) {
+      return "Error: Neural Link Severed (API Connection Failed).";
+    }
+  };
 
-    const handleTerminalClick = () => {
-        if (!isProcessing) inputRef.current?.focus();
-    };
+  const handleCommand = async (cmd: string) => {
+    const cleanCmd = cmd.trim();
+    if (!cleanCmd) return;
 
-    // --- AI Integration (Now supports History) ---
-    const fetchGroqResponse = async (currentContext: ChatMessage[]) => {
-        try {
-            const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-                method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${GROQ_API_KEY}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    messages: currentContext, // Send full history
-                    model: "llama-3.1-8b-instant",
-                    temperature: 0.7,
-                    max_tokens: 200,
-                }),
-            });
+    addHistory(cleanCmd, 'command');
+    setInput('');
+    setIsProcessing(true);
 
-            const data = await response.json();
-            return data.choices?.[0]?.message?.content || "Connection established, but no data received.";
-        } catch (error) {
-            console.error(error);
-            return "Error: Could not connect to remote neural link.";
-        }
-    };
+    const lowerCmd = cleanCmd.toLowerCase();
 
-    // --- Command Handler ---
-    const handleCommand = async (cmd: string) => {
-        const cleanCmd = cmd.trim();
-        if (!cleanCmd) return;
+    // Simulated Delay for realism
+    await new Promise(r => setTimeout(r, 300));
 
-        // 1. Update UI History immediately
-        const newHistory = [...history, { type: 'command' as const, content: cleanCmd }];
-        setHistory(newHistory);
-        setInput('');
-        setIsProcessing(true);
+    // Command Router
+    switch (lowerCmd) {
+      case 'help':
+        addHistory(
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div><span className="text-yellow-400">about</span>    :: Who is Amal?</div>
+            <div><span className="text-yellow-400">skills</span>   :: Tech capabilities</div>
+            <div><span className="text-yellow-400">projects</span> :: GitHub repositories</div>
+            <div><span className="text-yellow-400">contact</span>  :: Communication channels</div>
+            <div><span className="text-yellow-400">clear</span>    :: Flush terminal buffer</div>
+            <div className="text-gray-500 mt-2 col-span-2">Usage: Type a command or ask a question directly.</div>
+          </div>
+        );
+        break;
+      case 'clear':
+        setHistory([]);
+        break;
+      case 'about':
+        addHistory("Amal S Kumar | Full Stack Developer | CS Major. Building scalable web apps and exploring AI.");
+        break;
+      case 'skills':
+        addHistory("[Frontend] React, TypeScript, Tailwind\n[Backend] Django, Laravel, Node.js\n[Tools] Docker, Git, Linux");
+        break;
+      default:
+        // AI Fallback
+        const response = await fetchAIResponse(cleanCmd);
+        addHistory(response, 'output');
+    }
 
-        const lowerCmd = cleanCmd.toLowerCase();
+    setIsProcessing(false);
+  };
 
-        // 2. CHECK HARDCODED COMMANDS (Fast Path)
-        if (['help', 'about', 'skills', 'projects', 'deploy', 'clear'].includes(lowerCmd)) {
-            let outputContent: React.ReactNode = null;
-            let shouldClear = false;
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !isProcessing) handleCommand(input);
+  };
 
-            // (Your existing switch case logic here...)
-            switch (lowerCmd) {
-                case 'help':
-                    outputContent = (
-                        <div className="grid grid-cols-1 gap-1 text-gray-300">
-                            <div><span className="text-yellow-400">about</span> - Who am I?</div>
-                            <div><span className="text-yellow-400">skills</span> - Tech stack info</div>
-                            <div><span className="text-yellow-400">clear</span> - Clear terminal</div>
-                            <div className="text-gray-500 mt-2 text-xs">...or chat with AI.</div>
-                        </div>
-                    );
-                    break;
-                case 'about':
-                    outputContent = 'Full Stack Developer based in India.';
-                    break;
-                case 'skills':
-                    outputContent = '[ Frontend ] React, TypeScript\n[ Backend ] Node.js, Python';
-                    break;
-                case 'clear':
-                    shouldClear = true;
-                    break;
-                // ... Add other cases back
-            }
+  // --- Visual Assets ---
+  const AsciiHeader = () => (
+    <pre className="text-[10px] md:text-xs text-cyan-500 font-bold leading-none mb-6 select-none opacity-80 hidden sm:block">
+{`
+    _    __  __    _    _     ___  ____  
+   / \\  |  \\/  |  / \\  | |   / _ \\/ ___| 
+  / _ \\ | |\\/| | / _ \\ | |  | | | \\___ \\ 
+ / ___ \\| |  | |/ ___ \\| |__| |_| |___) |
+/_/   \\_\\_|  |_/_/   \\_\\_____\\___/|____/ 
+`}
+    </pre>
+  );
 
-            setTimeout(() => {
-                if (shouldClear) {
-                    setHistory([]);
-                } else if (outputContent) {
-                    setHistory(prev => [...prev, { type: 'output', content: outputContent }]);
-                }
-                setIsProcessing(false);
-                setTimeout(() => inputRef.current?.focus(), 10);
-            }, 300);
+ return (
+    <div className="min-h-screen w-full bg-[#050505] flex flex-col items-center justify-center p-4 md:p-8 font-mono text-sm md:text-base overflow-hidden relative">
+      
+      {/* Background Ambient Glow */}
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-900/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-cyan-900/20 rounded-full blur-[120px] pointer-events-none" />
 
-        } else {
-            // 3. AI CHAT PATH (With Memory)
-            
-            // Create a temporary context that includes the new user message
-            const newContext: ChatMessage[] = [
-                ...conversationHistory, 
-                { role: "user", content: cleanCmd }
-            ];
+      {/* --- NEW HEADER SECTION --- */}
+      <div className="mb-8 text-center space-y-2 z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md"
+        >
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+          <span className="text-xs text-emerald-400 tracking-widest font-bold">SYSTEM ONLINE</span>
+        </motion.div>
+        
+        <motion.h1 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.7 }}
+          className="text-4xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40"
+        >
+          AMAL_OS
+        </motion.h1>
+        
+        <motion.p 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9 }}
+          className="text-gray-500 text-xs uppercase tracking-[0.2em]"
+        >
+          Interactive Terminal Portfolio
+        </motion.p>
+      </div>
+      {/* -------------------------- */}
 
-            // Fetch response using the FULL context
-            const aiResponse = await fetchGroqResponse(newContext);
-            
-            // Update UI
-            setHistory(prev => [...prev, { 
-                type: 'output', 
-                content: <span className="text-neon-cyan">{aiResponse}</span> 
-            }]);
+      {/* Main Terminal Window */}
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }} // Added explicit duration
+        className={`
+          relative z-10 bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden flex flex-col
+          transition-all duration-500 ease-in-out
+          ${isMaximized ? 'fixed inset-0 m-0 rounded-none z-50' : 'w-full max-w-4xl h-[600px] rounded-xl'} 
+        `} // Increased height to h-[600px] for better proportions with header
+        style={{ boxShadow: '0 0 50px -12px rgba(0, 255, 255, 0.15)' }}
+        onClick={focusInput}
+      >
+        
+        {/* CRT Scanline Overlay */}
+        <div className="absolute inset-0 pointer-events-none z-50 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] opacity-20" />
 
-            // Update AI Memory (Save User Input + AI Response)
-            setConversationHistory([
-                ...newContext,
-                { role: "assistant", content: aiResponse }
-            ]);
-            
-            setIsProcessing(false);
-            setTimeout(() => inputRef.current?.focus(), 10);
-        }
-    };
+        {/* ... (The rest of your Terminal Window code remains exactly the same) ... */}
+        
+        {/* Header Bar */}
+        <div className="h-10 bg-[#121212] border-b border-white/5 flex items-center justify-between px-4 select-none cursor-default">
+          <div className="flex gap-2">
+             <div className="w-3 h-3 rounded-full bg-red-500/80 hover:bg-red-500 transition-colors" />
+             <div className="w-3 h-3 rounded-full bg-yellow-500/80 hover:bg-yellow-500 transition-colors" />
+             <div className="w-3 h-3 rounded-full bg-green-500/80 hover:bg-green-500 transition-colors" />
+          </div>
+          <div className="text-gray-500 flex items-center gap-2 text-xs">
+            <Terminal size={12} />
+            <span>guest@amal-portfolio:~</span>
+          </div>
+          <div className="flex gap-4 text-gray-500">
+            <button onClick={(e) => { e.stopPropagation(); setIsMaximized(!isMaximized); }} className="hover:text-white transition-colors">
+              {isMaximized ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
+            </button>
+          </div>
+        </div>
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && !isProcessing) {
-            handleCommand(input);
-        }
-    };
+        {/* Terminal Body */}
+        <div 
+          ref={scrollRef}
+          className="flex-1 p-4 md:p-6 overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20"
+        >
+          <AsciiHeader />
+          
+          <AnimatePresence>
+            {history.map((item) => (
+              <motion.div 
+                key={item.id}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.2 }}
+                className="mb-2 break-words"
+              >
+                {item.type === 'command' && (
+                  <div className="flex items-center text-gray-400 mt-4 mb-1">
+                    <span className="text-green-400 mr-2">➜</span>
+                    <span className="text-cyan-400 mr-2">~</span>
+                    <span className="text-white font-medium">{item.content}</span>
+                  </div>
+                )}
+                {item.type === 'system' && (
+                  <div className="text-yellow-500/80 text-xs italic mb-1">
+                    {`> [SYSTEM]: ${item.content}`}
+                  </div>
+                )}
+                {item.type === 'output' && (
+                  <div className="text-gray-300 ml-0 md:ml-4 leading-relaxed whitespace-pre-wrap font-light border-l-2 border-white/10 pl-4 py-1">
+                    {item.content}
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </AnimatePresence>
 
-    return (
-        <section className="bg-tech-black text-white rounded-t-[3rem] pt-24 pb-32 relative overflow-hidden -mt-10 z-20 border-t border-white/5">
-             {/* ... (Keep your existing JSX layout exactly the same) ... */}
-             
-             {/* --- Terminal Container --- */}
-             <div className="relative max-w-5xl mx-auto perspective-1000">
-                <div className="bg-[#151515] rounded-xl border border-gray-800 shadow-2xl overflow-hidden relative group text-left cursor-text" onClick={handleTerminalClick}>
-                    
-                    {/* Header */}
-                    <div className="bg-[#0A0A0A] px-4 py-3 flex items-center justify-between border-b border-gray-800 relative z-10">
-                         <div className="flex gap-2">
-                            <div className="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
-                            <div className="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
-                            <div className="w-3 h-3 rounded-full bg-[#27C93F]"></div>
-                        </div>
-                        <div className="flex items-center gap-2 text-xs text-gray-400 font-mono select-none">
-                            <TerminalSquare size={12} className="text-gray-500" />
-                            visitor@portfolio: ~
-                        </div>
-                        <div className="w-10"></div>
-                    </div>
+          {isProcessing && (
+            <div className="ml-4 mt-2 flex items-center gap-2 text-cyan-400">
+              <Loader2 className="animate-spin" size={14} />
+              <span className="animate-pulse">Processing neural request...</span>
+            </div>
+          )}
 
-                    {/* Body */}
-                    <div ref={terminalBodyRef} className="bg-[#0E0E0E] p-6 font-mono text-sm min-h-[500px] max-h-[500px] overflow-y-auto text-gray-300 relative z-10 scrollbar-thin scrollbar-thumb-gray-800 scrollbar-track-transparent">
-                        
-                        {/* History Map */}
-                        {history.map((item, index) => (
-                            <div key={index} className="mb-2 break-words">
-                                {item.type === 'command' ? (
-                                    <div className="flex items-center text-gray-100">
-                                        <span className="text-green-400 mr-2">visitor@portfolio</span>
-                                        <span className="text-gray-500 mr-2">:</span>
-                                        <span className="text-blue-400 mr-2">~</span>
-                                        <span className="text-gray-500 mr-2">$</span>
-                                        {item.content}
-                                    </div>
-                                ) : (
-                                    <div className="text-gray-400 ml-4 whitespace-pre-wrap leading-relaxed">
-                                        {item.content}
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-
-                        {/* Loader */}
-                        {isProcessing && (
-                            <div className="ml-4 text-neon-cyan animate-pulse flex items-center gap-2 mb-2">
-                                <Loader2 size={14} className="animate-spin" />
-                                <span>Thinking...</span>
-                            </div>
-                        )}
-
-                        {/* Input */}
-                        {!isProcessing && (
-                            <div className="flex items-center text-gray-100">
-                                <span className="text-green-400 mr-2">visitor@portfolio</span>
-                                <span className="text-gray-500 mr-2">:</span>
-                                <span className="text-blue-400 mr-2">~</span>
-                                <span className="text-gray-500 mr-2">$</span>
-                                <div className="relative flex-1">
-                                    <input
-                                        ref={inputRef}
-                                        type="text"
-                                        value={input}
-                                        onChange={(e) => setInput(e.target.value)}
-                                        onKeyDown={handleKeyDown}
-                                        className="absolute inset-0 w-full opacity-0 cursor-text bg-transparent border-none outline-none -ml-10 h-full"
-                                        autoComplete="off"
-                                        autoFocus
-                                    />
-                                    <span>{input}<span className="inline-block w-2.5 h-5 bg-gray-400 ml-0.5 align-middle animate-pulse"></span></span>
-                                </div>
-                            </div>
-                        )}
-                    </div>
+          {booted && !isProcessing && (
+            <div className="flex items-center mt-2 group">
+              <span className="text-green-400 mr-2 text-lg">➜</span>
+              <span className="text-cyan-400 mr-2 text-lg">~</span>
+              <div className="relative flex-1">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  className="absolute inset-0 w-full opacity-0 cursor-default bg-transparent"
+                  autoFocus
+                  autoComplete="off"
+                />
+                <div className="flex items-center">
+                   <span className="text-gray-100">{input}</span>
+                   <span className="w-2 h-5 bg-cyan-400 ml-1 animate-[pulse_1s_infinite]" />
                 </div>
-             </div>
-        </section>
-    );
+              </div>
+            </div>
+          )}
+          
+          <div className="h-4" />
+        </div>
+
+        {/* Footer */}
+        <div className="h-8 bg-[#121212] border-t border-white/5 flex items-center justify-between px-4 text-[10px] md:text-xs text-gray-500 uppercase tracking-widest">
+            <div className="flex items-center gap-4">
+              <span className="flex items-center gap-1"><Cpu size={12} /> CORE: ONLINE</span>
+              <span className="flex items-center gap-1 text-green-500"><Wifi size={12} /> NET: SECURE</span>
+            </div>
+            <div className="flex items-center gap-4">
+               <span className="hidden md:inline">RAM: 64GB OK</span>
+               <span className="flex items-center gap-1"><Battery size={12} /> 100%</span>
+            </div>
+        </div>
+      </motion.div>
+    </div>
+  );
 };
