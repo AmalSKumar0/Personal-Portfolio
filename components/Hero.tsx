@@ -144,8 +144,7 @@ export const Hero: React.FC = () => {
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4 mb-24">
                         <button className="bg-gray-900 hover:bg-gray-800 transition-all transform hover:-translate-y-1 text-white px-8 py-4 rounded-full text-base font-bold shadow-2xl shadow-blue-500/20 flex items-center gap-2">
-                            Get in Touch
-                            <Zap size={18} className="text-yellow-400 fill-current" />
+                            Get in Touch with me
                         </button>
                         <button className="bg-white border border-gray-200 hover:border-gray-400 transition-all text-gray-900 px-8 py-4 rounded-full text-base font-bold flex items-center gap-2">
                             Download Resume

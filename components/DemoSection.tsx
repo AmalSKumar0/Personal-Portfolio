@@ -216,7 +216,7 @@ export const DemoSection: React.FC = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.7 }}
-          className="text-4xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40"
+          className="text-4xl md:text-5xl font-display tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40"
         >
           AMAL_OS
         </motion.h1>
