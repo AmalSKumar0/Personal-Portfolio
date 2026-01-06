@@ -27,57 +27,10 @@ export const Hero: React.FC = () => {
     return (
         <>
             <SpaceBattle />
-            <section className="pt-48 pb-24 px-6 relative overflow-hidden bg-gray-50 min-h-screen flex flex-col items-center">
-
-                {/* CSS for custom animations and grid pattern */}
-                <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-20px); }
-        }
-        @keyframes float-delayed {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-15px); }
-        }
-        @keyframes pulse-glow {
-          0%, 100% { box-shadow: 0 0 0 0px rgba(59, 130, 246, 0.4); }
-          50% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
-        }
-        @keyframes orbit {
-          from { transform: rotate(0deg) translateX(300px) rotate(0deg); }
-          to { transform: rotate(360deg) translateX(300px) rotate(-360deg); }
-        }
-        @keyframes float-random-x {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(150px); }
-            50% { transform: translateX(-50px); }
-            75% { transform: translateX(-150px); }
-        }
-        @keyframes float-random-y {
-            0%, 100% { transform: translateY(0); }
-            33% { transform: translateY(-100px); }
-            66% { transform: translateY(100px); }
-        }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        .animate-float-delayed { animation: float-delayed 7s ease-in-out infinite; animation-delay: 1s; }
-        .animate-pulse-glow { animation: pulse-glow 3s infinite; }
-        .animate-orbit { animation: orbit 20s linear infinite; }
-        .perspective-1000 { perspective: 1000px; }
-        .bg-grid-pattern {
-          background-size: 40px 40px;
-          background-image: linear-gradient(to right, #e5e7eb 1px, transparent 1px),
-                            linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);
-        }
-        /* Custom Satellite SVG Styles */
-        .outline-blue { stroke: #3b82f6; fill: none; stroke-width: 2px; }
-        .outline-pink { stroke: #ec4899; fill: none; stroke-width: 2px; }
-        .thin { stroke-width: 1px; }
-        .micro { stroke-width: 0.5px; }
-        .dashed { stroke-dasharray: 4 2; }
-      `}</style>
+            <section className="pt-48 pb-24 px-6 relative overflow-hidden bg-gray-50 dark:bg-tech-black min-h-screen flex flex-col items-center transition-colors duration-300">
 
                 {/* Abstract Perspective Grid Background */}
-                <div className="absolute inset-0 bg-grid-pattern z-0 pointer-events-none opacity-50"></div>
+                <div className="absolute inset-0 bg-grid-pattern dark:opacity-[0.05] z-0 pointer-events-none opacity-50 transition-opacity duration-300"></div>
 
                 {/* Geometric Decorations */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none z-0">
@@ -109,18 +62,18 @@ export const Hero: React.FC = () => {
                 <div className="max-w-5xl mx-auto text-center relative z-10 flex flex-col items-center">
 
                     {/* Availability Badge */}
-                    <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full pl-2 pr-4 py-1.5 mb-8 shadow-sm hover:shadow-md transition-all cursor-default">
-                        <div className="bg-gray-900 text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Status</div>
-                        <span className="text-sm font-medium text-gray-600 flex items-center gap-2">
-                            Open to work <span className="text-gray-300">|</span> <span className="text-blue-500">Available for projects</span>
+                    <div className="inline-flex items-center gap-3 bg-white/80 dark:bg-white/5 backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-full pl-2 pr-4 py-1.5 mb-8 shadow-sm hover:shadow-md transition-all cursor-default">
+                        <div className="bg-gray-900 dark:bg-white text-white dark:text-tech-black text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Status</div>
+                        <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-2">
+                            Open to work <span className="text-gray-300 dark:text-gray-600">|</span> <span className="text-blue-500 dark:text-neon-blue">Available for projects</span>
                         </span>
                     </div>
 
                     {/* Headline */}
                     <div className="flex flex-col items-center mb-10 relative z-10 w-full">
                         <div className="flex items-center gap-6 mb-4 transition-all duration-300">
-                            <span className="text-6xl md:text-8xl font-display font-bold text-gray-900 leading-none">Hello, I'm</span>
-                            <div className="hidden md:block w-48 h-24 bg-blue-100 rounded-full shadow-lg overflow-hidden relative group rotate-3 hover:rotate-0 transition-all duration-300">
+                            <span className="text-6xl md:text-8xl font-display font-bold text-gray-900 dark:text-white leading-none transition-colors duration-300">Hello, I'm</span>
+                            <div className="hidden md:block w-48 h-24 bg-blue-100 dark:bg-blue-900/30 rounded-full shadow-lg overflow-hidden relative group rotate-3 hover:rotate-0 transition-all duration-300">
                                 <img
                                     src="/avatar-badge.jpg"
                                     alt="Avatar"
@@ -128,7 +81,7 @@ export const Hero: React.FC = () => {
                                 />
                             </div>
                         </div>
-                        <h1 className="text-7xl md:text-9xl font-display font-bold text-gray-900 leading-[1.05] tracking-tight transition-all duration-300 text-center">
+                        <h1 className="text-7xl md:text-9xl font-display font-bold text-gray-900 dark:text-white leading-[1.05] tracking-tight transition-all duration-300 text-center">
                             <span className="text-[#3b82f6] drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">
                                 Amal S Kumar
                             </span>
@@ -136,23 +89,23 @@ export const Hero: React.FC = () => {
                     </div>
 
                     {/* Subheadline */}
-                    <p className="text-xl text-gray-500 max-w-xl mx-auto mb-12 text-balance leading-relaxed">
+                    <p className="text-xl text-gray-500 dark:text-gray-400 max-w-xl mx-auto mb-12 text-balance leading-relaxed transition-colors duration-300">
                         Full-Stack Developer & AI Explorer. <br className="hidden md:block" />
                         Technology should solve real problems — I build systems that make that happen.
                     </p>
 
                     {/* CTA Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4 mb-24">
-                        <button className="bg-gray-900 hover:bg-gray-800 transition-all transform hover:-translate-y-1 text-white px-8 py-4 rounded-full text-base font-bold shadow-2xl shadow-blue-500/20 flex items-center gap-2">
+                        <button className="bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 transition-all transform hover:-translate-y-1 text-white dark:text-tech-black px-8 py-4 rounded-full text-base font-bold shadow-2xl shadow-blue-500/20 flex items-center gap-2">
                             Get in Touch with me
                         </button>
-                        <button className="bg-white border border-gray-200 hover:border-gray-400 transition-all text-gray-900 px-8 py-4 rounded-full text-base font-bold flex items-center gap-2">
+                        <button className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:border-gray-400 dark:hover:border-white/30 transition-all text-gray-900 dark:text-white px-8 py-4 rounded-full text-base font-bold flex items-center gap-2">
                             Download Resume
                         </button>
                     </div>
 
                     {/* Main Visual Composition */}
-            
+
                 </div>
             </section>
         </>

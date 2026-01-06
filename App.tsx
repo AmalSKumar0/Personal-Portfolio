@@ -6,21 +6,38 @@ import { Features } from './components/Features';
 import { Testimonials } from './components/Testimonials';
 import { Footer } from './components/Footer';
 import { TelemetrySection } from './components/TelemetrySection';
-import { SkillsBelt } from './components/SkillsBelt';
+import { LoadingScreen } from './components/LoadingScreen';
 
 const App: React.FC = () => {
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [isFading, setIsFading] = React.useState(false);
+
+  React.useEffect(() => {
+    // Logic moved to internal component timer + callback
+  }, []);
+
+  const handleLoadingComplete = () => {
+    setIsFading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+  };
+
   return (
-    <div className="min-h-screen bg-cream font-sans overflow-x-hidden selection:bg-flow-purple selection:text-flow-dark">
-      <Navbar />
-      <main>
-        <Hero />
-        <DemoSection />
-        <TelemetrySection />
-        <Features />
-        <Testimonials />
-      </main>
-      <Footer />
-    </div>
+    <>
+      {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
+      <div className={`min-h-screen bg-cream dark:bg-tech-black font-sans overflow-x-hidden selection:bg-flow-purple selection:text-flow-dark transition-colors duration-300 ${isLoading ? 'hidden' : ''}`}>
+        <Navbar />
+        <main>
+          <Hero />
+          <DemoSection />
+          <TelemetrySection />
+          <Features />
+          <Testimonials />
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 };
 

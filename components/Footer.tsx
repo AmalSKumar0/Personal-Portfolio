@@ -3,7 +3,7 @@ import { ArrowRight, Github, Linkedin, Twitter, Mail } from 'lucide-react';
 
 export const Footer: React.FC = () => {
     return (
-        <footer className="bg-cream pt-0 pb-12 px-6">
+        <footer className="bg-cream dark:bg-tech-black pt-0 pb-12 px-6 transition-colors duration-300">
             <div className="max-w-7xl mx-auto">
 
                 {/* Large CTA */}
@@ -28,45 +28,45 @@ export const Footer: React.FC = () => {
                 </div>
 
                 {/* Links Grid */}
-                <div className="grid md:grid-cols-12 gap-12 border-t border-gray-200 pt-16">
+                <div className="grid md:grid-cols-12 gap-12 border-t border-gray-200 dark:border-white/10 pt-16">
                     <div className="md:col-span-4">
-                        <div className="font-bold text-2xl mb-6">Amal S Kumar.</div>
-                        <p className="text-gray-500 text-sm max-w-xs">
+                        <div className="font-bold text-2xl mb-6 text-gray-900 dark:text-white">Amal S Kumar.</div>
+                        <p className="text-gray-500 dark:text-gray-400 text-sm max-w-xs">
                             Full-Stack Developer & AI Explorer.
                         </p>
                     </div>
                     <div className="md:col-span-2">
-                        <div className="font-bold mb-6">Services</div>
-                        <ul className="space-y-3 text-sm text-gray-500">
-                            <li><a href="#" className="hover:text-black transition-colors">Web Development</a></li>
-                            <li><a href="#" className="hover:text-black transition-colors">Mobile Apps</a></li>
-                            <li><a href="#" className="hover:text-black transition-colors">Cloud Solutions</a></li>
-                            <li><a href="#" className="hover:text-black transition-colors">UI/UX Design</a></li>
+                        <div className="font-bold mb-6 text-gray-900 dark:text-white">Services</div>
+                        <ul className="space-y-3 text-sm text-gray-500 dark:text-gray-400">
+                            <li><a href="#" className="hover:text-black dark:hover:text-white transition-colors">Web Development</a></li>
+                            <li><a href="#" className="hover:text-black dark:hover:text-white transition-colors">Mobile Apps</a></li>
+                            <li><a href="#" className="hover:text-black dark:hover:text-white transition-colors">Cloud Solutions</a></li>
+                            <li><a href="#" className="hover:text-black dark:hover:text-white transition-colors">UI/UX Design</a></li>
                         </ul>
                     </div>
                     <div className="md:col-span-2">
-                        <div className="font-bold mb-6">Explore</div>
-                        <ul className="space-y-3 text-sm text-gray-500">
-                            <li><a href="#" className="hover:text-black transition-colors">About</a></li>
-                            <li><a href="#" className="hover:text-black transition-colors">Experience</a></li>
-                            <li><a href="#" className="hover:text-black transition-colors">Projects</a></li>
-                            <li><a href="#" className="hover:text-black transition-colors">Contact</a></li>
+                        <div className="font-bold mb-6 text-gray-900 dark:text-white">Explore</div>
+                        <ul className="space-y-3 text-sm text-gray-500 dark:text-gray-400">
+                            <li><a href="#" className="hover:text-black dark:hover:text-white transition-colors">About</a></li>
+                            <li><a href="#" className="hover:text-black dark:hover:text-white transition-colors">Experience</a></li>
+                            <li><a href="#" className="hover:text-black dark:hover:text-white transition-colors">Projects</a></li>
+                            <li><a href="#" className="hover:text-black dark:hover:text-white transition-colors">Contact</a></li>
                         </ul>
                     </div>
                     <div className="md:col-span-4 flex md:justify-end">
                         <div className="space-y-6">
-                            <div className="font-bold">Connect</div>
+                            <div className="font-bold text-gray-900 dark:text-white">Connect</div>
                             <div className="flex gap-4">
-                                <a href="https://github.com/AmalSKumar0" target="_blank" rel="noreferrer" className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-black hover:text-white transition-colors"><Github size={18} /></a>
-                                <a href="https://www.linkedin.com/in/amal-fsd/" target="_blank" rel="noreferrer" className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-black hover:text-white transition-colors"><Linkedin size={18} /></a>
-                                <a href="mailto:amalskumarofficialz@gmail.com" className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-black hover:text-white transition-colors"><Mail size={18} /></a>
+                                <a href="https://github.com/AmalSKumar0" target="_blank" rel="noreferrer" className="w-10 h-10 bg-gray-100 dark:bg-white/10 rounded-full flex items-center justify-center hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-colors dark:text-white"><Github size={18} /></a>
+                                <a href="https://www.linkedin.com/in/amal-fsd/" target="_blank" rel="noreferrer" className="w-10 h-10 bg-gray-100 dark:bg-white/10 rounded-full flex items-center justify-center hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-colors dark:text-white"><Linkedin size={18} /></a>
+                                <a href="mailto:amalskumarofficialz@gmail.com" className="w-10 h-10 bg-gray-100 dark:bg-white/10 rounded-full flex items-center justify-center hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition-colors dark:text-white"><Mail size={18} /></a>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 {/* Copyright */}
-                <div className="border-t border-gray-200 pt-8 mt-16 text-center text-xs text-gray-400">
+                <div className="border-t border-gray-200 dark:border-white/10 pt-8 mt-16 text-center text-xs text-gray-400">
                     &copy; 2025 Amal S Kumar. All rights reserved.
                 </div>
 

@@ -3,10 +3,14 @@ import { ArrowRight, Code2, Layers, Cpu } from 'lucide-react';
 
 export const Features: React.FC = () => {
     return (
-        <div className="bg-white py-24 px-6 relative overflow-hidden">
+        <div className="bg-white dark:bg-tech-black py-24 px-6 relative overflow-hidden transition-colors duration-300">
             {/* Background Dots */}
-            <div className="absolute inset-0 z-0 opacity-[0.03]" style={{
+            <div className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.1]" style={{
                 backgroundImage: 'radial-gradient(#000 1px, transparent 1px)',
+                backgroundSize: '20px 20px'
+            }}></div>
+            <div className="absolute inset-0 z-0 opacity-0 dark:opacity-[0.1]" style={{
+                backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)',
                 backgroundSize: '20px 20px'
             }}></div>
 
@@ -14,8 +18,8 @@ export const Features: React.FC = () => {
 
                 {/* Intro Section */}
                 <div className="text-center mb-20">
-                    <h2 className="text-5xl font-display font-bold text-tech-black mb-6">My Expertise <br /> <span className="text-neon-blue">& Journey.</span></h2>
-                    <p className="text-xl text-gray-500 max-w-2xl mx-auto mb-10 text-balance">
+                    <h2 className="text-5xl font-display font-bold text-tech-black dark:text-white mb-6 transition-colors">My Expertise <br /> <span className="text-neon-blue"> & Journey.</span></h2>
+                    <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-10 text-balance transition-colors">
                         I’m a Computer Applications graduate passionate about designing and building systems that solve real-world problems. From backend architecture to polished UI.
                     </p>
                 </div>
@@ -24,15 +28,15 @@ export const Features: React.FC = () => {
                 <div className="grid md:grid-cols-3 gap-6 auto-rows-[minmax(300px,auto)]">
 
                     {/* Feature 1: Modern Architecture (Large Card) */}
-                    <div className="md:col-span-2 bg-gray-50 rounded-[2rem] p-8 border border-gray-100 relative overflow-hidden group hover:border-gray-200 transition-colors">
-                        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-gradient-to-bl from-white to-transparent rounded-full translate-x-1/3 -translate-y-1/3"></div>
+                    <div className="md:col-span-2 bg-gray-50 dark:bg-tech-dark rounded-[2rem] p-8 border border-gray-100 dark:border-white/5 relative overflow-hidden group hover:border-gray-200 dark:hover:border-white/10 transition-colors">
+                        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-gradient-to-bl from-white dark:from-white/5 to-transparent rounded-full translate-x-1/3 -translate-y-1/3 transition-colors"></div>
 
                         <div className="relative z-10 h-full flex flex-col">
-                            <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 text-tech-black">
+                            <div className="w-12 h-12 bg-white dark:bg-white/10 rounded-xl shadow-sm flex items-center justify-center mb-6 text-tech-black dark:text-white transition-colors">
                                 <Layers size={24} />
                             </div>
-                            <h3 className="text-2xl font-bold text-gray-900 mb-2">Professional Experience</h3>
-                            <p className="text-gray-500 max-w-md mb-8">Dec 2024 - Present: Freelance Web Developer delivering responsive solutions.</p>
+                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 transition-colors">Professional Experience</h3>
+                            <p className="text-gray-500 dark:text-gray-400 max-w-md mb-8 transition-colors">Dec 2024 - Present: Freelance Web Developer delivering responsive solutions.</p>
 
                             {/* Illustration: Nodes */}
                             <div className="mt-auto relative h-32 w-full flex items-center">
@@ -57,7 +61,7 @@ export const Features: React.FC = () => {
                     </div>
 
                     {/* Feature 2: High Performance (Dark Card) */}
-                    <div className="md:col-span-1 bg-tech-black rounded-[2rem] p-8 relative overflow-hidden text-white flex flex-col justify-between group">
+                    <div className="md:col-span-1 bg-tech-black dark:bg-[#050505] dark:border dark:border-white/10 rounded-[2rem] p-8 relative overflow-hidden text-white flex flex-col justify-between group transition-colors">
                         {/* Abstract Line Background */}
                         <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none group-hover:opacity-30 transition-opacity" viewBox="0 0 100 100" preserveAspectRatio="none">
                             <path d="M0 100 Q 30 60 100 20" stroke="url(#lineGradient)" strokeWidth="0.5" fill="none" />
@@ -90,12 +94,12 @@ export const Features: React.FC = () => {
                     </div>
 
                     {/* Feature 3: Clean Code */}
-                    <div className="md:col-span-1 bg-white border border-gray-100 rounded-[2rem] p-8 shadow-lg shadow-gray-100/50 flex flex-col hover:-translate-y-1 transition-transform duration-300">
-                        <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mb-6 text-neon-purple">
+                    <div className="md:col-span-1 bg-white dark:bg-tech-dark border border-gray-100 dark:border-white/5 rounded-[2rem] p-8 shadow-lg shadow-gray-100/50 dark:shadow-none flex flex-col hover:-translate-y-1 transition-all duration-300">
+                        <div className="w-12 h-12 bg-purple-50 dark:bg-purple-900/20 rounded-xl flex items-center justify-center mb-6 text-neon-purple transition-colors">
                             <Code2 size={24} />
                         </div>
-                        <h3 className="text-xl font-bold text-gray-900 mb-2">Education</h3>
-                        <p className="text-gray-500 text-sm mb-6">Bachelor of Computer Applications (BCA) - MG University.</p>
+                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 transition-colors">Education</h3>
+                        <p className="text-gray-500 dark:text-gray-400 text-sm mb-6 transition-colors">Bachelor of Computer Applications (BCA) - MG University.</p>
 
                         <div className="bg-gray-900 rounded-lg p-3 font-mono text-[10px] text-gray-300 mt-auto shadow-inner">
                             <div className="text-purple-400">interface <span className="text-yellow-300">Degree</span> {'{'}</div>

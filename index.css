@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Dark Mode Defaults */
+html.dark body {
+    @apply bg-tech-black text-white;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 dark:bg-white/20 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400 dark:bg-white/30;
+}
+
+/* Animations */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes float-delayed {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0px rgba(59, 130, 246, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+    }
+}
+
+@keyframes orbit {
+    from {
+        transform: rotate(0deg) translateX(300px) rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg) translateX(300px) rotate(-360deg);
+    }
+}
+
+@keyframes float-random-x {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(150px);
+    }
+
+    50% {
+        transform: translateX(-50px);
+    }
+
+    75% {
+        transform: translateX(-150px);
+    }
+}
+
+@keyframes float-random-y {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    33% {
+        transform: translateY(-100px);
+    }
+
+    66% {
+        transform: translateY(100px);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+    animation: float-delayed 7s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 3s infinite;
+}
+
+.animate-orbit {
+    animation: orbit 20s linear infinite;
+}
+
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+/* Grid Pattern */
+.bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, #e5e7eb 1px, transparent 1px),
+        linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);
+}
+
+html.dark .bg-grid-pattern {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+/* Custom Satellite SVG Styles */
+.outline-blue {
+    stroke: #3b82f6;
+    fill: none;
+    stroke-width: 2px;
+}
+
+.outline-pink {
+    stroke: #ec4899;
+    fill: none;
+    stroke-width: 2px;
+}
+
+.thin {
+    stroke-width: 1px;
+}
+
+.micro {
+    stroke-width: 0.5px;
+}
+
+.dashed {
+    stroke-dasharray: 4 2;
+}

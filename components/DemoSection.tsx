@@ -54,7 +54,7 @@ export const DemoSection: React.FC = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [booted, setBooted] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
-  
+
   // AI Memory
   const [conversationHistory, setConversationHistory] = useState<ChatMessage[]>([
     { role: "system", content: SYSTEM_PROMPT }
@@ -103,10 +103,10 @@ export const DemoSection: React.FC = () => {
   // --- Logic ---
   const fetchAIResponse = async (userQuery: string) => {
     if (!GROQ_API_KEY) return "Error: API Key missing in environment variables.";
-    
+
     try {
       const newContext = [...conversationHistory, { role: "user" as const, content: userQuery }];
-      
+
       const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
         method: "POST",
         headers: {
@@ -123,7 +123,7 @@ export const DemoSection: React.FC = () => {
 
       const data = await res.json();
       const aiReply = data.choices?.[0]?.message?.content || "Connection established, but no data received.";
-      
+
       setConversationHistory([...newContext, { role: "assistant", content: aiReply }]);
       return aiReply;
     } catch (e) {
@@ -183,7 +183,7 @@ export const DemoSection: React.FC = () => {
   // --- Visual Assets ---
   const AsciiHeader = () => (
     <pre className="text-[10px] md:text-xs text-cyan-500 font-bold leading-none mb-6 select-none opacity-80 hidden sm:block">
-{`
+      {`
     _    __  __    _    _     ___  ____  
    / \\  |  \\/  |  / \\  | |   / _ \\/ ___| 
   / _ \\ | |\\/| | / _ \\ | |  | | | \\___ \\ 
@@ -193,16 +193,16 @@ export const DemoSection: React.FC = () => {
     </pre>
   );
 
- return (
+  return (
     <div className="min-h-screen w-full bg-[#050505] flex flex-col items-center justify-center p-4 md:p-8 font-mono text-sm md:text-base overflow-hidden relative">
-      
+
       {/* Background Ambient Glow */}
       <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-900/20 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-cyan-900/20 rounded-full blur-[120px] pointer-events-none" />
 
       {/* --- NEW HEADER SECTION --- */}
       <div className="mb-8 text-center space-y-2 z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
@@ -211,8 +211,8 @@ export const DemoSection: React.FC = () => {
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
           <span className="text-xs text-emerald-400 tracking-widest font-bold">SYSTEM ONLINE</span>
         </motion.div>
-        
-        <motion.h1 
+
+        <motion.h1
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.7 }}
@@ -220,8 +220,8 @@ export const DemoSection: React.FC = () => {
         >
           AMAL_OS
         </motion.h1>
-        
-        <motion.p 
+
+        <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9 }}
@@ -233,7 +233,7 @@ export const DemoSection: React.FC = () => {
       {/* -------------------------- */}
 
       {/* Main Terminal Window */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }} // Added explicit duration
@@ -245,18 +245,18 @@ export const DemoSection: React.FC = () => {
         style={{ boxShadow: '0 0 50px -12px rgba(0, 255, 255, 0.15)' }}
         onClick={focusInput}
       >
-        
+
         {/* CRT Scanline Overlay */}
         <div className="absolute inset-0 pointer-events-none z-50 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] opacity-20" />
 
         {/* ... (The rest of your Terminal Window code remains exactly the same) ... */}
-        
+
         {/* Header Bar */}
         <div className="h-10 bg-[#121212] border-b border-white/5 flex items-center justify-between px-4 select-none cursor-default">
           <div className="flex gap-2">
-             <div className="w-3 h-3 rounded-full bg-red-500/80 hover:bg-red-500 transition-colors" />
-             <div className="w-3 h-3 rounded-full bg-yellow-500/80 hover:bg-yellow-500 transition-colors" />
-             <div className="w-3 h-3 rounded-full bg-green-500/80 hover:bg-green-500 transition-colors" />
+            <div className="w-3 h-3 rounded-full bg-red-500/80 hover:bg-red-500 transition-colors" />
+            <div className="w-3 h-3 rounded-full bg-yellow-500/80 hover:bg-yellow-500 transition-colors" />
+            <div className="w-3 h-3 rounded-full bg-green-500/80 hover:bg-green-500 transition-colors" />
           </div>
           <div className="text-gray-500 flex items-center gap-2 text-xs">
             <Terminal size={12} />
@@ -270,15 +270,15 @@ export const DemoSection: React.FC = () => {
         </div>
 
         {/* Terminal Body */}
-        <div 
+        <div
           ref={scrollRef}
           className="flex-1 p-4 md:p-6 overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20"
         >
           <AsciiHeader />
-          
+
           <AnimatePresence>
             {history.map((item) => (
-              <motion.div 
+              <motion.div
                 key={item.id}
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -325,30 +325,29 @@ export const DemoSection: React.FC = () => {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
                   className="absolute inset-0 w-full opacity-0 cursor-default bg-transparent"
-                  autoFocus
                   autoComplete="off"
                 />
                 <div className="flex items-center">
-                   <span className="text-gray-100">{input}</span>
-                   <span className="w-2 h-5 bg-cyan-400 ml-1 animate-[pulse_1s_infinite]" />
+                  <span className="text-gray-100">{input}</span>
+                  <span className="w-2 h-5 bg-cyan-400 ml-1 animate-[pulse_1s_infinite]" />
                 </div>
               </div>
             </div>
           )}
-          
+
           <div className="h-4" />
         </div>
 
         {/* Footer */}
         <div className="h-8 bg-[#121212] border-t border-white/5 flex items-center justify-between px-4 text-[10px] md:text-xs text-gray-500 uppercase tracking-widest">
-            <div className="flex items-center gap-4">
-              <span className="flex items-center gap-1"><Cpu size={12} /> CORE: ONLINE</span>
-              <span className="flex items-center gap-1 text-green-500"><Wifi size={12} /> NET: SECURE</span>
-            </div>
-            <div className="flex items-center gap-4">
-               <span className="hidden md:inline">RAM: 64GB OK</span>
-               <span className="flex items-center gap-1"><Battery size={12} /> 100%</span>
-            </div>
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-1"><Cpu size={12} /> CORE: ONLINE</span>
+            <span className="flex items-center gap-1 text-green-500"><Wifi size={12} /> NET: SECURE</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="hidden md:inline">RAM: 64GB OK</span>
+            <span className="flex items-center gap-1"><Battery size={12} /> 100%</span>
+          </div>
         </div>
       </motion.div>
     </div>
