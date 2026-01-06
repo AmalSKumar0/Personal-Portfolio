@@ -26,7 +26,9 @@ export const Hero: React.FC = () => {
 
     return (
         <>
-            <SpaceBattle />
+            <div className="hidden md:block">
+                <SpaceBattle />
+            </div>
             <section className="pt-48 pb-24 px-6 relative overflow-hidden bg-gray-50 dark:bg-tech-black min-h-screen flex flex-col items-center transition-colors duration-300">
 
                 {/* Abstract Perspective Grid Background */}
