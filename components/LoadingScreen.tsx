@@ -1,72 +1,106 @@
 import React, { useEffect, useState } from 'react';
+import { Satellite } from './Satellite';
+import { CelestialBody } from './CelestialBody';
+
+interface BackgroundBody {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  color: string;
+  type: 'planet' | 'sun';
+}
 
 export const LoadingScreen: React.FC<{ onComplete?: () => void }> = ({ onComplete }) => {
-    const [text, setText] = useState('');
-    const fullText = 'SYSTEM INITIALIZATION...';
+  const [text, setText] = useState('');
+  const fullText = 'www.amalskumar.co.in';
+  const [backgrounds, setBackgrounds] = useState<BackgroundBody[]>([]);
 
-    useEffect(() => {
-        let index = 0;
-        const interval = setInterval(() => {
-            setText(fullText.substring(0, index));
-            index++;
-            if (index > fullText.length) {
-                clearInterval(interval);
-                setTimeout(() => {
-                    if (onComplete) onComplete();
-                }, 1000);
-            }
-        }, 100);
+  useEffect(() => {
+    // Generate random celestial bodies
+    const bg: BackgroundBody[] = [];
+    const planetColors = ['#4B0082', '#00CED1', '#FF00FF', '#1E90FF', '#9370DB', '#00FA9A', '#FF6347', '#FFD700'];
 
-        return () => clearInterval(interval);
-    }, [onComplete]);
+    for (let i = 0; i < 8; i++) {
+      bg.push({
+        id: i,
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        size: 20 + Math.random() * 80,
+        color: planetColors[Math.floor(Math.random() * planetColors.length)],
+        type: Math.random() > 0.8 ? 'sun' : 'planet'
+      });
+    }
+    setBackgrounds(bg);
 
-    return (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-tech-black text-flow-cyan font-mono overflow-hidden">
-            <div className="relative w-64 h-64 flex items-center justify-center mb-8">
-                {/* Outer Ring */}
-                <div className="absolute inset-0 border-4 border-flow-purple/30 rounded-full animate-spin-slow border-t-flow-purple" />
+    // Text typing effect
+    let index = 0;
+    const interval = setInterval(() => {
+      setText(fullText.substring(0, index));
+      index++;
+      if (index > fullText.length) {
+        clearInterval(interval);
+        setTimeout(() => {
+          if (onComplete) onComplete();
+        }, 1000);
+      }
+    }, 100);
 
-                {/* Middle Ring */}
-                <div className="absolute inset-4 border-4 border-flow-cyan/30 rounded-full animate-spin-reverse border-b-flow-cyan" />
+    return () => clearInterval(interval);
+  }, [onComplete]);
 
-                {/* Inner Ring */}
-                <div className="absolute inset-8 border-2 border-white/10 rounded-full animate-pulse" />
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-tech-black overflow-hidden selection:bg-neon-blue selection:text-white">
 
-                {/* Core */}
-                <div className="w-32 h-32 bg-flow-purple/10 rounded-full flex items-center justify-center backdrop-blur-sm relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-flow-cyan/20 to-transparent animate-spin-slow" />
-                    <span className="text-4xl font-bold animate-pulse text-flow-cyan">AI</span>
-                </div>
-            </div>
+      {/* Background Orbs (Atmosphere) */}
+      <div className="absolute top-[20%] left-[10%] w-[300px] h-[300px] bg-blue-500/10 rounded-full blur-[80px] animate-pulse-glow" />
+      <div className="absolute bottom-[20%] right-[10%] w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px] animate-pulse-glow" style={{ animationDelay: '1s' }} />
 
-            <div className="h-8 flex items-center">
-                <span className="text-xl tracking-widest">{text}</span>
-                <span className="w-3 h-5 bg-flow-cyan ml-1 animate-blink" />
-            </div>
+      {/* Random Celestial Bodies */}
+      {backgrounds.map(bg => (
+        <CelestialBody
+          key={bg.id}
+          type={bg.type}
+          size={bg.size}
+          color={bg.color}
+          className="absolute opacity-40 animate-pulse"
+          style={{ left: bg.x, top: bg.y, animationDuration: `${3 + Math.random() * 4}s` }}
+        />
+      ))}
 
-            <style>{`
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes spin-reverse {
-          from { transform: rotate(360deg); }
-          to { transform: rotate(0deg); }
-        }
+      {/* Orbiting Satellite Container */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-[400px] h-[400px] animate-orbit-custom-loader">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 md:w-24 h-auto transform rotate-90">
+            <Satellite className="w-full h-full drop-shadow-[0_0_15px_rgba(0,243,255,0.4)]" />
+          </div>
+        </div>
+      </div>
+
+      {/* Typewriter Text */}
+      <div className="flex items-center relative z-10 p-4">
+        <span className="text-2xl md:text-3xl tracking-wider font-light text-[#00f3ff] drop-shadow-[0_0_8px_rgba(0,243,255,0.3)] font-mono">
+          {text}
+        </span>
+        <span className="w-2 h-6 md:h-8 bg-[#00f3ff] ml-2 animate-blink shadow-[0_0_8px_rgba(0,243,255,0.5)]" />
+      </div>
+
+      <style>{`
         @keyframes blink {
           0%, 100% { opacity: 1; }
           50% { opacity: 0; }
         }
-        .animate-spin-slow {
-          animation: spin-slow 8s linear infinite;
-        }
-        .animate-spin-reverse {
-          animation: spin-reverse 6s linear infinite;
+        @keyframes orbit-custom-loader {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
         .animate-blink {
           animation: blink 1s step-end infinite;
         }
+        .animate-orbit-custom-loader {
+          animation: orbit-custom-loader 8s linear infinite;
+        }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 };

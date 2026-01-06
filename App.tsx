@@ -26,17 +26,19 @@ const App: React.FC = () => {
   return (
     <>
       {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
-      <div className={`min-h-screen bg-cream dark:bg-tech-black font-sans overflow-x-hidden selection:bg-flow-purple selection:text-flow-dark transition-colors duration-300 ${isLoading ? 'hidden' : ''}`}>
-        <Navbar />
-        <main>
-          <Hero />
-          <DemoSection />
-          <TelemetrySection />
-          <Features />
-          <Testimonials />
-        </main>
-        <Footer />
-      </div>
+      {!isLoading && (
+        <div className="min-h-screen bg-cream dark:bg-tech-black font-sans overflow-x-hidden selection:bg-flow-purple selection:text-flow-dark transition-colors duration-300 animate-fade-in">
+          <Navbar />
+          <main>
+            <Hero />
+            <DemoSection />
+            <TelemetrySection />
+            <Features />
+            <Testimonials />
+          </main>
+          <Footer />
+        </div>
+      )}
     </>
   );
 };

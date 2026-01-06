@@ -164,3 +164,17 @@ html.dark .bg-grid-pattern {
 .dashed {
     stroke-dasharray: 4 2;
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 1.5s ease-out forwards;
+}
