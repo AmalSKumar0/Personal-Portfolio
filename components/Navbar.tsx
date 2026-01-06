@@ -32,7 +32,7 @@ export const Navbar: React.FC = () => {
       className={`fixed top-0 left-0 right-0 z-50 py-6 px-4 flex justify-center transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-[150%]'
         }`}
     >
-      <div className="bg-white/90 dark:bg-tech-black/90 backdrop-blur-md border border-gray-100 dark:border-white/10 shadow-sm rounded-full px-6 py-3 flex items-center gap-8 md:gap-12 max-w-4xl mx-auto transition-colors duration-300">
+      <div className="bg-white/90 dark:bg-tech-black/90 backdrop-blur-md border border-gray-100 dark:border-white/10 shadow-sm rounded-full px-4 py-2 md:px-6 md:py-3 flex items-center gap-4 md:gap-12 max-w-4xl mx-auto transition-colors duration-300">
         {/* Logo */}
         <div className="flex items-center gap-2">
           {/* Updated: Logo background to match the dark status badge */}
