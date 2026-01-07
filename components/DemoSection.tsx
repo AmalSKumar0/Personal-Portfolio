@@ -204,8 +204,9 @@ export const DemoSection: React.FC = () => {
       <div className="mb-8 text-center space-y-2 z-10">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
           className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md"
         >
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
@@ -214,8 +215,9 @@ export const DemoSection: React.FC = () => {
 
         <motion.h1
           initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.7 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
           className="text-4xl md:text-5xl font-display tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40"
         >
           AMAL_OS
@@ -223,8 +225,9 @@ export const DemoSection: React.FC = () => {
 
         <motion.p
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6 }}
           className="text-gray-500 text-xs uppercase tracking-[0.2em]"
         >
           Interactive Terminal Portfolio
@@ -235,7 +238,8 @@ export const DemoSection: React.FC = () => {
       {/* Main Terminal Window */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.5 }} // Added explicit duration
         className={`
           relative z-10 bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden flex flex-col

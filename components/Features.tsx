@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Code2, Layers, Cpu } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const Features: React.FC = () => {
     return (
@@ -14,21 +15,39 @@ export const Features: React.FC = () => {
                 backgroundSize: '20px 20px'
             }}></div>
 
-            <div className="max-w-7xl mx-auto relative z-10">
+            <motion.div
+                className="max-w-7xl mx-auto relative z-10"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ staggerChildren: 0.1 }}
+            >
 
                 {/* Intro Section */}
-                <div className="text-center mb-20">
+                <motion.div
+                    className="text-center mb-20"
+                    variants={{
+                        hidden: { opacity: 0, y: 20 },
+                        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+                    }}
+                >
                     <h2 className="text-5xl font-display font-bold text-tech-black dark:text-white mb-6 transition-colors">My Expertise <br /> <span className="text-neon-blue"> & Journey.</span></h2>
                     <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-10 text-balance transition-colors">
                         I’m a Computer Applications graduate passionate about designing and building systems that solve real-world problems. From backend architecture to polished UI.
                     </p>
-                </div>
+                </motion.div>
 
                 {/* BENTO GRID LAYOUT */}
                 <div className="grid md:grid-cols-3 gap-6 auto-rows-[minmax(300px,auto)]">
 
                     {/* Feature 1: Modern Architecture (Large Card) */}
-                    <div className="md:col-span-2 bg-gray-50 dark:bg-tech-dark rounded-[2rem] p-8 border border-gray-100 dark:border-white/5 relative overflow-hidden group hover:border-gray-200 dark:hover:border-white/10 transition-colors">
+                    <motion.div
+                        className="md:col-span-2 bg-gray-50 dark:bg-tech-dark rounded-[2rem] p-8 border border-gray-100 dark:border-white/5 relative overflow-hidden group hover:border-gray-200 dark:hover:border-white/10 transition-colors"
+                        variants={{
+                            hidden: { opacity: 0, y: 30 },
+                            visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                        }}
+                    >
                         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-gradient-to-bl from-white dark:from-white/5 to-transparent rounded-full translate-x-1/3 -translate-y-1/3 transition-colors"></div>
 
                         <div className="relative z-10 h-full flex flex-col">
@@ -58,10 +77,16 @@ export const Features: React.FC = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Feature 2: High Performance (Dark Card) */}
-                    <div className="md:col-span-1 bg-tech-black dark:bg-[#050505] dark:border dark:border-white/10 rounded-[2rem] p-8 relative overflow-hidden text-white flex flex-col justify-between group transition-colors">
+                    <motion.div
+                        className="md:col-span-1 bg-tech-black dark:bg-[#050505] dark:border dark:border-white/10 rounded-[2rem] p-8 relative overflow-hidden text-white flex flex-col justify-between group transition-colors"
+                        variants={{
+                            hidden: { opacity: 0, y: 30 },
+                            visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.1 } }
+                        }}
+                    >
                         {/* Abstract Line Background */}
                         <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none group-hover:opacity-30 transition-opacity" viewBox="0 0 100 100" preserveAspectRatio="none">
                             <path d="M0 100 Q 30 60 100 20" stroke="url(#lineGradient)" strokeWidth="0.5" fill="none" />
@@ -91,10 +116,16 @@ export const Features: React.FC = () => {
                                 <div className="h-full w-3/4 bg-gradient-to-r from-neon-blue to-neon-cyan"></div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Feature 3: Clean Code */}
-                    <div className="md:col-span-1 bg-white dark:bg-tech-dark border border-gray-100 dark:border-white/5 rounded-[2rem] p-8 shadow-lg shadow-gray-100/50 dark:shadow-none flex flex-col hover:-translate-y-1 transition-all duration-300">
+                    <motion.div
+                        className="md:col-span-1 bg-white dark:bg-tech-dark border border-gray-100 dark:border-white/5 rounded-[2rem] p-8 shadow-lg shadow-gray-100/50 dark:shadow-none flex flex-col hover:-translate-y-1 transition-all duration-300"
+                        variants={{
+                            hidden: { opacity: 0, y: 30 },
+                            visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2 } }
+                        }}
+                    >
                         <div className="w-12 h-12 bg-purple-50 dark:bg-purple-900/20 rounded-xl flex items-center justify-center mb-6 text-neon-purple transition-colors">
                             <Code2 size={24} />
                         </div>
@@ -107,10 +138,16 @@ export const Features: React.FC = () => {
                             <div className="pl-2">cgpa: <span className="text-blue-400">7.82</span>;</div>
                             <div>{'}'}</div>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Feature 4: Integration (Wide) */}
-                    <div className="md:col-span-2 bg-gradient-to-br from-gray-900 to-tech-black rounded-[2rem] p-8 text-white relative overflow-hidden flex items-center">
+                    <motion.div
+                        className="md:col-span-2 bg-gradient-to-br from-gray-900 to-tech-black rounded-[2rem] p-8 text-white relative overflow-hidden flex items-center"
+                        variants={{
+                            hidden: { opacity: 0, y: 30 },
+                            visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.3 } }
+                        }}
+                    >
                         <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-neon-blue/10 to-transparent pointer-events-none"></div>
 
                         <div className="relative z-10 w-1/2">
@@ -128,10 +165,10 @@ export const Features: React.FC = () => {
                             <div className="bg-white/5 rounded-xl backdrop-blur-sm border border-white/10 -translate-y-4"></div>
                             <div className="bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"></div>
                         </div>
-                    </div>
+                    </motion.div>
 
                 </div>
-            </div>
+            </motion.div>
         </div>
     );
 };

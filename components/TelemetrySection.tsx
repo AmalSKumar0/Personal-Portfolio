@@ -4,6 +4,7 @@ import {
    GraduationCap, Briefcase, Terminal, Cpu, ArrowUpRight,
    GitCommit, Layers, Command, Zap
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export const TelemetrySection = () => {
    return (
@@ -25,7 +26,13 @@ export const TelemetrySection = () => {
          <div className="relative w-full max-w-6xl mx-auto z-10">
 
             {/* --- MAIN DASHBOARD CONTAINER --- */}
-            <div className="bg-white/80 dark:bg-tech-gray/80 backdrop-blur-xl rounded-3xl shadow-2xl shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-white/10 overflow-hidden transition-colors">
+            <motion.div
+               className="bg-white/80 dark:bg-tech-gray/80 backdrop-blur-xl rounded-3xl shadow-2xl shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-white/10 overflow-hidden transition-colors"
+               initial={{ opacity: 0, y: 50 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               viewport={{ once: true }}
+               transition={{ duration: 0.8, ease: "easeOut" }}
+            >
 
                {/* --- TOP BAR --- */}
                <div className="h-16 border-b border-slate-100 flex items-center justify-between px-6 sm:px-8 bg-white/50">
@@ -190,7 +197,7 @@ export const TelemetrySection = () => {
                      </div>
                   </div>
                </div>
-            </div>
+            </motion.div>
          </div>
       </div>
    );

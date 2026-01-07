@@ -1,12 +1,10 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { DemoSection } from './components/DemoSection';
-import { Features } from './components/Features';
-import { Testimonials } from './components/Testimonials';
 import { Footer } from './components/Footer';
-import { TelemetrySection } from './components/TelemetrySection';
 import { LoadingScreen } from './components/LoadingScreen';
+import { Home } from './pages/Home';
+import { Contact } from './pages/Contact';
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -28,15 +26,16 @@ const App: React.FC = () => {
       {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
       {!isLoading && (
         <div className="min-h-screen bg-cream dark:bg-tech-black font-sans overflow-x-hidden selection:bg-flow-purple selection:text-flow-dark transition-colors duration-300 animate-fade-in">
-          <Navbar />
-          <main>
-            <Hero />
-            <DemoSection />
-            <TelemetrySection />
-            <Features />
-            <Testimonials />
-          </main>
-          <Footer />
+          <Router>
+            <Navbar />
+            <main>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/contact" element={<Contact />} />
+              </Routes>
+            </main>
+            <Footer />
+          </Router>
         </div>
       )}
     </>

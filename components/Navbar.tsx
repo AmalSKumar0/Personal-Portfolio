@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Code2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { ThemeToggle } from './ThemeToggle';
 
 export const Navbar: React.FC = () => {
@@ -34,7 +35,7 @@ export const Navbar: React.FC = () => {
     >
       <div className="bg-white/90 dark:bg-tech-black/90 backdrop-blur-md border border-gray-100 dark:border-white/10 shadow-sm rounded-full px-4 py-2 md:px-6 md:py-3 flex items-center gap-4 md:gap-12 max-w-4xl mx-auto transition-colors duration-300">
         {/* Logo */}
-        <div className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           {/* Updated: Logo background to match the dark status badge */}
           <div className="w-8 h-8 bg-slate-900 dark:bg-white rounded-lg flex items-center justify-center text-white dark:text-tech-black font-bold text-sm shadow-md transition-colors duration-300">
             <Code2 size={18} />
@@ -42,7 +43,7 @@ export const Navbar: React.FC = () => {
           <span className="font-bold text-gray-900 dark:text-white tracking-tight text-xl transition-colors duration-300">
             Amal S Kumar
           </span>
-        </div>
+        </Link>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors duration-300">
@@ -62,9 +63,11 @@ export const Navbar: React.FC = () => {
         <div className="hidden md:flex items-center gap-4">
           <ThemeToggle />
           {/* Updated: Button background to match the "STATUS" badge (Dark Navy) */}
-          <button className="bg-slate-900 dark:bg-white hover:bg-slate-800 dark:hover:bg-gray-200 transition-colors text-white dark:text-tech-black px-5 py-2 rounded-full text-sm font-medium">
-            Hire Me
-          </button>
+          <Link to="/contact">
+            <button className="bg-slate-900 dark:bg-white hover:bg-slate-800 dark:hover:bg-gray-200 transition-colors text-white dark:text-tech-black px-5 py-2 rounded-full text-sm font-medium">
+              Hire Me
+            </button>
+          </Link>
         </div>
 
         {/* Mobile Toggle */}
@@ -91,9 +94,11 @@ export const Navbar: React.FC = () => {
           <a href="#" className="text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-neon-blue transition-colors">
             Projects
           </a>
-          <button className="bg-slate-900 dark:bg-white text-white dark:text-tech-black px-5 py-3 rounded-full text-base font-medium mt-2 transition-colors">
-            Hire Me
-          </button>
+          <Link to="/contact">
+            <button className="w-full bg-slate-900 dark:bg-white text-white dark:text-tech-black px-5 py-3 rounded-full text-base font-medium mt-2 transition-colors">
+              Hire Me
+            </button>
+          </Link>
         </div>
       )}
     </nav>
