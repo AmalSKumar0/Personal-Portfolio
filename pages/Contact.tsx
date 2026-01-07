@@ -12,10 +12,27 @@ export const Contact: React.FC = () => {
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
 
+    // Load saved details on mount
+    React.useEffect(() => {
+        const savedName = localStorage.getItem('visitorName');
+        const savedEmail = localStorage.getItem('visitorEmail');
+        if (savedName || savedEmail) {
+            setFormData(prev => ({
+                ...prev,
+                name: savedName || '',
+                email: savedEmail || ''
+            }));
+        }
+    }, []);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus('sending');
         setErrorMessage('');
+
+        // Save details for next time
+        localStorage.setItem('visitorName', formData.name);
+        localStorage.setItem('visitorEmail', formData.email);
 
         const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
         const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
@@ -26,12 +43,33 @@ export const Contact: React.FC = () => {
             return;
         }
 
+        // Fetch IP Address
+        let ipAddress = 'Unknown';
+        try {
+            const ipRes = await fetch('https://api.ipify.org?format=json');
+            const ipData = await ipRes.json();
+            ipAddress = ipData.ip;
+        } catch (error) {
+            console.error('Failed to fetch IP:', error);
+        }
+
+        // Gather System Metadata
+        const systemInfo = `
+--------------------------------
+*System Info:*
+*IP:* \`${ipAddress}\`
+*OS:* ${navigator.platform}
+*Browser:* ${navigator.userAgent}
+*Time:* ${new Date().toLocaleString()}
+        `;
+
         const text = `
 *New Message From A Client*
 *Name:* ${formData.name}
 *Email:* ${formData.email}
 *Message:*
 ${formData.message}
+${systemInfo}
         `;
 
         try {
@@ -49,7 +87,7 @@ ${formData.message}
 
             if (response.ok) {
                 setStatus('success');
-                setFormData({ name: '', email: '', message: '' });
+                setFormData(prev => ({ ...prev, message: '' })); // Only clear message
                 setTimeout(() => setStatus('idle'), 5000); // Reset after 5s
             } else {
                 throw new Error('Failed to send message');
@@ -161,7 +199,7 @@ ${formData.message}
                                     </div>
                                     <div>
                                         <h3 className="text-gray-900 dark:text-white font-semibold text-lg mb-1">Socials</h3>
-                                        <a 
+                                        <a
                                             href="https://www.linkedin.com/in/amal-fsd/"
                                             target="_blank"
                                             rel="noopener noreferrer"
@@ -264,8 +302,8 @@ ${formData.message}
                                 type="submit"
                                 disabled={status === 'sending' || status === 'success'}
                                 className={`w-full font-bold py-4 px-6 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 ${status === 'success'
-                                        ? 'bg-green-500 text-white cursor-default'
-                                        : 'bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-tech-black'
+                                    ? 'bg-green-500 text-white cursor-default'
+                                    : 'bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-tech-black'
                                     }`}
                             >
                                 {status === 'sending' ? (

@@ -6,9 +6,14 @@ import { LoadingScreen } from './components/LoadingScreen';
 import { Home } from './pages/Home';
 import { Contact } from './pages/Contact';
 
+import { useVisitorTracker } from './hooks/useVisitorTracker';
+
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [isFading, setIsFading] = React.useState(false);
+
+  // Track visitor on mount
+  useVisitorTracker();
 
   React.useEffect(() => {
     // Logic moved to internal component timer + callback
