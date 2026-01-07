@@ -27,7 +27,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <HelmetProvider>
+    <>
       {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
       {!isLoading && (
         <div className="min-h-screen bg-cream dark:bg-tech-black font-sans overflow-x-hidden selection:bg-flow-purple selection:text-flow-dark transition-colors duration-300 animate-fade-in">
@@ -43,7 +43,7 @@ const App: React.FC = () => {
           </Router>
         </div>
       )}
-    </HelmetProvider>
+    </>
   );
 };
 
