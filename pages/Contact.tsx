@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, MessageSquare, Phone, Send, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { SpaceBattle } from '@/components/SpaceBattle';
 import { motion, AnimatePresence } from 'framer-motion';
+import { SEO } from '../components/SEO';
 
 export const Contact: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -131,6 +132,10 @@ ${systemInfo}
 
     return (
         <div className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex flex-col items-center">
+            <SEO
+                title="Contact Me | Amal S Kumar"
+                description="Get in touch with Amal S Kumar for freelance projects, job opportunities, or collaboration. Send a message directly."
+            />
             <SpaceBattle />
 
             {/* Background Effects */}
