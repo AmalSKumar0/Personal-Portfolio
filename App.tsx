@@ -5,6 +5,7 @@ import { Footer } from './components/Footer';
 import { LoadingScreen } from './components/LoadingScreen';
 import { Home } from './pages/Home';
 import { Contact } from './pages/Contact';
+import { NotFound } from './pages/NotFound';
 
 import { useVisitorTracker } from './hooks/useVisitorTracker';
 
@@ -37,6 +38,7 @@ const App: React.FC = () => {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
             <Footer />

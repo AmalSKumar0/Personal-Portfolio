@@ -111,6 +111,8 @@ export const Hero: React.FC = () => {
                                 <img
                                     src="/avatar-badge.jpg"
                                     alt="Avatar"
+                                    width="192"
+                                    height="96"
                                     className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
                                 />
                             </div>

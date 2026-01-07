@@ -10,12 +10,25 @@ interface SEOProps {
 
 export const SEO: React.FC<SEOProps> = ({
     title = "Amal S Kumar | Full Stack Developer",
-    description = "Portfolio of Amal S Kumar, a Full Stack Developer specializing in React, Django, Laravel, and building scalable web applications.",
-    keywords = "Amal S Kumar, Full Stack Developer, React Developer, Django Developer, Portfolio, Web Development, Software Engineer",
+    description = "Portfolio of Amal S Kumar, a Computer Science student and Full Stack Developer from Kerala, India. Specialize in React, Django, and scalable web solutions.",
+    keywords = "Amal S Kumar, Computer Science Student, Web Developer Kerala, Full Stack Developer India, React Developer, Django Expert, Software Engineer Portfolio",
     image = "/image.png", // Assuming this is in public folder
     url = "https://amalskumar.co.in"
 }) => {
     const siteTitle = title === "Amal S Kumar | Full Stack Developer" ? title : `${title} | Amal S Kumar`;
+
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Amal S Kumar",
+        "url": "https://amalskumar.co.in",
+        "jobTitle": "Student & Full Stack Developer",
+        "image": "https://amalskumar.co.in/image.png",
+        "sameAs": [
+            "https://linkedin.com/in/amal-fsd",
+            "https://github.com/AmalSKumar0"
+        ]
+    };
 
     return (
         <Helmet>
@@ -41,6 +54,11 @@ export const SEO: React.FC<SEOProps> = ({
 
             {/* Canonical */}
             <link rel="canonical" href={url} />
+
+            {/* Structured Data */}
+            <script type="application/ld+json">
+                {JSON.stringify(structuredData)}
+            </script>
         </Helmet>
     );
 };

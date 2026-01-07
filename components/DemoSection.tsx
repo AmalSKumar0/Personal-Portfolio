@@ -213,7 +213,7 @@ export const DemoSection: React.FC = () => {
           <span className="text-xs text-emerald-400 tracking-widest font-bold">SYSTEM ONLINE</span>
         </motion.div>
 
-        <motion.h1
+        <motion.h2
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -221,7 +221,7 @@ export const DemoSection: React.FC = () => {
           className="text-4xl md:text-5xl font-display tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40"
         >
           AMAL_OS
-        </motion.h1>
+        </motion.h2>
 
         <motion.p
           initial={{ opacity: 0 }}

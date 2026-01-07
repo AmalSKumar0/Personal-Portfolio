@@ -33,6 +33,7 @@ export const TelemetrySection = () => {
                viewport={{ once: true }}
                transition={{ duration: 0.8, ease: "easeOut" }}
             >
+               <h2 className="sr-only">System Telemetry Dashboard</h2>
 
                {/* --- TOP BAR --- */}
                <div className="h-16 border-b border-slate-100 flex items-center justify-between px-6 sm:px-8 bg-white/50">
