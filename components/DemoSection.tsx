@@ -1,12 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Terminal, Cpu, Wifi, Battery, Loader2, Minimize2, Maximize2, X } from 'lucide-react';
+import { Terminal, Cpu, Wifi, Battery, Loader2, Minimize2, Maximize2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // --- Configuration ---
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
-const USERNAME = "guest";
-const HOSTNAME = "amal-portfolio";
-
 const SYSTEM_PROMPT = `
 You are 'AmalOS', a Portfolio Assistant for Amal S Kumar.
 - You are running inside a web-based terminal interface.
@@ -66,7 +63,6 @@ export const DemoSection: React.FC = () => {
 
   // --- Boot Sequence Effect ---
   useEffect(() => {
-    let delay = 0;
     const boot = async () => {
       for (const step of INITIAL_BOOT_SEQUENCE) {
         await new Promise(r => setTimeout(r, 400));
@@ -174,6 +170,8 @@ export const DemoSection: React.FC = () => {
     }
 
     setIsProcessing(false);
+    // Refocus after processing
+    setTimeout(() => inputRef.current?.focus(), 10);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -200,7 +198,7 @@ export const DemoSection: React.FC = () => {
       <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-900/20 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-cyan-900/20 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* --- NEW HEADER SECTION --- */}
+      {/* --- HEADER SECTION --- */}
       <div className="mb-8 text-center space-y-2 z-10">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -233,27 +231,24 @@ export const DemoSection: React.FC = () => {
           Interactive Terminal Portfolio
         </motion.p>
       </div>
-      {/* -------------------------- */}
 
       {/* Main Terminal Window */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5 }} // Added explicit duration
+        transition={{ duration: 0.5 }}
         className={`
           relative z-10 bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden flex flex-col
           transition-all duration-500 ease-in-out
           ${isMaximized ? 'fixed inset-0 m-0 rounded-none z-50' : 'w-full max-w-4xl h-[600px] rounded-xl'} 
-        `} // Increased height to h-[600px] for better proportions with header
+        `}
         style={{ boxShadow: '0 0 50px -12px rgba(0, 255, 255, 0.15)' }}
         onClick={focusInput}
       >
 
         {/* CRT Scanline Overlay */}
         <div className="absolute inset-0 pointer-events-none z-50 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] opacity-20" />
-
-        {/* ... (The rest of your Terminal Window code remains exactly the same) ... */}
 
         {/* Header Bar */}
         <div className="h-10 bg-[#121212] border-b border-white/5 flex items-center justify-between px-4 select-none cursor-default">
@@ -321,21 +316,19 @@ export const DemoSection: React.FC = () => {
             <div className="flex items-center mt-2 group">
               <span className="text-green-400 mr-2 text-lg">➜</span>
               <span className="text-cyan-400 mr-2 text-lg">~</span>
-              <div className="relative flex-1">
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  className="absolute inset-0 w-full opacity-0 cursor-default bg-transparent"
-                  autoComplete="off"
-                />
-                <div className="flex items-center">
-                  <span className="text-gray-100">{input}</span>
-                  <span className="w-2 h-5 bg-cyan-400 ml-1 animate-[pulse_1s_infinite]" />
-                </div>
-              </div>
+              {/* --- UPDATED INPUT SECTION --- */}
+              <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                className="flex-1 bg-transparent border-none outline-none text-gray-100 font-mono caret-cyan-400 placeholder-gray-600/50"
+                autoComplete="off"
+                spellCheck="false"
+                autoFocus
+              />
+              {/* ----------------------------- */}
             </div>
           )}
 
