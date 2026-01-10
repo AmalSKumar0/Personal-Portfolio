@@ -94,7 +94,7 @@ export const Navbar: React.FC = () => {
       {mobileMenuOpen && isVisible && (
         <div className="absolute top-24 left-4 right-4 bg-white dark:bg-tech-gray border border-gray-100 dark:border-white/10 rounded-3xl p-6 md:hidden flex flex-col gap-4 shadow-xl z-50 transition-colors duration-300">
           <Link to="/about" className="text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-neon-blue transition-colors">
-            Skills
+            About
           </Link>
           <Link to="/experience" className="text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-neon-blue transition-colors">
             Experience
