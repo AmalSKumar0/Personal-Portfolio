@@ -1,0 +1,39 @@
+[
+    {
+        "id": "exp-1",
+        "company": "Tech Solutions Inc.",
+        "role": "Full Stack Developer",
+        "duration": "2023 - Present",
+        "description": "Led the development of scalable web applications for enterprise clients.",
+        "achievements": [
+            "Optimized database queries reducing load times by 40%.",
+            "Implemented a secure authentication system for 10k+ users.",
+            "Mentored junior developers in React and Node.js best practices."
+        ],
+        "techStack": [
+            "React",
+            "Node.js",
+            "PostgreSQL",
+            "AWS"
+        ],
+        "websiteUrl": "https://example.com"
+    },
+    {
+        "id": "exp-2",
+        "company": "Creative Agency",
+        "role": "Frontend Developer",
+        "duration": "2022 - 2023",
+        "description": "Collaborated with designers to bring creative concepts to life on the web.",
+        "achievements": [
+            "Developed award-winning landing pages with complex animations.",
+            "Improved site accessibility scores to 98+ on Lighthouse.",
+            "Integrated 3rd party APIs for dynamic content loading."
+        ],
+        "techStack": [
+            "Vue.js",
+            "GSAP",
+            "Tailwind CSS"
+        ],
+        "websiteUrl": "https://example.com"
+    }
+]

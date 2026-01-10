@@ -1,0 +1,98 @@
+[
+    {
+        "id": "ai-portfolio-assistant",
+        "title": "AI Portfolio Assistant",
+        "shortDescription": "An interactive terminal-based portfolio assistant powered by Groq API.",
+        "fullDescription": "A unique portfolio experience that mimics a terminal interface. It uses the Groq API to power an AI assistant ('AmalOS') that can answer questions about my skills, projects, and background in a witty and tech-savvy persona. The application features a realistic typing effect, command history, and system boot sequences.",
+        "tags": [
+            "React",
+            "TypeScript",
+            "Groq API",
+            "Tailwind CSS",
+            "Framer Motion"
+        ],
+        "imageUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
+        "demoUrl": "https://amalskumar.co.in",
+        "githubUrl": "https://github.com/AmalSKumar0",
+        "features": [
+            "Real-time AI chat responses",
+            "Terminal-like command interface",
+            "System boot simulation",
+            "Responsive design",
+            "Interactive help commands"
+        ],
+        "role": "Full Stack Developer",
+        "date": "2024"
+    },
+    {
+        "id": "ecommerce-platform",
+        "title": "Modern E-commerce Platform",
+        "shortDescription": "A full-featured e-commerce solution built with Laravel and React.",
+        "fullDescription": "A comprehensive e-commerce platform designed for scalability and performance. It features a robust backend API built with Laravel and a dynamic frontend using React. Key functionalities include user authentication, product management, shopping cart, secure checkout integration, and an admin dashboard for order management.",
+        "tags": [
+            "Laravel",
+            "React",
+            "MySQL",
+            "Redux",
+            "Stripe"
+        ],
+        "imageUrl": "https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=2089&auto=format&fit=crop",
+        "githubUrl": "https://github.com/AmalSKumar0",
+        "features": [
+            "User Authentication & Authorization",
+            "Product Search and Filtering",
+            "Shopping Cart & Checkout",
+            "Admin Dashboard",
+            "Order History & Tracking"
+        ],
+        "role": "Backend Lead",
+        "date": "2023"
+    },
+    {
+        "id": "task-manager-pro",
+        "title": "Task Manager Pro",
+        "shortDescription": "A collaborative task management tool for remote teams.",
+        "fullDescription": "Task Manager Pro is a productivity tool designed to help remote teams collaborate effectively. It allows users to create boards, lists, and cards to track tasks. Features include real-time updates using WebSockets, file attachments, due dates, and assignment tracking.",
+        "tags": [
+            "Node.js",
+            "Express",
+            "MongoDB",
+            "Socket.io",
+            "React"
+        ],
+        "imageUrl": "https://images.unsplash.com/photo-1540350394557-8d14678e7f91?q=80&w=1932&auto=format&fit=crop",
+        "githubUrl": "https://github.com/AmalSKumar0",
+        "features": [
+            "Real-time task updates",
+            "Drag and drop interface",
+            "Team collaboration space",
+            "File sharing and attachment",
+            "Progress analytics"
+        ],
+        "role": "Full Stack Developer",
+        "date": "2023"
+    },
+    {
+        "id": "smart-weather-app",
+        "title": "Smart Weather App",
+        "shortDescription": "A beautiful weather dashboard with location-based forecasts.",
+        "fullDescription": "A sleek weather dashboard that provides accurate weather data and forecasts based on the user's location. It utilizes the OpenWeatherMap API to fetch real-time data and displays it using interactive charts and weather icons. The app supports dark mode and multiple location saving.",
+        "tags": [
+            "React",
+            "OpenWeatherMap API",
+            "Chart.js",
+            "Geolocation API"
+        ],
+        "imageUrl": "https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=2070&auto=format&fit=crop",
+        "githubUrl": "https://github.com/AmalSKumar0",
+        "features": [
+            "Live weather tracking",
+            "7-day forecast",
+            "Interactive temperature charts",
+            "Location-based detection",
+            "responsive UI"
+        ],
+        "role": "Frontend Developer",
+        "date": "2024"
+    }
+]

@@ -6,6 +6,10 @@ import { LoadingScreen } from './components/LoadingScreen';
 import { Home } from './pages/Home';
 import { Contact } from './pages/Contact';
 import { NotFound } from './pages/NotFound';
+import { About } from './pages/About';
+import { Projects } from './pages/Project';
+import { ViewProject } from './pages/ViewProject';
+import { Experience } from './pages/Experience';
 
 import { useVisitorTracker } from './hooks/useVisitorTracker';
 
@@ -38,6 +42,10 @@ const App: React.FC = () => {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/projects/:id" element={<ViewProject />} />
+                <Route path="/experience" element={<Experience />} />
+                <Route path="/about" element={<About />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
