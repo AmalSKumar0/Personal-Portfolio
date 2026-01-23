@@ -53,6 +53,28 @@ const INITIAL_BOOT_SEQUENCE = [
   "Welcome to AmalOS v3.0"
 ];
 
+"Welcome to AmalOS v3.0"
+];
+
+// --- Typewriter Component ---
+const Typewriter = ({ text }: { text: string }) => {
+  const [displayedText, setDisplayedText] = useState('');
+
+  useEffect(() => {
+    let index = 0;
+    const intervalId = setInterval(() => {
+      setDisplayedText(text.slice(0, index + 1));
+      index++;
+      if (index === text.length) {
+        clearInterval(intervalId);
+      }
+    }, 15); // Speed: 15ms per char
+    return () => clearInterval(intervalId);
+  }, [text]);
+
+  return <span>{displayedText}</span>;
+};
+
 export const DemoSection: React.FC = () => {
   // --- State ---
   const [input, setInput] = useState('');
@@ -178,7 +200,7 @@ export const DemoSection: React.FC = () => {
       default:
         // AI Fallback
         const response = await fetchAIResponse(cleanCmd);
-        addHistory(response, 'output');
+        addHistory(<Typewriter text={response} />, 'output');
     }
 
     setIsProcessing(false);
