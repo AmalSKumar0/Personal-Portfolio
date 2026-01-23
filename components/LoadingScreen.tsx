@@ -1,106 +1,112 @@
 import React, { useEffect, useState } from 'react';
-import { Satellite } from './Satellite';
-import { CelestialBody } from './CelestialBody';
-
-interface BackgroundBody {
-  id: number;
-  x: number;
-  y: number;
-  size: number;
-  color: string;
-  type: 'planet' | 'sun';
-}
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const LoadingScreen: React.FC<{ onComplete?: () => void }> = ({ onComplete }) => {
-  const [text, setText] = useState('');
-  const fullText = 'www.amalskumar.co.in';
-  const [backgrounds, setBackgrounds] = useState<BackgroundBody[]>([]);
+  const [progress, setProgress] = useState(0);
+  const [status, setStatus] = useState('INITIALIZING CACHE');
 
   useEffect(() => {
-    // Generate random celestial bodies
-    const bg: BackgroundBody[] = [];
-    const planetColors = ['#4B0082', '#00CED1', '#FF00FF', '#1E90FF', '#9370DB', '#00FA9A', '#FF6347', '#FFD700'];
+    const duration = 2000; // 2 seconds total loading
+    const interval = 20;
+    const steps = duration / interval;
+    const increment = 100 / steps;
 
-    for (let i = 0; i < 8; i++) {
-      bg.push({
-        id: i,
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        size: 20 + Math.random() * 80,
-        color: planetColors[Math.floor(Math.random() * planetColors.length)],
-        type: Math.random() > 0.8 ? 'sun' : 'planet'
+    const timer = setInterval(() => {
+      setProgress(prev => {
+        const next = prev + increment;
+        if (next >= 100) {
+          clearInterval(timer);
+          setTimeout(() => onComplete?.(), 500); // Small delay before unmounting
+          return 100;
+        }
+
+        // Update status text based on progress
+        if (next > 70) setStatus('STARTING SERVICES');
+        else if (next > 40) setStatus('LOADING ASSETS');
+
+        return next;
       });
-    }
-    setBackgrounds(bg);
+    }, interval);
 
-    // Text typing effect
-    let index = 0;
-    const interval = setInterval(() => {
-      setText(fullText.substring(0, index));
-      index++;
-      if (index > fullText.length) {
-        clearInterval(interval);
-        setTimeout(() => {
-          if (onComplete) onComplete();
-        }, 1000);
-      }
-    }, 100);
-
-    return () => clearInterval(interval);
+    return () => clearInterval(timer);
   }, [onComplete]);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-tech-black overflow-hidden selection:bg-neon-blue selection:text-white">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black overflow-hidden font-mono">
 
-      {/* Background Orbs (Atmosphere) */}
-      <div className="absolute top-[20%] left-[10%] w-[300px] h-[300px] bg-blue-500/10 rounded-full blur-[80px] animate-pulse-glow" />
-      <div className="absolute bottom-[20%] right-[10%] w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px] animate-pulse-glow" style={{ animationDelay: '1s' }} />
+      {/* Background Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]"></div>
 
-      {/* Random Celestial Bodies */}
-      {backgrounds.map(bg => (
-        <CelestialBody
-          key={bg.id}
-          type={bg.type}
-          size={bg.size}
-          color={bg.color}
-          className="absolute opacity-40 animate-pulse"
-          style={{ left: bg.x, top: bg.y, animationDuration: `${3 + Math.random() * 4}s` }}
-        />
-      ))}
+      <div className="relative flex flex-col items-center justify-center">
 
-      {/* Orbiting Satellite Container */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[400px] h-[400px] animate-orbit-custom-loader">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 md:w-24 h-auto transform rotate-90">
-            <Satellite className="w-full h-full drop-shadow-[0_0_15px_rgba(0,243,255,0.4)]" />
+        {/* Main Reactor Container */}
+        <div className="relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center">
+
+          {/* Outer Ring - Cyan Dashed */}
+          <motion.div
+            className="absolute inset-0 rounded-full border-2 border-dashed border-cyan-500/30"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+          />
+
+          {/* Middle Ring - Blue Dashed Reverse */}
+          <motion.div
+            className="absolute inset-4 rounded-full border border-dashed border-blue-500/40"
+            animate={{ rotate: -360 }}
+            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          />
+
+          {/* Inner Track */}
+          <div className="absolute inset-0 rounded-full border border-white/5"></div>
+
+          {/* Rotating Scanner Arc */}
+          <motion.div
+            className="absolute inset-2"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          >
+            <div className="h-full w-full rounded-full border-t-4 border-cyan-400 opacity-50 blur-[2px]"></div>
+          </motion.div>
+
+          {/* Core Pulse */}
+          <motion.div
+            className="absolute w-32 h-32 bg-cyan-500/10 rounded-full blur-xl"
+            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+
+          {/* Center Text */}
+          <div className="relative z-10 flex flex-col items-center">
+            <span className="text-5xl md:text-6xl font-black text-white tracking-tighter">
+              {Math.round(progress)}
+            </span>
+            <span className="text-xs text-cyan-500 font-bold uppercase tracking-[0.2em] mt-1">
+              % Loaded
+            </span>
           </div>
         </div>
-      </div>
 
-      {/* Typewriter Text */}
-      <div className="flex items-center relative z-10 p-4">
-        <span className="text-2xl md:text-3xl tracking-wider font-light text-[#00f3ff] drop-shadow-[0_0_8px_rgba(0,243,255,0.3)] font-mono">
-          {text}
-        </span>
-        <span className="w-2 h-6 md:h-8 bg-[#00f3ff] ml-2 animate-blink shadow-[0_0_8px_rgba(0,243,255,0.5)]" />
-      </div>
+        {/* Status Bar */}
+        <div className="mt-12 w-64 md:w-80">
+          <div className="flex justify-between items-end mb-2">
+            <span className="text-xs text-cyan-400 font-bold tracking-widest animate-pulse">
+              {status}
+            </span>
+            <span className="text-[10px] text-gray-500">
+              v2.0.4
+            </span>
+          </div>
 
-      <style>{`
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-        }
-        @keyframes orbit-custom-loader {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .animate-blink {
-          animation: blink 1s step-end infinite;
-        }
-        .animate-orbit-custom-loader {
-          animation: orbit-custom-loader 8s linear infinite;
-        }
-      `}</style>
+          {/* Progress Bar Line */}
+          <div className="h-1 w-full bg-gray-900 rounded-full overflow-hidden">
+            <motion.div
+              className="h-full bg-gradient-to-r from-cyan-600 to-blue-500"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+        </div>
+
+      </div>
     </div>
   );
 };
