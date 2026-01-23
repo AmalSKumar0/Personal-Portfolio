@@ -32,7 +32,7 @@ export const Experience: React.FC = () => {
     };
 
     return (
-        <div className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex flex-col items-center">
+        <div className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-x-hidden min-h-screen flex flex-col items-center">
             <SEO
                 title="Professional Experience | Amal S Kumar"
                 description="My professional journey and work history with companies and clients."

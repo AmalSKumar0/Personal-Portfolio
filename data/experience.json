@@ -1,39 +1,109 @@
 [
     {
-        "id": "exp-1",
-        "company": "Tech Solutions Inc.",
+        "id": "exp-new-3",
+        "company": "Naturals",
         "role": "Full Stack Developer",
-        "duration": "2023 - Present",
-        "description": "Led the development of scalable web applications for enterprise clients.",
+        "duration": "Aug 2025 - Present",
+        "description": "Developing a comprehensive platform for Naturals using React and Laravel. Focusing on scalable architecture and seamless user experience architecture.",
         "achievements": [
-            "Optimized database queries reducing load times by 40%.",
-            "Implemented a secure authentication system for 10k+ users.",
-            "Mentored junior developers in React and Node.js best practices."
+            "Architecting the full-stack application using React and Laravel.",
+            "Implementing robust API integration and state management.",
+            "Designing a modern, responsive user interface."
         ],
         "techStack": [
             "React",
-            "Node.js",
-            "PostgreSQL",
-            "AWS"
+            "Laravel",
+            "MySQL"
         ],
-        "websiteUrl": "https://example.com"
+        "websiteUrl": ""
+    },
+    {
+        "id": "exp-new-2",
+        "company": "Tours of Georgia",
+        "role": "Freelance Web Developer",
+        "duration": "July 2025 - Aug 2025",
+        "description": "Developed a tourism website for Tours of Georgia, featuring itinerary planning, booking integrations, and a visually immersive gallery.",
+        "achievements": [
+            "Created an immersive travel experience website.",
+            "Integrated booking functionalities and itinerary planners.",
+            "Optimized visual assets for fast loading and high quality."
+        ],
+        "techStack": [
+            "React",
+            "Tailwind CSS",
+            "Framer Motion"
+        ],
+        "websiteUrl": "https://toursofgeorgia.com"
+    },
+    {
+        "id": "exp-new-1",
+        "company": "The Navigans",
+        "role": "Freelance Web Developer",
+        "duration": "June 2025 - July 2025",
+        "description": "Built a corporate website for The Navigans, focusing on professional branding, service showcasing, and lead generation capabilities.",
+        "achievements": [
+            "Delivered a professional corporate presence online.",
+            "Implemented lead generation forms and value proposition showcases.",
+            "Ensured cross-browser compatibility and mobile responsiveness."
+        ],
+        "techStack": [
+            "React",
+            "TypeScript",
+            "Vite"
+        ],
+        "websiteUrl": "https://thenavigans.com"
+    },
+    {
+        "id": "exp-1",
+        "company": "Hope and Heal – Disability Aid Company",
+        "role": "Freelance Web Developer",
+        "duration": "Dec 2024 - Feb 2025",
+        "description": "Designed and deployed a fully responsive WordPress website for Hope and Heal, a disability aid company, using Elementor and custom CSS to ensure accessibility and SEO compliance.",
+        "achievements": [
+            "Designed and deployed a fully responsive WordPress website.",
+            "Ensured accessibility and SEO compliance using Elementor and custom CSS."
+        ],
+        "techStack": [
+            "WordPress",
+            "Elementor",
+            "Custom CSS"
+        ],
+        "websiteUrl": "https://hopeandheal.com.au"
     },
     {
         "id": "exp-2",
-        "company": "Creative Agency",
-        "role": "Frontend Developer",
-        "duration": "2022 - 2023",
-        "description": "Collaborated with designers to bring creative concepts to life on the web.",
+        "company": "HOC Art Cafe",
+        "role": "Freelance Front-End Developer",
+        "duration": "May 2025 - May 2025",
+        "description": "Developed a fully custom, visually appealing café website for HOC Art Cafe using HTML, CSS, and JavaScript, reflecting the client’s artistic identity through responsive design and a curated gallery section. Optimized site performance with smooth scrolling, intuitive navigation, and fast load time.",
         "achievements": [
-            "Developed award-winning landing pages with complex animations.",
-            "Improved site accessibility scores to 98+ on Lighthouse.",
-            "Integrated 3rd party APIs for dynamic content loading."
+            "Developed a fully custom, visually appealing café website reflecting the client’s artistic identity.",
+            "Created a curated gallery section and ensured responsive design.",
+            "Optimized performance with smooth scrolling, intuitive navigation, and fast load time."
         ],
         "techStack": [
-            "Vue.js",
-            "GSAP",
-            "Tailwind CSS"
+            "HTML",
+            "CSS",
+            "JavaScript"
         ],
-        "websiteUrl": "https://example.com"
+        "websiteUrl": "https://hocartcafe.com"
+    },
+    {
+        "id": "exp-3",
+        "company": "Zinda Exteriors",
+        "role": "Freelance WordPress Developer",
+        "duration": "Apr 2025 - May 2025",
+        "description": "Built a visually engaging website for Zinda Exteriors using WordPress, Elementor, and Yoast SEO to showcase their exterior design services, stone work, and product catalog. Customized the layout for brand consistency and applies SEO best practices.",
+        "achievements": [
+            "Built a visually engaging website showcasing services, stone work, and product catalog.",
+            "Customized the layout for brand consistency.",
+            "Applied SEO best practices using Yoast SEO."
+        ],
+        "techStack": [
+            "WordPress",
+            "Elementor",
+            "Yoast SEO"
+        ],
+        "websiteUrl": "https://zindaexteriors.com"
     }
 ]

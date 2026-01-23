@@ -1,5 +1,5 @@
 
 import { Experience } from '../types';
-import experienceList from './experience.json';
+import experienceData from './experience.json';
 
-export const experience: Experience[] = experienceList;
+export const experience: Experience[] = experienceData; // Force HMR update

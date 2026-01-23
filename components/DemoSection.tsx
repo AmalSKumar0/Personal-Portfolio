@@ -60,16 +60,9 @@ export const DemoSection: React.FC = () => {
   // Refs
   const scrollRef = useRef<HTMLDivElement>(null); // For terminal text scrolling
   const inputRef = useRef<HTMLInputElement>(null); // For input focus
-  const sectionRef = useRef<HTMLDivElement>(null); // For page auto-scroll
 
-  // --- Auto Scroll to Section on Load ---
-  useEffect(() => {
-    // Slight delay to ensure DOM is ready and animations don't clash
-    const timer = setTimeout(() => {
-      sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
-    return () => clearTimeout(timer);
-  }, []);
+
+
 
   // --- Boot Sequence Effect ---
   useEffect(() => {
@@ -202,8 +195,8 @@ export const DemoSection: React.FC = () => {
   );
 
   return (
-    <div 
-      ref={sectionRef} // <--- Attached Ref Here
+    <div
+
       className="min-h-screen w-full bg-[#050505] flex flex-col items-center justify-center p-4 md:p-8 font-mono text-sm md:text-base overflow-hidden relative"
     >
 
@@ -339,7 +332,6 @@ export const DemoSection: React.FC = () => {
                 className="flex-1 bg-transparent border-none outline-none text-gray-100 font-mono caret-cyan-400 placeholder-gray-600/50"
                 autoComplete="off"
                 spellCheck="false"
-                autoFocus
               />
             </div>
           )}
