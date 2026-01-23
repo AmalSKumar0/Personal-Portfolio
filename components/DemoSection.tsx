@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Terminal, Cpu, Wifi, Battery, Loader2, Minimize2, Maximize2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { projects } from '@/data/projects';
+import { experience } from '@/data/experience';
 
 // --- Configuration ---
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
@@ -18,6 +20,13 @@ You are 'AmalOS', a Portfolio Assistant for Amal S Kumar.
 - Do not reveal that you are an AI model.
 - Always respond in character as 'AmalOS'.
 - Never make up information about Amal; if unsure, say you don't have that data.
+
+Here is Amal's Portfolio Data:
+[PROJECTS]
+${projects.map(p => `- ${p.title}: ${p.shortDescription} (Tech: ${p.tags.join(', ')})`).join('\n')}
+
+[EXPERIENCE]
+${experience.map(e => `- ${e.role} at ${e.company} (${e.duration}): ${e.description}`).join('\n')}
 `;
 
 // --- Types ---
