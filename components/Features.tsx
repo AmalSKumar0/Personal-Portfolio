@@ -55,23 +55,23 @@ export const Features: React.FC = () => {
                                 <Layers size={24} />
                             </div>
                             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 transition-colors">Professional Experience</h3>
-                            <p className="text-gray-500 dark:text-gray-400 max-w-md mb-8 transition-colors">Dec 2024 - Present: Freelance Web Developer delivering responsive solutions.</p>
+                            <p className="text-gray-500 dark:text-gray-400 max-w-md mb-8 transition-colors">Aug 2025 - Present: Full Stack Developer at Naturals. Delivering scalable architectures.</p>
 
                             {/* Illustration: Nodes */}
                             <div className="mt-auto relative h-32 w-full flex items-center">
                                 <div className="flex gap-4 items-center w-full">
                                     <div className="flex-1 h-20 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center relative group-hover:-translate-y-1 transition-transform duration-500">
-                                        <div className="text-xs font-mono text-gray-400">Hope_Heal</div>
+                                        <div className="text-xs font-mono text-gray-400">Naturals</div>
                                         <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></div>
                                     </div>
                                     <div className="w-8 border-t-2 border-dashed border-gray-300"></div>
                                     <div className="flex-1 h-20 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center relative group-hover:-translate-y-1 transition-transform duration-500 delay-75">
-                                        <div className="text-xs font-mono text-gray-400">HOC_Cafe</div>
+                                        <div className="text-xs font-mono text-gray-400">Tours_Ga</div>
                                         <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></div>
                                     </div>
                                     <div className="w-8 border-t-2 border-dashed border-gray-300"></div>
                                     <div className="flex-1 h-20 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center relative group-hover:-translate-y-1 transition-transform duration-500 delay-150">
-                                        <div className="text-xs font-mono text-gray-400">Project_XYZ</div>
+                                        <div className="text-xs font-mono text-gray-400">Navigans</div>
                                         <div className="absolute -top-1 -right-1 w-2 h-2 bg-blue-500 rounded-full"></div>
                                     </div>
                                 </div>

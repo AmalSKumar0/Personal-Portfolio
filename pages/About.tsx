@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code2, Globe, Database, Cpu, Calendar, Award, Briefcase } from 'lucide-react';
+import { Code2, Globe, Database, Cpu, Calendar, Award, Briefcase, GraduationCap } from 'lucide-react';
 import { SpaceBattle } from '@/components/SpaceBattle';
 import { SEO } from '@/components/SEO';
 
@@ -39,25 +39,26 @@ export const About: React.FC = () => {
 
     const timeline = [
         {
-            year: 'Present',
-            title: 'Freelance Full Stack Developer',
-            description: 'Building custom web solutions for diverse clients using React, Laravel, and modern tech stacks.',
-            icon: Briefcase,
+            year: '2026',
+            title: 'Master of Computer Applications',
+            description: 'Pursuing MCA at Amal Jyothi College of Engineering, specializing in advanced software development.',
+            icon: GraduationCap,
             color: 'text-blue-500'
         },
         {
-            year: '2024',
+            year: '2025',
+            title: 'Freelance Web Developer',
+            description: 'Building custom web solutions for diverse clients using React, Laravel, and modern tech stacks.',
+            icon: Briefcase,
+            color: 'text-purple-500'
+        },
+
+        {
+            year: '2022',
             title: 'Bachelor of Computer Applications',
             description: 'Graduated from MG University with a focus on comprehensive software development and computer science fundamentals.',
             icon: Award,
-            color: 'text-purple-500'
-        },
-        {
-            year: '2023',
-            title: 'Frontend Development Intern',
-            description: 'Honed skills in React ecosystem and responsive design principles through practical application.',
-            icon: Code2,
-            color: 'text-green-500'
+            color: 'text-orange-500'
         }
     ];
 
