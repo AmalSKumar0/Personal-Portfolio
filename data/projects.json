@@ -1,98 +1,301 @@
 [
     {
-        "id": "ai-portfolio-assistant",
-        "title": "AI Portfolio Assistant",
-        "shortDescription": "An interactive terminal-based portfolio assistant powered by Groq API.",
-        "fullDescription": "A unique portfolio experience that mimics a terminal interface. It uses the Groq API to power an AI assistant ('AmalOS') that can answer questions about my skills, projects, and background in a witty and tech-savvy persona. The application features a realistic typing effect, command history, and system boot sequences.",
+        "id": "copper",
+        "title": "Copper",
+        "shortDescription": "A custom interpreted programming language created in C.",
+        "fullDescription": "A foundational project exploring language design and compiler theory. Copper is an interpreted language built from scratch using C, featuring its own syntax and runtime environment.",
         "tags": [
-            "React",
-            "TypeScript",
-            "Groq API",
-            "Tailwind CSS",
-            "Framer Motion"
+            "C",
+            "Language Design",
+            "Interpreters",
+            "Systems Programming"
         ],
-        "imageUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
-        "demoUrl": "https://amalskumar.co.in",
-        "githubUrl": "https://github.com/AmalSKumar0",
+        "imageUrl": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=2070&auto=format&fit=crop",
+        "demoUrl": "",
+        "githubUrl": "https://github.com/AmalSKumar0/Copper",
         "features": [
-            "Real-time AI chat responses",
-            "Terminal-like command interface",
-            "System boot simulation",
-            "Responsive design",
-            "Interactive help commands"
+            "Custom Syntax",
+            "Lexical Analysis",
+            "Runtime Environment",
+            "Standard Library"
         ],
-        "role": "Full Stack Developer",
-        "date": "2024"
+        "role": "Systems Engineer",
+        "date": "2025"
     },
     {
-        "id": "ecommerce-platform",
-        "title": "Modern E-commerce Platform",
-        "shortDescription": "A full-featured e-commerce solution built with Laravel and React.",
-        "fullDescription": "A comprehensive e-commerce platform designed for scalability and performance. It features a robust backend API built with Laravel and a dynamic frontend using React. Key functionalities include user authentication, product management, shopping cart, secure checkout integration, and an admin dashboard for order management.",
+        "id": "rickshaw-hub-php",
+        "title": "RickshawHub (PHP)",
+        "shortDescription": "A web-based auto rickshaw booking system built with PHP.",
+        "fullDescription": "A comprehensive booking platform designed to connect passengers with auto-rickshaw drivers. It features user registration, ride booking, fare calculation, and driver management. Built using native PHP for the backend.",
         "tags": [
-            "Laravel",
-            "React",
+            "PHP",
             "MySQL",
-            "Redux",
-            "Stripe"
+            "HTML/CSS",
+            "JavaScript"
         ],
-        "imageUrl": "https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=2089&auto=format&fit=crop",
-        "githubUrl": "https://github.com/AmalSKumar0",
+        "imageUrl": "https://images.unsplash.com/photo-1596524430615-b46475ddff6e?q=80&w=2070&auto=format&fit=crop",
+        "demoUrl": "",
+        "githubUrl": "https://github.com/AmalSKumar0/RickshawHub-PHP",
         "features": [
-            "User Authentication & Authorization",
-            "Product Search and Filtering",
-            "Shopping Cart & Checkout",
+            "User and Driver Login",
+            "Ride Booking Interface",
             "Admin Dashboard",
-            "Order History & Tracking"
-        ],
-        "role": "Backend Lead",
-        "date": "2023"
-    },
-    {
-        "id": "task-manager-pro",
-        "title": "Task Manager Pro",
-        "shortDescription": "A collaborative task management tool for remote teams.",
-        "fullDescription": "Task Manager Pro is a productivity tool designed to help remote teams collaborate effectively. It allows users to create boards, lists, and cards to track tasks. Features include real-time updates using WebSockets, file attachments, due dates, and assignment tracking.",
-        "tags": [
-            "Node.js",
-            "Express",
-            "MongoDB",
-            "Socket.io",
-            "React"
-        ],
-        "imageUrl": "https://images.unsplash.com/photo-1540350394557-8d14678e7f91?q=80&w=1932&auto=format&fit=crop",
-        "githubUrl": "https://github.com/AmalSKumar0",
-        "features": [
-            "Real-time task updates",
-            "Drag and drop interface",
-            "Team collaboration space",
-            "File sharing and attachment",
-            "Progress analytics"
+            "Fare Calculator"
         ],
         "role": "Full Stack Developer",
-        "date": "2023"
+        "date": "2024"
     },
     {
-        "id": "smart-weather-app",
-        "title": "Smart Weather App",
-        "shortDescription": "A beautiful weather dashboard with location-based forecasts.",
-        "fullDescription": "A sleek weather dashboard that provides accurate weather data and forecasts based on the user's location. It utilizes the OpenWeatherMap API to fetch real-time data and displays it using interactive charts and weather icons. The app supports dark mode and multiple location saving.",
+        "id": "rickshaw-hub-django",
+        "title": "RickshawHub (Django)",
+        "shortDescription": "The Python/Django implementation of the auto rickshaw booking system.",
+        "fullDescription": "A robust migration of the RickshawHub concept to the Django framework. This version leverages Django's ORM and secure authentication system to provide a scalable backend for ride management.",
         "tags": [
-            "React",
-            "OpenWeatherMap API",
-            "Chart.js",
-            "Geolocation API"
+            "Python",
+            "Django",
+            "SQLite/PostgreSQL",
+            "Bootstrap"
         ],
-        "imageUrl": "https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=2070&auto=format&fit=crop",
-        "githubUrl": "https://github.com/AmalSKumar0",
+        "imageUrl": "https://images.unsplash.com/photo-1557053537-430c66336a50?q=80&w=2070&auto=format&fit=crop",
+        "demoUrl": "",
+        "githubUrl": "https://github.com/AmalSKumar0/RickshawHub",
         "features": [
-            "Live weather tracking",
-            "7-day forecast",
-            "Interactive temperature charts",
-            "Location-based detection",
-            "responsive UI"
+            "Secure Authentication",
+            "Ride History",
+            "Driver Availability Status",
+            "Django Admin Integration"
         ],
-        "role": "Frontend Developer",
+        "role": "Backend Developer",
         "date": "2024"
+    },
+    {
+        "id": "swift-ride",
+        "title": "SwiftRide",
+        "shortDescription": "A transportation service platform built with Django.",
+        "fullDescription": "A web application focused on streamlining vehicle transport services. It handles route planning, booking management, and fleet tracking using the Django framework.",
+        "tags": [
+            "Python",
+            "Django",
+            "Google Maps API",
+            "JavaScript"
+        ],
+        "imageUrl": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop",
+        "demoUrl": "",
+        "githubUrl": "https://github.com/AmalSKumar0/SwiftRide",
+        "features": [
+            "Real-time Booking",
+            "Route Optimization",
+            "User Profiles",
+            "Service Listings"
+        ],
+        "role": "Full Stack Developer",
+        "date": "2024"
+    },
+    {
+        "id": "fresh-cart",
+        "title": "FreshCart",
+        "shortDescription": "An e-commerce grocery platform built with Django.",
+        "fullDescription": "A full-featured online grocery store application. It allows users to browse products, manage carts, and process orders. Includes inventory management for administrators.",
+        "tags": [
+            "Python",
+            "Django",
+            "E-commerce",
+            "Stripe Integration"
+        ],
+        "imageUrl": "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=2070&auto=format&fit=crop",
+        "demoUrl": "",
+        "githubUrl": "https://github.com/AmalSKumar0/FreshCart",
+        "features": [
+            "Product Catalog",
+            "Shopping Cart",
+            "Order Processing",
+            "Inventory Management"
+        ],
+        "role": "Full Stack Developer",
+        "date": "2024"
+    },
+    {
+        "id": "pet-adoption",
+        "title": "PetAdoption",
+        "shortDescription": "A platform connecting pets with potential owners using Django.",
+        "fullDescription": "A compassionate platform designed to facilitate pet adoptions. Users can browse available pets, filter by breed/type, and submit adoption applications directly through the site.",
+        "tags": [
+            "Python",
+            "Django",
+            "Bootstrap",
+            "File Handling"
+        ],
+        "imageUrl": "https://images.unsplash.com/photo-1450778869180-41d0601e046e?q=80&w=2070&auto=format&fit=crop",
+        "demoUrl": "",
+        "githubUrl": "https://github.com/AmalSKumar0/PetAdoption",
+        "features": [
+            "Pet Listings with Photos",
+            "Adoption Forms",
+            "Search and Filter",
+            "Admin Panel for Shelters"
+        ],
+        "role": "Full Stack Developer",
+        "date": "2024"
+    },
+    {
+        "id": "path-finder",
+        "title": "PathFinder",
+        "shortDescription": "A navigation and route-planning application using Django.",
+        "fullDescription": "A utility application for discovering paths and routes. It integrates mapping features to help users find the best way from point A to point B.",
+        "tags": [
+            "Python",
+            "Django",
+            "Algorithms",
+            "Leaflet.js"
+        ],
+        "imageUrl": "https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?q=80&w=2070&auto=format&fit=crop",
+        "demoUrl": "",
+        "githubUrl": "https://github.com/AmalSKumar0/PathFinder",
+        "features": [
+            "Interactive Map",
+            "Route Calculation",
+            "Location Search",
+            "User Preferences"
+        ],
+        "role": "Back End Developer",
+        "date": "2024"
+    },
+    {
+        "id": "voice-bot",
+        "title": "VoiceBot",
+        "shortDescription": "A voice-activated assistant built with Django.",
+        "fullDescription": "An innovative project integrating speech recognition with a Django backend. It processes voice commands to perform actions or query information, acting as a personal assistant.",
+        "tags": [
+            "Python",
+            "Django",
+            "SpeechRecognition",
+            "PyAudio"
+        ],
+        "imageUrl": "https://images.unsplash.com/photo-1589254065878-42c9da997008?q=80&w=2070&auto=format&fit=crop",
+        "demoUrl": "",
+        "githubUrl": "https://github.com/AmalSKumar0/VoiceBot",
+        "features": [
+            "Voice Command Recognition",
+            "Text-to-Speech Response",
+            "Automated Task Execution",
+            "Command History"
+        ],
+        "role": "AI Engineer",
+        "date": "2025"
+    },
+    {
+        "id": "tic-tac-toe",
+        "title": "TicTacToe Multiplayer",
+        "shortDescription": "Real-time multiplayer game using Django Channels and React.",
+        "fullDescription": "A modern implementation of the classic game featuring real-time WebSocket communication. It uses Django Channels for the backend and React for a responsive frontend interface.",
+        "tags": [
+            "Django Channels",
+            "WebSockets",
+            "React",
+            "Redis"
+        ],
+        "imageUrl": "https://images.unsplash.com/photo-1611996575749-79a3a250f948?q=80&w=2070&auto=format&fit=crop",
+        "demoUrl": "",
+        "githubUrl": "https://github.com/AmalSKumar0/tictactoe",
+        "features": [
+            "Real-time Gameplay",
+            "Lobby System",
+            "WebSocket Communication",
+            "React State Management"
+        ],
+        "role": "Full Stack Developer",
+        "date": "2025"
+    },
+    {
+        "id": "quick-hire",
+        "title": "QuickHire",
+        "shortDescription": "A job board platform for unskilled workers built in PHP.",
+        "fullDescription": "A dedicated portal bridging the gap between employers and unskilled laborers. It simplifies the hiring process with easy posting and quick application features.",
+        "tags": [
+            "PHP",
+            "MySQL",
+            "HTML5",
+            "CSS3"
+        ],
+        "imageUrl": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=2070&auto=format&fit=crop",
+        "demoUrl": "",
+        "githubUrl": "https://github.com/AmalSKumar0/QuickHire",
+        "features": [
+            "Job Posting",
+            "Simple Application Flow",
+            "Worker Profiles",
+            "Search by Category"
+        ],
+        "role": "Full Stack Developer",
+        "date": "2024"
+    },
+    {
+        "id": "email-to-telegram",
+        "title": "EmailToTelegram",
+        "shortDescription": "A Python automation tool forwarding emails to Telegram.",
+        "fullDescription": "An efficient automation script that monitors email inboxes and forwards important messages to a Telegram chat. It utilizes IMAP for email retrieval and the Telegram Bot API.",
+        "tags": [
+            "Python",
+            "Telegram API",
+            "IMAP",
+            "Automation"
+        ],
+        "imageUrl": "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop",
+        "demoUrl": "",
+        "githubUrl": "https://github.com/AmalSKumar0/EmailToTelegram",
+        "features": [
+            "Instant Notifications",
+            "Attachment Handling",
+            "Filter Rules",
+            "Secure Credentials Management"
+        ],
+        "role": "Backend Developer",
+        "date": "2025"
+    },
+    {
+        "id": "pixera",
+        "title": "Pixera",
+        "shortDescription": "A website builder and content creator tool using Django.",
+        "fullDescription": "A dynamic web application that allows users to create and manage simple websites or portfolios. It abstracts the coding process, providing a user-friendly interface for content creation.",
+        "tags": [
+            "Python",
+            "Django",
+            "JavaScript",
+            "WYSIWYG Editor"
+        ],
+        "imageUrl": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop",
+        "demoUrl": "",
+        "githubUrl": "https://github.com/AmalSKumar0/Pixera",
+        "features": [
+            "Drag-and-Drop Interface",
+            "Template Selection",
+            "Custom Domain Support",
+            "Responsive Output"
+        ],
+        "role": "Full Stack Developer",
+        "date": "2025"
+    },
+    {
+        "id": "momentum",
+        "title": "Momentum",
+        "shortDescription": "A gamified habit tracker application built with PHP.",
+        "fullDescription": "A productivity tool designed to help users build and maintain positive habits. It employs gamification elements to keep users motivated and tracks progress over time.",
+        "tags": [
+            "PHP",
+            "MySQL",
+            "Chart.js",
+            "Gamification"
+        ],
+        "imageUrl": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?q=80&w=2070&auto=format&fit=crop",
+        "demoUrl": "",
+        "githubUrl": "https://github.com/AmalSKumar0/Momentum",
+        "features": [
+            "Habit Streaks",
+            "Progress Visualizations",
+            "Reward System",
+            "Daily Reminders"
+        ],
+        "role": "Full Stack Developer",
+        "date": "2025"
     }
 ]
