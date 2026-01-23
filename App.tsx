@@ -10,6 +10,7 @@ import { About } from './pages/About';
 import { Projects } from './pages/Project';
 import { ViewProject } from './pages/ViewProject';
 import { Experience } from './pages/Experience';
+import { Resume } from './pages/Resume';
 
 import { useVisitorTracker } from './hooks/useVisitorTracker';
 
@@ -45,6 +46,7 @@ const App: React.FC = () => {
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/projects/:id" element={<ViewProject />} />
                 <Route path="/experience" element={<Experience />} />
+                <Route path="/resume" element={<Resume />} />
                 <Route path="/about" element={<About />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

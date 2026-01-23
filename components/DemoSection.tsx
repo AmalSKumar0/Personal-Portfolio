@@ -53,8 +53,7 @@ const INITIAL_BOOT_SEQUENCE = [
   "Welcome to AmalOS v3.0"
 ];
 
-"Welcome to AmalOS v3.0"
-];
+
 
 // --- Typewriter Component ---
 const Typewriter = ({ text }: { text: string }) => {

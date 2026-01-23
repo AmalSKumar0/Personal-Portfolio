@@ -145,13 +145,14 @@ export const Hero: React.FC = () => {
                         >
                             Get in Touch with me
                         </motion.button>
-                        <motion.button
+                        <motion.a
+                            href="/resume"
+                            className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:border-gray-400 dark:hover:border-white/30 transition-all text-gray-900 dark:text-white px-8 py-4 rounded-full text-base font-bold flex items-center gap-2 cursor-pointer"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:border-gray-400 dark:hover:border-white/30 transition-all text-gray-900 dark:text-white px-8 py-4 rounded-full text-base font-bold flex items-center gap-2"
                         >
-                            Download Resume
-                        </motion.button>
+                            View Resume
+                        </motion.a>
                     </motion.div>
 
                     {/* Main Visual Composition */}
