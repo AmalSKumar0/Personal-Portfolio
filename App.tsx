@@ -36,7 +36,7 @@ const App: React.FC = () => {
     <>
       {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
       {!isLoading && (
-        <div className="min-h-screen bg-cream dark:bg-tech-black font-sans overflow-x-hidden selection:bg-flow-purple selection:text-flow-dark transition-colors duration-300 animate-fade-in">
+        <div className="min-h-screen bg-cream dark:bg-tech-black font-sans overflow-x-hidden selection:bg-[#00f3ff] selection:text-black transition-colors duration-300 animate-fade-in">
           <Router>
             <Navbar />
             <main>
