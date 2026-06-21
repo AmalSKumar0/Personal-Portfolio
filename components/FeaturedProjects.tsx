@@ -113,7 +113,7 @@ export const FeaturedProjects: React.FC = () => {
   };
 
   return (
-    <section className="w-full bg-gradient-to-b from-cream via-lavender-50/20 to-cream dark:from-tech-black dark:via-tech-dark/40 dark:to-tech-black py-24 px-6 border-t border-lavender-200/20 dark:border-white/5 transition-colors duration-500 relative overflow-hidden z-10">
+    <section className="w-full bg-gradient-to-b from-cream via-lavender-50/20 to-cream dark:from-tech-black dark:via-tech-dark/40 dark:to-tech-black py-24 px-4 sm:px-8 border-t border-lavender-200/20 dark:border-white/5 transition-colors duration-500 relative overflow-hidden z-10">
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] rounded-full bg-lavender-200/20 dark:bg-lavender-900/[0.04] blur-3xl pointer-events-none -translate-y-1/2"></div>
       <div className="absolute top-1/2 right-1/4 w-[500px] h-[500px] rounded-full bg-neon-purple/5 dark:bg-neon-purple/[0.03] blur-3xl pointer-events-none -translate-y-1/2"></div>
@@ -166,9 +166,9 @@ export const FeaturedProjects: React.FC = () => {
               <motion.div
                 key={project.id}
                 variants={cardVariants}
-                className="w-[325px] sm:w-[380px] shrink-0 snap-start"
+                className="w-[280px] sm:w-[380px] shrink-0 snap-start"
               >
-                <div className="rounded-[2.5rem] border border-lavender-300/40 dark:border-lavender-500/10 bg-lavender-50/20 dark:bg-tech-dark/50 backdrop-blur-xl p-5 md:p-6 flex flex-col justify-between h-[450px] shadow-lg hover:shadow-xl hover:border-lavender-400/60 dark:hover:border-lavender-400/25 transition-all duration-300 relative group overflow-hidden">
+                <div className="rounded-[2.5rem] border border-lavender-300/40 dark:border-lavender-500/10 bg-lavender-50/20 dark:bg-tech-dark/50 backdrop-blur-xl p-5 md:p-6 flex flex-col justify-between h-[385px] sm:h-[450px] shadow-lg hover:shadow-xl hover:border-lavender-400/60 dark:hover:border-lavender-400/25 transition-all duration-300 relative group overflow-hidden">
                   
                   {/* Subtle Lavender Glow on Card Hover */}
                   <div className="absolute inset-0 bg-gradient-to-br from-lavender-400/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />

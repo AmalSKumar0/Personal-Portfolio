@@ -25,7 +25,7 @@ export const TechStackSnapshot: React.FC = () => {
   };
 
   return (
-    <section className="relative bg-cream dark:bg-tech-black transition-colors duration-500 py-24 md:py-32 px-6 md:px-12 flex flex-col justify-center min-h-[80vh] overflow-hidden border-t border-gray-200/50 dark:border-white/10">
+    <section className="relative bg-cream dark:bg-tech-black transition-colors duration-500 py-24 md:py-32 px-4 sm:px-8 md:px-12 flex flex-col justify-center min-h-[80vh] overflow-hidden border-t border-gray-200/50 dark:border-white/10">
 
       {/* Ambient background decoration */}
       <div className="absolute inset-0 bg-grid-pattern opacity-10 dark:opacity-[0.03] z-0 pointer-events-none" />
@@ -43,7 +43,7 @@ export const TechStackSnapshot: React.FC = () => {
           className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-gray-200/35 dark:border-white/5 pb-8"
         >
           <div>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-sans font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
               My Capabilities
             </h2>
           </div>

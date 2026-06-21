@@ -78,7 +78,7 @@ export const AboutSnapshot: React.FC = () => {
   return (
     <section 
       ref={containerRef} 
-      className="relative bg-cream dark:bg-tech-black transition-colors duration-500 py-24 md:py-32 px-6 md:px-12 flex flex-col justify-center min-h-[90vh] overflow-hidden border-t border-gray-200/50 dark:border-white/10"
+      className="relative bg-cream dark:bg-tech-black transition-colors duration-500 py-24 md:py-32 px-4 sm:px-8 md:px-12 flex flex-col justify-center min-h-[90vh] overflow-hidden border-t border-gray-200/50 dark:border-white/10"
     >
       {/* Background Subtle Mesh Effect */}
       <div className="absolute inset-0 bg-grid-pattern opacity-10 dark:opacity-[0.03] z-0 pointer-events-none" />

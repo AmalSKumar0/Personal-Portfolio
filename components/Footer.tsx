@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const Footer: React.FC = () => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
         <footer className="bg-cream dark:bg-tech-black pt-0 pb-12 px-6 transition-colors duration-300">
             <div className="max-w-7xl mx-auto">
@@ -16,18 +27,23 @@ export const Footer: React.FC = () => {
                     <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-neon-cyan/10 dark:bg-neon-cyan/5 blur-3xl pointer-events-none"></div>
 
                     <div className="relative z-10 max-w-2xl mx-auto">
-                        <h2 className="text-5xl md:text-7xl font-display font-bold mb-6 tracking-tight text-gray-900 dark:text-white">Let's build systems together.</h2>
-                        <p className="text-lg text-gray-600 dark:text-gray-400 mb-10">
-                            Looking to design scalable APIs, distributed systems, or optimize databases? Let's talk. <br />
-                            <span className="text-neon-purple dark:text-neon-cyan font-bold">amalskumarofficialz@gmail.com</span>
+                        <h2 className="text-3xl md:text-7xl font-display font-bold mb-6 tracking-tight text-gray-900 dark:text-white">Let's build systems together.</h2>
+                        <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-10">
+                            Looking to design scalable APIs, distributed systems, or optimize databases? Let's talk.
                         </p>
                         <div className="flex flex-col sm:flex-row justify-center gap-4">
-                            <a href="mailto:amalskumarofficialz@gmail.com" className="bg-slate-900 dark:bg-white text-white dark:text-tech-black px-8 py-4 rounded-full font-bold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all flex items-center justify-center gap-2 shadow-lg">
+                            <a href="mailto:amalskumardev@gmail.com" className="bg-slate-900 dark:bg-white text-white dark:text-tech-black px-8 py-4 rounded-full font-bold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all flex items-center justify-center gap-2 shadow-lg">
                                 Email Me <ArrowRight size={18} />
                             </a>
-                            <Link to="/resume" className="bg-white/40 dark:bg-white/5 border border-gray-300/30 dark:border-white/10 text-gray-800 dark:text-white px-8 py-4 rounded-full font-bold hover:bg-white/60 dark:hover:bg-white/10 backdrop-blur-md transition-all inline-flex items-center justify-center shadow-sm">
-                                View Resume
-                            </Link>
+                            {isMobile ? (
+                                <a href="/resume/resume.pdf" className="bg-white/40 dark:bg-white/5 border border-gray-300/30 dark:border-white/10 text-gray-800 dark:text-white px-8 py-4 rounded-full font-bold hover:bg-white/60 dark:hover:bg-white/10 backdrop-blur-md transition-all inline-flex items-center justify-center shadow-sm">
+                                    View Resume
+                                </a>
+                            ) : (
+                                <Link to="/resume" className="bg-white/40 dark:bg-white/5 border border-gray-300/30 dark:border-white/10 text-gray-800 dark:text-white px-8 py-4 rounded-full font-bold hover:bg-white/60 dark:hover:bg-white/10 backdrop-blur-md transition-all inline-flex items-center justify-center shadow-sm">
+                                    View Resume
+                                </Link>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -64,7 +80,7 @@ export const Footer: React.FC = () => {
                             <div className="flex gap-4">
                                 <a href="https://github.com/AmalSKumar0" target="_blank" rel="noreferrer" className="w-10 h-10 bg-gray-100 dark:bg-white/10 rounded-full flex items-center justify-center hover:bg-neon-purple hover:text-white dark:hover:bg-neon-purple transition-colors dark:text-white"><Github size={18} /></a>
                                 <a href="https://www.linkedin.com/in/amal-fsd/" target="_blank" rel="noreferrer" className="w-10 h-10 bg-gray-100 dark:bg-white/10 rounded-full flex items-center justify-center hover:bg-neon-purple hover:text-white dark:hover:bg-neon-purple transition-colors dark:text-white"><Linkedin size={18} /></a>
-                                <a href="mailto:amalskumarofficialz@gmail.com" className="w-10 h-10 bg-gray-100 dark:bg-white/10 rounded-full flex items-center justify-center hover:bg-neon-purple hover:text-white dark:hover:bg-neon-purple transition-colors dark:text-white"><Mail size={18} /></a>
+                                <a href="mailto:amalskumardev@gmail.com" className="w-10 h-10 bg-gray-100 dark:bg-white/10 rounded-full flex items-center justify-center hover:bg-neon-purple hover:text-white dark:hover:bg-neon-purple transition-colors dark:text-white"><Mail size={18} /></a>
                             </div>
                         </div>
                     </div>

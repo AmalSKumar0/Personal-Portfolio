@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { ThemeToggle } from './ThemeToggle';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavbarProps {
   onClose?: () => void;
@@ -43,7 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onClose }) => {
         isVisible ? 'translate-y-0' : '-translate-y-[150%]'
       }`}
     >
-      <div className="bg-white/90 dark:bg-tech-black/90 backdrop-blur-md border border-gray-100 dark:border-white/10 shadow-sm rounded-full px-4 py-2 md:px-6 md:py-3 flex items-center gap-4 md:gap-12 max-w-4xl mx-auto transition-colors duration-300">
+      <div className="w-full bg-white/90 dark:bg-tech-black/90 backdrop-blur-md border border-gray-100 dark:border-white/10 shadow-sm rounded-full px-4 py-2 md:px-6 md:py-3 flex items-center gap-4 md:gap-12 max-w-4xl mx-auto transition-colors duration-300">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2" onClick={handleLinkClick}>
           <span className="font-bold text-gray-900 dark:text-white tracking-tight text-xl transition-colors duration-300">
@@ -116,24 +117,32 @@ export const Navbar: React.FC<NavbarProps> = ({ onClose }) => {
       </div>
 
       {/* Mobile Menu */}
-      {mobileMenuOpen && isVisible && (
-        <div className="absolute top-24 left-4 right-4 bg-white dark:bg-tech-gray border border-gray-100 dark:border-white/10 rounded-3xl p-6 md:hidden flex flex-col gap-4 shadow-xl z-50 transition-colors duration-300">
-          <Link to="/about" className="text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-neon-blue dark:hover:text-neon-cyan transition-colors" onClick={handleLinkClick}>
-            About
-          </Link>
-          <Link to="/experience" className="text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-neon-blue dark:hover:text-neon-cyan transition-colors" onClick={handleLinkClick}>
-            Experience
-          </Link>
-          <Link to="/projects" className="text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-neon-blue dark:hover:text-neon-cyan transition-colors" onClick={handleLinkClick}>
-            Projects
-          </Link>
-          <Link to="/contact" onClick={handleLinkClick}>
-            <button className="w-full bg-slate-900 dark:bg-white text-white dark:text-tech-black px-5 py-3 rounded-full text-base font-medium mt-2 transition-colors cursor-pointer">
-              Hire Me
-            </button>
-          </Link>
-        </div>
-      )}
+      <AnimatePresence>
+        {mobileMenuOpen && isVisible && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="absolute top-24 left-4 right-4 bg-white/95 dark:bg-tech-gray/95 backdrop-blur-lg border border-gray-100 dark:border-white/10 rounded-3xl p-6 md:hidden flex flex-col gap-4 shadow-xl z-50 transition-colors duration-300"
+          >
+            <Link to="/about" className="text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-neon-blue dark:hover:text-neon-cyan transition-colors" onClick={handleLinkClick}>
+              About
+            </Link>
+            <Link to="/experience" className="text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-neon-blue dark:hover:text-neon-cyan transition-colors" onClick={handleLinkClick}>
+              Experience
+            </Link>
+            <Link to="/projects" className="text-lg font-medium text-gray-600 dark:text-gray-300 hover:text-neon-blue dark:hover:text-neon-cyan transition-colors" onClick={handleLinkClick}>
+              Projects
+            </Link>
+            <Link to="/contact" onClick={handleLinkClick}>
+              <button className="w-full bg-slate-900 dark:bg-white text-white dark:text-tech-black px-5 py-3 rounded-full text-base font-medium mt-2 transition-colors cursor-pointer">
+                Hire Me
+              </button>
+            </Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

@@ -42,22 +42,26 @@ const App: React.FC = () => {
       {!isLoading && (
         <div className="min-h-screen bg-white dark:bg-black font-sans overflow-x-hidden transition-colors duration-500">
           
-          {/* White Navigation Bar at the top of the viewport */}
+          {/* Responsive Navigation Bar at the top of the viewport */}
           <div
-            className={`w-full bg-white dark:bg-white text-tech-black flex items-center justify-center transition-all duration-500 ease-in-out overflow-hidden z-30 ${
-              showNavbar ? 'h-16 border-b border-gray-200' : 'h-0 pointer-events-none'
+            className={`w-full bg-white/95 dark:bg-tech-black/95 text-gray-900 dark:text-white flex items-center justify-center transition-all duration-500 ease-in-out overflow-hidden z-30 ${
+              showNavbar 
+                ? 'h-[260px] md:h-16 border-b border-gray-200 dark:border-white/10' 
+                : 'h-0 pointer-events-none'
             }`}
           >
-            <div className="flex items-center gap-4 md:gap-6 text-xs md:text-sm font-bold tracking-widest text-gray-800 uppercase">
-              <Link to="/" className="hover:text-neon-purple transition-colors" onClick={() => setShowNavbar(false)}>Home</Link>
-              <span className="text-gray-300 font-light">|</span>
-              <Link to="/about" className="hover:text-neon-purple transition-colors" onClick={() => setShowNavbar(false)}>About</Link>
-              <span className="text-gray-300 font-light">|</span>
-              <Link to="/projects" className="hover:text-neon-purple transition-colors" onClick={() => setShowNavbar(false)}>Projects</Link>
-              <span className="text-gray-300 font-light">|</span>
-              <Link to="/experience" className="hover:text-neon-purple transition-colors" onClick={() => setShowNavbar(false)}>Experience</Link>
-              <span className="text-gray-300 font-light">|</span>
-              <Link to="/contact" className="hover:text-neon-purple transition-colors" onClick={() => setShowNavbar(false)}>Contact</Link>
+            <div className="w-full max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 py-6 md:py-0">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 text-base md:text-sm font-bold tracking-widest text-gray-800 dark:text-gray-200 uppercase w-full">
+                <Link to="/" className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors" onClick={() => setShowNavbar(false)}>Home</Link>
+                <span className="hidden md:inline text-gray-300 dark:text-gray-700 font-light">|</span>
+                <Link to="/about" className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors" onClick={() => setShowNavbar(false)}>About</Link>
+                <span className="hidden md:inline text-gray-300 dark:text-gray-700 font-light">|</span>
+                <Link to="/projects" className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors" onClick={() => setShowNavbar(false)}>Projects</Link>
+                <span className="hidden md:inline text-gray-300 dark:text-gray-700 font-light">|</span>
+                <Link to="/experience" className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors" onClick={() => setShowNavbar(false)}>Experience</Link>
+                <span className="hidden md:inline text-gray-300 dark:text-gray-700 font-light">|</span>
+                <Link to="/contact" className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors" onClick={() => setShowNavbar(false)}>Contact</Link>
+              </div>
             </div>
           </div>
 
