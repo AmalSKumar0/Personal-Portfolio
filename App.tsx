@@ -11,6 +11,7 @@ import { ViewProject } from './pages/ViewProject';
 import { Experience } from './pages/Experience';
 import { Resume } from './pages/Resume';
 import { ThemeToggle } from './components/ThemeToggle';
+import { LavenderPetals } from './components/LavenderPetals';
 import { Github, Linkedin, Mail } from 'lucide-react';
 
 import { useVisitorTracker } from './hooks/useVisitorTracker';
@@ -67,6 +68,10 @@ const App: React.FC = () => {
                 : 'rounded-t-none'
             }`}
           >
+            {/* Global Falling Petals Overlay */}
+            <div className="fixed inset-0 pointer-events-none z-[9999]">
+              <LavenderPetals maxPetals={25} speedMultiplier={0.8} opacityMultiplier={0.4} />
+            </div>
             {/* Global Header */}
             <header className="w-full max-w-7xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between relative z-30">
               {/* Left: Branding logo */}

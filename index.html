@@ -20,6 +20,19 @@
             'neon-blue': '#7C3AED',
             'neon-purple': '#8B5CF6',
             'neon-cyan': '#C084FC',
+            lavender: {
+              50: '#F5F3FF',
+              100: '#EDE9FE',
+              200: '#DDD6FE',
+              300: '#C7D2FE',
+              400: '#A5B4FC',
+              500: '#818CF8',
+              600: '#6366F1',
+              700: '#4F46E5',
+              800: '#4338CA',
+              900: '#3730A3',
+              DEFAULT: '#E9D5FF'
+            },
           },
           fontFamily: {
             sans: ['Outfit', 'sans-serif'],
@@ -43,11 +56,11 @@
     }
   </script>
   <script>
-    // Check for dark mode preference
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark')
-    } else {
+    // Check for dark mode preference - default to dark
+    if (localStorage.theme === 'light') {
       document.documentElement.classList.remove('dark')
+    } else {
+      document.documentElement.classList.add('dark')
     }
   </script>
 

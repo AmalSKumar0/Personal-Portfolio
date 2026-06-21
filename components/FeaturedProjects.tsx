@@ -1,216 +1,268 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Github, Code } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Github, Code, Terminal } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
-const featuredList = [
-  {
-    id: 'copper',
-    title: 'Copper',
-    shortDescription: 'A custom interpreted programming language created from scratch in C, exploring compiler theory and lexical analysis.',
-    tags: ['C', 'Systems Programming', 'Language Design'],
-    imageUrl: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=2070&auto=format&fit=crop',
-    githubUrl: 'https://github.com/AmalSKumar0/Copper',
-    isHighlighted: false
-  },
-  {
-    id: 'tic-tac-toe',
-    title: 'TicTacToe Multiplayer',
-    shortDescription: 'Real-time multiplayer game server implementing WebSocket communication, state channels, and lobby matchmaking.',
-    tags: ['React', 'WebSockets', 'Django Channels', 'Redis'],
-    imageUrl: 'https://images.unsplash.com/photo-1611996575749-79a3a250f948?q=80&w=2070&auto=format&fit=crop',
-    githubUrl: 'https://github.com/AmalSKumar0/tictactoe',
-    isHighlighted: true
-  },
-  {
-    id: 'momentum',
-    title: 'Momentum',
-    shortDescription: 'A productivity habit tracker built in PHP featuring custom analytics progress visualizations and gamification rewards.',
-    tags: ['PHP', 'MySQL', 'Chart.js', 'Gamification'],
-    imageUrl: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?q=80&w=2070&auto=format&fit=crop',
-    githubUrl: 'https://github.com/AmalSKumar0/Momentum',
-    isHighlighted: false
-  }
-];
+import { projects } from '../data/projects';
 
 export const FeaturedProjects: React.FC = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const targetScrollLeft = useRef(0);
+  const isAnimating = useRef(false);
+
+  const smoothScrollTo = (target: number) => {
+    if (!scrollRef.current) return;
+    const maxScroll = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
+    targetScrollLeft.current = Math.max(0, Math.min(target, maxScroll));
+    
+    if (!isAnimating.current) {
+      isAnimating.current = true;
+      const animate = () => {
+        if (!scrollRef.current) {
+          isAnimating.current = false;
+          return;
+        }
+        const current = scrollRef.current.scrollLeft;
+        const diff = targetScrollLeft.current - current;
+        // Damping factor - creates a luxurious lag / smooth slide effect
+        const step = diff * 0.08;
+        
+        if (Math.abs(step) > 0.5) {
+          scrollRef.current.scrollLeft += step;
+          requestAnimationFrame(animate);
+        } else {
+          scrollRef.current.scrollLeft = targetScrollLeft.current;
+          isAnimating.current = false;
+        }
+      };
+      requestAnimationFrame(animate);
+    }
+  };
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      // Sync on button click if user manually scrolled in the meantime
+      if (targetScrollLeft.current !== scrollRef.current.scrollLeft && !isAnimating.current) {
+        targetScrollLeft.current = scrollRef.current.scrollLeft;
+      }
+      const scrollAmount = direction === 'left' ? -420 : 420;
+      smoothScrollTo(targetScrollLeft.current + scrollAmount);
+    }
+  };
+
+  // Convert vertical wheel to smooth horizontal scroll with inertia
+  React.useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      const isAtStart = el.scrollLeft <= 0;
+      const isAtEnd = el.scrollLeft >= el.scrollWidth - el.clientWidth - 1;
+
+      if (e.deltaY !== 0) {
+        // If scrolling left at start, or right at end, let normal page scrolling happen
+        if ((isAtStart && e.deltaY < 0) || (isAtEnd && e.deltaY > 0)) {
+          return;
+        }
+
+        e.preventDefault();
+        
+        // Sync starting point if scroll position changed since last wheel event
+        if (!isAnimating.current) {
+          targetScrollLeft.current = el.scrollLeft;
+        }
+
+        const sensitivity = 1.2;
+        const newTarget = targetScrollLeft.current + e.deltaY * sensitivity;
+        smoothScrollTo(newTarget);
+      }
+    };
+
+    const handleScroll = () => {
+      if (!isAnimating.current) {
+        targetScrollLeft.current = el.scrollLeft;
+      }
+    };
+
+    el.addEventListener('wheel', handleWheel, { passive: false });
+    el.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      el.removeEventListener('wheel', handleWheel);
+      el.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Entry animations
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1
+        staggerChildren: 0.05
       }
     }
   };
 
   const cardVariants = {
-    hidden: { y: 40, opacity: 0 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
-      y: 0,
       opacity: 1,
-      transition: { type: 'spring', stiffness: 60, damping: 15 }
+      y: 0,
+      transition: { type: 'spring', stiffness: 80, damping: 15 }
     }
   };
 
   return (
-    <section className="w-full bg-cream dark:bg-tech-black py-20 px-6 border-t border-gray-200/40 dark:border-white/5 transition-colors duration-500 relative overflow-hidden z-10">
-      <div className="max-w-7xl mx-auto flex flex-col items-center">
+    <section className="w-full bg-gradient-to-b from-cream via-lavender-50/20 to-cream dark:from-tech-black dark:via-tech-dark/40 dark:to-tech-black py-24 px-6 border-t border-lavender-200/20 dark:border-white/5 transition-colors duration-500 relative overflow-hidden z-10">
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] rounded-full bg-lavender-200/20 dark:bg-lavender-900/[0.04] blur-3xl pointer-events-none -translate-y-1/2"></div>
+      <div className="absolute top-1/2 right-1/4 w-[500px] h-[500px] rounded-full bg-neon-purple/5 dark:bg-neon-purple/[0.03] blur-3xl pointer-events-none -translate-y-1/2"></div>
 
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="text-center mb-16 max-w-xl mx-auto"
-        >
-          <span className="text-[10px] md:text-xs font-bold tracking-[0.3em] text-neon-purple dark:text-neon-cyan uppercase font-mono">
-            FEATURED WORK
-          </span>
-          <h2 className="text-4xl sm:text-5xl font-serif text-gray-900 dark:text-white font-normal italic mt-3 tracking-tight">
-            Selected Projects
-          </h2>
-        </motion.div>
+      <div className="max-w-7xl mx-auto flex flex-col">
+        {/* Section Header with Scrolling Controls */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div>
+            <span className="text-xs md:text-sm font-extrabold tracking-[0.25em] text-neon-purple dark:text-lavender-300 uppercase font-brand">
+              MY PROJECTS
+            </span>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-gray-900 dark:text-white font-bold italic mt-3 tracking-tight leading-tight">
+              Selected <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-purple to-neon-cyan dark:from-neon-purple dark:to-lavender-300 not-italic font-sans font-extrabold">Systems</span> & Applications
+            </h2>
+          </div>
+          
+          {/* Scroll Navigation Buttons */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => scroll('left')}
+              className="p-3 rounded-full bg-lavender-100/40 dark:bg-white/5 border border-lavender-300/40 dark:border-white/10 text-lavender-800 dark:text-gray-200 hover:bg-lavender-200/50 dark:hover:bg-white/10 transition-all shadow-sm active:scale-95 cursor-pointer backdrop-blur-md"
+              aria-label="Scroll left"
+            >
+              <ArrowLeft size={18} />
+            </button>
+            <button
+              onClick={() => scroll('right')}
+              className="p-3 rounded-full bg-lavender-100/40 dark:bg-white/5 border border-lavender-300/40 dark:border-white/10 text-lavender-800 dark:text-gray-200 hover:bg-lavender-200/50 dark:hover:bg-white/10 transition-all shadow-sm active:scale-95 cursor-pointer backdrop-blur-md"
+              aria-label="Scroll right"
+            >
+              <ArrowRight size={18} />
+            </button>
+          </div>
+        </div>
 
-        {/* Projects Grid (3 columns matching capability snapshot layout) */}
+        {/* Horizontal Carousel */}
         <motion.div
+          ref={scrollRef}
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8 w-full"
+          className="flex gap-8 overflow-x-auto pb-10 pt-4 px-2 no-scrollbar snap-x snap-mandatory md:snap-none cursor-grab active:cursor-grabbing"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {featuredList.map((project) => {
-            if (project.isHighlighted) {
-              return (
-                /* Card 2: Highlighted Card (Gradient background) */
-                <motion.div
-                  key={project.id}
-                  variants={cardVariants}
-                  className="w-full h-full"
-                >
-                  <motion.div
-                    animate={{ y: [4, -4] }}
-                    transition={{ repeat: Infinity, repeatType: 'mirror', duration: 7, ease: 'easeInOut', delay: 0.2 }}
-                    className="rounded-[2.5rem] bg-gradient-to-br from-neon-purple via-purple-500 to-pink-500 text-white p-6 md:p-8 flex flex-col justify-between min-h-[380px] shadow-xl hover:scale-[1.02] hover:shadow-neon-purple/20 transition-all duration-300 relative overflow-hidden group h-full border-2 border-white/10"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/35 opacity-40 mix-blend-overlay z-0" />
+          {projects.map((project) => {
+            const yearShort = project.date ? project.date.slice(-2) : '25';
 
-                    <div className="space-y-4 relative z-10">
-                      <div className="flex justify-between items-start">
-                        <h3 className="text-2xl font-bold font-sans tracking-tight leading-tight">
-                          {project.title}
-                        </h3>
-                        <div className="flex gap-2">
-                          <a
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 bg-white/20 hover:bg-white text-white hover:text-black rounded-full flex items-center justify-center shadow-md transition-colors"
-                          >
-                            <Github size={16} />
-                          </a>
-                          <Link
-                            to={`/projects/${project.id}`}
-                            className="p-2 bg-pink-100 text-pink-600 hover:bg-white rounded-full flex items-center justify-center shadow-md transition-colors"
-                          >
-                            <ArrowUpRight size={16} className="stroke-[2.5]" />
-                          </Link>
+            return (
+              <motion.div
+                key={project.id}
+                variants={cardVariants}
+                className="w-[325px] sm:w-[380px] shrink-0 snap-start"
+              >
+                <div className="rounded-[2.5rem] border border-lavender-300/40 dark:border-lavender-500/10 bg-lavender-50/20 dark:bg-tech-dark/50 backdrop-blur-xl p-5 md:p-6 flex flex-col justify-between h-[450px] shadow-lg hover:shadow-xl hover:border-lavender-400/60 dark:hover:border-lavender-400/25 transition-all duration-300 relative group overflow-hidden">
+                  
+                  {/* Subtle Lavender Glow on Card Hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-lavender-400/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
+                  
+                  <div className="relative z-10 flex flex-col h-full justify-between">
+                    <div>
+                      {/* Card Header Row */}
+                      <div className="flex justify-between items-center mb-4">
+                        {/* Left Badge: Role/Category with Lavender Theme */}
+                        <span className="bg-lavender-900 dark:bg-lavender-400/20 text-white dark:text-lavender-200 border border-lavender-700/30 dark:border-lavender-400/30 px-3.5 py-1.5 rounded-full text-[10px] sm:text-xs font-bold tracking-wide uppercase shadow-sm">
+                          {project.role.split(' ')[0] || 'DEV'}
+                        </span>
+
+                        {/* Right Badge: Split Pill Layout inspired by the mock image */}
+                        <div className="flex items-center border border-lavender-200/50 dark:border-lavender-500/15 rounded-full overflow-hidden text-[10px] font-bold tracking-wider font-mono shadow-sm bg-lavender-50/30 dark:bg-white/5">
+                          <span className="bg-lavender-900 dark:bg-white/10 text-white dark:text-gray-200 px-2.5 py-1 uppercase text-[9px]">
+                            YEAR
+                          </span>
+                          <span className="bg-lavender-50/50 dark:bg-tech-gray text-lavender-900 dark:text-white px-2.5 py-1 text-[9px] border-l border-lavender-200/50 dark:border-white/10">
+                            {yearShort}
+                          </span>
                         </div>
                       </div>
-                      <div className="h-px bg-white/20 w-full" />
-                      <p className="text-xs text-white/80 font-sans leading-relaxed">
+
+                      {/* Title & Description */}
+                      <h3 className="text-2xl font-bold font-sans text-gray-900 dark:text-white tracking-tight leading-tight group-hover:text-neon-purple dark:group-hover:text-lavender-300 transition-colors duration-300 mb-1.5">
+                        {project.title}
+                      </h3>
+                      <p className="text-[13px] sm:text-sm text-lavender-900/60 dark:text-lavender-200/60 font-sans leading-relaxed line-clamp-2 h-[42px] overflow-hidden">
                         {project.shortDescription}
                       </p>
                     </div>
 
-                    <div className="flex flex-wrap gap-2 mt-6 relative z-10">
-                      {project.tags.map((tag, idx) => (
-                        <span
-                          key={idx}
-                          className="bg-white/10 text-white border border-white/25 px-2.5 py-1 rounded-lg font-mono text-[9px] font-bold uppercase tracking-wider cursor-default select-none"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </motion.div>
-                </motion.div>
-              );
-            }
+                    {/* Image with rounded corners and bottom stack overlay */}
+                    <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden mt-3 mb-0 border border-lavender-200/45 dark:border-lavender-500/15 shadow-md">
+                      <img
+                        src={project.imageUrl}
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                        loading="lazy"
+                      />
+                      {/* Gradient shadow inside the image to ensure text legibility */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
 
-            return (
-              /* Cards 1 & 3: Minimal Outline Cards */
-              <motion.div
-                key={project.id}
-                variants={cardVariants}
-                className="w-full h-full"
-              >
-                <motion.div
-                  animate={{ y: [-4, 4] }}
-                  transition={{ repeat: Infinity, repeatType: 'mirror', duration: project.id === 'copper' ? 6 : 6.5, ease: 'easeInOut', delay: project.id === 'copper' ? 0 : 0.4 }}
-                  className="rounded-[2.5rem] border-2 border-purple-200/70 dark:border-white/10 bg-white/40 dark:bg-tech-dark/40 backdrop-blur-md p-6 md:p-8 flex flex-col justify-between min-h-[380px] shadow-sm hover:shadow-xl hover:border-pink-300/50 dark:hover:border-neon-cyan/30 transition-all duration-300 group h-full"
-                >
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-start">
-                      <h3 className="text-2xl font-bold font-sans text-gray-900 dark:text-white tracking-tight leading-tight">
-                        {project.title}
-                      </h3>
-                      <div className="flex gap-2">
+                      {/* Location-like overlay showing tech stack */}
+                      <div className="absolute bottom-4 left-4 bg-lavender-50/70 dark:bg-tech-dark/70 backdrop-blur-md border border-lavender-200/40 dark:border-lavender-500/15 rounded-2xl py-1.5 px-3 flex items-center gap-2 shadow-md">
+                        <Terminal size={12} className="text-lavender-600 dark:text-lavender-300" />
+                        <span className="text-[10px] font-bold text-gray-800 dark:text-white tracking-wide uppercase font-mono">
+                          {project.tags.slice(0, 2).join(' • ')}
+                        </span>
+                      </div>
+
+                      {/* Action Links Overlay Top Right */}
+                      <div className="absolute top-4 right-4 flex gap-1.5">
                         <a
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-2 bg-purple-50 dark:bg-purple-950/40 text-neon-purple dark:text-neon-cyan hover:bg-neon-purple hover:text-white dark:hover:bg-neon-cyan dark:hover:text-black rounded-full flex items-center justify-center border border-purple-200/50 dark:border-white/5 shadow-sm transition-colors"
+                          className="p-2 bg-lavender-50/90 hover:bg-white text-lavender-900 hover:text-neon-purple rounded-full flex items-center justify-center shadow-md transition-all hover:scale-105 active:scale-95"
+                          title="View Code"
                         >
-                          <Github size={16} />
+                          <Github size={14} />
                         </a>
                         <Link
                           to={`/projects/${project.id}`}
-                          className="p-2 bg-purple-50 dark:bg-purple-950/40 text-neon-purple dark:text-neon-cyan hover:bg-neon-purple hover:text-white dark:hover:bg-neon-cyan dark:hover:text-black rounded-full flex items-center justify-center border border-purple-200/50 dark:border-white/5 shadow-sm transition-colors"
+                          className="p-2 bg-lavender-50/90 hover:bg-white text-lavender-900 hover:text-neon-purple rounded-full flex items-center justify-center shadow-md transition-all hover:scale-105 active:scale-95"
+                          title="Project Details"
                         >
-                          <ArrowUpRight size={16} />
+                          <ArrowUpRight size={14} />
                         </Link>
                       </div>
                     </div>
-                    <div className="h-px bg-purple-200/50 dark:bg-white/10 w-full" />
-                    <p className="text-xs text-gray-500 dark:text-gray-400 font-sans leading-relaxed">
-                      {project.shortDescription}
-                    </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-2 mt-6">
-                    {project.tags.map((tag, idx) => (
-                      <span
-                        key={idx}
-                        className="bg-purple-50/55 dark:bg-purple-950/30 text-neon-purple dark:text-neon-cyan border border-purple-200/40 dark:border-white/5 px-2.5 py-1 rounded-lg font-mono text-[9px] font-bold uppercase tracking-wider hover:bg-purple-100/50 dark:hover:bg-purple-900/30 transition-all duration-305 cursor-default select-none"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
+                </div>
               </motion.div>
             );
           })}
         </motion.div>
 
-        {/* View All CTA Link */}
+        {/* View All CTA Link - Glassmorphic button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-20px' }}
-          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.3 }}
-          className="mt-16 text-center"
+          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+          className="mt-8 text-center"
         >
           <Link
             to="/projects"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-gray-950 dark:bg-white text-white dark:text-tech-black text-sm font-sans font-bold rounded-full shadow-lg hover:shadow-xl hover:scale-[1.03] transition-all cursor-pointer"
+            className="inline-flex items-center gap-2.5 px-8 py-4 bg-lavender-100/40 dark:bg-white/5 border border-lavender-300/50 dark:border-white/10 text-lavender-900 dark:text-white rounded-full font-bold hover:bg-lavender-200/50 dark:hover:bg-white/10 backdrop-blur-md shadow-md hover:shadow-lg hover:scale-[1.03] transition-all cursor-pointer group"
           >
             <span>View All Projects</span>
-            <Code size={16} />
+            <Code size={16} className="text-neon-purple dark:text-lavender-300 group-hover:rotate-12 transition-transform" />
           </Link>
         </motion.div>
 
@@ -218,4 +270,5 @@ export const FeaturedProjects: React.FC = () => {
     </section>
   );
 };
+
 export default FeaturedProjects;

@@ -38,7 +38,7 @@ export const Hero: React.FC = () => {
                     <div className="max-w-6xl w-full flex flex-col items-center relative z-20">
                         {/* Availability Badge */}
                     <motion.div
-                        className="inline-flex items-center gap-3 bg-white/80 dark:bg-tech-dark/65 backdrop-blur-md border border-gray-200/50 dark:border-white/10 rounded-full pl-2 pr-4 py-1.5 mb-8 shadow-sm hover:shadow-md transition-all cursor-default"
+                        className="inline-flex items-center gap-3 bg-white/30 dark:bg-white/5 backdrop-blur-lg border border-white/40 dark:border-white/10 rounded-full pl-2 pr-4 py-1.5 mb-8 shadow-md hover:shadow-lg transition-all cursor-default hover:bg-white/40 dark:hover:bg-white/10"
                         variants={itemVariants}
                     >
                         <div className="bg-neon-purple text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Status</div>
@@ -54,7 +54,14 @@ export const Hero: React.FC = () => {
                     >
                         {/* Line 1: Amal [Capsule] S Kumar */}
                         <div className="flex flex-wrap items-center justify-center gap-x-4 md:gap-x-6 gap-y-2 text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-serif text-gray-900 dark:text-white font-light">
-                            <span>Amal</span>
+                            <span>Amal S Kumar</span>
+                            <svg className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 text-neon-cyan animate-spin-slow" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
+                            </svg>
+                        </div>
+
+                        {/* Line 2: [Sparkle Star] Backend Engineer */}
+                        <div className="flex flex-wrap items-center justify-center gap-x-4 md:gap-x-6 gap-y-2 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif text-gray-900 dark:text-white italic font-normal mt-3">
                             <div className="inline-flex items-center justify-center w-16 sm:w-20 md:w-32 h-10 sm:h-12 md:h-16 rounded-full border border-neon-purple/20 bg-neon-purple/10 overflow-hidden relative shadow-inner">
                                 {/* Glowing nodes indicator representing backend network inside capsule */}
                                 <div className="absolute inset-0 flex items-center justify-center gap-1 sm:gap-1.5">
@@ -63,14 +70,6 @@ export const Hero: React.FC = () => {
                                     <span className="w-1.5 md:w-2 h-5 md:h-7 bg-neon-purple rounded-full animate-pulse delay-150"></span>
                                 </div>
                             </div>
-                            <span>S Kumar</span>
-                        </div>
-
-                        {/* Line 2: [Sparkle Star] Backend Engineer */}
-                        <div className="flex flex-wrap items-center justify-center gap-x-4 md:gap-x-6 gap-y-2 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif text-gray-900 dark:text-white italic font-normal mt-3">
-                            <svg className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 text-neon-cyan animate-spin-slow" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
-                            </svg>
                             <span>Full-Stack Developer</span>
                         </div>
 
@@ -80,7 +79,7 @@ export const Hero: React.FC = () => {
                                 href="/contact"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="inline-flex items-center gap-2 px-6 py-3 bg-gray-950 dark:bg-white text-white dark:text-tech-black text-sm sm:text-base font-sans font-bold rounded-full transition-all shadow-lg border border-white/10 hover:shadow-xl cursor-pointer"
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-neon-purple/15 dark:bg-white/10 text-neon-purple dark:text-white backdrop-blur-md text-sm sm:text-base font-sans font-bold rounded-full transition-all shadow-lg border border-neon-purple/30 dark:border-white/20 hover:bg-neon-purple/25 dark:hover:bg-white/20 hover:shadow-xl cursor-pointer"
                             >
                                 <span>Get in touch</span>
                                 <span className="text-neon-purple">→</span>
@@ -89,7 +88,7 @@ export const Hero: React.FC = () => {
                                 href="/resume"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="inline-flex items-center gap-2 px-6 py-3 bg-white/40 dark:bg-white/5 text-gray-950 dark:text-white text-sm sm:text-base font-sans font-bold rounded-full transition-all shadow-sm border border-gray-200/50 dark:border-white/10 hover:bg-white/60 dark:hover:bg-white/10 cursor-pointer"
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-white/20 dark:bg-white/5 text-gray-800 dark:text-white backdrop-blur-md text-sm sm:text-base font-sans font-bold rounded-full transition-all shadow-md border border-gray-300/30 dark:border-white/10 hover:bg-white/30 dark:hover:bg-white/10 cursor-pointer"
                             >
                                 <span>View Resume</span>
                                 <span className="text-neon-cyan">↓</span>
