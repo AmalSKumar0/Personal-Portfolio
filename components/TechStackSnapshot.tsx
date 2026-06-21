@@ -17,8 +17,8 @@ const toolSkills = [
 export const TechStackSnapshot: React.FC = () => {
   const cardVariants = {
     hidden: { opacity: 0, y: 25 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: { duration: 0.5, ease: 'easeOut' }
     }
@@ -26,16 +26,16 @@ export const TechStackSnapshot: React.FC = () => {
 
   return (
     <section className="relative bg-cream dark:bg-tech-black transition-colors duration-500 py-24 md:py-32 px-6 md:px-12 flex flex-col justify-center min-h-[80vh] overflow-hidden border-t border-gray-200/50 dark:border-white/10">
-      
+
       {/* Ambient background decoration */}
       <div className="absolute inset-0 bg-grid-pattern opacity-10 dark:opacity-[0.03] z-0 pointer-events-none" />
       <div className="absolute top-[30%] right-[-10%] w-[450px] h-[450px] bg-pink-500/5 dark:bg-pink-500/2 rounded-full blur-[140px] pointer-events-none z-0" />
       <div className="absolute bottom-[30%] left-[-10%] w-[450px] h-[450px] bg-neon-purple/5 dark:bg-neon-purple/2 rounded-full blur-[140px] pointer-events-none z-0" />
 
       <div className="max-w-6xl w-full mx-auto relative z-10 flex flex-col gap-16 md:gap-24">
-        
+
         {/* Top Section Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
@@ -56,9 +56,9 @@ export const TechStackSnapshot: React.FC = () => {
 
         {/* 3 Column Cards Layout */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8">
-          
+
           {/* Card 1: Backend & Systems (Outline Card) */}
-          <motion.div 
+          <motion.div
             variants={cardVariants}
             initial="hidden"
             whileInView="visible"
@@ -85,11 +85,11 @@ export const TechStackSnapshot: React.FC = () => {
                   Designing secure, high-performance, and scalable server-side systems with optimized database indexing and background queues.
                 </p>
               </div>
-              
+
               {/* Skill Tags */}
               <div className="flex flex-wrap gap-2 mt-6">
                 {backendSkills.map((skill, index) => (
-                  <span 
+                  <span
                     key={index}
                     className="bg-purple-50/55 dark:bg-purple-950/30 text-neon-purple dark:text-neon-cyan border border-purple-200/40 dark:border-white/5 px-2.5 py-1 rounded-lg font-mono text-[9px] font-bold uppercase tracking-wider hover:bg-purple-100/50 dark:hover:bg-purple-900/30 transition-all duration-305 cursor-default select-none"
                   >
@@ -101,7 +101,7 @@ export const TechStackSnapshot: React.FC = () => {
           </motion.div>
 
           {/* Card 2: Frontend & Interactive (Gradient Highlight Card) */}
-          <motion.div 
+          <motion.div
             variants={cardVariants}
             initial="hidden"
             whileInView="visible"
@@ -117,7 +117,7 @@ export const TechStackSnapshot: React.FC = () => {
               {/* Background Accent Gradients */}
               <div className="absolute -right-16 -top-16 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none" />
               <div className="absolute inset-0 border-2 border-white/10 rounded-[2rem] pointer-events-none" />
-              
+
               {/* Card Info Header */}
               <div className="space-y-4 relative z-10">
                 <div className="flex justify-between items-start">
@@ -133,11 +133,11 @@ export const TechStackSnapshot: React.FC = () => {
                   Crafting pixel-perfect user interfaces, modular components, and fluid animations for responsive web engines.
                 </p>
               </div>
-              
+
               {/* Skill Tags */}
               <div className="flex flex-wrap gap-2 mt-6 relative z-10">
                 {frontendSkills.map((skill, index) => (
-                  <span 
+                  <span
                     key={index}
                     className="bg-white/10 text-white border border-white/25 px-2.5 py-1 rounded-lg font-mono text-[9px] font-bold uppercase tracking-wider hover:bg-white/20 transition-all duration-300 cursor-default select-none"
                   >
@@ -149,7 +149,7 @@ export const TechStackSnapshot: React.FC = () => {
           </motion.div>
 
           {/* Card 3: Tools & Workflows (Outline Card) */}
-          <motion.div 
+          <motion.div
             variants={cardVariants}
             initial="hidden"
             whileInView="visible"
@@ -177,11 +177,11 @@ export const TechStackSnapshot: React.FC = () => {
                   Managing version control, cloud deployment paths, search index optimizations, and academic programming foundations.
                 </p>
               </div>
-              
+
               {/* Skill Tags */}
               <div className="flex flex-wrap gap-2 mt-6">
                 {toolSkills.map((skill, index) => (
-                  <span 
+                  <span
                     key={index}
                     className="bg-purple-50/55 dark:bg-purple-950/30 text-neon-purple dark:text-neon-cyan border border-purple-200/40 dark:border-white/5 px-2.5 py-1 rounded-lg font-mono text-[9px] font-bold uppercase tracking-wider hover:bg-purple-100/50 dark:hover:bg-purple-900/30 transition-all duration-305 cursor-default select-none"
                   >

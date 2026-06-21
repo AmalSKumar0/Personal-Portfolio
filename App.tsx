@@ -101,7 +101,7 @@ const App: React.FC = () => {
                 <ThemeToggle />
                 <div className="hidden sm:flex items-center gap-4 text-gray-700 dark:text-gray-300">
                   <a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/amal-fsd"
                     target="_blank"
                     rel="noreferrer"
                     className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors"
@@ -109,7 +109,7 @@ const App: React.FC = () => {
                     <Linkedin size={18} />
                   </a>
                   <a
-                    href="https://github.com"
+                    href="https://github.com/AmalSKumar0"
                     target="_blank"
                     rel="noreferrer"
                     className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors"
@@ -117,7 +117,7 @@ const App: React.FC = () => {
                     <Github size={18} />
                   </a>
                   <a
-                    href="mailto:contact@amal.dev"
+                    href="mailto:amalskumardev@gmail.com"
                     className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors"
                   >
                     <Mail size={18} />

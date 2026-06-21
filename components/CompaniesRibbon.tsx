@@ -1,56 +1,42 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Leaf, 
-  Mountain, 
-  Compass, 
-  Heart, 
-  Palette, 
-  Home 
-} from 'lucide-react';
 
 const companies = [
   { 
-    name: 'Naturals', 
-    icon: Leaf,
-    colorClass: 'text-purple-500 dark:text-purple-400',
-    fontClass: 'font-serif italic font-semibold text-xl tracking-tight'
-  },
-  { 
-    name: 'TOURS OF GEORGIA', 
-    icon: Mountain,
-    colorClass: 'text-pink-500 dark:text-pink-400',
-    fontClass: 'font-sans font-bold text-sm tracking-[0.2em]'
-  },
-  { 
-    name: 'THE NAVIGANS', 
-    icon: Compass,
-    colorClass: 'text-violet-500 dark:text-violet-400',
-    fontClass: 'font-mono font-medium text-sm tracking-widest'
-  },
-  { 
-    name: 'Hope & Heal', 
-    icon: Heart,
-    colorClass: 'text-rose-500 dark:text-rose-400',
-    fontClass: 'font-sans font-medium text-lg tracking-tight'
-  },
-  { 
     name: 'HOC Art Cafe', 
-    icon: Palette,
-    colorClass: 'text-indigo-500 dark:text-indigo-400',
-    fontClass: 'font-display font-extrabold text-base tracking-normal'
+    logo: '/companies/hoc.webp',
+    url: 'https://www.hocartcafe.com/',
+    filterClass: 'invert dark:invert-0' // White logo -> Black in light mode, White in dark mode
   },
   { 
     name: 'ZINDA EXTERIORS', 
-    icon: Home,
-    colorClass: 'text-fuchsia-500 dark:text-fuchsia-400',
-    fontClass: 'font-brand font-semibold text-xs tracking-[0.25em]'
+    logo: '/companies/zinda.png',
+    url: 'https://zindaexteriors.com/',
+    filterClass: 'dark:invert' // Black logo -> Black in light mode, White in dark mode
+  },
+  { 
+    name: 'TOURS OF GEORGIA', 
+    logo: '/companies/toursofgeorgia.png',
+    url: 'https://toursofgeorgia.com/',
+    filterClass: 'dark:brightness-125' // Colorful logo -> slightly brighter in dark mode
+  },
+  { 
+    name: 'THE NAVIGANS', 
+    logo: '/companies/navigans.png',
+    url: 'https://thenavigans.com/en/',
+    filterClass: 'invert dark:invert-0' // White logo -> Black in light mode, White in dark mode
+  },
+  { 
+    name: 'Hope & Heal', 
+    logo: '/companies/hopendheal.png',
+    url: 'https://hopeandheal.com.au/',
+    filterClass: 'dark:brightness-110' // Colorful logo -> slightly brighter in dark mode
   }
 ];
 
 export const CompaniesRibbon: React.FC = () => {
-  // Triple the array to ensure full width coverage for seamless reverse scrolling
-  const listItems = [...companies, ...companies, ...companies];
+  // Quadruple the array to ensure full width coverage for seamless infinite scrolling
+  const listItems = [...companies, ...companies, ...companies, ...companies];
 
   return (
     <motion.section 
@@ -58,13 +44,13 @@ export const CompaniesRibbon: React.FC = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
-      className="w-full bg-gradient-to-b from-cream via-purple-50/20 to-cream dark:from-tech-black dark:via-purple-950/10 dark:to-tech-black py-16 md:py-20 flex flex-col justify-center overflow-hidden relative border-t border-b border-gray-200/40 dark:border-white/5 transition-all duration-500"
+      className="w-full bg-gradient-to-b from-cream via-purple-50/20 to-cream dark:from-tech-black dark:via-purple-950/10 dark:to-tech-black py-10 md:py-14 flex flex-col justify-center overflow-hidden relative border-t border-b border-gray-200/40 dark:border-white/5 transition-all duration-500"
     >
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[150px] bg-neon-purple/5 dark:bg-neon-purple/2 rounded-full blur-[100px] pointer-events-none z-0" />
 
       {/* Heading */}
-      <div className="text-center mb-10 md:mb-12 relative z-10 px-6">
+      <div className="text-center mb-10 relative z-10 px-6">
         <h3 className="font-sans text-[10px] md:text-xs font-bold tracking-[0.3em] text-gray-500 dark:text-gray-400 uppercase">
           COMPANIES I HAVE WORKED WITH
         </h3>
@@ -75,26 +61,25 @@ export const CompaniesRibbon: React.FC = () => {
       <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-cream dark:from-tech-black to-transparent z-10 pointer-events-none transition-colors duration-500" />
 
       {/* Sliding Marquee Track */}
-      <div className="flex w-[200%] md:w-max relative z-10 select-none group">
+      <div className="w-full overflow-hidden relative z-10 select-none">
         
-        {/* Left-to-right scrolling marquee */}
-        <div className="flex items-center gap-12 md:gap-16 px-6 animate-infinite-scroll-reverse group-hover:paused">
-          {listItems.map((company, index) => {
-            const Icon = company.icon;
-            return (
-              <div 
-                key={`company-1-${index}`} 
-                className="flex items-center gap-3.5 opacity-40 hover:opacity-100 transition-all duration-300 transform hover:scale-105 group/item cursor-default"
-              >
-                <div className={`p-2 bg-white/40 dark:bg-tech-gray/40 backdrop-blur-sm rounded-xl border border-gray-200/50 dark:border-white/10 ${company.colorClass} shadow-sm group-hover/item:border-neon-purple/20 dark:group-hover/item:border-neon-cyan/20 transition-all duration-300`}>
-                  <Icon size={20} className="group-hover/item:rotate-12 transition-transform duration-300" />
-                </div>
-                <span className={`text-gray-700 dark:text-gray-300 group-hover/item:text-gray-950 dark:group-hover/item:text-white transition-colors duration-300 ${company.fontClass}`}>
-                  {company.name}
-                </span>
-              </div>
-            );
-          })}
+        {/* Scrolling marquee */}
+        <div className="flex items-center w-max gap-12 md:gap-20 px-6 animate-infinite-scroll-reverse hover:[animation-play-state:paused] whitespace-nowrap py-4">
+          {listItems.map((company, index) => (
+            <a 
+              href={company.url}
+              key={`company-${index}`} 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block flex-shrink-0 transition-all duration-300 transform hover:scale-110 group/item cursor-pointer"
+            >
+              <img 
+                src={company.logo} 
+                alt={company.name} 
+                className={`h-12 md:h-16 w-auto object-contain ${company.filterClass} opacity-60 hover:opacity-100 transition-all duration-300`} 
+              />
+            </a>
+          ))}
         </div>
 
       </div>

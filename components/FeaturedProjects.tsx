@@ -57,9 +57,9 @@ export const FeaturedProjects: React.FC = () => {
   return (
     <section className="w-full bg-cream dark:bg-tech-black py-20 px-6 border-t border-gray-200/40 dark:border-white/5 transition-colors duration-500 relative overflow-hidden z-10">
       <div className="max-w-7xl mx-auto flex flex-col items-center">
-        
+
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
@@ -73,9 +73,9 @@ export const FeaturedProjects: React.FC = () => {
             Selected Projects
           </h2>
         </motion.div>
- 
+
         {/* Projects Grid (3 columns matching capability snapshot layout) */}
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -86,7 +86,7 @@ export const FeaturedProjects: React.FC = () => {
             if (project.isHighlighted) {
               return (
                 /* Card 2: Highlighted Card (Gradient background) */
-                <motion.div 
+                <motion.div
                   key={project.id}
                   variants={cardVariants}
                   className="w-full h-full"
@@ -97,22 +97,22 @@ export const FeaturedProjects: React.FC = () => {
                     className="rounded-[2.5rem] bg-gradient-to-br from-neon-purple via-purple-500 to-pink-500 text-white p-6 md:p-8 flex flex-col justify-between min-h-[380px] shadow-xl hover:scale-[1.02] hover:shadow-neon-purple/20 transition-all duration-300 relative overflow-hidden group h-full border-2 border-white/10"
                   >
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/35 opacity-40 mix-blend-overlay z-0" />
-                    
+
                     <div className="space-y-4 relative z-10">
                       <div className="flex justify-between items-start">
                         <h3 className="text-2xl font-bold font-sans tracking-tight leading-tight">
                           {project.title}
                         </h3>
                         <div className="flex gap-2">
-                          <a 
-                            href={project.githubUrl} 
-                            target="_blank" 
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="p-2 bg-white/20 hover:bg-white text-white hover:text-black rounded-full flex items-center justify-center shadow-md transition-colors"
                           >
                             <Github size={16} />
                           </a>
-                          <Link 
+                          <Link
                             to={`/projects/${project.id}`}
                             className="p-2 bg-pink-100 text-pink-600 hover:bg-white rounded-full flex items-center justify-center shadow-md transition-colors"
                           >
@@ -125,10 +125,10 @@ export const FeaturedProjects: React.FC = () => {
                         {project.shortDescription}
                       </p>
                     </div>
-                    
+
                     <div className="flex flex-wrap gap-2 mt-6 relative z-10">
                       {project.tags.map((tag, idx) => (
-                        <span 
+                        <span
                           key={idx}
                           className="bg-white/10 text-white border border-white/25 px-2.5 py-1 rounded-lg font-mono text-[9px] font-bold uppercase tracking-wider cursor-default select-none"
                         >
@@ -140,10 +140,10 @@ export const FeaturedProjects: React.FC = () => {
                 </motion.div>
               );
             }
- 
+
             return (
               /* Cards 1 & 3: Minimal Outline Cards */
-              <motion.div 
+              <motion.div
                 key={project.id}
                 variants={cardVariants}
                 className="w-full h-full"
@@ -159,15 +159,15 @@ export const FeaturedProjects: React.FC = () => {
                         {project.title}
                       </h3>
                       <div className="flex gap-2">
-                        <a 
-                          href={project.githubUrl} 
-                          target="_blank" 
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
                           rel="noopener noreferrer"
                           className="p-2 bg-purple-50 dark:bg-purple-950/40 text-neon-purple dark:text-neon-cyan hover:bg-neon-purple hover:text-white dark:hover:bg-neon-cyan dark:hover:text-black rounded-full flex items-center justify-center border border-purple-200/50 dark:border-white/5 shadow-sm transition-colors"
                         >
                           <Github size={16} />
                         </a>
-                        <Link 
+                        <Link
                           to={`/projects/${project.id}`}
                           className="p-2 bg-purple-50 dark:bg-purple-950/40 text-neon-purple dark:text-neon-cyan hover:bg-neon-purple hover:text-white dark:hover:bg-neon-cyan dark:hover:text-black rounded-full flex items-center justify-center border border-purple-200/50 dark:border-white/5 shadow-sm transition-colors"
                         >
@@ -180,10 +180,10 @@ export const FeaturedProjects: React.FC = () => {
                       {project.shortDescription}
                     </p>
                   </div>
-                  
+
                   <div className="flex flex-wrap gap-2 mt-6">
                     {project.tags.map((tag, idx) => (
-                      <span 
+                      <span
                         key={idx}
                         className="bg-purple-50/55 dark:bg-purple-950/30 text-neon-purple dark:text-neon-cyan border border-purple-200/40 dark:border-white/5 px-2.5 py-1 rounded-lg font-mono text-[9px] font-bold uppercase tracking-wider hover:bg-purple-100/50 dark:hover:bg-purple-900/30 transition-all duration-305 cursor-default select-none"
                       >
@@ -196,9 +196,9 @@ export const FeaturedProjects: React.FC = () => {
             );
           })}
         </motion.div>
- 
+
         {/* View All CTA Link */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-20px' }}
