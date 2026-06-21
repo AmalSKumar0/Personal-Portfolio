@@ -60,6 +60,10 @@ export const LavenderPetals: React.FC<LavenderPetalsProps> = ({
     let mouseX = -1000;
     let mouseY = -1000;
     let activeMouse = false;
+    let isHoveringLink = false;
+    let targetPetalCount = maxPetals;
+    let lastCountChange = Date.now();
+    let changeInterval = Math.random() * 8000 + 7000;
 
     // Soft elegant lavender and rose-petal gradients
     const colors = [
@@ -154,6 +158,21 @@ export const LavenderPetals: React.FC<LavenderPetalsProps> = ({
       ctx.clearRect(0, 0, w, h);
       const theta = Math.atan2(h, w);
 
+      // Periodically change target count randomly between 30% and 100% of maxPetals to simulate natural wind gusts
+      const now = Date.now();
+      if (now - lastCountChange > changeInterval) {
+        const minCount = Math.floor(maxPetals * 0.3);
+        const maxCount = maxPetals;
+        targetPetalCount = Math.floor(Math.random() * (maxCount - minCount + 1)) + minCount;
+        lastCountChange = now;
+        changeInterval = Math.random() * 8000 + 7000; // change again in 7-15s
+      }
+
+      // Spawn a new petal off-screen slowly if under target count
+      if (petals.length < targetPetalCount && Math.random() < 0.04) {
+        petals.push(createPetal(false));
+      }
+
       // Perpendicular vectors to flow direction (theta)
       const perpX = -Math.sin(theta);
       const perpY = Math.cos(theta);
@@ -168,7 +187,12 @@ export const LavenderPetals: React.FC<LavenderPetalsProps> = ({
         p.scaleX = Math.abs(Math.sin(p.angle * 0.5)) * 0.6 + 0.4;
 
         if (p.t > 1.0) {
-          petals[i] = createPetal(false);
+          if (petals.length > targetPetalCount) {
+            petals.splice(i, 1);
+            i--; // decrement index to account for spliced element
+          } else {
+            petals[i] = createPetal(false);
+          }
           continue;
         }
 
@@ -246,8 +270,9 @@ export const LavenderPetals: React.FC<LavenderPetalsProps> = ({
             p.y += p.vy;
           }
 
-          // Fade in the petals when mouse is first tracked
-          p.opacity += (0.85 - p.opacity) * 0.1;
+          // Fade in/out the petals slowly based on whether we are hovering a link
+          const targetOpacity = isHoveringLink ? 0 : 0.85;
+          p.opacity += (targetOpacity - p.opacity) * 0.08;
 
           ctx.save();
           ctx.translate(p.x, p.y);
@@ -286,9 +311,31 @@ export const LavenderPetals: React.FC<LavenderPetalsProps> = ({
       }
     };
 
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target && typeof target.closest === 'function') {
+        const isInteractive = target.closest('a, button, [role="button"], input, select, textarea');
+        if (isInteractive) {
+          isHoveringLink = true;
+        }
+      }
+    };
+
+    const handleMouseOut = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target && typeof target.closest === 'function') {
+        const isInteractive = target.closest('a, button, [role="button"], input, select, textarea');
+        if (isInteractive) {
+          isHoveringLink = false;
+        }
+      }
+    };
+
     window.addEventListener('resize', resizeCanvas);
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('mouseover', handleMouseOver, { passive: true });
+    window.addEventListener('mouseout', handleMouseOut, { passive: true });
     
     resizeCanvas();
     initPetals();
@@ -298,6 +345,8 @@ export const LavenderPetals: React.FC<LavenderPetalsProps> = ({
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('mouseout', handleMouseOut);
       cancelAnimationFrame(animationFrameId);
     };
   }, [maxPetals, speedMultiplier, opacityMultiplier]);

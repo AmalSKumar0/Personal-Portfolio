@@ -11,7 +11,7 @@ const frontendSkills = [
 ];
 
 const toolSkills = [
-  'Git', 'GitHub', 'AWS', 'VS Code', 'Google Colab', 'Agile / Scrum', 'SEO Optimization', 'C', 'C++', 'Java'
+  'Git', 'GitHub', 'Docker', 'AWS', 'VS Code', 'Google Colab', 'Agile / Scrum', 'SEO Optimization', 'C', 'C++', 'Java'
 ];
 
 export const TechStackSnapshot: React.FC = () => {
