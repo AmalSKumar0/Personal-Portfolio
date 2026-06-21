@@ -9,8 +9,8 @@ const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
 const SYSTEM_PROMPT = `
 You are 'AmalOS', a Portfolio Assistant for Amal S Kumar.
 - You are running inside a web-based terminal interface.
-- Keep answers concise, tech-savvy, and slightly witty.
-- Amal is a CS major, Full Stack Developer (React, Django, Laravel).
+- Keep answers concise, tech-savvy, and professional.
+- Amal is a Backend Engineer and Full Stack Developer specializing in distributed systems, database optimization, high-performance APIs, and cloud infrastructure (Node.js, React, TypeScript, Django, Laravel, SQL, Docker).
 - Maintain context of the conversation.
 - Do not use markdown formatting.
 - If you don't know the answer, respond with "Connection established, but no data received."
@@ -47,13 +47,11 @@ interface ChatMessage {
 // --- Initial State ---
 const INITIAL_BOOT_SEQUENCE = [
   "Initializing Kernel...",
-  "Loading Graphic Drivers... [OK]",
-  "Mounting File System... [OK]",
+  "Loading Core Microservices... [OK]",
+  "Mounting DB Connection Pools... [OK]",
   "Connecting to Neural Network... [OK]",
-  "Welcome to AmalOS v3.0"
+  "Welcome to AmalOS v3.0 (Backend Architect Console)"
 ];
-
-
 
 // --- Typewriter Component ---
 const Typewriter = ({ text }: { text: string }) => {
@@ -90,9 +88,6 @@ export const DemoSection: React.FC = () => {
   // Refs
   const scrollRef = useRef<HTMLDivElement>(null); // For terminal text scrolling
   const inputRef = useRef<HTMLInputElement>(null); // For input focus
-
-
-
 
   // --- Boot Sequence Effect ---
   useEffect(() => {
@@ -177,12 +172,12 @@ export const DemoSection: React.FC = () => {
     switch (lowerCmd) {
       case 'help':
         addHistory(
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            <div><span className="text-yellow-400">about</span>    :: Who is Amal?</div>
-            <div><span className="text-yellow-400">skills</span>   :: Tech capabilities</div>
-            <div><span className="text-yellow-400">projects</span> :: GitHub repositories</div>
-            <div><span className="text-yellow-400">contact</span>  :: Communication channels</div>
-            <div><span className="text-yellow-400">clear</span>    :: Flush terminal buffer</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm font-mono">
+            <div><span className="text-neon-cyan">about</span>    :: Who is Amal?</div>
+            <div><span className="text-neon-cyan">skills</span>   :: Tech capabilities</div>
+            <div><span className="text-neon-cyan">projects</span> :: Key implementations</div>
+            <div><span className="text-neon-cyan">contact</span>  :: Communication channels</div>
+            <div><span className="text-neon-cyan">clear</span>    :: Flush terminal buffer</div>
             <div className="text-gray-500 mt-2 col-span-2">Usage: Type a command or ask a question directly.</div>
           </div>
         );
@@ -191,10 +186,16 @@ export const DemoSection: React.FC = () => {
         setHistory([]);
         break;
       case 'about':
-        addHistory("Amal S Kumar | Full Stack Developer | CS Major. Building scalable web apps and exploring AI.");
+        addHistory("Amal S Kumar | Backend Engineer & Distributed Systems Builder. Designing clean APIs, high-performance services, and optimized backend architectures.");
         break;
       case 'skills':
-        addHistory("[Frontend] React, TypeScript, Tailwind\n[Backend] Django, Laravel, Node.js\n[Tools] Docker, Git, Linux");
+        addHistory("[Backend & Systems] Distributed Systems, Node.js, Django, Laravel, REST APIs\n[Databases & Cache] PostgreSQL, MySQL, Redis, Database Optimization\n[DevOps & Frontend] Docker, Git, Linux, React, TypeScript");
+        break;
+      case 'projects':
+        addHistory(projects.map(p => `- ${p.title}: ${p.shortDescription}`).join('\n'));
+        break;
+      case 'contact':
+        addHistory("Email: amalskumarofficialz@gmail.com\nLinkedIn: linkedin.com/in/amal-fsd/");
         break;
       default:
         // AI Fallback
@@ -213,26 +214,22 @@ export const DemoSection: React.FC = () => {
 
   // --- Visual Assets ---
   const AsciiHeader = () => (
-    <pre className="text-[10px] md:text-xs text-cyan-500 font-bold leading-none mb-6 select-none opacity-80 hidden sm:block">
+    <pre className="text-[10px] md:text-xs text-neon-purple font-bold leading-none mb-6 select-none opacity-85 hidden sm:block">
       {`
     _    __  __    _    _     ___  ____  
    / \\  |  \\/  |  / \\  | |   / _ \\/ ___| 
   / _ \\ | |\\/| | / _ \\ | |  | | | \\___ \\ 
- / ___ \\| |  | |/ ___ \\| |__| |_| |___) |
+  / ___ \\| |  | |/ ___ \\| |__| |_| |___) |
 /_/   \\_\\_|  |_/_/   \\_\\_____\\___/|____/ 
 `}
     </pre>
   );
 
   return (
-    <div
-
-      className="min-h-screen w-full bg-[#050505] flex flex-col items-center justify-center p-4 md:p-8 font-mono text-sm md:text-base overflow-hidden relative"
-    >
-
+    <div className="w-full bg-cream dark:bg-tech-black flex flex-col items-center justify-center py-20 px-4 md:p-8 font-mono text-sm md:text-base overflow-hidden relative transition-colors duration-300">
       {/* Background Ambient Glow */}
-      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-900/20 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-cyan-900/20 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-neon-purple/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-neon-cyan/5 rounded-full blur-[120px] pointer-events-none" />
 
       {/* --- HEADER SECTION --- */}
       <div className="mb-8 text-center space-y-2 z-10">
@@ -241,10 +238,10 @@ export const DemoSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md"
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neon-purple/10 border border-neon-purple/20 backdrop-blur-md"
         >
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
-          <span className="text-xs text-emerald-400 tracking-widest font-bold">SYSTEM ONLINE</span>
+          <span className="text-xs text-emerald-600 dark:text-emerald-400 tracking-widest font-bold">SYSTEM ONLINE</span>
         </motion.div>
 
         <motion.h2
@@ -252,7 +249,7 @@ export const DemoSection: React.FC = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="text-4xl md:text-5xl font-display tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40"
+          className="text-4xl md:text-5xl font-display tracking-tighter text-gray-900 dark:text-white"
         >
           AMAL_OS
         </motion.h2>
@@ -262,7 +259,7 @@ export const DemoSection: React.FC = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.6 }}
-          className="text-gray-500 text-xs uppercase tracking-[0.2em]"
+          className="text-gray-500 dark:text-gray-400 text-xs uppercase tracking-[0.2em]"
         >
           Interactive Terminal Portfolio
         </motion.p>
@@ -275,29 +272,29 @@ export const DemoSection: React.FC = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
         className={`
-          relative z-10 bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden flex flex-col
+          relative z-10 bg-[#0C0A12]/95 backdrop-blur-xl border border-neon-purple/20 shadow-2xl overflow-hidden flex flex-col
           transition-all duration-500 ease-in-out
           ${isMaximized ? 'fixed inset-0 m-0 rounded-none z-50' : 'w-full max-w-4xl h-[600px] rounded-xl'} 
         `}
-        style={{ boxShadow: '0 0 50px -12px rgba(0, 255, 255, 0.15)' }}
+        style={{ boxShadow: '0 0 50px -12px rgba(139, 92, 246, 0.2)' }}
         onClick={focusInput}
       >
 
         {/* CRT Scanline Overlay */}
-        <div className="absolute inset-0 pointer-events-none z-50 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] opacity-20" />
+        <div className="absolute inset-0 pointer-events-none z-50 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] opacity-15" />
 
         {/* Header Bar */}
-        <div className="h-10 bg-[#121212] border-b border-white/5 flex items-center justify-between px-4 select-none cursor-default">
+        <div className="h-10 bg-[#120E22]/90 border-b border-neon-purple/10 flex items-center justify-between px-4 select-none cursor-default">
           <div className="flex gap-2">
             <div className="w-3 h-3 rounded-full bg-red-500/80 hover:bg-red-500 transition-colors" />
             <div className="w-3 h-3 rounded-full bg-yellow-500/80 hover:bg-yellow-500 transition-colors" />
             <div className="w-3 h-3 rounded-full bg-green-500/80 hover:bg-green-500 transition-colors" />
           </div>
-          <div className="text-gray-500 flex items-center gap-2 text-xs">
+          <div className="text-neon-cyan flex items-center gap-2 text-xs opacity-80">
             <Terminal size={12} />
             <span>guest@amal-portfolio:~</span>
           </div>
-          <div className="flex gap-4 text-gray-500">
+          <div className="flex gap-4 text-gray-400">
             <button onClick={(e) => { e.stopPropagation(); setIsMaximized(!isMaximized); }} className="hover:text-white transition-colors">
               {isMaximized ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
             </button>
@@ -307,7 +304,7 @@ export const DemoSection: React.FC = () => {
         {/* Terminal Body */}
         <div
           ref={scrollRef}
-          className="flex-1 p-4 md:p-6 overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20"
+          className="flex-1 p-4 md:p-6 overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-neon-purple/20"
         >
           <AsciiHeader />
 
@@ -322,18 +319,18 @@ export const DemoSection: React.FC = () => {
               >
                 {item.type === 'command' && (
                   <div className="flex items-center text-gray-400 mt-4 mb-1">
-                    <span className="text-green-400 mr-2">➜</span>
-                    <span className="text-cyan-400 mr-2">~</span>
+                    <span className="text-neon-purple mr-2">➜</span>
+                    <span className="text-neon-cyan mr-2">~</span>
                     <span className="text-white font-medium">{item.content}</span>
                   </div>
                 )}
                 {item.type === 'system' && (
-                  <div className="text-yellow-500/80 text-xs italic mb-1">
+                  <div className="text-neon-purple/70 text-xs italic mb-1">
                     {`> [SYSTEM]: ${item.content}`}
                   </div>
                 )}
                 {item.type === 'output' && (
-                  <div className="text-gray-300 ml-0 md:ml-4 leading-relaxed whitespace-pre-wrap font-light border-l-2 border-white/10 pl-4 py-1">
+                  <div className="text-gray-300 ml-0 md:ml-4 leading-relaxed whitespace-pre-wrap font-light border-l-2 border-neon-purple/20 pl-4 py-1">
                     {item.content}
                   </div>
                 )}
@@ -342,7 +339,7 @@ export const DemoSection: React.FC = () => {
           </AnimatePresence>
 
           {isProcessing && (
-            <div className="ml-4 mt-2 flex items-center gap-2 text-cyan-400">
+            <div className="ml-4 mt-2 flex items-center gap-2 text-neon-cyan">
               <Loader2 className="animate-spin" size={14} />
               <span className="animate-pulse">Processing neural request...</span>
             </div>
@@ -350,16 +347,15 @@ export const DemoSection: React.FC = () => {
 
           {booted && !isProcessing && (
             <div className="flex items-center mt-2 group">
-              <span className="text-green-400 mr-2 text-lg">➜</span>
-              <span className="text-cyan-400 mr-2 text-lg">~</span>
-              {/* --- UPDATED INPUT SECTION --- */}
+              <span className="text-neon-purple mr-2 text-lg">➜</span>
+              <span className="text-neon-cyan mr-2 text-lg">~</span>
               <input
                 ref={inputRef}
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="flex-1 bg-transparent border-none outline-none text-gray-100 font-mono caret-cyan-400 placeholder-gray-600/50"
+                className="flex-1 bg-transparent border-none outline-none text-gray-100 font-mono caret-neon-cyan placeholder-gray-600/50"
                 autoComplete="off"
                 spellCheck="false"
               />
@@ -370,10 +366,10 @@ export const DemoSection: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <div className="h-8 bg-[#121212] border-t border-white/5 flex items-center justify-between px-4 text-[10px] md:text-xs text-gray-500 uppercase tracking-widest">
+        <div className="h-8 bg-[#120E22]/90 border-t border-neon-purple/10 flex items-center justify-between px-4 text-[10px] md:text-xs text-gray-500 uppercase tracking-widest">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1"><Cpu size={12} /> CORE: ONLINE</span>
-            <span className="flex items-center gap-1 text-green-500"><Wifi size={12} /> NET: SECURE</span>
+            <span className="flex items-center gap-1 text-neon-purple"><Wifi size={12} /> NET: SECURE</span>
           </div>
           <div className="flex items-center gap-4">
             <span className="hidden md:inline">RAM: 64GB OK</span>

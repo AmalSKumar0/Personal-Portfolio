@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Mail, MessageSquare, Phone, Send, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
-import { SpaceBattle } from '@/components/SpaceBattle';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SEO } from '../components/SEO';
 
@@ -131,19 +130,18 @@ ${systemInfo}
     };
 
     return (
-        <div className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex flex-col items-center">
+        <div className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex flex-col items-center bg-cream dark:bg-tech-black transition-colors duration-300">
             <SEO
                 title="Contact Me | Amal S Kumar"
                 description="Get in touch with Amal S Kumar for freelance projects, job opportunities, or collaboration. Send a message directly."
             />
-            <SpaceBattle />
 
             {/* Background Effects */}
             <div className="absolute inset-0 bg-grid-pattern dark:opacity-[0.05] opacity-[0.4] z-0 pointer-events-none transition-opacity duration-300"></div>
 
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none z-0">
-                <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] animate-pulse-glow"></div>
-                <div className="absolute bottom-[10%] right-[-10%] w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[100px] animate-pulse-glow" style={{ animationDelay: '2s' }}></div>
+                <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-neon-blue/5 rounded-full blur-[100px] animate-pulse-glow"></div>
+                <div className="absolute bottom-[10%] right-[-10%] w-[600px] h-[600px] bg-neon-purple/5 rounded-full blur-[100px] animate-pulse-glow" style={{ animationDelay: '2s' }}></div>
             </div>
 
             <motion.div
@@ -154,10 +152,10 @@ ${systemInfo}
             >
                 <motion.div className="text-center mb-16" variants={itemVariants}>
                     <h1 className="text-5xl md:text-7xl font-display mb-6 tracking-tight text-gray-900 dark:text-white">
-                        Get in <span className="text-blue-500 dark:text-blue-400 drop-shadow-sm">Touch</span>
+                        Get in <span className="text-neon-blue drop-shadow-sm">Touch</span>
                     </h1>
                     <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                        Have a project in mind or just want to say hi? I'd love to hear from you.
+                        Have a project, job opening, or backend architecture topic to discuss? I'd love to chat.
                     </p>
                 </motion.div>
 
@@ -165,18 +163,18 @@ ${systemInfo}
                     {/* Contact Info */}
                     <motion.div className="space-y-8" variants={itemVariants}>
                         <div className="bg-white/80 dark:bg-white/5 p-8 rounded-3xl border border-gray-100 dark:border-white/10 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 group">
-                            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">Contact Information</h2>
+                            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 group-hover:text-neon-blue transition-colors">Contact Information</h2>
                             <div className="space-y-8">
                                 <motion.div
                                     className="flex items-start gap-5"
                                     whileHover={{ x: 5 }}
                                 >
-                                    <div className="p-4 bg-blue-50 dark:bg-blue-500/10 rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                                        <Mail className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                                    <div className="p-4 bg-neon-purple/10 rounded-2xl group-hover:scale-110 transition-transform duration-300">
+                                        <Mail className="w-6 h-6 text-neon-blue" />
                                     </div>
                                     <div>
                                         <h3 className="text-gray-900 dark:text-white font-semibold text-lg mb-1">Email</h3>
-                                        <p className="text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors cursor-pointer">
+                                        <p className="text-gray-500 dark:text-gray-400 hover:text-neon-blue transition-colors cursor-pointer">
                                             amalskumarofficialz@gmail.com
                                         </p>
                                     </div>
@@ -185,8 +183,8 @@ ${systemInfo}
                                     className="flex items-start gap-5"
                                     whileHover={{ x: 5 }}
                                 >
-                                    <div className="p-4 bg-purple-50 dark:bg-purple-500/10 rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                                        <Phone className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                                    <div className="p-4 bg-neon-purple/10 rounded-2xl group-hover:scale-110 transition-transform duration-300">
+                                        <Phone className="w-6 h-6 text-neon-purple" />
                                     </div>
                                     <div>
                                         <h3 className="text-gray-900 dark:text-white font-semibold text-lg mb-1">Phone</h3>
@@ -199,8 +197,8 @@ ${systemInfo}
                                     className="flex items-start gap-5"
                                     whileHover={{ x: 5 }}
                                 >
-                                    <div className="p-4 bg-pink-50 dark:bg-pink-500/10 rounded-2xl group-hover:scale-110 transition-transform duration-300">
-                                        <MessageSquare className="w-6 h-6 text-pink-600 dark:text-pink-400" />
+                                    <div className="p-4 bg-neon-purple/10 rounded-2xl group-hover:scale-110 transition-transform duration-300">
+                                        <MessageSquare className="w-6 h-6 text-neon-cyan" />
                                     </div>
                                     <div>
                                         <h3 className="text-gray-900 dark:text-white font-semibold text-lg mb-1">Socials</h3>
@@ -208,7 +206,7 @@ ${systemInfo}
                                             href="https://www.linkedin.com/in/amal-fsd/"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-gray-500 dark:text-gray-400 hover:text-pink-500 dark:hover:text-pink-400 transition-colors cursor-pointer"
+                                            className="text-gray-500 dark:text-gray-400 hover:text-neon-cyan transition-colors cursor-pointer"
                                         >
                                             @amalskumar
                                         </a>
@@ -235,7 +233,7 @@ ${systemInfo}
                                     name="name"
                                     value={formData.name}
                                     onChange={handleChange}
-                                    className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-5 py-4 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-500/10 transition-all placeholder:text-gray-400"
+                                    className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-5 py-4 text-gray-900 dark:text-white focus:outline-none focus:border-neon-blue focus:ring-2 focus:ring-neon-blue/10 transition-all placeholder:text-gray-400"
                                     placeholder="Your name"
                                     required
                                     disabled={status === 'sending'}
@@ -252,7 +250,7 @@ ${systemInfo}
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-5 py-4 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-500/10 transition-all placeholder:text-gray-400"
+                                    className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-5 py-4 text-gray-900 dark:text-white focus:outline-none focus:border-neon-blue focus:ring-2 focus:ring-neon-blue/10 transition-all placeholder:text-gray-400"
                                     placeholder="your.email@example.com"
                                     required
                                     disabled={status === 'sending'}
@@ -269,7 +267,7 @@ ${systemInfo}
                                     value={formData.message}
                                     onChange={handleChange}
                                     rows={4}
-                                    className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-5 py-4 text-gray-900 dark:text-white focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-500/10 transition-all placeholder:text-gray-400 resize-none"
+                                    className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-5 py-4 text-gray-900 dark:text-white focus:outline-none focus:border-neon-blue focus:ring-2 focus:ring-neon-blue/10 transition-all placeholder:text-gray-400 resize-none"
                                     placeholder="How can I help you?"
                                     required
                                     disabled={status === 'sending'}
@@ -303,14 +301,14 @@ ${systemInfo}
 
                             <motion.button
                                 whileHover={{ scale: 1.02, translateY: -2 }}
-                                whileTap={{ scale: 0.98 }}
+                                tap={{ scale: 0.98 }}
                                 type="submit"
                                 disabled={status === 'sending' || status === 'success'}
                                 className={`w-full font-bold py-4 px-6 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 ${status === 'success'
                                     ? 'bg-green-500 text-white cursor-default'
                                     : 'bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-tech-black'
                                     }`}
-                            >
+                             >
                                 {status === 'sending' ? (
                                     <Loader2 className="animate-spin" />
                                 ) : status === 'success' ? (

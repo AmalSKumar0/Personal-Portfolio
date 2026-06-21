@@ -7,11 +7,7 @@ export const Features: React.FC = () => {
         <div className="bg-white dark:bg-tech-black py-24 px-6 relative overflow-hidden transition-colors duration-300">
             {/* Background Dots */}
             <div className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.1]" style={{
-                backgroundImage: 'radial-gradient(#000 1px, transparent 1px)',
-                backgroundSize: '20px 20px'
-            }}></div>
-            <div className="absolute inset-0 z-0 opacity-0 dark:opacity-[0.1]" style={{
-                backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)',
+                backgroundImage: 'radial-gradient(#8b5cf6 1px, transparent 1px)',
                 backgroundSize: '20px 20px'
             }}></div>
 
@@ -33,7 +29,7 @@ export const Features: React.FC = () => {
                 >
                     <h2 className="text-5xl font-display font-bold text-tech-black dark:text-white mb-6 transition-colors">My Expertise <br /> <span className="text-neon-blue"> & Journey.</span></h2>
                     <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-10 text-balance transition-colors">
-                        I’m a Computer Applications graduate passionate about designing and building systems that solve real-world problems. From backend architecture to polished UI.
+                        Computer Applications graduate focused on building high-performance systems and backend APIs.
                     </p>
                 </motion.div>
 
@@ -60,19 +56,19 @@ export const Features: React.FC = () => {
                             {/* Illustration: Nodes */}
                             <div className="mt-auto relative h-32 w-full flex items-center">
                                 <div className="flex gap-4 items-center w-full">
-                                    <div className="flex-1 h-20 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center relative group-hover:-translate-y-1 transition-transform duration-500">
+                                    <div className="flex-1 h-20 bg-white dark:bg-white/5 rounded-xl shadow-sm border border-gray-100 dark:border-white/10 flex items-center justify-center relative group-hover:-translate-y-1 transition-transform duration-500">
                                         <div className="text-xs font-mono text-gray-400">Naturals</div>
                                         <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></div>
                                     </div>
-                                    <div className="w-8 border-t-2 border-dashed border-gray-300"></div>
-                                    <div className="flex-1 h-20 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center relative group-hover:-translate-y-1 transition-transform duration-500 delay-75">
+                                    <div className="w-8 border-t-2 border-dashed border-gray-300 dark:border-white/10"></div>
+                                    <div className="flex-1 h-20 bg-white dark:bg-white/5 rounded-xl shadow-sm border border-gray-100 dark:border-white/10 flex items-center justify-center relative group-hover:-translate-y-1 transition-transform duration-500 delay-75">
                                         <div className="text-xs font-mono text-gray-400">Tours_Ga</div>
                                         <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></div>
                                     </div>
-                                    <div className="w-8 border-t-2 border-dashed border-gray-300"></div>
-                                    <div className="flex-1 h-20 bg-white rounded-xl shadow-sm border border-gray-100 flex items-center justify-center relative group-hover:-translate-y-1 transition-transform duration-500 delay-150">
+                                    <div className="w-8 border-t-2 border-dashed border-gray-300 dark:border-white/10"></div>
+                                    <div className="flex-1 h-20 bg-white dark:bg-white/5 rounded-xl shadow-sm border border-gray-100 dark:border-white/10 flex items-center justify-center relative group-hover:-translate-y-1 transition-transform duration-500 delay-150">
                                         <div className="text-xs font-mono text-gray-400">Navigans</div>
-                                        <div className="absolute -top-1 -right-1 w-2 h-2 bg-blue-500 rounded-full"></div>
+                                        <div className="absolute -top-1 -right-1 w-2 h-2 bg-neon-blue rounded-full"></div>
                                     </div>
                                 </div>
                             </div>
@@ -93,8 +89,8 @@ export const Features: React.FC = () => {
                             <path d="M0 100 Q 50 50 100 0" stroke="url(#lineGradient)" strokeWidth="0.5" fill="none" />
                             <defs>
                                 <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="1">
-                                    <stop offset="0%" stopColor="#3B82F6" />
-                                    <stop offset="100%" stopColor="#8B5CF6" />
+                                    <stop offset="0%" stopColor="#7C3AED" />
+                                    <stop offset="100%" stopColor="#C084FC" />
                                 </linearGradient>
                             </defs>
                         </svg>
@@ -135,7 +131,7 @@ export const Features: React.FC = () => {
                         <div className="bg-gray-900 rounded-lg p-3 font-mono text-[10px] text-gray-300 mt-auto shadow-inner">
                             <div className="text-purple-400">interface <span className="text-yellow-300">Degree</span> {'{'}</div>
                             <div className="pl-2">course: <span className="text-green-400">'BCA'</span>;</div>
-                            <div className="pl-2">cgpa: <span className="text-blue-400">7.82</span>;</div>
+                            <div className="pl-2">cgpa: <span className="text-neon-cyan font-bold">7.82</span>;</div>
                             <div>{'}'}</div>
                         </div>
                     </motion.div>
@@ -153,9 +149,9 @@ export const Features: React.FC = () => {
                         <div className="relative z-10 w-1/2">
                             <h3 className="text-2xl font-bold mb-4">Technical Skills</h3>
                             <p className="text-gray-400 text-sm mb-6">Python (Django, Flask), PHP (Laravel), React.js, Tailwind CSS, SQL, Git.</p>
-                            <button className="text-sm font-bold flex items-center gap-2 hover:gap-3 transition-all text-neon-blue">
+                            <a href="https://github.com/AmalSKumar0" target="_blank" rel="noreferrer" className="text-sm font-bold flex items-center gap-2 hover:gap-3 transition-all text-neon-blue">
                                 View GitHub <ArrowRight size={16} />
-                            </button>
+                            </a>
                         </div>
 
                         {/* Abstract Grid of Logos */}

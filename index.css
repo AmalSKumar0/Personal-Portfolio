@@ -140,30 +140,7 @@ html.dark .bg-grid-pattern {
         linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
 }
 
-/* Custom Satellite SVG Styles */
-.outline-blue {
-    stroke: #3b82f6;
-    fill: none;
-    stroke-width: 2px;
-}
 
-.outline-pink {
-    stroke: #ec4899;
-    fill: none;
-    stroke-width: 2px;
-}
-
-.thin {
-    stroke-width: 1px;
-}
-
-.micro {
-    stroke-width: 0.5px;
-}
-
-.dashed {
-    stroke-dasharray: 4 2;
-}
 
 @keyframes fadeIn {
     from {
@@ -177,4 +154,17 @@ html.dark .bg-grid-pattern {
 
 .animate-fade-in {
     animation: fadeIn 1.5s ease-out forwards;
+}
+
+@keyframes infinite-scroll-reverse {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.animate-infinite-scroll-reverse {
+    animation: infinite-scroll-reverse 25s linear infinite;
 }

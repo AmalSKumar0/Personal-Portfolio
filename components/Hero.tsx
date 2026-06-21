@@ -1,37 +1,14 @@
-import {
-    Server, Database, Activity, Zap, Boxes,
-    Shield, Globe, CheckCircle, Brain, Lock
-} from 'lucide-react';
-import { Satellite } from './Satellite';
-import { SpaceBattle } from './SpaceBattle';
+import { LavenderPetals } from './LavenderPetals';
 import { motion } from 'framer-motion';
 
-import { useState, useEffect } from 'react';
-import { TelemetrySection } from './TelemetrySection';
-
 export const Hero: React.FC = () => {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            // Calculate position relative to center of screen
-            // "Very slow" follow means a small factor (e.g. 0.02)
-            const x = (e.clientX - window.innerWidth / 2) * 0.05;
-            const y = (e.clientY - window.innerHeight / 2) * 0.05;
-            setMousePosition({ x, y });
-        };
-
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
-    }, []);
-
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.2,
-                delayChildren: 0.3
+                staggerChildren: 0.15,
+                delayChildren: 0.2
             }
         }
     };
@@ -47,116 +24,82 @@ export const Hero: React.FC = () => {
 
     return (
         <>
-            <div className="hidden md:block">
-                <SpaceBattle />
-            </div>
-            <section className="pt-48 pb-24 px-6 relative overflow-hidden bg-gray-50 dark:bg-tech-black min-h-screen flex flex-col items-center transition-colors duration-300">
-
-                {/* Abstract Perspective Grid Background */}
-                <div className="absolute inset-0 bg-grid-pattern dark:opacity-[0.05] z-0 pointer-events-none opacity-50 transition-opacity duration-300"></div>
-
-                {/* Geometric Decorations */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none z-0">
-                    <svg className="absolute top-0 right-[-20%] w-[800px] h-[800px] opacity-30 text-purple-500 animate-[spin_60s_linear_infinite]" viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" />
-                        <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 4" />
-                        <path d="M50 5 L50 95 M5 50 L95 50" stroke="currentColor" strokeWidth="0.5" />
-                    </svg>
-                    <div className="absolute top-[20%] left-[-10%] w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px]"></div>
-                    <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px]"></div>
-                </div>
-
-                {/* Orbiting Interactive Satellite */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none z-0 hidden lg:block">
-                    <div className="w-full h-full animate-[spin_60s_linear_infinite]">
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-auto">
-                            <div className="w-full h-full animate-[spin_60s_linear_infinite_reverse]">
-                                <div
-                                    className="transition-transform duration-100 ease-out flex items-center justify-center p-4 hover:scale-110 transition-all duration-500"
-                                    style={{ transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)` }}
-                                >
-                                    <Satellite className="w-full h-full" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+            <section className="relative overflow-hidden bg-cream dark:bg-tech-black min-h-[calc(100vh-5rem)] flex-grow flex flex-col items-center justify-center transition-colors duration-300">
+                {/* Glassmorphic Container wrapping the entire hero content - covers remaining viewport */}
                 <motion.div
-                    className="max-w-5xl mx-auto text-center relative z-10 flex flex-col items-center"
+                    className="w-full min-h-[calc(100vh-5rem)] flex-grow relative overflow-hidden z-20 bg-white/20 dark:bg-tech-black/30 backdrop-blur-xl shadow-2xl flex flex-col items-center justify-center py-12 md:py-16 px-6 md:px-12"
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
                 >
+                    {/* Canvas Lavender Petals (flowing like a river NW to SE, z-10 inside glassmorphic card) */}
+                    <LavenderPetals />
 
-                    {/* Availability Badge */}
+                    <div className="max-w-6xl w-full flex flex-col items-center relative z-20">
+                        {/* Availability Badge */}
                     <motion.div
-                        className="inline-flex items-center gap-3 bg-white/80 dark:bg-white/5 backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-full pl-2 pr-4 py-1.5 mb-8 shadow-sm hover:shadow-md transition-all cursor-default"
+                        className="inline-flex items-center gap-3 bg-white/80 dark:bg-tech-dark/65 backdrop-blur-md border border-gray-200/50 dark:border-white/10 rounded-full pl-2 pr-4 py-1.5 mb-8 shadow-sm hover:shadow-md transition-all cursor-default"
                         variants={itemVariants}
                     >
-                        <div className="bg-gray-900 dark:bg-white text-white dark:text-tech-black text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Status</div>
-                        <span className="text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-2">
-                            Open to work <span className="text-gray-300 dark:text-gray-600">|</span> <span className="text-blue-500 dark:text-neon-blue">Available for projects</span>
+                        <div className="bg-neon-purple text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Status</div>
+                        <span className="text-xs md:text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-2">
+                            Open to work <span className="text-gray-300 dark:text-gray-600">|</span> <span className="text-neon-blue dark:text-neon-cyan font-semibold">Available for backend roles</span>
                         </span>
                     </motion.div>
 
-                    {/* Headline */}
+                    {/* Headline Grid Layout */}
                     <motion.div
-                        className="flex flex-col items-center mb-10 relative z-10 w-full"
+                        className="flex flex-col items-center mb-12 w-full text-center"
                         variants={itemVariants}
                     >
-                        <div className="flex items-center gap-6 mb-4 transition-all duration-300">
-                            <span className="text-6xl md:text-8xl font-display font-bold text-gray-900 dark:text-white leading-none transition-colors duration-300">Hello, I'm</span>
-                            <div className="hidden md:block w-48 h-24 bg-blue-100 dark:bg-blue-900/30 rounded-full shadow-lg overflow-hidden relative group rotate-3 hover:rotate-0 transition-all duration-300">
-                                <img
-                                    src="/avatar-badge.jpg"
-                                    alt="Avatar"
-                                    width="192"
-                                    height="96"
-                                    className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
-                                />
+                        {/* Line 1: Amal [Capsule] S Kumar */}
+                        <div className="flex flex-wrap items-center justify-center gap-x-4 md:gap-x-6 gap-y-2 text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-serif text-gray-900 dark:text-white font-light">
+                            <span>Amal</span>
+                            <div className="inline-flex items-center justify-center w-16 sm:w-20 md:w-32 h-10 sm:h-12 md:h-16 rounded-full border border-neon-purple/20 bg-neon-purple/10 overflow-hidden relative shadow-inner">
+                                {/* Glowing nodes indicator representing backend network inside capsule */}
+                                <div className="absolute inset-0 flex items-center justify-center gap-1 sm:gap-1.5">
+                                    <span className="w-1.5 md:w-2 h-6 md:h-8 bg-neon-purple rounded-full animate-pulse"></span>
+                                    <span className="w-1.5 md:w-2 h-8 md:h-12 bg-neon-cyan rounded-full animate-pulse delay-75"></span>
+                                    <span className="w-1.5 md:w-2 h-5 md:h-7 bg-neon-purple rounded-full animate-pulse delay-150"></span>
+                                </div>
                             </div>
+                            <span>S Kumar</span>
                         </div>
-                        <h1 className="text-7xl md:text-9xl font-display font-bold text-gray-900 dark:text-white leading-[1.05] tracking-tight transition-all duration-300 text-center">
-                            <span className="text-[#3b82f6] drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">
-                                Amal S Kumar
-                            </span>
-                        </h1>
+
+                        {/* Line 2: [Sparkle Star] Backend Engineer */}
+                        <div className="flex flex-wrap items-center justify-center gap-x-4 md:gap-x-6 gap-y-2 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif text-gray-900 dark:text-white italic font-normal mt-3">
+                            <svg className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 text-neon-cyan animate-spin-slow" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
+                            </svg>
+                            <span>Full-Stack Developer</span>
+                        </div>
+
+                        {/* Line 3: & Systems Builder [Hire Me Oval Link] */}
+                        <div className="flex flex-wrap items-center justify-center gap-4 mt-6">
+                            <motion.a
+                                href="/contact"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-gray-950 dark:bg-white text-white dark:text-tech-black text-sm sm:text-base font-sans font-bold rounded-full transition-all shadow-lg border border-white/10 hover:shadow-xl cursor-pointer"
+                            >
+                                <span>Get in touch</span>
+                                <span className="text-neon-purple">→</span>
+                            </motion.a>
+                            <motion.a
+                                href="/resume"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="inline-flex items-center gap-2 px-6 py-3 bg-white/40 dark:bg-white/5 text-gray-950 dark:text-white text-sm sm:text-base font-sans font-bold rounded-full transition-all shadow-sm border border-gray-200/50 dark:border-white/10 hover:bg-white/60 dark:hover:bg-white/10 cursor-pointer"
+                            >
+                                <span>View Resume</span>
+                                <span className="text-neon-cyan">↓</span>
+                            </motion.a>
+                        </div>
                     </motion.div>
-
-                    {/* Subheadline */}
-                    <motion.p
-                        className="text-xl text-gray-500 dark:text-gray-400 max-w-xl mx-auto mb-12 text-balance leading-relaxed transition-colors duration-300"
-                        variants={itemVariants}
-                    >
-                        Full-Stack Developer & AI Explorer. <br className="hidden md:block" />
-                        Technology should solve real problems — I build systems that make that happen.
-                    </motion.p>
-
-                    {/* CTA Buttons */}
-                    <motion.div
-                        className="flex flex-col sm:flex-row gap-4 mb-24"
-                        variants={itemVariants}
-                    >
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 transition-all text-white dark:text-tech-black px-8 py-4 rounded-full text-base font-bold shadow-2xl shadow-blue-500/20 flex items-center gap-2"
-                        >
-                            Get in Touch with me
-                        </motion.button>
-                        <motion.a
-                            href="/resume"
-                            className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:border-gray-400 dark:hover:border-white/30 transition-all text-gray-900 dark:text-white px-8 py-4 rounded-full text-base font-bold flex items-center gap-2 cursor-pointer"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            View Resume
-                        </motion.a>
-                    </motion.div>
-
-                    {/* Main Visual Composition */}
-
+ 
+                    {/* Bottom Column Layout (Approach, Arched Graphic, Specialties) */}
+                 
+                    </div>
                 </motion.div>
             </section>
         </>

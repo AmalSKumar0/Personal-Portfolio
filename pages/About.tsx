@@ -1,8 +1,6 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Code2, Globe, Database, Cpu, Calendar, Award, Briefcase, GraduationCap } from 'lucide-react';
-import { SpaceBattle } from '@/components/SpaceBattle';
 import { SEO } from '@/components/SEO';
 
 export const About: React.FC = () => {
@@ -31,10 +29,10 @@ export const About: React.FC = () => {
     };
 
     const skills = [
-        { name: 'React & TypeScript', icon: Code2, level: 90 },
+        { name: 'System Architecture', icon: Cpu, level: 90 },
         { name: 'Node.js & Express', icon: Globe, level: 85 },
-        { name: 'Database Design', icon: Database, level: 80 },
-        { name: 'System Architecture', icon: Cpu, level: 75 },
+        { name: 'Database Design & SQL', icon: Database, level: 85 },
+        { name: 'React & TypeScript', icon: Code2, level: 80 },
     ];
 
     const timeline = [
@@ -43,33 +41,30 @@ export const About: React.FC = () => {
             title: 'Master of Computer Applications',
             description: 'Pursuing MCA at Amal Jyothi College of Engineering, specializing in advanced software development.',
             icon: GraduationCap,
-            color: 'text-blue-500'
+            color: 'text-neon-blue'
         },
         {
             year: '2025',
-            title: 'Freelance Web Developer',
-            description: 'Building custom web solutions for diverse clients using React, Laravel, and modern tech stacks.',
+            title: 'Freelance Backend Developer',
+            description: 'Building custom web solutions and API integrations for diverse clients using React, Laravel, and Django.',
             icon: Briefcase,
-            color: 'text-purple-500'
+            color: 'text-neon-purple'
         },
-
         {
             year: '2022',
             title: 'Bachelor of Computer Applications',
             description: 'Graduated from MG University with a focus on comprehensive software development and computer science fundamentals.',
             icon: Award,
-            color: 'text-orange-500'
+            color: 'text-neon-cyan'
         }
     ];
 
     return (
-        <div className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex flex-col items-center">
+        <div className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden min-h-screen flex flex-col items-center bg-cream dark:bg-tech-black transition-colors duration-300">
             <SEO
                 title="About Me | Amal S Kumar"
                 description="Learn about Amal S Kumar's journey, technical skills, and professional experience as a Full Stack Developer."
             />
-
-            <SpaceBattle />
 
             <div className="absolute inset-0 bg-grid-pattern dark:opacity-[0.05] opacity-[0.4] z-0 pointer-events-none transition-opacity duration-300"></div>
 
@@ -82,10 +77,10 @@ export const About: React.FC = () => {
                 {/* Header Section */}
                 <motion.div className="text-center mb-20" variants={itemVariants}>
                     <h1 className="text-5xl md:text-7xl font-display mb-6 tracking-tight text-gray-900 dark:text-white">
-                        About <span className="text-blue-500 dark:text-blue-400 drop-shadow-sm">Me</span>
+                        About <span className="text-neon-blue drop-shadow-sm">Me</span>
                     </h1>
                     <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                        I'm a passionate developer who bridges the gap between creative design and robust engineering.
+                        I'm a backend engineer and full-stack developer who enjoys building robust, high-performance systems.
                     </p>
                 </motion.div>
 
@@ -95,24 +90,24 @@ export const About: React.FC = () => {
                     <div className="space-y-12">
                         <motion.section variants={itemVariants} className="bg-white/80 dark:bg-white/5 p-8 rounded-3xl border border-gray-100 dark:border-white/10 backdrop-blur-md shadow-xl">
                             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-3">
-                                <span className="p-2 bg-blue-100 dark:bg-blue-500/20 rounded-lg text-blue-600 dark:text-blue-400"><Code2 size={20} /></span>
+                                <span className="p-2 bg-neon-purple/10 rounded-lg text-neon-blue"><Code2 size={20} /></span>
                                 who_am_i?
                             </h2>
                             <div className="space-y-4 text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
                                 <p>
-                                    Hello! I'm <span className="font-semibold text-gray-900 dark:text-white">Amal S Kumar</span>, a Full Stack Developer based in India.
-                                    I enjoy creating things that live on the internet, whether that be websites, applications, or anything in between.
+                                    Hello! I'm <span className="font-semibold text-gray-900 dark:text-white">Amal S Kumar</span>, a Backend-focused Full Stack Developer based in India.
+                                    I specialize in crafting robust backend services, scaling databases, and building responsive frontends.
                                 </p>
                                 <p>
-                                    My goal is to always build products that provide pixel-perfect, performant experiences.
-                                    I graduated with a BCA degree and have since been diving deep into the world of web technologies.
+                                    My goal is to write clean, maintainable code and design architectures that can grow with the user base.
+                                    I hold a BCA degree and am currently advancing my engineering foundations through MCA studies.
                                 </p>
                             </div>
                         </motion.section>
 
                         <motion.section variants={itemVariants} className="bg-white/80 dark:bg-white/5 p-8 rounded-3xl border border-gray-100 dark:border-white/10 backdrop-blur-md shadow-xl">
                             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3">
-                                <span className="p-2 bg-purple-100 dark:bg-purple-500/20 rounded-lg text-purple-600 dark:text-purple-400"><Cpu size={20} /></span>
+                                <span className="p-2 bg-neon-purple/10 rounded-lg text-neon-purple"><Cpu size={20} /></span>
                                 Technical Arsenal
                             </h2>
                             <div className="space-y-6">
@@ -120,14 +115,14 @@ export const About: React.FC = () => {
                                     <div key={skill.name}>
                                         <div className="flex justify-between mb-2">
                                             <span className="font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                                                <skill.icon size={16} className="text-blue-500" />
+                                                <skill.icon size={16} className="text-neon-blue" />
                                                 {skill.name}
                                             </span>
                                             <span className="text-sm text-gray-500">{skill.level}%</span>
                                         </div>
                                         <div className="h-2 bg-gray-200 dark:bg-white/10 rounded-full overflow-hidden">
                                             <motion.div
-                                                className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
+                                                className="h-full bg-gradient-to-r from-neon-blue to-neon-purple"
                                                 initial={{ width: 0 }}
                                                 whileInView={{ width: `${skill.level}%` }}
                                                 viewport={{ once: true }}
@@ -144,7 +139,7 @@ export const About: React.FC = () => {
                     <div className="space-y-12">
                         <motion.section variants={itemVariants} className="bg-white/80 dark:bg-white/5 p-8 rounded-3xl border border-gray-100 dark:border-white/10 backdrop-blur-md shadow-xl">
                             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3">
-                                <span className="p-2 bg-green-100 dark:bg-green-500/20 rounded-lg text-green-600 dark:text-green-400"><Calendar size={20} /></span>
+                                <span className="p-2 bg-neon-cyan/10 rounded-lg text-neon-purple"><Calendar size={20} /></span>
                                 My Journey
                             </h2>
 
@@ -161,7 +156,7 @@ export const About: React.FC = () => {
                                         <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white dark:bg-white/5 p-4 rounded-xl border border-gray-100 dark:border-white/10 shadow-sm transition-all hover:shadow-md">
                                             <div className="flex items-center justify-between space-x-2 mb-1">
                                                 <div className="font-bold text-gray-900 dark:text-white">{item.title}</div>
-                                                <time className="font-caveat font-medium text-blue-500">{item.year}</time>
+                                                <time className="font-caveat font-medium text-neon-blue">{item.year}</time>
                                             </div>
                                             <div className="text-slate-500 dark:text-slate-400 text-sm">
                                                 {item.description}
@@ -172,10 +167,10 @@ export const About: React.FC = () => {
                             </div>
                         </motion.section>
 
-                        <motion.section variants={itemVariants} className="p-8 rounded-3xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20 backdrop-blur-md text-center">
+                        <motion.section variants={itemVariants} className="p-8 rounded-3xl bg-gradient-to-br from-neon-blue/10 to-neon-purple/10 border border-neon-blue/20 backdrop-blur-md text-center">
                             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Ready to collaborate?</h3>
                             <p className="text-gray-600 dark:text-gray-300 mb-6">
-                                I'm always open to discussing product design work or partnership opportunities.
+                                I'm always open to discussing system architecture design, backend development, or API integrations.
                             </p>
                             <a
                                 href="/contact"

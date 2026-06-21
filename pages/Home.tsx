@@ -1,23 +1,23 @@
 import React from 'react';
 import { Hero } from '../components/Hero';
-import { DemoSection } from '../components/DemoSection';
-import { Features } from '../components/Features';
-import { SelectedWork } from '@/components/SelectedWork';
+import { AboutSnapshot } from '../components/AboutSnapshot';
+import { CompaniesRibbon } from '../components/CompaniesRibbon';
+import { TechStackSnapshot } from '../components/TechStackSnapshot';
 import { TelemetrySection } from '../components/TelemetrySection';
+import { FeaturedProjects } from '../components/FeaturedProjects';
 import { SEO } from '../components/SEO';
 
 export const Home: React.FC = () => {
     return (
         <>
             <SEO
-                title="Amal S Kumar | Full Stack Developer"
-                description="Portfolio of Amal S Kumar, expert in React, Node.js, and Python. View projects, skills, and contact information."
+                title="Amal S Kumar | Backend Engineer & Systems Builder"
+                description="Portfolio of Amal S Kumar, Backend Engineer specializing in scalable APIs, distributed systems, database optimization, and high-performance server-side applications."
             />
             <Hero />
-            <DemoSection />
-            <TelemetrySection />
-            <Features />
-            <SelectedWork />
+            <CompaniesRibbon />
+            <AboutSnapshot />
+            <TechStackSnapshot />
         </>
     );
 };

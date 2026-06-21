@@ -8,26 +8,26 @@ import { motion } from 'framer-motion';
 
 export const TelemetrySection = () => {
    return (
-      <div className="py-24 px-4 sm:px-6 relative overflow-hidden bg-slate-50 dark:bg-tech-black min-h-screen flex flex-col items-center justify-center font-sans transition-colors duration-300">
+      <div className="py-24 px-4 sm:px-6 relative overflow-hidden bg-cream dark:bg-tech-black min-h-screen flex flex-col items-center justify-center font-sans transition-colors duration-300">
 
          {/* --- BACKGROUND: Professional Dot Grid --- */}
          <div className="absolute inset-0 z-0 pointer-events-none"
             style={{
-               backgroundImage: 'radial-gradient(#cbd5e1 1.5px, transparent 1.5px)',
+               backgroundImage: 'radial-gradient(#8b5cf6 1.5px, transparent 1.5px)',
                backgroundSize: '24px 24px',
-               opacity: 0.4
+               opacity: 0.08
             }}>
          </div>
 
          {/* --- BACKGROUND: Ambient Glows --- */}
-         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl -z-10 mix-blend-multiply"></div>
-         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-200/30 rounded-full blur-3xl -z-10 mix-blend-multiply"></div>
+         <div className="absolute top-0 left-1/4 w-96 h-96 bg-neon-purple/5 rounded-full blur-3xl -z-10 mix-blend-multiply"></div>
+         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-neon-blue/5 rounded-full blur-3xl -z-10 mix-blend-multiply"></div>
 
          <div className="relative w-full max-w-6xl mx-auto z-10">
 
             {/* --- MAIN DASHBOARD CONTAINER --- */}
             <motion.div
-               className="bg-white/80 dark:bg-tech-gray/80 backdrop-blur-xl rounded-3xl shadow-2xl shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-white/10 overflow-hidden transition-colors"
+               className="bg-white/80 dark:bg-[#0c0a12]/80 backdrop-blur-xl rounded-3xl shadow-2xl shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-neon-purple/20 overflow-hidden transition-colors"
                initial={{ opacity: 0, y: 50 }}
                whileInView={{ opacity: 1, y: 0 }}
                viewport={{ once: true }}
@@ -36,12 +36,12 @@ export const TelemetrySection = () => {
                <h2 className="sr-only">System Telemetry Dashboard</h2>
 
                {/* --- TOP BAR --- */}
-               <div className="h-16 border-b border-slate-100 flex items-center justify-between px-6 sm:px-8 bg-white/50">
+               <div className="h-16 border-b border-slate-100 dark:border-neon-purple/10 flex items-center justify-between px-6 sm:px-8 bg-white/50 dark:bg-white/5">
                   <div className="flex items-center gap-4">
                      <div className="flex gap-2">
-                        <div className="w-3 h-3 rounded-full bg-red-400/80"></div>
-                        <div className="w-3 h-3 rounded-full bg-amber-400/80"></div>
-                        <div className="w-3 h-3 rounded-full bg-emerald-400/80"></div>
+                      <div className="w-3 h-3 rounded-full bg-red-400/80"></div>
+                      <div className="w-3 h-3 rounded-full bg-amber-400/80"></div>
+                      <div className="w-3 h-3 rounded-full bg-emerald-400/80"></div>
                      </div>
                      <div className="h-6 w-[1px] bg-slate-200 dark:bg-white/10 mx-2"></div>
                      <div className="flex items-center gap-2 px-3 py-1 rounded-md bg-slate-50 dark:bg-black/20 border border-slate-200 dark:border-white/10">
@@ -64,18 +64,18 @@ export const TelemetrySection = () => {
 
                   {/* --- SIDEBAR RAIL --- */}
                   <div className="w-full md:w-20 border-r border-slate-100 dark:border-white/5 bg-slate-50/50 dark:bg-tech-black/50 flex md:flex-col items-center py-4 md:py-8 gap-6 justify-center md:justify-start overflow-x-auto md:overflow-visible transition-colors">
-                     <div className="p-2 bg-blue-600 rounded-xl text-white shadow-lg shadow-blue-500/20 mb-0 md:mb-4 shrink-0">
+                     <div className="p-2 bg-neon-purple rounded-xl text-white shadow-lg shadow-neon-purple/20 mb-0 md:mb-4 shrink-0">
                         <Command size={20} />
                      </div>
                      {[Activity, Server, Database, Layers, Globe].map((Icon, i) => (
-                        <button key={i} className={`p-2 rounded-lg transition-all duration-200 shrink-0 ${i === 0 ? 'bg-white dark:bg-white/10 text-blue-600 dark:text-blue-400 shadow-sm ring-1 ring-slate-200 dark:ring-white/10' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/5'}`}>
+                        <button key={i} className={`p-2 rounded-lg transition-all duration-200 shrink-0 ${i === 0 ? 'bg-white dark:bg-white/10 text-neon-purple dark:text-neon-cyan shadow-sm ring-1 ring-slate-200 dark:ring-white/10' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/5'}`}>
                            <Icon size={20} />
                         </button>
                      ))}
                   </div>
 
                   {/* --- CONTENT AREA --- */}
-                  <div className="flex-1 p-6 sm:p-8 bg-slate-50/30">
+                  <div className="flex-1 p-6 sm:p-8 bg-slate-50/30 dark:bg-black/10">
 
                      {/* GRID: Bento Box Style */}
                      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
@@ -84,11 +84,11 @@ export const TelemetrySection = () => {
                         <div className="md:col-span-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
                            <StatCard
                               icon={GitCommit} label="Total Contributions" value="3,482" sub="Top 1% this year"
-                              color="text-blue-600 dark:text-blue-400" bg="bg-blue-50 dark:bg-blue-500/10" border="group-hover:border-blue-200 dark:group-hover:border-blue-500/30"
+                              color="text-neon-blue" bg="bg-neon-blue/10" border="group-hover:border-neon-blue/30"
                            />
                            <StatCard
                               icon={Layers} label="Projects Shipped" value="24" sub="7 Enterprise Grade"
-                              color="text-purple-600 dark:text-purple-400" bg="bg-purple-50 dark:bg-purple-500/10" border="group-hover:border-purple-200 dark:group-hover:border-purple-500/30"
+                              color="text-neon-purple" bg="bg-neon-purple/10" border="group-hover:border-neon-purple/30"
                            />
                            <StatCard
                               icon={Zap} label="Current Streak" value="18 Days" sub="Active Development"
@@ -97,7 +97,7 @@ export const TelemetrySection = () => {
                         </div>
 
                         {/* 2. MAIN GRAPH (Spans 8 cols) */}
-                        <div className="md:col-span-8 bg-white dark:bg-tech-gray/50 rounded-2xl p-6 border border-slate-100 dark:border-white/5 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
+                        <div className="md:col-span-8 bg-white dark:bg-[#120E22]/40 rounded-2xl p-6 border border-slate-100 dark:border-neon-purple/10 shadow-sm relative overflow-hidden group hover:shadow-md transition-all">
                            <div className="flex justify-between items-start mb-6">
                               <div>
                                  <h3 className="text-slate-800 dark:text-white font-bold text-base">Activity Frequency</h3>
@@ -113,17 +113,17 @@ export const TelemetrySection = () => {
                            <div className="relative h-32 w-full">
                               <svg className="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 30">
                                  <defs>
-                                    <linearGradient id="blueGradient" x1="0" y1="0" x2="0" y2="1">
-                                       <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.2" />
-                                       <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
+                                    <linearGradient id="purpleGradient" x1="0" y1="0" x2="0" y2="1">
+                                       <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.2" />
+                                       <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
                                     </linearGradient>
                                  </defs>
-                                 <path d="M0,30 L0,25 C10,25 10,15 20,18 C30,21 30,28 40,25 C50,22 50,5 60,10 C70,15 70,20 80,18 C90,16 90,8 100,12 L100,30 Z" fill="url(#blueGradient)" />
-                                 <path d="M0,25 C10,25 10,15 20,18 C30,21 30,28 40,25 C50,22 50,5 60,10 C70,15 70,20 80,18 C90,16 90,8 100,12" fill="none" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
+                                 <path d="M0,30 L0,25 C10,25 10,15 20,18 C30,21 30,28 40,25 C50,22 50,5 60,10 C70,15 70,20 80,18 C90,16 90,8 100,12 L100,30 Z" fill="url(#purpleGradient)" />
+                                 <path d="M0,25 C10,25 10,15 20,18 C30,21 30,28 40,25 C50,22 50,5 60,10 C70,15 70,20 80,18 C90,16 90,8 100,12" fill="none" stroke="#8b5cf6" strokeWidth="2" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
                               </svg>
 
                               {/* Interactive Tooltip Simulation */}
-                              <div className="absolute top-1/3 left-[60%] w-3 h-3 bg-blue-600 rounded-full border-4 border-white shadow-md transform -translate-x-1/2 -translate-y-1/2 group-hover:scale-125 transition-transform"></div>
+                              <div className="absolute top-1/3 left-[60%] w-3 h-3 bg-neon-purple rounded-full border-4 border-white shadow-md transform -translate-x-1/2 -translate-y-1/2 group-hover:scale-125 transition-transform"></div>
                               <div className="absolute top-[10%] left-[60%] transform -translate-x-1/2 bg-slate-800 text-white text-[10px] py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                                  High Intensity
                               </div>
@@ -131,23 +131,23 @@ export const TelemetrySection = () => {
                         </div>
 
                         {/* 3. SKILL CLUSTER (Spans 4 cols) */}
-                        <div className="md:col-span-4 bg-white dark:bg-tech-gray/50 rounded-2xl p-6 border border-slate-100 dark:border-white/5 shadow-sm hover:shadow-md transition-all">
+                        <div className="md:col-span-4 bg-white dark:bg-[#120E22]/40 rounded-2xl p-6 border border-slate-100 dark:border-neon-purple/10 shadow-sm hover:shadow-md transition-all">
                            <div className="flex items-center gap-3 mb-6">
-                              <div className="p-2 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 rounded-lg">
+                              <div className="p-2 bg-neon-purple/10 text-neon-purple rounded-lg">
                                  <Brain size={18} />
                               </div>
                               <h3 className="text-slate-800 dark:text-white font-bold text-sm">Tech Composition</h3>
                            </div>
 
                            <div className="space-y-4">
-                              <SkillBar label="Backend (Go/Django)" percent="92%" color="bg-indigo-500" />
-                              <SkillBar label="Frontend (React/TS)" percent="85%" color="bg-blue-500" />
-                              <SkillBar label="DevOps (Docker/AWS)" percent="65%" color="bg-slate-400" />
+                              <SkillBar label="Backend (Node/Django/Laravel)" percent="92%" color="bg-neon-purple" />
+                              <SkillBar label="Frontend (React/TS)" percent="85%" color="bg-neon-cyan" />
+                              <SkillBar label="DevOps (Docker/Linux)" percent="65%" color="bg-slate-500" />
                            </div>
                         </div>
 
                         {/* 4. CODE SNIPPET / CONFIG (Spans 5 cols) */}
-                        <div className="md:col-span-5 bg-slate-900 dark:bg-[#080808] rounded-2xl p-6 border border-slate-800 dark:border-white/5 shadow-sm relative overflow-hidden group">
+                        <div className="md:col-span-5 bg-slate-900 dark:bg-[#0C0A12] rounded-2xl p-6 border border-slate-800 dark:border-neon-purple/10 shadow-sm relative overflow-hidden group">
                            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                               <Cpu size={64} className="text-white" />
                            </div>
@@ -158,7 +158,7 @@ export const TelemetrySection = () => {
                            </div>
                            <div className="font-mono text-[11px] text-slate-300 leading-relaxed">
                               <div><span className="text-purple-400">const</span> <span className="text-blue-400">devProfile</span> = {'{'}</div>
-                              <div className="pl-4">role: <span className="text-emerald-400">'Full Stack Engineer'</span>,</div>
+                              <div className="pl-4">role: <span className="text-emerald-400">'Backend Engineer'</span>,</div>
                               <div className="pl-4">openToWork: <span className="text-amber-400">true</span>,</div>
                               <div className="pl-4">location: <span className="text-emerald-400">'Remote / Hybrid'</span></div>
                               <div>{'};'}</div>
@@ -173,10 +173,10 @@ export const TelemetrySection = () => {
                         </div>
 
                         {/* 5. MILESTONES (Spans 7 cols) */}
-                        <div className="md:col-span-7 bg-white dark:bg-tech-gray/50 rounded-2xl p-6 border border-slate-100 dark:border-white/5 shadow-sm hover:shadow-md transition-all">
+                        <div className="md:col-span-7 bg-white dark:bg-[#120E22]/40 rounded-2xl p-6 border border-slate-100 dark:border-neon-purple/10 shadow-sm hover:shadow-md transition-all">
                            <div className="flex justify-between items-center mb-4">
                               <h3 className="text-slate-800 dark:text-white font-bold text-sm">Recent Milestones</h3>
-                              <button className="text-[10px] font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 bg-blue-50 dark:bg-blue-500/10 px-3 py-1 rounded-full transition-colors">View All</button>
+                              <button className="text-[10px] font-bold text-neon-purple hover:text-neon-cyan bg-neon-purple/10 px-3 py-1 rounded-full transition-colors">View All</button>
                            </div>
 
                            <div className="space-y-3">
@@ -186,11 +186,11 @@ export const TelemetrySection = () => {
                               />
                               <MilestoneItem
                                  icon={GraduationCap} title="Masters in Computer Applications" role="3.9 GPA" year="Present"
-                                 bg="bg-blue-50 dark:bg-blue-500/10" color="text-blue-600 dark:text-blue-400"
+                                 bg="bg-neon-blue/10" color="text-neon-blue"
                               />
                               <MilestoneItem
                                  icon={Briefcase} title="Freelance Senior Developer" role="Full Stack" year="Active"
-                                 bg="bg-purple-50 dark:bg-purple-500/10" color="text-purple-600 dark:text-purple-400"
+                                 bg="bg-neon-purple/10" color="text-neon-purple"
                               />
                            </div>
                         </div>
@@ -207,7 +207,7 @@ export const TelemetrySection = () => {
 /* --- SUB-COMPONENTS for Cleanliness --- */
 
 const StatCard = ({ icon: Icon, label, value, sub, color, bg, border }) => (
-   <div className={`bg-white dark:bg-tech-gray/50 p-5 rounded-2xl border border-slate-100 dark:border-white/5 group transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${border}`}>
+   <div className={`bg-white dark:bg-[#120E22]/40 p-5 rounded-2xl border border-slate-100 dark:border-neon-purple/10 group transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${border}`}>
       <div className="flex items-start justify-between mb-2">
          <div className={`p-2.5 rounded-xl ${bg} ${color}`}>
             <Icon size={20} />

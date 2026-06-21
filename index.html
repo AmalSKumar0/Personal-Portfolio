@@ -13,23 +13,24 @@
       theme: {
         extend: {
           colors: {
-            cream: '#FAF9F6',
-            'tech-black': '#050505',
-            'tech-dark': '#0A0A0A',
-            'tech-gray': '#121212',
-            'neon-blue': '#3B82F6',
+            cream: '#FAF8FF',
+            'tech-black': '#0C0A12',
+            'tech-dark': '#120E22',
+            'tech-gray': '#1B1630',
+            'neon-blue': '#7C3AED',
             'neon-purple': '#8B5CF6',
-            'neon-cyan': '#06B6D4',
+            'neon-cyan': '#C084FC',
           },
           fontFamily: {
             sans: ['Outfit', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
-            display: ['Aladin', 'system-ui'],
+            display: ['Sora', 'sans-serif'],
             brand: ['Space Grotesk', 'sans-serif'],
+            serif: ['Cormorant Garamond', 'Playfair Display', 'serif'],
           },
           backgroundImage: {
             'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-            'hero-glow': 'conic-gradient(from 180deg at 50% 50%, #2a8af6 0deg, #a853ba 180deg, #e92a67 360deg)',
+            'hero-glow': 'conic-gradient(from 180deg at 50% 50%, #8b5cf6 0deg, #c084fc 180deg, #faf8ff 360deg)',
           },
           animation: {
             'spin-slow': 'spin 15s linear infinite',
@@ -51,7 +52,7 @@
   </script>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Aladin&family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&family=Sora:wght@700;800&family=JetBrains+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
     rel="stylesheet">
   <style>
     .no-scrollbar::-webkit-scrollbar {
@@ -111,8 +112,8 @@
     .bg-grid-pattern {
       background-size: 50px 50px;
       background-image:
-        linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+        linear-gradient(to right, rgba(139, 92, 246, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(139, 92, 246, 0.04) 1px, transparent 1px);
       mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
       -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
     }
@@ -121,12 +122,12 @@
       background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(139, 92, 246, 0.1);
     }
 
     /* Dark mode glass */
     .glass-panel-dark {
-      background: rgba(10, 10, 10, 0.6);
+      background: rgba(18, 14, 34, 0.6);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.05);
@@ -180,7 +181,7 @@
   <link rel="stylesheet" href="/index.css">
 </head>
 
-<body class="bg-gray-50 text-gray-900 antialiased selection:bg-neon-blue selection:text-white">
+<body class="bg-gray-50 text-gray-900 antialiased selection:bg-neon-purple selection:text-white">
   <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

@@ -1,6 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Navbar } from './components/Navbar';
+import { Routes, Route, Link } from 'react-router-dom';
 import { Footer } from './components/Footer';
 import { LoadingScreen } from './components/LoadingScreen';
 import { Home } from './pages/Home';
@@ -11,19 +10,22 @@ import { Projects } from './pages/Project';
 import { ViewProject } from './pages/ViewProject';
 import { Experience } from './pages/Experience';
 import { Resume } from './pages/Resume';
+import { ThemeToggle } from './components/ThemeToggle';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 import { useVisitorTracker } from './hooks/useVisitorTracker';
+import { useLenisScroll } from './hooks/useLenisScroll';
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [isFading, setIsFading] = React.useState(false);
+  const [showNavbar, setShowNavbar] = React.useState(false);
 
   // Track visitor on mount
   useVisitorTracker();
 
-  React.useEffect(() => {
-    // Logic moved to internal component timer + callback
-  }, []);
+  // Initialize Lenis Smooth Scroll
+  useLenisScroll();
 
   const handleLoadingComplete = () => {
     setIsFading(true);
@@ -36,10 +38,95 @@ const App: React.FC = () => {
     <>
       {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
       {!isLoading && (
-        <div className="min-h-screen bg-cream dark:bg-tech-black font-sans overflow-x-hidden selection:bg-[#00f3ff] selection:text-black transition-colors duration-300 animate-fade-in">
-          <Router>
-            <Navbar />
-            <main>
+        <div className="min-h-screen bg-white dark:bg-black font-sans overflow-x-hidden transition-colors duration-500">
+          
+          {/* White Navigation Bar at the top of the viewport */}
+          <div
+            className={`w-full bg-white dark:bg-white text-tech-black flex items-center justify-center transition-all duration-500 ease-in-out overflow-hidden z-30 ${
+              showNavbar ? 'h-16 border-b border-gray-200' : 'h-0 pointer-events-none'
+            }`}
+          >
+            <div className="flex items-center gap-4 md:gap-6 text-xs md:text-sm font-bold tracking-widest text-gray-800 uppercase">
+              <Link to="/" className="hover:text-neon-purple transition-colors" onClick={() => setShowNavbar(false)}>Home</Link>
+              <span className="text-gray-300 font-light">|</span>
+              <Link to="/about" className="hover:text-neon-purple transition-colors" onClick={() => setShowNavbar(false)}>About</Link>
+              <span className="text-gray-300 font-light">|</span>
+              <Link to="/projects" className="hover:text-neon-purple transition-colors" onClick={() => setShowNavbar(false)}>Projects</Link>
+              <span className="text-gray-300 font-light">|</span>
+              <Link to="/experience" className="hover:text-neon-purple transition-colors" onClick={() => setShowNavbar(false)}>Experience</Link>
+              <span className="text-gray-300 font-light">|</span>
+              <Link to="/contact" className="hover:text-neon-purple transition-colors" onClick={() => setShowNavbar(false)}>Contact</Link>
+            </div>
+          </div>
+
+          {/* Main Layout Container - shifts down and rounds top corners when menu is open */}
+          <div
+            className={`min-h-screen bg-cream dark:bg-tech-black transition-all duration-500 ease-in-out flex flex-col relative z-20 shadow-2xl ${
+              showNavbar
+                ? 'rounded-t-[32px] border-t border-gray-200/50 dark:border-white/10'
+                : 'rounded-t-none'
+            }`}
+          >
+            {/* Global Header */}
+            <header className="w-full max-w-7xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between relative z-30">
+              {/* Left: Branding logo */}
+              <Link
+                to="/"
+                className="text-gray-900 dark:text-white font-serif italic text-xl md:text-2xl font-bold tracking-tight hover:opacity-80 transition-opacity"
+                onClick={() => setShowNavbar(false)}
+              >
+                Amal S Kumar
+              </Link>
+
+              {/* Center: Menu Toggle Button */}
+              <button
+                onClick={() => setShowNavbar(!showNavbar)}
+                className="inline-flex items-center gap-2 px-6 py-2 border border-gray-900/10 dark:border-white/10 hover:bg-gray-950/5 dark:hover:bg-white/5 rounded-full text-xs md:text-sm font-semibold tracking-wider uppercase text-gray-900 dark:text-white bg-transparent transition-all cursor-pointer shadow-sm hover:shadow-md hover:scale-105 active:scale-95"
+              >
+                {showNavbar ? (
+                  <>
+                    <span>Close</span>
+                    <span className="text-[10px] md:text-xs">✕</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Menu</span>
+                    <span className="text-[10px] md:text-xs">☰</span>
+                  </>
+                )}
+              </button>
+
+              {/* Right: Theme Toggle & Social Links */}
+              <div className="flex items-center gap-4">
+                <ThemeToggle />
+                <div className="hidden sm:flex items-center gap-4 text-gray-700 dark:text-gray-300">
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors"
+                  >
+                    <Linkedin size={18} />
+                  </a>
+                  <a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors"
+                  >
+                    <Github size={18} />
+                  </a>
+                  <a
+                    href="mailto:contact@amal.dev"
+                    className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors"
+                  >
+                    <Mail size={18} />
+                  </a>
+                </div>
+              </div>
+            </header>
+
+            <main className="flex-grow flex flex-col">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/contact" element={<Contact />} />
@@ -52,7 +139,7 @@ const App: React.FC = () => {
               </Routes>
             </main>
             <Footer />
-          </Router>
+          </div>
         </div>
       )}
     </>
