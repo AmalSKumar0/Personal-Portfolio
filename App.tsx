@@ -40,7 +40,7 @@ const App: React.FC = () => {
     <>
       {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
       {!isLoading && (
-        <div className="min-h-screen bg-white dark:bg-black font-sans overflow-x-hidden transition-colors duration-500">
+        <div className="min-h-screen bg-white dark:bg-black font-sans overflow-x-clip transition-colors duration-500">
           
           {/* Responsive Navigation Bar at the top of the viewport */}
           <div
