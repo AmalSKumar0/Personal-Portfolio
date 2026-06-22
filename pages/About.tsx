@@ -2,6 +2,7 @@ import React from 'react';
 import { SEO } from '../components/SEO';
 import { AboutIllustration } from '../components/AboutIllustration';
 import { AboutSnapshot } from '../components/AboutSnapshot';
+import { AboutTimeline } from '../components/AboutTimeline';
 import { ScrollFade } from '../components/ScrollFade';
 
 export const About: React.FC = () => {
@@ -25,6 +26,9 @@ export const About: React.FC = () => {
                 <ScrollFade amount={0.1}>
                     <AboutSnapshot />
                 </ScrollFade>
+
+                {/* Section: Interactive Dev Timeline */}
+                <AboutTimeline />
             </div>
         </div>
     );
