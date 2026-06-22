@@ -41,13 +41,20 @@ export const AboutTimeline: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
+  const pathLength = useSpring(scrollYProgress, { stiffness: 60, damping: 20 });
+
   const milestones: Milestone[] = [
     {
       id: 1,
       num: "01",
       year: "2022",
-      title: "Mahatma Gandhi University (BCA)",
-      subtitle: "The Beginning of the Journey",
+      title: "Testimonials",
+      subtitle: "Mahatma Gandhi University (BCA)",
       description: "Enrolled in Bachelor of Computer Applications (BCA) to build formal foundations in system architecture, logic design, and computer networks.",
       icon: <GraduationCap className="w-4 h-4" />,
       tags: ["C Programming", "Computer Logic", "Network Basics"],
@@ -63,8 +70,8 @@ export const AboutTimeline: React.FC = () => {
       id: 2,
       num: "02",
       year: "Late 2022",
-      title: "First C++ Project",
-      subtitle: "The Spark of Creation",
+      title: "Trust Badges",
+      subtitle: "First C++ Project",
       description: "Knowing next to nothing about programming, hacked together a fully working terminal Tic-Tac-Toe game in C++. Solving logic flows and compiling code sparked a lifelong passion.",
       icon: <Code2 className="w-4 h-4" />,
       tags: ["C++", "CLI Logic", "Algorithms"],
@@ -80,9 +87,9 @@ export const AboutTimeline: React.FC = () => {
       id: 3,
       num: "03",
       year: "Summer 2023",
-      title: "Self-Taught Shift (Django)",
-      subtitle: "Autodidactic Learning Spree",
-      description: "Spent the college summer vacation diving deep into python and modern web frameworks. Taught myself Django and built a fully functional locally deployed To-Do application.",
+      title: "Add Contacts",
+      subtitle: "Self-Taught Shift (Django)",
+      description: "Spent the college summer vacation diving deep into python and web frameworks. Taught myself Django and built a fully functional locally deployed To-Do application.",
       icon: <Flame className="w-4 h-4" />,
       tags: ["Python", "Django", "SQL", "HTML/CSS"],
       stats: [
@@ -97,8 +104,8 @@ export const AboutTimeline: React.FC = () => {
       id: 4,
       num: "04",
       year: "2023 - 2024",
-      title: "BCA 2nd Year (Platform Era)",
-      subtitle: "RikshawHub & Swiftride",
+      title: "Case Studies",
+      subtitle: "BCA 2nd Year (Platform Era)",
       description: "Created RikshawHub (PHP) for local logistics coordination and Swiftride (Python/Django) for micro-transit matching, along with a Pet Adoption portal and FreshCart e-commerce solution.",
       icon: <Layers className="w-4 h-4" />,
       tags: ["PHP", "Django", "MySQL", "Git", "JS"],
@@ -114,7 +121,7 @@ export const AboutTimeline: React.FC = () => {
       id: 5,
       num: "05",
       year: "Late 2024 - 2025",
-      title: "Global Freelance Career",
+      title: "Clear Refund Policy",
       subtitle: "Final Year BCA & Professional Delivery",
       description: "Stepped into professional web development during my final year. Delivered production websites (e.g. Tours of Georgia, The Navigans, Zinda Exteriors) to global clients in WordPress, Laravel, and React.",
       icon: <Globe className="w-4 h-4" />,
@@ -131,8 +138,8 @@ export const AboutTimeline: React.FC = () => {
       id: 6,
       num: "06",
       year: "2025 - Present",
-      title: "MCA at Amal Jyothi College",
-      subtitle: "NASA Space Apps & Velora System",
+      title: "Global Nominee",
+      subtitle: "NASA Space Apps & Amal Jyothi College",
       description: "Enrolled in MCA to specialize in backend systems. Designed and deployed Velora (art marketplace with secure workflows). Competed in the NASA Space Apps Challenge, becoming a Global Nominee.",
       icon: <Award className="w-4 h-4" />,
       tags: ["Django REST", "AWS", "Celery/Redis", "LeetCode"],
@@ -148,7 +155,7 @@ export const AboutTimeline: React.FC = () => {
       id: 7,
       num: "07",
       year: "Future / 2027",
-      title: "The Ultimate Capstone",
+      title: "Enterprise Systems",
       subtitle: "Final Year MCA Flagship Project",
       description: "Leaving space for my most ambitious, highly optimized system architecture yet. R&D is currently underway focused on real-world enterprise scalability, database sharding, and high throughput.",
       icon: <Rocket className="w-4 h-4" />,
@@ -257,7 +264,7 @@ export const AboutTimeline: React.FC = () => {
                       </svg>
                     )}
 
-                    {/* Chunky Glassmorphic Hanging Card */}
+                    {/* Chunky Glassmorphic Hanging Card (Portrait Sticky Note Style) */}
                     <motion.div
                       layout
                       initial={{ opacity: 0, y: 40 }}
@@ -274,54 +281,53 @@ export const AboutTimeline: React.FC = () => {
                       }}
                       onMouseEnter={() => setHoveredCard(m.id)}
                       onMouseLeave={() => setHoveredCard(null)}
-                      className="w-full rounded-[2.2rem] border-2 border-lavender-200/80 dark:border-white/10 bg-white/90 dark:bg-black/35 backdrop-blur-3xl pt-8 p-6 shadow-[0_15px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_15px_30px_rgba(0,0,0,0.35)] hover:shadow-[0_25px_45px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_25px_45px_rgba(0,0,0,0.6)] transition-all duration-305 relative group overflow-hidden mt-6"
+                      className="w-[280px] sm:w-[325px] rounded-[2.2rem] border-2 border-lavender-200/80 dark:border-white/10 bg-white/90 dark:bg-black/35 backdrop-blur-3xl shadow-[0_15px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_15px_30px_rgba(0,0,0,0.35)] hover:shadow-[0_25px_45px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_25px_45px_rgba(0,0,0,0.6)] transition-all duration-305 relative group overflow-hidden mt-6 flex flex-col justify-between"
                     >
                       {/* Metallic Ring / Hanging Grommet at top-center of the card */}
                       <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full border-2 border-lavender-300/40 bg-black/45 dark:bg-black/75 shadow-inner flex items-center justify-center z-25">
                         <div className="w-1.5 h-1.5 rounded-full bg-cream dark:bg-tech-black shadow-md" />
                       </div>
 
-                      {/* Pastel Glassy Index Band */}
+                      {/* Top Tinted Header Block (matching image) */}
                       <div
-                        style={{ backgroundColor: `${m.accentColor}18` }}
-                        className="absolute top-0 left-0 right-0 h-10 flex items-center px-6 justify-between border-b-2 border-lavender-200/30 dark:border-white/10"
+                        style={{ backgroundColor: `${m.accentColor}15` }}
+                        className="w-full pt-8 pb-5 px-6 flex flex-col justify-end border-b border-lavender-200/30 dark:border-white/10 rounded-t-[2.2rem]"
                       >
                         <span
                           style={{ color: m.accentColor }}
-                          className="font-serif italic font-bold text-lg select-none"
+                          className="font-serif italic font-bold text-3xl select-none block mb-1"
                         >
                           {m.num}
                         </span>
-                        <span className="font-mono text-[9px] font-bold tracking-widest text-gray-500 dark:text-white/40 uppercase">
-                          {m.year}
-                        </span>
-                      </div>
-
-                      {/* Card Content (shifted down for top band) */}
-                      <div className="mt-6">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span
-                            style={{ color: m.accentColor }}
-                            className="opacity-75 group-hover:scale-110 transition-transform duration-300"
-                          >
+                        
+                        <div className="flex items-center gap-1.5">
+                          <span style={{ color: m.accentColor }} className="opacity-75">
                             {m.icon}
                           </span>
-                          <span className="text-[9px] font-bold font-mono tracking-widest uppercase text-gray-400 dark:text-white/40">
-                            {m.subtitle}
+                          <span className="font-mono text-[9px] font-bold tracking-widest text-gray-500 dark:text-white/40 uppercase">
+                            {m.year}
                           </span>
                         </div>
-
-                        <h3 className="text-lg md:text-xl font-bold font-sans text-gray-900 dark:text-white mt-1 leading-snug tracking-tight group-hover:text-neon-purple dark:group-hover:text-[#E9D5FF] transition-colors duration-300">
+                        
+                        <h3 className="text-xl font-bold font-sans text-gray-900 dark:text-white mt-2 leading-tight tracking-tight group-hover:text-neon-purple dark:group-hover:text-[#E9D5FF] transition-colors duration-300">
                           {m.title}
                         </h3>
+                      </div>
 
-                        <p className="text-gray-700 dark:text-gray-400 text-xs md:text-sm font-sans font-light leading-relaxed mt-3 mb-5">
-                          {m.description}
-                        </p>
+                      {/* Bottom Description & Tag Block */}
+                      <div className="p-6 flex-grow flex flex-col justify-between bg-transparent">
+                        <div>
+                          <span className="text-[9px] font-bold font-mono tracking-widest uppercase text-gray-400 dark:text-white/35 block mb-2">
+                            {m.subtitle}
+                          </span>
+                          <p className="text-gray-700 dark:text-gray-400 text-xs md:text-sm font-sans font-light leading-relaxed mb-6">
+                            {m.description}
+                          </p>
+                        </div>
 
                         {/* Tag list */}
-                        <div className="flex flex-wrap gap-1.5">
-                          {m.tags.map((tag) => (
+                        <div className="flex flex-wrap gap-1.5 mb-2">
+                          {m.tags.slice(0, 3).map((tag) => (
                             <span
                               key={tag}
                               className="text-[8px] font-bold font-mono tracking-wider uppercase bg-lavender-50 dark:bg-white/5 text-lavender-800 dark:text-gray-300 border border-lavender-100 dark:border-white/5 px-2.5 py-0.5 rounded"
@@ -340,20 +346,20 @@ export const AboutTimeline: React.FC = () => {
                           opacity: hoveredCard === m.id ? 1 : 0
                         }}
                         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                        className="overflow-hidden border-t-2 border-gray-200/30 dark:border-white/5 mt-5 pt-5"
+                        className="overflow-hidden border-t border-gray-200/30 dark:border-white/5 px-6 pb-5"
                       >
-                        <div className="grid grid-cols-3 gap-2.5">
+                        <div className="grid grid-cols-3 gap-2 mt-4">
                           {m.stats.map((s, idx) => (
                             <div
                               key={idx}
-                              className="bg-lavender-50/50 dark:bg-black/10 border border-lavender-100 dark:border-white/5 rounded-xl p-2.5 flex flex-col justify-center text-center backdrop-blur-md"
+                              className="bg-lavender-50/50 dark:bg-black/10 border border-lavender-100 dark:border-white/5 rounded-xl p-2 flex flex-col justify-center text-center backdrop-blur-md"
                             >
                               <span className="text-[7px] font-bold font-mono text-gray-500 dark:text-white/40 uppercase tracking-widest block">
                                 {s.label}
                               </span>
                               <span
                                 style={{ color: m.accentColor }}
-                                className="text-[9px] md:text-[11px] font-black tracking-wide block mt-0.5 uppercase"
+                                className="text-[9px] md:text-[10px] font-black tracking-wide block mt-0.5 uppercase"
                               >
                                 {s.value}
                               </span>
@@ -363,7 +369,7 @@ export const AboutTimeline: React.FC = () => {
                       </motion.div>
 
                       {/* Micro hover interaction indicator */}
-                      <div className="flex justify-end items-center gap-1.5 mt-4 opacity-25 group-hover:opacity-100 transition-opacity duration-300 text-[9px] font-bold font-mono text-gray-500 dark:text-gray-400 select-none">
+                      <div className="flex justify-end items-center gap-1.5 px-6 pb-4 opacity-25 group-hover:opacity-100 transition-opacity duration-300 text-[9px] font-bold font-mono text-gray-500 dark:text-gray-400 select-none">
                         <CheckCircle2 size={9} style={{ color: m.accentColor }} />
                         <span>{hoveredCard === m.id ? 'Active Focus' : 'Hover to Inspect'}</span>
                       </div>
