@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
-import { GraduationCap, Code2, Flame, Layers, Globe, Rocket, Award, CheckCircle2 } from 'lucide-react';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { GraduationCap, Code2, Flame, Layers, Globe, Rocket, Award, CheckCircle2, ChevronRight } from 'lucide-react';
 import { LavenderPetals } from './LavenderPetals';
 
 interface Milestone {
@@ -14,201 +14,187 @@ interface Milestone {
   tags: string[];
   stats: { label: string; value: string }[];
   accentColor: string;
-  rotation: number;
+  glowColor: string;
 }
-
-const Thumbtack: React.FC<{ color?: string }> = ({ color = '#C084FC' }) => {
-  return (
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2.5 z-30 pointer-events-none flex flex-col items-center">
-      {/* Pinned Head - Chunky, glossy, physical */}
-      <div
-        style={{
-          backgroundColor: color,
-          boxShadow: 'inset -4px -4px 8px rgba(0,0,0,0.5), inset 4px 4px 8px rgba(255,255,255,0.7), 0 8px 12px rgba(0,0,0,0.45)'
-        }}
-        className="w-6.5 h-6.5 rounded-full relative transition-all duration-300"
-      >
-        {/* Shiny glare */}
-        <div className="absolute top-1.5 left-1.5 w-2 h-2 rounded-full bg-white/70" />
-      </div>
-      {/* Needle drop-shadow cast onto the paper board */}
-      <div className="w-[2px] h-3.5 bg-black/50 rotate-[22deg] origin-top -mt-0.5 shadow-md" />
-    </div>
-  );
-};
 
 export const AboutTimeline: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
+  // Scroll progress for the central path tracking line
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start center", "end center"]
   });
 
-  const pathLength = useSpring(scrollYProgress, { stiffness: 60, damping: 20 });
+  const pathLength = useSpring(scrollYProgress, { stiffness: 65, damping: 22 });
 
   const milestones: Milestone[] = [
     {
       id: 1,
       num: "01",
       year: "2022",
-      title: "Testimonials",
-      subtitle: "Mahatma Gandhi University (BCA)",
-      description: "Enrolled in Bachelor of Computer Applications (BCA) to build formal foundations in system architecture, logic design, and computer networks.",
-      icon: <GraduationCap className="w-4 h-4" />,
-      tags: ["C Programming", "Computer Logic", "Network Basics"],
+      title: "MG University (BCA)",
+      subtitle: "BCA Computer Applications",
+      description: "Started my formal computer science education at Mahatma Gandhi University, focusing on system architecture, database theories, logic design, and basic C coding.",
+      icon: <GraduationCap className="w-5 h-5" />,
+      tags: ["C Logic", "OS Systems", "SQL Databases"],
       stats: [
-        { label: "Academics", value: "BCA" },
-        { label: "Passion", value: "100%" },
-        { label: "Lines Written", value: "0" }
+        { label: "Phase", value: "BCA Start" },
+        { label: "Focus", value: "Fundamentals" },
+        { label: "Curiosity", value: "100%" }
       ],
-      accentColor: "#F97316", // Orange
-      rotation: -2.5
+      accentColor: "#C084FC", // Purple
+      glowColor: "rgba(192, 132, 252, 0.45)"
     },
     {
       id: 2,
       num: "02",
       year: "Late 2022",
-      title: "Trust Badges",
-      subtitle: "First C++ Project",
-      description: "Knowing next to nothing about programming, hacked together a fully working terminal Tic-Tac-Toe game in C++. Solving logic flows and compiling code sparked a lifelong passion.",
-      icon: <Code2 className="w-4 h-4" />,
-      tags: ["C++", "CLI Logic", "Algorithms"],
+      title: "First C++ Engine",
+      subtitle: "Tic-Tac-Toe Game",
+      description: "Hacked together my very first programming project—a functional terminal Tic-Tac-Toe in C++. Discovering how variables, loops, and conditions created a playable system sparked a deep interest in software development.",
+      icon: <Code2 className="w-5 h-5" />,
+      tags: ["C++ Basics", "Terminal I/O", "Game Loops"],
       stats: [
-        { label: "Complexity", value: "Basic" },
         { label: "Bugs Fixed", value: "Countless" },
-        { label: "Terminal Art", value: "ASCII" }
+        { label: "Complexity", value: "Simple" },
+        { label: "Status", value: "Shipped" }
       ],
-      accentColor: "#3B82F6", // Blue
-      rotation: 2.0
+      accentColor: "#60A5FA", // Blue
+      glowColor: "rgba(96, 165, 250, 0.45)"
     },
     {
       id: 3,
       num: "03",
       year: "Summer 2023",
-      title: "Add Contacts",
-      subtitle: "Self-Taught Shift (Django)",
-      description: "Spent the college summer vacation diving deep into python and web frameworks. Taught myself Django and built a fully functional locally deployed To-Do application.",
-      icon: <Flame className="w-4 h-4" />,
-      tags: ["Python", "Django", "SQL", "HTML/CSS"],
+      title: "Self-Taught Django",
+      subtitle: "Full-Stack Autodidact",
+      description: "Invested the college summer vacation into self-studying Web Architecture. Learned Python, model-view-template architectures, database schema modeling, and built a To-Do system.",
+      icon: <Flame className="w-5 h-5" />,
+      tags: ["Python", "Django Framework", "Relational DBs"],
       stats: [
-        { label: "Self-Study", value: "3+ Months" },
-        { label: "App Deployed", value: "Localhost" },
-        { label: "Focus", value: "Full Stack" }
+        { label: "Method", value: "Self-Study" },
+        { label: "Timeframe", value: "Summer Break" },
+        { label: "Apps Deployed", value: "Localhost" }
       ],
-      accentColor: "#A855F7", // Purple
-      rotation: -1.8
+      accentColor: "#FBBF24", // Yellow/Gold
+      glowColor: "rgba(251, 191, 36, 0.45)"
     },
     {
       id: 4,
       num: "04",
       year: "2023 - 2024",
-      title: "Case Studies",
-      subtitle: "BCA 2nd Year (Platform Era)",
-      description: "Created RikshawHub (PHP) for local logistics coordination and Swiftride (Python/Django) for micro-transit matching, along with a Pet Adoption portal and FreshCart e-commerce solution.",
-      icon: <Layers className="w-4 h-4" />,
-      tags: ["PHP", "Django", "MySQL", "Git", "JS"],
+      title: "Advanced Platforms",
+      subtitle: "RikshawHub & Swiftride",
+      description: "Designed RikshawHub in PHP for local delivery logistics and Swiftride in Django for micro-transit services. Built a Pet Adoption platform and FreshCart to refine database schemas.",
+      icon: <Layers className="w-5 h-5" />,
+      tags: ["PHP Laravel", "Django Core", "MySQL", "Git Workflow"],
       stats: [
-        { label: "Systems Built", value: "4 Platforms" },
-        { label: "Lines Deployed", value: "5K+" },
-        { label: "Database Mod", value: "Relational" }
+        { label: "Projects", value: "4 Platforms" },
+        { label: "Lines Written", value: "8K+" },
+        { label: "Architecture", value: "MVC Model" }
       ],
-      accentColor: "#10B981", // Mint
-      rotation: 2.5
+      accentColor: "#34D399", // Mint/Emerald
+      glowColor: "rgba(52, 211, 153, 0.45)"
     },
     {
       id: 5,
       num: "05",
       year: "Late 2024 - 2025",
-      title: "Clear Refund Policy",
-      subtitle: "Final Year BCA & Professional Delivery",
-      description: "Stepped into professional web development during my final year. Delivered production websites (e.g. Tours of Georgia, The Navigans, Zinda Exteriors) to global clients in WordPress, Laravel, and React.",
-      icon: <Globe className="w-4 h-4" />,
-      tags: ["React", "Laravel", "WordPress", "Tailwind CSS"],
+      title: "Global Freelance Era",
+      subtitle: "Production Deployments",
+      description: "Started freelance web development in my final BCA year. Deployed high-performance production websites (e.g. Tours of Georgia, The Navigans, Zinda Exteriors) using Laravel and React for clients globally.",
+      icon: <Globe className="w-5 h-5" />,
+      tags: ["React.js", "Laravel", "WordPress Core", "SEO & Speed"],
       stats: [
-        { label: "Live Systems", value: "6+ Deployed" },
-        { label: "Client Rating", value: "5.0/5.0" },
-        { label: "Uptime", value: "99.9%" }
+        { label: "Clients", value: "Global" },
+        { label: "Completed", value: "6 Live Sites" },
+        { label: "Satisfaction", value: "100%" }
       ],
-      accentColor: "#EF4444", // Rose/Red
-      rotation: -2.0
+      accentColor: "#F87171", // Rose
+      glowColor: "rgba(248, 113, 113, 0.45)"
     },
     {
       id: 6,
       num: "06",
       year: "2025 - Present",
-      title: "Global Nominee",
-      subtitle: "NASA Space Apps & Amal Jyothi College",
-      description: "Enrolled in MCA to specialize in backend systems. Designed and deployed Velora (art marketplace with secure workflows). Competed in the NASA Space Apps Challenge, becoming a Global Nominee.",
-      icon: <Award className="w-4 h-4" />,
-      tags: ["Django REST", "AWS", "Celery/Redis", "LeetCode"],
+      title: "MCA Specialization",
+      subtitle: "AWS, APIs & Leetcode 185+",
+      description: "Joined MCA at Amal Jyothi College. Built Velora (marketplace). Focused on cloud services, caching, task queues, API performance, and solved 185+ LeetCode problems (actively maintaining progress). Joined NASA Space Apps Challenge, becoming a Global Nominee.",
+      icon: <Award className="w-5 h-5" />,
+      tags: ["Django REST", "AWS S3/EC2", "Celery & Redis", "NASA Nominee"],
       stats: [
-        { label: "LeetCode Count", value: "185+ Solved" },
-        { label: "NASA Award", value: "Global Nominee" },
-        { label: "Key Tech", value: "API & Deploy" }
+        { label: "LeetCode", value: "185+ Solved" },
+        { label: "NASA Status", value: "Global Nom" },
+        { label: "Uptime Focus", value: "Cloud Deploy" }
       ],
-      accentColor: "#A855F7", // Purple
-      rotation: 1.8
+      accentColor: "#C084FC", // Purple
+      glowColor: "rgba(192, 132, 252, 0.45)"
     },
     {
       id: 7,
       num: "07",
       year: "Future / 2027",
-      title: "Enterprise Systems",
-      subtitle: "Final Year MCA Flagship Project",
-      description: "Leaving space for my most ambitious, highly optimized system architecture yet. R&D is currently underway focused on real-world enterprise scalability, database sharding, and high throughput.",
-      icon: <Rocket className="w-4 h-4" />,
-      tags: ["Go/Rust", "System Design", "Kubernetes", "gRPC"],
+      title: "Flagship Capstone",
+      subtitle: "Scalable Enterprise System",
+      description: "Reserving space for the final year MCA capstone project. Investigating system architecture topics including database sharding, caching strategies, distributed consensus, and containerized scale.",
+      icon: <Rocket className="w-5 h-5" />,
+      tags: ["Go Lang", "gRPC / Protobuf", "Docker & K8s", "Systems Design"],
       stats: [
-        { label: "Ambition", value: "100%" },
         { label: "Scale Target", value: "Enterprise" },
-        { label: "Status", value: "R&D Phase" }
+        { label: "R&D Stage", value: "Active Research" },
+        { label: "Ambition", value: "Infinite" }
       ],
-      accentColor: "#F97316", // Orange
-      rotation: -1.5
+      accentColor: "#60A5FA", // Blue
+      glowColor: "rgba(96, 165, 250, 0.45)"
     }
   ];
 
   return (
-    <section
-      ref={containerRef}
+    <section 
+      ref={containerRef} 
       className="relative w-full py-32 px-4 sm:px-8 bg-cream dark:bg-tech-black transition-colors duration-500 overflow-hidden border-t border-gray-200/50 dark:border-white/10 z-20"
-      style={{
-        // Ruled paper background lines
-        backgroundSize: '100% 44px',
-        backgroundImage: 'linear-gradient(to bottom, transparent 43px, rgba(139, 92, 246, 0.04) 43px, rgba(139, 92, 246, 0.04) 44px)'
-      }}
     >
       {/* Background Soft Falling Petals */}
-      <LavenderPetals maxPetals={20} opacityMultiplier={0.5} />
+      <LavenderPetals maxPetals={15} opacityMultiplier={0.4} />
+
+      {/* Grid Pattern overlay */}
+      <div className="absolute inset-0 bg-grid-pattern dark:opacity-[0.02] opacity-[0.1] z-0 pointer-events-none" />
 
       {/* Background Glows */}
       <div className="absolute top-[30%] left-[-15%] w-[450px] h-[450px] bg-neon-purple/5 dark:bg-neon-purple/2 rounded-full blur-[130px] pointer-events-none" />
-      <div className="absolute bottom-[20%] right-[-15%] w-[450px] h-[450px] bg-[#E9D5FF]/10 dark:bg-[#E9D5FF]/2 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[-15%] w-[450px] h-[450px] bg-neon-cyan/5 dark:bg-neon-cyan/2 rounded-full blur-[130px] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto flex flex-col relative z-20">
         
         {/* Title */}
         <div className="text-center mb-36">
-          <span className="text-xs md:text-sm font-extrabold tracking-[0.25em] text-[#E9D5FF] uppercase font-brand">
+          <span className="text-xs md:text-sm font-extrabold tracking-[0.25em] text-neon-purple dark:text-neon-cyan uppercase font-brand">
             DEV TIMELINE
           </span>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-gray-900 dark:text-white font-bold italic mt-3 tracking-tight">
-            Interactive <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E9D5FF] to-white not-italic font-sans font-extrabold">Milestones</span>
+            Interconnected <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-purple to-neon-blue not-italic font-sans font-extrabold">Milestones</span>
           </h2>
           <p className="text-gray-500 dark:text-gray-400 mt-4 max-w-xl mx-auto text-sm md:text-base font-light">
-            Each milestone card is suspended by a string from its pushpin. Hover over them to inspect their statistics.
+            A flowing network connecting education, freelance systems, and cloud development. Hover over nodes to inspect engineering statistics.
           </p>
         </div>
 
         {/* Timeline Path & Grid */}
         <div className="relative w-full">
           
+          {/* Central spine track line (Desktop only) */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-gray-200/50 dark:bg-white/5 hidden lg:block">
+            <motion.div
+              style={{ scaleY: pathLength, originY: 0 }}
+              className="w-full h-full bg-gradient-to-b from-neon-purple via-neon-blue to-neon-cyan rounded-full"
+            />
+          </div>
+
           <div className="flex flex-col gap-24 lg:gap-32 relative w-full">
             {milestones.map((m, index) => {
               const isEven = index % 2 === 0;
-              const hasNext = index < milestones.length - 1;
 
               return (
                 <div
@@ -218,172 +204,168 @@ export const AboutTimeline: React.FC = () => {
                   }`}
                 >
                   
-                  {/* Pin & Card Hanging Assembly Wrapper */}
-                  <div className="relative w-full lg:w-[45%] flex flex-col items-center pt-10">
-                    
-                    {/* The Wall Anchor Pushpin */}
-                    <Thumbtack color={m.accentColor} />
+                  {/* Central Spine Node Indicator (Desktop only) */}
+                  <div className="absolute left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-cream dark:bg-tech-black border border-gray-200 dark:border-white/10 z-30 hidden lg:flex items-center justify-center">
+                    <motion.div
+                      animate={{
+                        scale: hoveredCard === m.id ? [1, 1.2, 1] : 1,
+                        boxShadow: hoveredCard === m.id ? `0 0 16px ${m.accentColor}` : 'none'
+                      }}
+                      transition={{ duration: 1.5, repeat: hoveredCard === m.id ? Infinity : 0 }}
+                      style={{ backgroundColor: m.accentColor }}
+                      className="w-3.5 h-3.5 rounded-full"
+                    />
+                  </div>
 
-                    {/* Hanging String (connects pin down to the card grommet) */}
-                    <svg className="absolute top-1 left-0 right-0 w-full h-10 pointer-events-none" fill="none">
+                  {/* Horizontal Connector Arm (Desktop only) */}
+                  {isEven ? (
+                    // Right-to-Left branch: from spine (50%) to card right edge (45%)
+                    <svg className="absolute top-1/2 -translate-y-1/2 left-[45%] w-[5%] h-4 pointer-events-none hidden lg:block overflow-visible" fill="none">
                       <motion.line
                         initial={{ pathLength: 0 }}
                         whileInView={{ pathLength: 1 }}
-                        viewport={{ once: true, margin: '-100px' }}
-                        transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
-                        x1="50%"
-                        y1="0"
-                        x2="50%"
-                        y2="38"
-                        stroke={m.accentColor}
+                        viewport={{ once: true, margin: '-50px' }}
+                        transition={{ duration: 0.5, ease: 'easeOut' }}
+                        x1="100%" y1="50%" x2="0%" y2="50%"
+                        stroke={hoveredCard === m.id ? m.accentColor : 'rgba(139, 92, 246, 0.2)'}
                         strokeWidth="2"
-                        strokeDasharray="2 2"
-                        className="opacity-80"
+                        strokeDasharray={hoveredCard === m.id ? "0" : "4 4"}
+                      />
+                      <motion.circle
+                        cx="0%" cy="50%" r="3"
+                        fill={m.accentColor}
+                        className="opacity-75"
                       />
                     </svg>
+                  ) : (
+                    // Left-to-Right branch: from spine (50%) to card left edge (55%)
+                    <svg className="absolute top-1/2 -translate-y-1/2 left-[50%] w-[5%] h-4 pointer-events-none hidden lg:block overflow-visible" fill="none">
+                      <motion.line
+                        initial={{ pathLength: 0 }}
+                        whileInView={{ pathLength: 1 }}
+                        viewport={{ once: true, margin: '-50px' }}
+                        transition={{ duration: 0.5, ease: 'easeOut' }}
+                        x1="0%" y1="50%" x2="100%" y2="50%"
+                        stroke={hoveredCard === m.id ? m.accentColor : 'rgba(139, 92, 246, 0.2)'}
+                        strokeWidth="2"
+                        strokeDasharray={hoveredCard === m.id ? "0" : "4 4"}
+                      />
+                      <motion.circle
+                        cx="100%" cy="50%" r="3"
+                        fill={m.accentColor}
+                        className="opacity-75"
+                      />
+                    </svg>
+                  )}
 
-                    {/* Sequential Connector String (From this pin to the NEXT pin) */}
-                    {hasNext && (
-                      <svg className="absolute top-1 left-0 w-[220%] h-[340px] pointer-events-none hidden lg:block z-10" fill="none" style={{ left: isEven ? '50%' : 'auto', right: isEven ? 'auto' : '50%' }}>
-                        <motion.path
-                          initial={{ pathLength: 0 }}
-                          whileInView={{ pathLength: 1 }}
-                          viewport={{ once: true, margin: '-100px' }}
-                          transition={{ duration: 1.0, ease: 'easeInOut', delay: 0.3 }}
-                          d={isEven 
-                            ? "M 0 0 C 35 100, 65 200, 100% 300" // Curve from Left Pin to Right Pin (next row)
-                            : "M 100% 0 C 65 100, 35 200, 0 300" // Curve from Right Pin to Left Pin (next row)
-                          }
-                          style={{
-                            vectorEffect: 'non-scaling-stroke'
-                          }}
-                          stroke="rgba(192, 132, 252, 0.45)"
-                          strokeWidth="2.5"
-                          strokeDasharray="6 5"
-                        />
-                      </svg>
-                    )}
-
-                    {/* Chunky Glassmorphic Hanging Card (Portrait Sticky Note Style) */}
-                    <motion.div
-                      layout
-                      initial={{ opacity: 0, y: 40 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: '-100px' }}
-                      transition={{
-                        layout: { type: "spring", stiffness: 350, damping: 30 },
-                        opacity: { duration: 0.5 },
-                        y: { type: "spring", stiffness: 180, damping: 18 }
-                      }}
-                      style={{
-                        rotate: hoveredCard === m.id ? 0 : m.rotation,
-                        scale: hoveredCard === m.id ? 1.03 : 1,
-                      }}
-                      onMouseEnter={() => setHoveredCard(m.id)}
-                      onMouseLeave={() => setHoveredCard(null)}
-                      className="w-[280px] sm:w-[325px] rounded-[2.2rem] border-2 border-lavender-200/80 dark:border-white/10 bg-white/90 dark:bg-black/35 backdrop-blur-3xl shadow-[0_15px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_15px_30px_rgba(0,0,0,0.35)] hover:shadow-[0_25px_45px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_25px_45px_rgba(0,0,0,0.6)] transition-all duration-305 relative group overflow-hidden mt-6 flex flex-col justify-between"
+                  {/* Interconnected Tech Glass Card */}
+                  <motion.div
+                    layout
+                    initial={{ opacity: 0, x: isEven ? -40 : 40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: '-100px' }}
+                    transition={{
+                      layout: { type: "spring", stiffness: 350, damping: 30 },
+                      opacity: { duration: 0.5 },
+                      x: { type: "spring", stiffness: 180, damping: 20 }
+                    }}
+                    onMouseEnter={() => setHoveredCard(m.id)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                    style={{
+                      boxShadow: hoveredCard === m.id 
+                        ? `0 20px 40px -15px ${m.glowColor}, 0 0 0 1px ${m.accentColor}30`
+                        : '0 10px 30px -15px rgba(0,0,0,0.05)'
+                    }}
+                    className={`w-full lg:w-[45%] rounded-3xl border-2 border-lavender-200/80 dark:border-white/10 bg-white/95 dark:bg-[#121214]/80 backdrop-blur-3xl p-6 sm:p-8 hover:-translate-y-1.5 transition-all duration-300 relative group overflow-hidden`}
+                  >
+                    
+                    {/* Glowing index corner tag */}
+                    <div 
+                      style={{ color: m.accentColor, backgroundColor: `${m.accentColor}12` }}
+                      className="absolute top-0 right-0 px-4 py-2 rounded-bl-3xl border-l border-b border-lavender-200/30 dark:border-white/10 font-mono text-xs font-bold"
                     >
-                      {/* Metallic Ring / Hanging Grommet at top-center of the card */}
-                      <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full border-2 border-lavender-300/40 bg-black/45 dark:bg-black/75 shadow-inner flex items-center justify-center z-25">
-                        <div className="w-1.5 h-1.5 rounded-full bg-cream dark:bg-tech-black shadow-md" />
-                      </div>
+                      {m.year}
+                    </div>
 
-                      {/* Top Tinted Header Block (matching image) */}
+                    {/* Card Header */}
+                    <div className="flex items-start gap-4 mb-4 mt-2">
                       <div
-                        style={{ backgroundColor: `${m.accentColor}15` }}
-                        className="w-full pt-8 pb-5 px-6 flex flex-col justify-end border-b border-lavender-200/30 dark:border-white/10 rounded-t-[2.2rem]"
+                        style={{ color: m.accentColor, borderColor: `${m.accentColor}25` }}
+                        className="p-3 bg-lavender-50 dark:bg-white/5 border-2 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-105"
                       >
-                        <span
-                          style={{ color: m.accentColor }}
-                          className="font-serif italic font-bold text-3xl select-none block mb-1"
-                        >
-                          {m.num}
+                        {m.icon}
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-bold font-mono tracking-widest uppercase text-neon-purple dark:text-neon-cyan">
+                          {m.subtitle}
                         </span>
-                        
-                        <div className="flex items-center gap-1.5">
-                          <span style={{ color: m.accentColor }} className="opacity-75">
-                            {m.icon}
-                          </span>
-                          <span className="font-mono text-[9px] font-bold tracking-widest text-gray-500 dark:text-white/40 uppercase">
-                            {m.year}
-                          </span>
-                        </div>
-                        
-                        <h3 className="text-xl font-bold font-sans text-gray-900 dark:text-white mt-2 leading-tight tracking-tight group-hover:text-neon-purple dark:group-hover:text-[#E9D5FF] transition-colors duration-300">
+                        <h3 className="text-xl sm:text-2xl font-bold font-sans text-gray-900 dark:text-white mt-0.5 tracking-tight group-hover:text-neon-purple dark:group-hover:text-neon-cyan transition-colors duration-300">
                           {m.title}
                         </h3>
                       </div>
+                    </div>
 
-                      {/* Bottom Description & Tag Block */}
-                      <div className="p-6 flex-grow flex flex-col justify-between bg-transparent">
-                        <div>
-                          <span className="text-[9px] font-bold font-mono tracking-widest uppercase text-gray-400 dark:text-white/35 block mb-2">
-                            {m.subtitle}
-                          </span>
-                          <p className="text-gray-700 dark:text-gray-400 text-xs md:text-sm font-sans font-light leading-relaxed mb-6">
-                            {m.description}
-                          </p>
-                        </div>
+                    {/* Card Description */}
+                    <p className="text-gray-750 dark:text-gray-300 text-xs sm:text-sm font-sans font-light leading-relaxed mb-6">
+                      {m.description}
+                    </p>
 
-                        {/* Tag list */}
-                        <div className="flex flex-wrap gap-1.5 mb-2">
-                          {m.tags.slice(0, 3).map((tag) => (
-                            <span
-                              key={tag}
-                              className="text-[8px] font-bold font-mono tracking-wider uppercase bg-lavender-50 dark:bg-white/5 text-lavender-800 dark:text-gray-300 border border-lavender-100 dark:border-white/5 px-2.5 py-0.5 rounded"
-                            >
-                              {tag}
+                    {/* Tags block */}
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      {m.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[9px] font-bold font-mono tracking-wider uppercase bg-lavender-50 dark:bg-white/5 text-lavender-800 dark:text-gray-300 border border-lavender-100 dark:border-white/5 px-2.5 py-0.5 rounded-lg"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Interactive Stat Drawer */}
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{
+                        height: hoveredCard === m.id ? 'auto' : 0,
+                        opacity: hoveredCard === m.id ? 1 : 0
+                      }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden border-t border-gray-200/30 dark:border-white/5 mt-5 pt-5"
+                    >
+                      <div className="grid grid-cols-3 gap-2.5">
+                        {m.stats.map((s, idx) => (
+                          <div
+                            key={idx}
+                            className="bg-lavender-50/50 dark:bg-black/20 border border-lavender-100 dark:border-white/5 rounded-xl p-2.5 flex flex-col justify-center text-center backdrop-blur-md"
+                          >
+                            <span className="text-[7px] font-bold font-mono text-gray-500 dark:text-white/40 uppercase tracking-widest block">
+                              {s.label}
                             </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Interactive Stat Drawer */}
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{
-                          height: hoveredCard === m.id ? 'auto' : 0,
-                          opacity: hoveredCard === m.id ? 1 : 0
-                        }}
-                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                        className="overflow-hidden border-t border-gray-200/30 dark:border-white/5 px-6 pb-5"
-                      >
-                        <div className="grid grid-cols-3 gap-2 mt-4">
-                          {m.stats.map((s, idx) => (
-                            <div
-                              key={idx}
-                              className="bg-lavender-50/50 dark:bg-black/10 border border-lavender-100 dark:border-white/5 rounded-xl p-2 flex flex-col justify-center text-center backdrop-blur-md"
+                            <span
+                              style={{ color: m.accentColor }}
+                              className="text-[10px] md:text-[11px] font-black tracking-wide block mt-0.5 uppercase"
                             >
-                              <span className="text-[7px] font-bold font-mono text-gray-500 dark:text-white/40 uppercase tracking-widest block">
-                                {s.label}
-                              </span>
-                              <span
-                                style={{ color: m.accentColor }}
-                                className="text-[9px] md:text-[10px] font-black tracking-wide block mt-0.5 uppercase"
-                              >
-                                {s.value}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </motion.div>
-
-                      {/* Micro hover interaction indicator */}
-                      <div className="flex justify-end items-center gap-1.5 px-6 pb-4 opacity-25 group-hover:opacity-100 transition-opacity duration-300 text-[9px] font-bold font-mono text-gray-500 dark:text-gray-400 select-none">
-                        <CheckCircle2 size={9} style={{ color: m.accentColor }} />
-                        <span>{hoveredCard === m.id ? 'Active Focus' : 'Hover to Inspect'}</span>
+                              {s.value}
+                            </span>
+                          </div>
+                        ))}
                       </div>
-
                     </motion.div>
-                  </div>
-                  
+
+                    {/* Micro hover indicator */}
+                    <div className="flex justify-end items-center gap-1.5 mt-4 opacity-30 group-hover:opacity-100 transition-opacity duration-300 text-[9px] font-bold font-mono text-gray-500 dark:text-gray-400 select-none">
+                      <span>{hoveredCard === m.id ? 'Core Connected' : 'Hover to Inspect'}</span>
+                      <ChevronRight size={10} style={{ color: m.accentColor }} className="group-hover:translate-x-0.5 transition-transform" />
+                    </div>
+
+                  </motion.div>
                 </div>
               );
             })}
           </div>
         </div>
 
-        {/* Signature Box (Design Partner / Creator note) */}
+        {/* Bottom Signature Badge */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
