@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react';
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { GraduationCap, Code2, Flame, Layers, Globe, Rocket, Award, CheckCircle2 } from 'lucide-react';
 import { LavenderPetals } from './LavenderPetals';
 
 interface Milestone {
   id: number;
   year: string;
+  num: string;
   title: string;
   subtitle: string;
   description: string;
@@ -13,13 +14,33 @@ interface Milestone {
   tags: string[];
   stats: { label: string; value: string }[];
   accentColor: string;
+  rotation: number;
 }
+
+const Thumbtack: React.FC<{ color?: string }> = ({ color = '#C084FC' }) => {
+  return (
+    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex flex-col items-center">
+      {/* Plastic Head with realistic 3D shadows & reflections */}
+      <div
+        style={{
+          backgroundColor: color,
+          boxShadow: 'inset -3px -3px 6px rgba(0,0,0,0.45), inset 3px 3px 6px rgba(255,255,255,0.7), 0 6px 10px rgba(0,0,0,0.35)'
+        }}
+        className="w-5.5 h-5.5 rounded-full relative"
+      >
+        {/* Glass glare highlight */}
+        <div className="absolute top-1 left-1 w-1.5 h-1.5 rounded-full bg-white/70" />
+      </div>
+      {/* Shadow of the needle pinned into the page */}
+      <div className="w-[1.5px] h-3 bg-black/45 rotate-[20deg] origin-top -mt-0.5 shadow-md" />
+    </div>
+  );
+};
 
 export const AboutTimeline: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
-  // Track scroll progress through the timeline container to animate the central path line
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start center", "end center"]
@@ -30,6 +51,7 @@ export const AboutTimeline: React.FC = () => {
   const milestones: Milestone[] = [
     {
       id: 1,
+      num: "01",
       year: "2022",
       title: "Mahatma Gandhi University (BCA)",
       subtitle: "The Beginning of the Journey",
@@ -41,10 +63,12 @@ export const AboutTimeline: React.FC = () => {
         { label: "Passion", value: "100%" },
         { label: "Lines Written", value: "0" }
       ],
-      accentColor: "#E9D5FF"
+      accentColor: "#F97316", // Orange
+      rotation: -2.5
     },
     {
       id: 2,
+      num: "02",
       year: "Late 2022",
       title: "First C++ Project",
       subtitle: "The Spark of Creation",
@@ -56,10 +80,12 @@ export const AboutTimeline: React.FC = () => {
         { label: "Bugs Fixed", value: "Countless" },
         { label: "Terminal Art", value: "ASCII" }
       ],
-      accentColor: "#93C5FD"
+      accentColor: "#3B82F6", // Blue
+      rotation: 2.0
     },
     {
       id: 3,
+      num: "03",
       year: "Summer 2023",
       title: "Self-Taught Shift (Django)",
       subtitle: "Autodidactic Learning Spree",
@@ -71,10 +97,12 @@ export const AboutTimeline: React.FC = () => {
         { label: "App Deployed", value: "Localhost" },
         { label: "Focus", value: "Full Stack" }
       ],
-      accentColor: "#FDE047"
+      accentColor: "#A855F7", // Purple
+      rotation: -1.8
     },
     {
       id: 4,
+      num: "04",
       year: "2023 - 2024",
       title: "BCA 2nd Year (Platform Era)",
       subtitle: "RikshawHub & Swiftride",
@@ -86,10 +114,12 @@ export const AboutTimeline: React.FC = () => {
         { label: "Lines Deployed", value: "5K+" },
         { label: "Database Mod", value: "Relational" }
       ],
-      accentColor: "#A7F3D0"
+      accentColor: "#10B981", // Mint
+      rotation: 2.5
     },
     {
       id: 5,
+      num: "05",
       year: "Late 2024 - 2025",
       title: "Global Freelance Career",
       subtitle: "Final Year BCA & Professional Delivery",
@@ -101,10 +131,12 @@ export const AboutTimeline: React.FC = () => {
         { label: "Client Rating", value: "5.0/5.0" },
         { label: "Uptime", value: "99.9%" }
       ],
-      accentColor: "#F87171"
+      accentColor: "#EF4444", // Rose/Red
+      rotation: -2.0
     },
     {
       id: 6,
+      num: "06",
       year: "2025 - Present",
       title: "MCA at Amal Jyothi College",
       subtitle: "NASA Space Apps & Velora System",
@@ -116,10 +148,12 @@ export const AboutTimeline: React.FC = () => {
         { label: "NASA Award", value: "Global Nominee" },
         { label: "Key Tech", value: "API & Deploy" }
       ],
-      accentColor: "#E9D5FF"
+      accentColor: "#A855F7", // Purple
+      rotation: 1.8
     },
     {
       id: 7,
+      num: "07",
       year: "Future / 2027",
       title: "The Ultimate Capstone",
       subtitle: "Final Year MCA Flagship Project",
@@ -131,23 +165,32 @@ export const AboutTimeline: React.FC = () => {
         { label: "Scale Target", value: "Enterprise" },
         { label: "Status", value: "R&D Phase" }
       ],
-      accentColor: "#C084FC"
+      accentColor: "#F97316", // Orange
+      rotation: -1.5
     }
   ];
 
   return (
-    <section ref={containerRef} className="relative w-full py-32 px-4 sm:px-8 bg-cream dark:bg-tech-black transition-colors duration-500 overflow-hidden border-t border-gray-200/50 dark:border-white/10 z-20">
-      
+    <section
+      ref={containerRef}
+      className="relative w-full py-32 px-4 sm:px-8 bg-cream dark:bg-tech-black transition-colors duration-500 overflow-hidden border-t border-gray-200/50 dark:border-white/10 z-20"
+      style={{
+        // Subtly ruled notebook paper pattern using background gradients
+        backgroundSize: '100% 44px',
+        backgroundImage: 'linear-gradient(to bottom, transparent 43px, rgba(139, 92, 246, 0.04) 43px, rgba(139, 92, 246, 0.04) 44px)'
+      }}
+    >
       {/* Background Soft Falling Petals */}
-      <LavenderPetals maxPetals={25} opacityMultiplier={0.6} />
+      <LavenderPetals maxPetals={20} opacityMultiplier={0.5} />
 
       {/* Background Glows */}
       <div className="absolute top-[30%] left-[-15%] w-[450px] h-[450px] bg-neon-purple/5 dark:bg-neon-purple/2 rounded-full blur-[130px] pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-15%] w-[450px] h-[450px] bg-[#E9D5FF]/10 dark:bg-[#E9D5FF]/2 rounded-full blur-[130px] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto flex flex-col relative z-20">
+      <div className="max-w-5xl mx-auto flex flex-col relative z-20">
+        
         {/* Title */}
-        <div className="text-center mb-24">
+        <div className="text-center mb-32">
           <span className="text-xs md:text-sm font-extrabold tracking-[0.25em] text-[#E9D5FF] uppercase font-brand">
             DEV TIMELINE
           </span>
@@ -155,21 +198,25 @@ export const AboutTimeline: React.FC = () => {
             Interactive <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E9D5FF] to-white not-italic font-sans font-extrabold">Milestones</span>
           </h2>
           <p className="text-gray-500 dark:text-gray-400 mt-4 max-w-xl mx-auto text-sm md:text-base font-light">
-            Hover over any milestone card to reveal performance statistics, tools, and technical outcomes.
+            Each milestone is pinned to the board. Hover over them to release their stats and reveal more detail.
           </p>
         </div>
 
-        {/* Timeline Track container */}
+        {/* Timeline Path & Grid */}
         <div className="relative w-full">
-          {/* Vertical central tracking line (Desktop only) */}
-          <div className="absolute left-[50%] -translate-x-1/2 top-0 bottom-0 w-[1px] bg-gray-200/30 dark:bg-white/5 hidden lg:block">
-            <motion.div
-              style={{ scaleY: pathLength, originY: 0 }}
-              className="w-full h-full bg-gradient-to-b from-[#E9D5FF]/80 via-purple-400/50 to-[#E9D5FF]/80 rounded-full"
+          
+          {/* Sinusoidal Wave Dashed Connector Line (Desktop only) */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block" fill="none">
+            <motion.path
+              d="M 50% 40 Q 20% 190, 50% 340 T 50% 640 T 50% 940 T 50% 1240 T 50% 1540 T 50% 1840 T 50% 2140"
+              stroke="rgba(192, 132, 252, 0.25)"
+              strokeWidth="2"
+              strokeDasharray="6 6"
+              style={{ pathLength }}
             />
-          </div>
+          </svg>
 
-          <div className="flex flex-col gap-12 lg:gap-24 relative w-full">
+          <div className="flex flex-col gap-20 lg:gap-28 relative w-full">
             {milestones.map((m, index) => {
               const isEven = index % 2 === 0;
 
@@ -180,79 +227,80 @@ export const AboutTimeline: React.FC = () => {
                     isEven ? 'lg:justify-start' : 'lg:justify-end'
                   }`}
                 >
-                  {/* Central Node Indicator (Desktop only) */}
-                  <div className="absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full border border-cream/50 dark:border-tech-black bg-black z-25 hidden lg:flex items-center justify-center overflow-hidden">
-                    <motion.div
-                      style={{
-                        backgroundColor: hoveredCard === m.id ? m.accentColor : '#1E1B4B',
-                        borderColor: m.accentColor,
-                      }}
-                      className="w-2.5 h-2.5 rounded-full border transition-all duration-300"
-                    />
-                  </div>
-
-                  {/* Glassmorphic Milestone Card */}
+                  
+                  {/* Glassmorphic Sticky Note Card */}
                   <motion.div
                     layout
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-100px' }}
                     transition={{
                       layout: { type: "spring", stiffness: 350, damping: 30 },
                       opacity: { duration: 0.5 },
-                      y: { type: "spring", stiffness: 200, damping: 20 }
+                      y: { type: "spring", stiffness: 180, damping: 18 }
+                    }}
+                    style={{
+                      // Card tilting on default state
+                      rotate: hoveredCard === m.id ? 0 : m.rotation,
+                      scale: hoveredCard === m.id ? 1.03 : 1,
                     }}
                     onMouseEnter={() => setHoveredCard(m.id)}
                     onMouseLeave={() => setHoveredCard(null)}
-                    className={`w-full lg:w-[46%] rounded-[2.2rem] border border-lavender-300/10 dark:border-white/5 bg-gradient-to-br from-white/[0.03] to-transparent dark:from-white/[0.04] dark:to-transparent backdrop-blur-3xl p-6 md:p-8 shadow-[0_8px_32px_0_rgba(139,92,246,0.01)] transition-all duration-500 hover:-translate-y-1 relative group overflow-hidden ${
-                      hoveredCard === m.id
-                        ? 'border-[#E9D5FF]/30 dark:border-[#E9D5FF]/15 shadow-[0_16px_48px_0_rgba(139,92,246,0.06)]'
-                        : ''
-                    }`}
+                    className="w-full lg:w-[45%] rounded-[1.8rem] border border-lavender-300/10 dark:border-white/5 bg-gradient-to-br from-white/[0.04] to-transparent dark:from-white/[0.05] dark:to-transparent backdrop-blur-3xl pt-8 p-6 shadow-[0_8px_32px_0_rgba(139,92,246,0.015)] hover:shadow-[0_20px_48px_rgba(139,92,246,0.08)] transition-all duration-300 relative group overflow-hidden"
                   >
-                    {/* Background glow strip */}
-                    <div
-                      style={{ backgroundColor: m.accentColor }}
-                      className="absolute top-0 left-0 right-0 h-[2px] opacity-10 group-hover:opacity-100 transition-opacity duration-500"
-                    />
+                    
+                    {/* Realistic Pushpin */}
+                    <Thumbtack color={m.accentColor} />
 
-                    {/* Card Header */}
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="flex items-center gap-3">
-                        <div
-                          style={{ color: m.accentColor, borderColor: `${m.accentColor}20` }}
-                          className="p-2.5 bg-black/40 border rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105"
-                        >
-                          {m.icon}
-                        </div>
-                        <div>
-                          <span className="text-[9px] font-bold font-mono tracking-widest uppercase text-gray-500 dark:text-gray-400">
-                            {m.subtitle}
-                          </span>
-                          <h3 className="text-lg md:text-xl font-bold font-sans text-gray-900 dark:text-white mt-0.5 tracking-tight group-hover:text-[#E9D5FF] transition-colors duration-300">
-                            {m.title}
-                          </h3>
-                        </div>
-                      </div>
-                      <span className="font-mono font-bold text-[10px] md:text-xs text-[#E9D5FF] border border-[#E9D5FF]/15 bg-[#E9D5FF]/5 px-3 py-1 rounded-full shadow-sm">
+                    {/* Pastel Glassy Top Index Band */}
+                    <div
+                      style={{ backgroundColor: `${m.accentColor}12` }}
+                      className="absolute top-0 left-0 right-0 h-10 flex items-center px-6 justify-between border-b border-lavender-300/5 dark:border-white/5"
+                    >
+                      <span
+                        style={{ color: m.accentColor }}
+                        className="font-serif italic font-bold text-lg select-none"
+                      >
+                        {m.num}
+                      </span>
+                      <span className="font-mono text-[9px] font-bold tracking-widest text-gray-400 dark:text-white/40 uppercase">
                         {m.year}
                       </span>
                     </div>
 
-                    <p className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-sans font-light leading-relaxed mb-6">
-                      {m.description}
-                    </p>
-
-                    {/* Tag list */}
-                    <div className="flex flex-wrap gap-1.5 mb-2">
-                      {m.tags.map((tag) => (
+                    {/* Card Content (shifted down for top band) */}
+                    <div className="mt-6">
+                      <div className="flex items-center gap-2 mb-2">
                         <span
-                          key={tag}
-                          className="text-[8px] font-bold font-mono tracking-wider uppercase bg-gray-200/30 dark:bg-white/5 text-gray-700 dark:text-gray-300 border border-gray-300/10 dark:border-white/5 px-2.5 py-0.5 rounded-md"
+                          style={{ color: m.accentColor }}
+                          className="opacity-75 group-hover:scale-110 transition-transform duration-300"
                         >
-                          {tag}
+                          {m.icon}
                         </span>
-                      ))}
+                        <span className="text-[9px] font-bold font-mono tracking-widest uppercase text-gray-400 dark:text-white/40">
+                          {m.subtitle}
+                        </span>
+                      </div>
+
+                      <h3 className="text-lg md:text-xl font-bold font-sans text-gray-900 dark:text-white mt-1 leading-snug tracking-tight group-hover:text-[#E9D5FF] transition-colors duration-300">
+                        {m.title}
+                      </h3>
+
+                      <p className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-sans font-light leading-relaxed mt-3 mb-5">
+                        {m.description}
+                      </p>
+
+                      {/* Tag list */}
+                      <div className="flex flex-wrap gap-1.5">
+                        {m.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-[8px] font-bold font-mono tracking-wider uppercase bg-gray-200/30 dark:bg-white/5 text-gray-700 dark:text-gray-300 border border-gray-300/10 dark:border-white/5 px-2 py-0.5 rounded"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
 
                     {/* Interactive Stat Drawer */}
@@ -265,7 +313,7 @@ export const AboutTimeline: React.FC = () => {
                       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden border-t border-gray-200/30 dark:border-white/5 mt-5 pt-5"
                     >
-                      <div className="grid grid-cols-3 gap-2.5">
+                      <div className="grid grid-cols-3 gap-2">
                         {m.stats.map((s, idx) => (
                           <div
                             key={idx}
@@ -276,7 +324,7 @@ export const AboutTimeline: React.FC = () => {
                             </span>
                             <span
                               style={{ color: m.accentColor }}
-                              className="text-[10px] md:text-xs font-black tracking-wide block mt-0.5 uppercase"
+                              className="text-[9px] md:text-[11px] font-black tracking-wide block mt-0.5 uppercase"
                             >
                               {s.value}
                             </span>
@@ -286,9 +334,9 @@ export const AboutTimeline: React.FC = () => {
                     </motion.div>
 
                     {/* Micro hover interaction indicator */}
-                    <div className="flex justify-end items-center gap-1.5 mt-4 opacity-30 group-hover:opacity-100 transition-opacity duration-300 text-[9px] font-bold font-mono text-gray-500 dark:text-gray-400 select-none">
+                    <div className="flex justify-end items-center gap-1.5 mt-4 opacity-20 group-hover:opacity-100 transition-opacity duration-300 text-[9px] font-bold font-mono text-gray-500 dark:text-gray-400 select-none">
                       <CheckCircle2 size={9} style={{ color: m.accentColor }} />
-                      <span>{hoveredCard === m.id ? 'Active Focus' : 'Hover to Expand'}</span>
+                      <span>{hoveredCard === m.id ? 'Active Focus' : 'Hover to Pin'}</span>
                     </div>
 
                   </motion.div>
@@ -297,6 +345,35 @@ export const AboutTimeline: React.FC = () => {
             })}
           </div>
         </div>
+
+        {/* Signature Box (Design Partner / Creator note) */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="mt-32 flex flex-col items-center justify-center gap-3 text-center"
+        >
+          <div className="relative w-12 h-12 rounded-full overflow-hidden border border-[#E9D5FF]/30 shadow-md">
+            <img
+              src="/profile.png"
+              alt="Amal S Kumar"
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = '/avatar-badge.jpg';
+              }}
+            />
+          </div>
+          <div>
+            <span className="font-sans text-[11px] font-bold tracking-widest text-[#E9D5FF] uppercase block">
+              Amal S Kumar
+            </span>
+            <span className="text-[9px] font-mono text-gray-500 dark:text-gray-400 uppercase block mt-0.5">
+              Backend Systems & Architecture Partner.
+            </span>
+          </div>
+        </motion.div>
 
       </div>
     </section>
