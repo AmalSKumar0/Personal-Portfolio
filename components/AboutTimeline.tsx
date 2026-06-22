@@ -306,7 +306,7 @@ export const AboutTimeline: React.FC = () => {
                     </div>
 
                     {/* Card Description */}
-                    <p className="text-gray-750 dark:text-gray-300 text-xs sm:text-sm font-sans font-light leading-relaxed mb-6">
+                    <p className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm font-sans font-light leading-relaxed mb-6">
                       {m.description}
                     </p>
 
@@ -373,7 +373,7 @@ export const AboutTimeline: React.FC = () => {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="mt-36 flex flex-col items-center justify-center gap-3 text-center"
         >
-          <div className="relative w-12 h-12 rounded-full overflow-hidden border border-[#E9D5FF]/30 shadow-md">
+          <div className="relative w-12 h-12 rounded-full overflow-hidden border border-lavender-200 dark:border-[#E9D5FF]/30 shadow-md">
             <img
               src="/profile.png"
               alt="Amal S Kumar"
@@ -385,7 +385,7 @@ export const AboutTimeline: React.FC = () => {
             />
           </div>
           <div>
-            <span className="font-sans text-[11px] font-bold tracking-widest text-[#E9D5FF] uppercase block">
+            <span className="font-sans text-[11px] font-bold tracking-widest text-gray-900 dark:text-[#E9D5FF] uppercase block">
               Amal S Kumar
             </span>
             <span className="text-[9px] font-mono text-gray-500 dark:text-gray-400 uppercase block mt-0.5">

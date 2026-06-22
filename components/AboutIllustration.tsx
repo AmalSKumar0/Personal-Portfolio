@@ -69,67 +69,66 @@ export const AboutIllustration: React.FC = () => {
 
     // Component Content for Card 2 (Middle Card)
     const renderMiddleCardContent = () => (
-        <div className={`w-full ${isDesktop ? 'h-[1022px] relative overflow-hidden p-16' : 'min-h-[500px] p-8'} bg-white/[0.03] dark:bg-black/40 backdrop-blur-2xl border border-white/20 dark:border-white/10 rounded-[2.5rem] shadow-[0_8px_32px_0_rgba(139,92,246,0.02)] transition-all duration-300 flex flex-col justify-between`}>
+        <div className={`w-full ${isDesktop ? 'h-[1022px] relative overflow-hidden p-16' : 'min-h-[500px] p-8'} bg-white/90 dark:bg-black/40 backdrop-blur-2xl border border-lavender-200/50 dark:border-white/10 rounded-[2.5rem] shadow-[0_8px_32px_0_rgba(139,92,246,0.02)] transition-all duration-300 flex flex-col justify-between`}>
             {/* Decorative Ticket Cuts */}
-            <div className="absolute left-0 top-[62%] -translate-x-1/2 w-8 h-8 rounded-full bg-black border border-white/10 z-30 pointer-events-none" />
-            <div className="absolute right-0 top-[62%] translate-x-1/2 w-8 h-8 rounded-full bg-black border border-white/10 z-30 pointer-events-none" />
+            <div className="absolute left-0 top-[62%] -translate-x-1/2 w-8 h-8 rounded-full bg-cream dark:bg-tech-black border border-lavender-200/50 dark:border-white/10 z-30 pointer-events-none" />
+            <div className="absolute right-0 top-[62%] translate-x-1/2 w-8 h-8 rounded-full bg-cream dark:bg-tech-black border border-lavender-200/50 dark:border-white/10 z-30 pointer-events-none" />
 
             <div>
                 <div className="flex justify-between items-center mb-6 lg:mb-10">
                     <div className="flex items-center gap-2">
-                        <div className="w-2.5 h-2.5 lg:w-4 lg:h-4 rounded-full bg-[#E9D5FF]" />
-                        <span className="text-[10px] lg:text-[22px] font-mono font-bold tracking-widest text-[#E9D5FF] uppercase">GitHub Statistics</span>
+                        <div className="w-2.5 h-2.5 lg:w-4 lg:h-4 rounded-full bg-neon-purple" />
+                        <span className="text-[10px] lg:text-[22px] font-mono font-bold tracking-widest text-lavender-700 dark:text-[#E9D5FF] uppercase">GitHub Statistics</span>
                     </div>
-                    <span className="text-[10px] lg:text-[22px] font-bold text-black bg-white px-2.5 py-0.5 lg:px-6 lg:py-2 rounded-md tracking-wider">
+                    <span className="text-[10px] lg:text-[22px] font-bold text-gray-900 dark:text-white bg-lavender-50 dark:bg-white/10 border border-lavender-200 dark:border-white/10 px-2.5 py-0.5 lg:px-6 lg:py-2 rounded-md tracking-wider">
                         Grade: C+
                     </span>
                 </div>
 
-                <h2 className="text-xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight mb-6 lg:mb-12">
+                <h2 className="text-xl lg:text-7xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-tight mb-6 lg:mb-12">
                     AmalSKumar0 Profile Stats
                 </h2>
 
                 <ul className="space-y-3.5 lg:space-y-8 text-left">
-                    <li className="flex justify-between items-center border-b border-white/10 pb-2 lg:pb-6">
-                        <span className="text-xs lg:text-3xl text-white/60 font-light">Total Contributions</span>
-                        <span className="text-xs lg:text-3xl font-bold text-[#E9D5FF]">549</span>
+                    <li className="flex justify-between items-center border-b border-lavender-100 dark:border-white/10 pb-2 lg:pb-6">
+                        <span className="text-xs lg:text-3xl text-gray-600 dark:text-white/60 font-light">Total Contributions</span>
+                        <span className="text-xs lg:text-3xl font-bold text-lavender-700 dark:text-[#E9D5FF]">549</span>
                     </li>
-                    <li className="flex justify-between items-center border-b border-white/10 pb-2 lg:pb-6">
-                        <span className="text-xs lg:text-3xl text-white/60 font-light">Commits (Last Year)</span>
-                        <span className="text-xs lg:text-3xl font-bold text-[#E9D5FF]">309</span>
+                    <li className="flex justify-between items-center border-b border-lavender-100 dark:border-white/10 pb-2 lg:pb-6">
+                        <span className="text-xs lg:text-3xl text-gray-600 dark:text-white/60 font-light">Commits (Last Year)</span>
+                        <span className="text-xs lg:text-3xl font-bold text-lavender-700 dark:text-[#E9D5FF]">309</span>
                     </li>
-                    <li className="flex justify-between items-center border-b border-white/10 pb-2 lg:pb-6">
-                        <span className="text-xs lg:text-3xl text-white/60 font-light">Public Repositories</span>
-                        <span className="text-xs lg:text-3xl font-bold text-[#E9D5FF]">17</span>
+                    <li className="flex justify-between items-center border-b border-lavender-100 dark:border-white/10 pb-2 lg:pb-6">
+                        <span className="text-xs lg:text-3xl text-gray-600 dark:text-white/60 font-light">Public Repositories</span>
+                        <span className="text-xs lg:text-3xl font-bold text-lavender-700 dark:text-[#E9D5FF]">17</span>
                     </li>
-                    <li className="flex justify-between items-center border-b border-white/10 pb-2 lg:pb-6">
-                        <span className="text-xs lg:text-3xl text-white/60 font-light">Total PRs / Stars</span>
-                        <span className="text-xs lg:text-3xl font-bold text-[#E9D5FF]">10 PRs / 8 Stars</span>
+                    <li className="flex justify-between items-center border-b border-lavender-100 dark:border-white/10 pb-2 lg:pb-6">
+                        <span className="text-xs lg:text-3xl text-gray-600 dark:text-white/60 font-light">Total PRs / Stars</span>
+                        <span className="text-xs lg:text-3xl font-bold text-lavender-700 dark:text-[#E9D5FF]">10 PRs / 8 Stars</span>
                     </li>
                 </ul>
             </div>
 
-            <div className="border-t border-dashed border-white/10 pt-4 bg-transparent mt-6 lg:mt-12">
+            <div className="border-t border-dashed border-lavender-200/40 dark:border-white/10 pt-4 bg-transparent mt-6 lg:mt-12">
                 <div className="flex justify-between items-center mb-2 lg:mb-6">
                     <div>
-                        <span className="text-[8px] lg:text-[18px] font-mono text-white/40 block">JOINED</span>
-                        <span className="text-xs lg:text-2xl font-bold text-[#E9D5FF]">2 years ago</span>
+                        <span className="text-[8px] lg:text-[18px] font-mono text-gray-500 dark:text-white/40 block">JOINED</span>
+                        <span className="text-xs lg:text-2xl font-bold text-lavender-700 dark:text-[#E9D5FF]">2 years ago</span>
                     </div>
                     <div className="text-right">
-                        <span className="text-[8px] lg:text-[18px] font-mono text-white/40 block">STREAK</span>
-                        <span className="text-xs lg:text-2xl font-bold text-[#E9D5FF]">10 Days</span>
+                        <span className="text-[8px] lg:text-[18px] font-mono text-gray-500 dark:text-white/40 block">STREAK</span>
+                        <span className="text-xs lg:text-2xl font-bold text-lavender-700 dark:text-[#E9D5FF]">10 Days</span>
                     </div>
                 </div>
 
-                <div className="flex items-end justify-between h-8 lg:h-20 bg-black/60 rounded-md lg:rounded-2xl px-3 py-1 lg:px-6 lg:py-3 border border-white/10 overflow-hidden">
+                <div className="flex items-end justify-between h-8 lg:h-20 bg-lavender-50/50 dark:bg-black/60 rounded-md lg:rounded-2xl px-3 py-1 lg:px-6 lg:py-3 border border-lavender-200/30 dark:border-white/10 overflow-hidden">
                     {[1, 3, 1, 2, 4, 1, 3, 2, 1, 4, 2, 1, 3, 1, 2, 4, 1, 2, 3, 1, 4, 2, 1].map((width, idx) => (
                         <div
                             key={idx}
-                            className="rounded-sm lg:rounded-md"
+                            className={`rounded-sm lg:rounded-md ${idx % 3 === 0 ? 'bg-neon-purple dark:bg-neon-cyan' : 'bg-lavender-200 dark:bg-white'}`}
                             style={{
                                 width: `${width * (isDesktop ? 3.5 : 1.5)}px`,
                                 height: idx % 3 === 0 ? '90%' : idx % 2 === 0 ? '75%' : '60%',
-                                backgroundColor: idx % 3 === 0 ? '#E9D5FF' : '#FFFFFF'
                             }}
                         />
                     ))}
@@ -194,7 +193,7 @@ export const AboutIllustration: React.FC = () => {
                                 className="w-full h-full flex flex-col justify-between"
                             >
                                 {/* Floating top badge */}
-                                <div className="mb-6 mx-auto inline-flex items-center gap-2 bg-black text-white border border-white/20 rounded-full px-4 py-2 shadow-lg backdrop-blur-md">
+                                <div className="mb-6 mx-auto inline-flex items-center gap-2 bg-gray-900 dark:bg-black text-white border border-white/20 rounded-full px-4 py-2 shadow-lg backdrop-blur-md">
                                     <span className="flex h-2 w-2 relative">
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                                         <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
@@ -203,33 +202,33 @@ export const AboutIllustration: React.FC = () => {
                                 </div>
 
                                 {/* Main Card with Glassmorphism */}
-                                <div className="w-full flex-grow flex flex-col justify-between bg-white/[0.03] dark:bg-black/40 backdrop-blur-2xl border border-white/20 dark:border-white/10 p-8 rounded-[2.5rem] shadow-[0_8px_32px_0_rgba(139,92,246,0.02)] transition-all duration-300">
+                                <div className="w-full flex-grow flex flex-col justify-between bg-white/90 dark:bg-black/40 backdrop-blur-2xl border border-lavender-200/50 dark:border-white/10 p-8 rounded-[2.5rem] shadow-[0_8px_32px_0_rgba(139,92,246,0.02)] transition-all duration-300">
                                     <div>
-                                        <h2 className="text-3xl font-bold font-serif text-white leading-tight tracking-tight mt-2 mb-6">
-                                            We craft <span className="text-[#E9D5FF] italic font-normal">systems</span> the elegant way
+                                        <h2 className="text-3xl font-bold font-serif text-gray-900 dark:text-white leading-tight tracking-tight mt-2 mb-6">
+                                            We craft <span className="text-lavender-600 dark:text-[#E9D5FF] italic font-normal">systems</span> the elegant way
                                         </h2>
 
-                                        <p className="text-sm text-white/70 leading-relaxed font-sans font-light mb-6">
+                                        <p className="text-sm text-gray-700 dark:text-white/70 leading-relaxed font-sans font-light mb-6">
                                             Operating as a systems developer to design, build, and deploy full-cycle applications with high structural standards.
                                         </p>
 
                                         <div className="space-y-4 text-left">
-                                            <div className="p-4 rounded-2xl bg-black/20 border border-white/10">
+                                            <div className="p-4 rounded-2xl bg-lavender-50/50 dark:bg-black/20 border border-lavender-100/50 dark:border-white/10">
                                                 <div className="flex items-center justify-between mb-1">
-                                                    <span className="text-xs font-bold text-white">Velora</span>
-                                                    <span className="text-[9px] font-mono text-[#E9D5FF] border border-[#E9D5FF]/30 px-1.5 py-0.5 rounded">Django</span>
+                                                    <span className="text-xs font-bold text-gray-900 dark:text-white">Velora</span>
+                                                    <span className="text-[9px] font-mono text-lavender-700 dark:text-[#E9D5FF] border border-lavender-200/50 dark:border-[#E9D5FF]/30 px-1.5 py-0.5 rounded bg-lavender-100/10">Django</span>
                                                 </div>
-                                                <p className="text-[11px] text-white/60 leading-normal">
+                                                <p className="text-[11px] text-gray-600 dark:text-white/60 leading-normal">
                                                     Digital Art Marketplace. Secure Inverse Payments, Dispute Resolution & Role-Based Workflows.
                                                 </p>
                                             </div>
 
-                                            <div className="p-4 rounded-2xl bg-black/20 border border-white/10">
+                                            <div className="p-4 rounded-2xl bg-lavender-50/50 dark:bg-black/20 border border-lavender-100/50 dark:border-white/10">
                                                 <div className="flex items-center justify-between mb-1">
-                                                    <span className="text-xs font-bold text-white">Rook</span>
-                                                    <span className="text-[9px] font-mono text-[#E9D5FF] border border-[#E9D5FF]/30 px-1.5 py-0.5 rounded">Java</span>
+                                                    <span className="text-xs font-bold text-gray-900 dark:text-white">Rook</span>
+                                                    <span className="text-[9px] font-mono text-lavender-700 dark:text-[#E9D5FF] border border-lavender-200/50 dark:border-[#E9D5FF]/30 px-1.5 py-0.5 rounded bg-lavender-100/10">Java</span>
                                                 </div>
-                                                <p className="text-[11px] text-white/60 leading-normal">
+                                                <p className="text-[11px] text-gray-600 dark:text-white/60 leading-normal">
                                                     Mobile-first API testing & management platform with a unique tactile design aesthetic.
                                                 </p>
                                             </div>
@@ -242,10 +241,10 @@ export const AboutIllustration: React.FC = () => {
                                             href="https://github.com/AmalSKumar0"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="inline-flex items-center justify-between w-full bg-white/10 hover:bg-white/20 text-white px-5 py-3 rounded-full font-bold border border-white/15"
+                                            className="inline-flex items-center justify-between w-full bg-lavender-50 hover:bg-lavender-100/50 dark:bg-white/10 dark:hover:bg-white/20 text-gray-900 dark:text-white px-5 py-3 rounded-full font-bold border border-lavender-200/40 dark:border-white/15"
                                         >
-                                            <span className="text-xs font-mono tracking-widest uppercase text-[#E9D5FF]">github/AmalSKumar0</span>
-                                            <span className="p-1.5 bg-black text-white rounded-full flex items-center justify-center">
+                                            <span className="text-xs font-mono tracking-widest uppercase text-lavender-700 dark:text-[#E9D5FF]">github/AmalSKumar0</span>
+                                            <span className="p-1.5 bg-gray-900 dark:bg-black text-white rounded-full flex items-center justify-center">
                                                 <ArrowRight size={14} className="text-[#E9D5FF]" />
                                             </span>
                                         </a>
@@ -303,17 +302,17 @@ export const AboutIllustration: React.FC = () => {
                             >
                                 {/* Hanging Ribbon/Strap */}
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-8 flex flex-col items-center pointer-events-none z-20">
-                                    <div className="w-4 h-16 bg-white/20 dark:bg-white/10 rounded-t shadow-md border-x border-white/5" />
-                                    <div className="w-6 h-3 bg-white/40 dark:bg-white/20 rounded-b border border-white/10 shadow-sm" />
+                                    <div className="w-4 h-16 bg-lavender-200/40 dark:bg-white/10 rounded-t shadow-md border-x border-lavender-300/20 dark:border-white/5" />
+                                    <div className="w-6 h-3 bg-lavender-300/60 dark:bg-white/20 rounded-b border border-lavender-300/40 dark:border-white/10 shadow-sm" />
                                 </div>
 
                                 {/* Main Badge Card with Glassmorphism */}
-                                <div className="w-full flex-grow flex flex-col justify-between bg-white/[0.03] dark:bg-black/40 backdrop-blur-2xl border border-white/20 dark:border-white/10 p-8 rounded-[2.5rem] shadow-[0_8px_32px_0_rgba(139,92,246,0.02)] mt-8 transition-all duration-300">
+                                <div className="w-full flex-grow flex flex-col justify-between bg-white/90 dark:bg-black/40 backdrop-blur-2xl border border-lavender-200/50 dark:border-white/10 p-8 rounded-[2.5rem] shadow-[0_8px_32px_0_rgba(139,92,246,0.02)] mt-8 transition-all duration-300">
                                     <div className="flex justify-between items-center mb-6">
-                                        <span className="text-[10px] font-mono font-bold tracking-widest text-[#E9D5FF]">DEV ID CARD</span>
+                                        <span className="text-[10px] font-mono font-bold tracking-widest text-lavender-750 dark:text-[#E9D5FF]">DEV ID CARD</span>
 
                                         <div className="flex gap-1.5" title="Theme Color Palette">
-                                            <span className="w-2.5 h-2.5 rounded-full bg-white border border-white/20" />
+                                            <span className="w-2.5 h-2.5 rounded-full bg-white border border-lavender-200/40 dark:border-white/20" />
                                             <span className="w-2.5 h-2.5 rounded-full bg-[#EDE9FE]" />
                                             <span className="w-2.5 h-2.5 rounded-full bg-[#E9D5FF]" />
                                             <span className="w-2.5 h-2.5 rounded-full bg-black border border-[#E9D5FF]" />
@@ -321,7 +320,7 @@ export const AboutIllustration: React.FC = () => {
                                     </div>
 
                                     {/* Portrait Frame */}
-                                    <div className="relative w-full aspect-[4/5] rounded-[1.8rem] overflow-hidden bg-black/40 border border-white/10 flex items-center justify-center">
+                                    <div className="relative w-full aspect-[4/5] rounded-[1.8rem] overflow-hidden bg-lavender-50/30 dark:bg-black/40 border border-lavender-200/40 dark:border-white/10 flex items-center justify-center">
                                         <img
                                             src="/profile.png"
                                             alt="Amal S Kumar Profile"
@@ -336,7 +335,7 @@ export const AboutIllustration: React.FC = () => {
                                                     const parent = target.parentElement;
                                                     if (parent) {
                                                         const icon = document.createElement('div');
-                                                        icon.className = "flex flex-col items-center justify-center text-[#E9D5FF] gap-2";
+                                                        icon.className = "flex flex-col items-center justify-center text-lavender-700 dark:text-[#E9D5FF] gap-2";
                                                         icon.innerHTML = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span class="text-xs font-mono font-bold tracking-widest uppercase">Developer</span>`;
                                                         parent.appendChild(icon);
                                                     }
@@ -345,11 +344,11 @@ export const AboutIllustration: React.FC = () => {
                                         />
 
                                         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[90%] rotate-[-3deg] shadow-lg">
-                                            <div className="bg-black text-white border border-white/20 px-4 py-2.5 rounded-xl text-center backdrop-blur-md">
-                                                <span className="font-sans text-xs font-extrabold uppercase tracking-wider block text-[#E9D5FF]">
+                                            <div className="bg-white dark:bg-black text-gray-900 dark:text-white border border-lavender-200 dark:border-white/20 px-4 py-2.5 rounded-xl text-center backdrop-blur-md">
+                                                <span className="font-sans text-xs font-extrabold uppercase tracking-wider block text-lavender-750 dark:text-[#E9D5FF]">
                                                     Amal S Kumar
                                                 </span>
-                                                <span className="text-[9px] font-mono font-semibold tracking-wider text-white/60 uppercase block mt-0.5">
+                                                <span className="text-[9px] font-mono font-semibold tracking-wider text-gray-600 dark:text-white/60 uppercase block mt-0.5">
                                                     Backend Engineer
                                                 </span>
                                             </div>
@@ -359,14 +358,14 @@ export const AboutIllustration: React.FC = () => {
                                     {/* Brand Logo & Signature at the bottom */}
                                     <div className="mt-8 flex justify-between items-center">
                                         <div className="flex items-center gap-2">
-                                            <span className="p-1.5 bg-white/10 text-[#E9D5FF] rounded-lg border border-white/5">
-                                                <Sparkles size={14} className="text-[#E9D5FF]" />
+                                            <span className="p-1.5 bg-lavender-50 dark:bg-white/10 text-lavender-700 dark:text-[#E9D5FF] rounded-lg border border-lavender-200/50 dark:border-white/5">
+                                                <Sparkles size={14} className="text-lavender-700 dark:text-[#E9D5FF]" />
                                             </span>
-                                            <span className="font-brand text-sm font-bold text-white tracking-wide">
+                                            <span className="font-brand text-sm font-bold text-gray-900 dark:text-white tracking-wide">
                                                 AmalSKumar0
                                             </span>
                                         </div>
-                                        <Award size={18} className="text-[#E9D5FF]" />
+                                        <Award size={18} className="text-lavender-700 dark:text-[#E9D5FF]" />
                                     </div>
                                 </div>
                             </motion.div>
