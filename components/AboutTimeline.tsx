@@ -19,20 +19,20 @@ interface Milestone {
 
 const Thumbtack: React.FC<{ color?: string }> = ({ color = '#C084FC' }) => {
   return (
-    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex flex-col items-center">
-      {/* Plastic Head with realistic 3D shadows & reflections */}
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2.5 z-30 pointer-events-none flex flex-col items-center">
+      {/* Pinned Head - Chunky, glossy, physical */}
       <div
         style={{
           backgroundColor: color,
-          boxShadow: 'inset -3px -3px 6px rgba(0,0,0,0.45), inset 3px 3px 6px rgba(255,255,255,0.7), 0 6px 10px rgba(0,0,0,0.35)'
+          boxShadow: 'inset -4px -4px 8px rgba(0,0,0,0.5), inset 4px 4px 8px rgba(255,255,255,0.7), 0 8px 12px rgba(0,0,0,0.45)'
         }}
-        className="w-5.5 h-5.5 rounded-full relative"
+        className="w-6.5 h-6.5 rounded-full relative transition-all duration-300"
       >
-        {/* Glass glare highlight */}
-        <div className="absolute top-1 left-1 w-1.5 h-1.5 rounded-full bg-white/70" />
+        {/* Shiny glare */}
+        <div className="absolute top-1.5 left-1.5 w-2 h-2 rounded-full bg-white/70" />
       </div>
-      {/* Shadow of the needle pinned into the page */}
-      <div className="w-[1.5px] h-3 bg-black/45 rotate-[20deg] origin-top -mt-0.5 shadow-md" />
+      {/* Needle drop-shadow cast onto the paper board */}
+      <div className="w-[2px] h-3.5 bg-black/50 rotate-[22deg] origin-top -mt-0.5 shadow-md" />
     </div>
   );
 };
@@ -40,13 +40,6 @@ const Thumbtack: React.FC<{ color?: string }> = ({ color = '#C084FC' }) => {
 export const AboutTimeline: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end center"]
-  });
-
-  const pathLength = useSpring(scrollYProgress, { stiffness: 60, damping: 20 });
 
   const milestones: Milestone[] = [
     {
@@ -175,7 +168,7 @@ export const AboutTimeline: React.FC = () => {
       ref={containerRef}
       className="relative w-full py-32 px-4 sm:px-8 bg-cream dark:bg-tech-black transition-colors duration-500 overflow-hidden border-t border-gray-200/50 dark:border-white/10 z-20"
       style={{
-        // Subtly ruled notebook paper pattern using background gradients
+        // Ruled paper background lines
         backgroundSize: '100% 44px',
         backgroundImage: 'linear-gradient(to bottom, transparent 43px, rgba(139, 92, 246, 0.04) 43px, rgba(139, 92, 246, 0.04) 44px)'
       }}
@@ -190,7 +183,7 @@ export const AboutTimeline: React.FC = () => {
       <div className="max-w-5xl mx-auto flex flex-col relative z-20">
         
         {/* Title */}
-        <div className="text-center mb-32">
+        <div className="text-center mb-36">
           <span className="text-xs md:text-sm font-extrabold tracking-[0.25em] text-[#E9D5FF] uppercase font-brand">
             DEV TIMELINE
           </span>
@@ -198,27 +191,17 @@ export const AboutTimeline: React.FC = () => {
             Interactive <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E9D5FF] to-white not-italic font-sans font-extrabold">Milestones</span>
           </h2>
           <p className="text-gray-500 dark:text-gray-400 mt-4 max-w-xl mx-auto text-sm md:text-base font-light">
-            Each milestone is pinned to the board. Hover over them to release their stats and reveal more detail.
+            Each milestone card is suspended by a string from its pushpin. Hover over them to inspect their statistics.
           </p>
         </div>
 
         {/* Timeline Path & Grid */}
         <div className="relative w-full">
           
-          {/* Sinusoidal Wave Dashed Connector Line (Desktop only) */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block" fill="none">
-            <motion.path
-              d="M 50% 40 Q 20% 190, 50% 340 T 50% 640 T 50% 940 T 50% 1240 T 50% 1540 T 50% 1840 T 50% 2140"
-              stroke="rgba(192, 132, 252, 0.25)"
-              strokeWidth="2"
-              strokeDasharray="6 6"
-              style={{ pathLength }}
-            />
-          </svg>
-
-          <div className="flex flex-col gap-20 lg:gap-28 relative w-full">
+          <div className="flex flex-col gap-24 lg:gap-32 relative w-full">
             {milestones.map((m, index) => {
               const isEven = index % 2 === 0;
+              const hasNext = index < milestones.length - 1;
 
               return (
                 <div
@@ -228,118 +211,158 @@ export const AboutTimeline: React.FC = () => {
                   }`}
                 >
                   
-                  {/* Glassmorphic Sticky Note Card */}
-                  <motion.div
-                    layout
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-100px' }}
-                    transition={{
-                      layout: { type: "spring", stiffness: 350, damping: 30 },
-                      opacity: { duration: 0.5 },
-                      y: { type: "spring", stiffness: 180, damping: 18 }
-                    }}
-                    style={{
-                      // Card tilting on default state
-                      rotate: hoveredCard === m.id ? 0 : m.rotation,
-                      scale: hoveredCard === m.id ? 1.03 : 1,
-                    }}
-                    onMouseEnter={() => setHoveredCard(m.id)}
-                    onMouseLeave={() => setHoveredCard(null)}
-                    className="w-full lg:w-[45%] rounded-[1.8rem] border border-lavender-300/10 dark:border-white/5 bg-gradient-to-br from-white/[0.04] to-transparent dark:from-white/[0.05] dark:to-transparent backdrop-blur-3xl pt-8 p-6 shadow-[0_8px_32px_0_rgba(139,92,246,0.015)] hover:shadow-[0_20px_48px_rgba(139,92,246,0.08)] transition-all duration-300 relative group overflow-hidden"
-                  >
+                  {/* Pinned Card Assembly */}
+                  <div className="relative w-full lg:w-[45%] flex flex-col items-center pt-10">
                     
-                    {/* Realistic Pushpin */}
+                    {/* The Wall Anchor Pushpin */}
                     <Thumbtack color={m.accentColor} />
 
-                    {/* Pastel Glassy Top Index Band */}
-                    <div
-                      style={{ backgroundColor: `${m.accentColor}12` }}
-                      className="absolute top-0 left-0 right-0 h-10 flex items-center px-6 justify-between border-b border-lavender-300/5 dark:border-white/5"
-                    >
-                      <span
-                        style={{ color: m.accentColor }}
-                        className="font-serif italic font-bold text-lg select-none"
-                      >
-                        {m.num}
-                      </span>
-                      <span className="font-mono text-[9px] font-bold tracking-widest text-gray-400 dark:text-white/40 uppercase">
-                        {m.year}
-                      </span>
-                    </div>
+                    {/* Hanging String (connects pin down to the card grommet) */}
+                    <svg className="absolute top-1 left-0 right-0 w-full h-10 pointer-events-none" fill="none">
+                      <line
+                        x1="50%"
+                        y1="0"
+                        x2="50%"
+                        y2="38"
+                        stroke={m.accentColor}
+                        strokeWidth="2"
+                        strokeDasharray="2 2"
+                        className="opacity-80"
+                      />
+                    </svg>
 
-                    {/* Card Content (shifted down for top band) */}
-                    <div className="mt-6">
-                      <div className="flex items-center gap-2 mb-2">
+                    {/* Sequential Connector String (From this pin to the NEXT pin) */}
+                    {hasNext && (
+                      <svg className="absolute top-1 left-0 w-[220%] h-[340px] pointer-events-none hidden lg:block z-10" fill="none" style={{ left: isEven ? '50%' : 'auto', right: isEven ? 'auto' : '50%' }}>
+                        <path
+                          d={isEven 
+                            ? "M 0 0 C 35 100, 65 200, 100% 300" // Curve from Left Pin to Right Pin (next row)
+                            : "M 100% 0 C 65 100, 35 200, 0 300" // Curve from Right Pin to Left Pin (next row)
+                          }
+                          style={{
+                            vectorEffect: 'non-scaling-stroke'
+                          }}
+                          stroke="rgba(192, 132, 252, 0.45)"
+                          strokeWidth="2.5"
+                          strokeDasharray="6 5"
+                        />
+                      </svg>
+                    )}
+
+                    {/* Chunky Glassmorphic Hanging Card */}
+                    <motion.div
+                      layout
+                      initial={{ opacity: 0, y: 40 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-100px' }}
+                      transition={{
+                        layout: { type: "spring", stiffness: 350, damping: 30 },
+                        opacity: { duration: 0.5 },
+                        y: { type: "spring", stiffness: 180, damping: 18 }
+                      }}
+                      style={{
+                        rotate: hoveredCard === m.id ? 0 : m.rotation,
+                        scale: hoveredCard === m.id ? 1.03 : 1,
+                      }}
+                      onMouseEnter={() => setHoveredCard(m.id)}
+                      onMouseLeave={() => setHoveredCard(null)}
+                      className="w-full rounded-[2.2rem] border-2 border-lavender-200/80 dark:border-white/10 bg-white/90 dark:bg-black/35 backdrop-blur-3xl pt-8 p-6 shadow-[0_15px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_15px_30px_rgba(0,0,0,0.35)] hover:shadow-[0_25px_45px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_25px_45px_rgba(0,0,0,0.6)] transition-all duration-305 relative group overflow-hidden mt-6"
+                    >
+                      {/* Metallic Ring / Hanging Grommet at top-center of the card */}
+                      <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full border-2 border-lavender-300/40 bg-black/45 dark:bg-black/75 shadow-inner flex items-center justify-center z-25">
+                        <div className="w-1.5 h-1.5 rounded-full bg-cream dark:bg-tech-black shadow-md" />
+                      </div>
+
+                      {/* Pastel Glassy Index Band */}
+                      <div
+                        style={{ backgroundColor: `${m.accentColor}18` }}
+                        className="absolute top-0 left-0 right-0 h-10 flex items-center px-6 justify-between border-b-2 border-lavender-200/30 dark:border-white/10"
+                      >
                         <span
                           style={{ color: m.accentColor }}
-                          className="opacity-75 group-hover:scale-110 transition-transform duration-300"
+                          className="font-serif italic font-bold text-lg select-none"
                         >
-                          {m.icon}
+                          {m.num}
                         </span>
-                        <span className="text-[9px] font-bold font-mono tracking-widest uppercase text-gray-400 dark:text-white/40">
-                          {m.subtitle}
+                        <span className="font-mono text-[9px] font-bold tracking-widest text-gray-500 dark:text-white/40 uppercase">
+                          {m.year}
                         </span>
                       </div>
 
-                      <h3 className="text-lg md:text-xl font-bold font-sans text-gray-900 dark:text-white mt-1 leading-snug tracking-tight group-hover:text-[#E9D5FF] transition-colors duration-300">
-                        {m.title}
-                      </h3>
-
-                      <p className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-sans font-light leading-relaxed mt-3 mb-5">
-                        {m.description}
-                      </p>
-
-                      {/* Tag list */}
-                      <div className="flex flex-wrap gap-1.5">
-                        {m.tags.map((tag) => (
+                      {/* Card Content (shifted down for top band) */}
+                      <div className="mt-6">
+                        <div className="flex items-center gap-2 mb-2">
                           <span
-                            key={tag}
-                            className="text-[8px] font-bold font-mono tracking-wider uppercase bg-gray-200/30 dark:bg-white/5 text-gray-700 dark:text-gray-300 border border-gray-300/10 dark:border-white/5 px-2 py-0.5 rounded"
+                            style={{ color: m.accentColor }}
+                            className="opacity-75 group-hover:scale-110 transition-transform duration-300"
                           >
-                            {tag}
+                            {m.icon}
                           </span>
-                        ))}
-                      </div>
-                    </div>
+                          <span className="text-[9px] font-bold font-mono tracking-widest uppercase text-gray-400 dark:text-white/40">
+                            {m.subtitle}
+                          </span>
+                        </div>
 
-                    {/* Interactive Stat Drawer */}
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{
-                        height: hoveredCard === m.id ? 'auto' : 0,
-                        opacity: hoveredCard === m.id ? 1 : 0
-                      }}
-                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden border-t border-gray-200/30 dark:border-white/5 mt-5 pt-5"
-                    >
-                      <div className="grid grid-cols-3 gap-2">
-                        {m.stats.map((s, idx) => (
-                          <div
-                            key={idx}
-                            className="bg-black/10 border border-white/5 rounded-xl p-2.5 flex flex-col justify-center text-center backdrop-blur-md"
-                          >
-                            <span className="text-[7px] font-bold font-mono text-gray-500 dark:text-white/40 uppercase tracking-widest block">
-                              {s.label}
-                            </span>
+                        <h3 className="text-lg md:text-xl font-bold font-sans text-gray-900 dark:text-white mt-1 leading-snug tracking-tight group-hover:text-neon-purple dark:group-hover:text-[#E9D5FF] transition-colors duration-300">
+                          {m.title}
+                        </h3>
+
+                        <p className="text-gray-700 dark:text-gray-400 text-xs md:text-sm font-sans font-light leading-relaxed mt-3 mb-5">
+                          {m.description}
+                        </p>
+
+                        {/* Tag list */}
+                        <div className="flex flex-wrap gap-1.5">
+                          {m.tags.map((tag) => (
                             <span
-                              style={{ color: m.accentColor }}
-                              className="text-[9px] md:text-[11px] font-black tracking-wide block mt-0.5 uppercase"
+                              key={tag}
+                              className="text-[8px] font-bold font-mono tracking-wider uppercase bg-lavender-50 dark:bg-white/5 text-lavender-800 dark:text-gray-300 border border-lavender-100 dark:border-white/5 px-2.5 py-0.5 rounded"
                             >
-                              {s.value}
+                              {tag}
                             </span>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
+
+                      {/* Interactive Stat Drawer */}
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{
+                          height: hoveredCard === m.id ? 'auto' : 0,
+                          opacity: hoveredCard === m.id ? 1 : 0
+                        }}
+                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden border-t-2 border-gray-200/30 dark:border-white/5 mt-5 pt-5"
+                      >
+                        <div className="grid grid-cols-3 gap-2.5">
+                          {m.stats.map((s, idx) => (
+                            <div
+                              key={idx}
+                              className="bg-lavender-50/50 dark:bg-black/10 border border-lavender-100 dark:border-white/5 rounded-xl p-2.5 flex flex-col justify-center text-center backdrop-blur-md"
+                            >
+                              <span className="text-[7px] font-bold font-mono text-gray-500 dark:text-white/40 uppercase tracking-widest block">
+                                {s.label}
+                              </span>
+                              <span
+                                style={{ color: m.accentColor }}
+                                className="text-[9px] md:text-[11px] font-black tracking-wide block mt-0.5 uppercase"
+                              >
+                                {s.value}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </motion.div>
+
+                      {/* Micro hover interaction indicator */}
+                      <div className="flex justify-end items-center gap-1.5 mt-4 opacity-25 group-hover:opacity-100 transition-opacity duration-300 text-[9px] font-bold font-mono text-gray-500 dark:text-gray-400 select-none">
+                        <CheckCircle2 size={9} style={{ color: m.accentColor }} />
+                        <span>{hoveredCard === m.id ? 'Active Focus' : 'Hover to Inspect'}</span>
+                      </div>
+
                     </motion.div>
-
-                    {/* Micro hover interaction indicator */}
-                    <div className="flex justify-end items-center gap-1.5 mt-4 opacity-20 group-hover:opacity-100 transition-opacity duration-300 text-[9px] font-bold font-mono text-gray-500 dark:text-gray-400 select-none">
-                      <CheckCircle2 size={9} style={{ color: m.accentColor }} />
-                      <span>{hoveredCard === m.id ? 'Active Focus' : 'Hover to Pin'}</span>
-                    </div>
-
-                  </motion.div>
+                  </div>
+                  
                 </div>
               );
             })}
@@ -352,7 +375,7 @@ export const AboutTimeline: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="mt-32 flex flex-col items-center justify-center gap-3 text-center"
+          className="mt-36 flex flex-col items-center justify-center gap-3 text-center"
         >
           <div className="relative w-12 h-12 rounded-full overflow-hidden border border-[#E9D5FF]/30 shadow-md">
             <img
