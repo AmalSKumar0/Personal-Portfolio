@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+    showCTA?: boolean;
+}
+
+export const Footer: React.FC<FooterProps> = ({ showCTA = true }) => {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -19,34 +23,36 @@ export const Footer: React.FC = () => {
             <div className="max-w-7xl mx-auto">
 
                 {/* Large CTA */}
-                <div className="relative w-full rounded-[3rem] overflow-hidden mb-20 bg-lavender-50/30 dark:bg-tech-dark/40 border border-lavender-300/30 dark:border-white/10 p-12 md:p-24 text-center backdrop-blur-xl shadow-xl transition-all duration-300">
-                    <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-[0.05] mix-blend-overlay"></div>
-                    
-                    {/* Soft lavender background glow */}
-                    <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-neon-purple/10 dark:bg-neon-purple/5 blur-3xl pointer-events-none"></div>
-                    <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-neon-cyan/10 dark:bg-neon-cyan/5 blur-3xl pointer-events-none"></div>
+                {showCTA && (
+                    <div className="relative w-full rounded-[3rem] overflow-hidden mb-20 bg-lavender-50/30 dark:bg-tech-dark/40 border border-lavender-300/30 dark:border-white/10 p-12 md:p-24 text-center backdrop-blur-xl shadow-xl transition-all duration-300">
+                        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-[0.05] mix-blend-overlay"></div>
+                        
+                        {/* Soft lavender background glow */}
+                        <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-neon-purple/10 dark:bg-neon-purple/5 blur-3xl pointer-events-none"></div>
+                        <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-neon-cyan/10 dark:bg-neon-cyan/5 blur-3xl pointer-events-none"></div>
 
-                    <div className="relative z-10 max-w-2xl mx-auto">
-                        <h2 className="text-3xl md:text-7xl font-display font-bold mb-6 tracking-tight text-gray-900 dark:text-white">Let's build systems together.</h2>
-                        <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-10">
-                            Looking to design scalable APIs, distributed systems, or optimize databases? Let's talk.
-                        </p>
-                        <div className="flex flex-col sm:flex-row justify-center gap-4">
-                            <a href="mailto:amalskumardev@gmail.com" className="bg-slate-900 dark:bg-white text-white dark:text-tech-black px-8 py-4 rounded-full font-bold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all flex items-center justify-center gap-2 shadow-lg">
-                                Email Me <ArrowRight size={18} />
-                            </a>
-                            {isMobile ? (
-                                <a href="/resume/resume.pdf" className="bg-white/40 dark:bg-white/5 border border-gray-300/30 dark:border-white/10 text-gray-800 dark:text-white px-8 py-4 rounded-full font-bold hover:bg-white/60 dark:hover:bg-white/10 backdrop-blur-md transition-all inline-flex items-center justify-center shadow-sm">
-                                    View Resume
+                        <div className="relative z-10 max-w-2xl mx-auto">
+                            <h2 className="text-3xl md:text-7xl font-display font-bold mb-6 tracking-tight text-gray-900 dark:text-white">Let's build systems together.</h2>
+                            <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-10">
+                                Looking to design scalable APIs, distributed systems, or optimize databases? Let's talk.
+                            </p>
+                            <div className="flex flex-col sm:flex-row justify-center gap-4">
+                                <a href="mailto:amalskumardev@gmail.com" className="bg-slate-900 dark:bg-white text-white dark:text-tech-black px-8 py-4 rounded-full font-bold hover:bg-slate-800 dark:hover:bg-gray-100 transition-all flex items-center justify-center gap-2 shadow-lg">
+                                    Email Me <ArrowRight size={18} />
                                 </a>
-                            ) : (
-                                <Link to="/resume" className="bg-white/40 dark:bg-white/5 border border-gray-300/30 dark:border-white/10 text-gray-800 dark:text-white px-8 py-4 rounded-full font-bold hover:bg-white/60 dark:hover:bg-white/10 backdrop-blur-md transition-all inline-flex items-center justify-center shadow-sm">
-                                    View Resume
-                                </Link>
-                            )}
+                                {isMobile ? (
+                                    <a href="/resume/resume.pdf" className="bg-white/40 dark:bg-white/5 border border-gray-300/30 dark:border-white/10 text-gray-800 dark:text-white px-8 py-4 rounded-full font-bold hover:bg-white/60 dark:hover:bg-white/10 backdrop-blur-md transition-all inline-flex items-center justify-center shadow-sm">
+                                        View Resume
+                                    </a>
+                                ) : (
+                                    <Link to="/resume" className="bg-white/40 dark:bg-white/5 border border-gray-300/30 dark:border-white/10 text-gray-800 dark:text-white px-8 py-4 rounded-full font-bold hover:bg-white/60 dark:hover:bg-white/10 backdrop-blur-md transition-all inline-flex items-center justify-center shadow-sm">
+                                        View Resume
+                                    </Link>
+                                )}
+                            </div>
                         </div>
                     </div>
-                </div>
+                )}
 
                 {/* Links Grid */}
                 <div className="grid md:grid-cols-12 gap-12 border-t border-gray-200 dark:border-white/10 pt-16">

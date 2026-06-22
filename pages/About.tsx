@@ -3,6 +3,7 @@ import { SEO } from '../components/SEO';
 import { AboutIllustration } from '../components/AboutIllustration';
 import { AboutSnapshot } from '../components/AboutSnapshot';
 import { AboutTimeline } from '../components/AboutTimeline';
+import { AboutAccomplishments } from '../components/AboutAccomplishments';
 import { ScrollFade } from '../components/ScrollFade';
 
 export const About: React.FC = () => {
@@ -25,6 +26,11 @@ export const About: React.FC = () => {
                 {/* Section: My Story Scroll Reveal */}
                 <ScrollFade amount={0.1}>
                     <AboutSnapshot />
+                </ScrollFade>
+
+                {/* Section: Accomplishments & Expertise Card Layout */}
+                <ScrollFade amount={0.1}>
+                    <AboutAccomplishments />
                 </ScrollFade>
 
                 {/* Section: Interactive Dev Timeline */}

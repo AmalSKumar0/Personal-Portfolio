@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Footer } from './components/Footer';
 import { LoadingScreen } from './components/LoadingScreen';
 import { Home } from './pages/Home';
@@ -19,6 +19,7 @@ import { useVisitorTracker } from './hooks/useVisitorTracker';
 import { useLenisScroll } from './hooks/useLenisScroll';
 
 const App: React.FC = () => {
+  const location = useLocation();
   const [isLoading, setIsLoading] = React.useState(true);
   const [isFading, setIsFading] = React.useState(false);
   const [showNavbar, setShowNavbar] = React.useState(false);
@@ -149,7 +150,7 @@ const App: React.FC = () => {
               </Routes>
             </main>
             <ScrollFade amount={0.05}>
-              <Footer />
+              <Footer showCTA={location.pathname !== '/contact'} />
             </ScrollFade>
           </div>
         </div>

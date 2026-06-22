@@ -154,6 +154,7 @@ export const AboutTimeline: React.FC = () => {
   return (
     <section 
       ref={containerRef} 
+      id="timeline"
       className="relative w-full py-32 px-4 sm:px-8 bg-cream dark:bg-tech-black transition-colors duration-500 overflow-hidden border-t border-gray-200/50 dark:border-white/10 z-20"
     >
       {/* Background Soft Falling Petals */}
@@ -364,36 +365,6 @@ export const AboutTimeline: React.FC = () => {
             })}
           </div>
         </div>
-
-        {/* Bottom Signature Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="mt-36 flex flex-col items-center justify-center gap-3 text-center"
-        >
-          <div className="relative w-12 h-12 rounded-full overflow-hidden border border-lavender-200 dark:border-[#E9D5FF]/30 shadow-md">
-            <img
-              src="/profile.png"
-              alt="Amal S Kumar"
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.src = '/avatar-badge.jpg';
-              }}
-            />
-          </div>
-          <div>
-            <span className="font-sans text-[11px] font-bold tracking-widest text-gray-900 dark:text-[#E9D5FF] uppercase block">
-              Amal S Kumar
-            </span>
-            <span className="text-[9px] font-mono text-gray-500 dark:text-gray-400 uppercase block mt-0.5">
-              Backend Systems & Architecture Partner.
-            </span>
-          </div>
-        </motion.div>
-
       </div>
     </section>
   );
