@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
+import { Link, useLocation } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 
 interface WordItem {
   text: string;
@@ -31,6 +33,8 @@ const Word: React.FC<{
 
 export const AboutSnapshot: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
   
   // Track scroll position of the entire section container
   const { scrollYProgress } = useScroll({
@@ -162,6 +166,25 @@ export const AboutSnapshot: React.FC = () => {
                 );
               })}
             </p>
+
+            {/* Conditionally render glassmorphic "View More" button on Home page */}
+            {isHomePage && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+                className="mt-16 text-center"
+              >
+                <Link
+                  to="/about"
+                  className="inline-flex items-center gap-2.5 px-8 py-4 bg-lavender-100/40 dark:bg-white/5 border border-lavender-300/50 dark:border-white/10 text-lavender-900 dark:text-white rounded-full font-bold hover:bg-lavender-200/50 dark:hover:bg-white/10 backdrop-blur-md shadow-md hover:shadow-lg hover:scale-[1.03] transition-all cursor-pointer group"
+                >
+                  <span>View More</span>
+                  <ArrowRight size={16} className="text-neon-purple dark:text-neon-cyan group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.div>
+            )}
 
           </div>
         </div>
