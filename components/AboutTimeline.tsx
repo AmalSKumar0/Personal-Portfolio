@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { GraduationCap, Code2, Flame, Layers, Globe, Rocket, Award, CheckCircle2 } from 'lucide-react';
+import { LavenderPetals } from './LavenderPetals';
 
 interface Milestone {
   id: number;
@@ -33,7 +34,7 @@ export const AboutTimeline: React.FC = () => {
       title: "Mahatma Gandhi University (BCA)",
       subtitle: "The Beginning of the Journey",
       description: "Enrolled in Bachelor of Computer Applications (BCA) to build formal foundations in system architecture, logic design, and computer networks.",
-      icon: <GraduationCap className="w-5 h-5" />,
+      icon: <GraduationCap className="w-4 h-4" />,
       tags: ["C Programming", "Computer Logic", "Network Basics"],
       stats: [
         { label: "Academics", value: "BCA" },
@@ -48,7 +49,7 @@ export const AboutTimeline: React.FC = () => {
       title: "First C++ Project",
       subtitle: "The Spark of Creation",
       description: "Knowing next to nothing about programming, hacked together a fully working terminal Tic-Tac-Toe game in C++. Solving logic flows and compiling code sparked a lifelong passion.",
-      icon: <Code2 className="w-5 h-5" />,
+      icon: <Code2 className="w-4 h-4" />,
       tags: ["C++", "CLI Logic", "Algorithms"],
       stats: [
         { label: "Complexity", value: "Basic" },
@@ -63,7 +64,7 @@ export const AboutTimeline: React.FC = () => {
       title: "Self-Taught Shift (Django)",
       subtitle: "Autodidactic Learning Spree",
       description: "Spent the college summer vacation diving deep into python and modern web frameworks. Taught myself Django and built a fully functional locally deployed To-Do application.",
-      icon: <Flame className="w-5 h-5" />,
+      icon: <Flame className="w-4 h-4" />,
       tags: ["Python", "Django", "SQL", "HTML/CSS"],
       stats: [
         { label: "Self-Study", value: "3+ Months" },
@@ -78,7 +79,7 @@ export const AboutTimeline: React.FC = () => {
       title: "BCA 2nd Year (Platform Era)",
       subtitle: "RikshawHub & Swiftride",
       description: "Created RikshawHub (PHP) for local logistics coordination and Swiftride (Python/Django) for micro-transit matching, along with a Pet Adoption portal and FreshCart e-commerce solution.",
-      icon: <Layers className="w-5 h-5" />,
+      icon: <Layers className="w-4 h-4" />,
       tags: ["PHP", "Django", "MySQL", "Git", "JS"],
       stats: [
         { label: "Systems Built", value: "4 Platforms" },
@@ -93,7 +94,7 @@ export const AboutTimeline: React.FC = () => {
       title: "Global Freelance Career",
       subtitle: "Final Year BCA & Professional Delivery",
       description: "Stepped into professional web development during my final year. Delivered production websites (e.g. Tours of Georgia, The Navigans, Zinda Exteriors) to global clients in WordPress, Laravel, and React.",
-      icon: <Globe className="w-5 h-5" />,
+      icon: <Globe className="w-4 h-4" />,
       tags: ["React", "Laravel", "WordPress", "Tailwind CSS"],
       stats: [
         { label: "Live Systems", value: "6+ Deployed" },
@@ -108,7 +109,7 @@ export const AboutTimeline: React.FC = () => {
       title: "MCA at Amal Jyothi College",
       subtitle: "NASA Space Apps & Velora System",
       description: "Enrolled in MCA to specialize in backend systems. Designed and deployed Velora (art marketplace with secure workflows). Competed in the NASA Space Apps Challenge, becoming a Global Nominee.",
-      icon: <Award className="w-5 h-5" />,
+      icon: <Award className="w-4 h-4" />,
       tags: ["Django REST", "AWS", "Celery/Redis", "LeetCode"],
       stats: [
         { label: "LeetCode Count", value: "185+ Solved" },
@@ -123,7 +124,7 @@ export const AboutTimeline: React.FC = () => {
       title: "The Ultimate Capstone",
       subtitle: "Final Year MCA Flagship Project",
       description: "Leaving space for my most ambitious, highly optimized system architecture yet. R&D is currently underway focused on real-world enterprise scalability, database sharding, and high throughput.",
-      icon: <Rocket className="w-5 h-5" />,
+      icon: <Rocket className="w-4 h-4" />,
       tags: ["Go/Rust", "System Design", "Kubernetes", "gRPC"],
       stats: [
         { label: "Ambition", value: "100%" },
@@ -136,11 +137,15 @@ export const AboutTimeline: React.FC = () => {
 
   return (
     <section ref={containerRef} className="relative w-full py-32 px-4 sm:px-8 bg-cream dark:bg-tech-black transition-colors duration-500 overflow-hidden border-t border-gray-200/50 dark:border-white/10 z-20">
+      
+      {/* Background Soft Falling Petals */}
+      <LavenderPetals maxPetals={25} opacityMultiplier={0.6} />
+
       {/* Background Glows */}
       <div className="absolute top-[30%] left-[-15%] w-[450px] h-[450px] bg-neon-purple/5 dark:bg-neon-purple/2 rounded-full blur-[130px] pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-15%] w-[450px] h-[450px] bg-[#E9D5FF]/10 dark:bg-[#E9D5FF]/2 rounded-full blur-[130px] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto flex flex-col">
+      <div className="max-w-6xl mx-auto flex flex-col relative z-20">
         {/* Title */}
         <div className="text-center mb-24">
           <span className="text-xs md:text-sm font-extrabold tracking-[0.25em] text-[#E9D5FF] uppercase font-brand">
@@ -157,10 +162,10 @@ export const AboutTimeline: React.FC = () => {
         {/* Timeline Track container */}
         <div className="relative w-full">
           {/* Vertical central tracking line (Desktop only) */}
-          <div className="absolute left-[50%] -translate-x-1/2 top-0 bottom-0 w-0.5 bg-gray-200/50 dark:bg-white/10 hidden lg:block">
+          <div className="absolute left-[50%] -translate-x-1/2 top-0 bottom-0 w-[1px] bg-gray-200/30 dark:bg-white/5 hidden lg:block">
             <motion.div
               style={{ scaleY: pathLength, originY: 0 }}
-              className="w-full h-full bg-gradient-to-b from-[#E9D5FF] via-purple-400 to-[#E9D5FF] rounded-full"
+              className="w-full h-full bg-gradient-to-b from-[#E9D5FF]/80 via-purple-400/50 to-[#E9D5FF]/80 rounded-full"
             />
           </div>
 
@@ -176,69 +181,74 @@ export const AboutTimeline: React.FC = () => {
                   }`}
                 >
                   {/* Central Node Indicator (Desktop only) */}
-                  <div className="absolute left-1/2 -translate-x-1/2 w-8 h-8 rounded-full border-4 border-cream dark:border-tech-black bg-black z-25 hidden lg:flex items-center justify-center overflow-hidden">
+                  <div className="absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full border border-cream/50 dark:border-tech-black bg-black z-25 hidden lg:flex items-center justify-center overflow-hidden">
                     <motion.div
                       style={{
                         backgroundColor: hoveredCard === m.id ? m.accentColor : '#1E1B4B',
                         borderColor: m.accentColor,
                       }}
-                      className="w-3 h-3 rounded-full border transition-all duration-300"
+                      className="w-2.5 h-2.5 rounded-full border transition-all duration-300"
                     />
                   </div>
 
                   {/* Glassmorphic Milestone Card */}
                   <motion.div
-                    initial={{ opacity: 0, y: 50 }}
+                    layout
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-100px' }}
-                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{
+                      layout: { type: "spring", stiffness: 350, damping: 30 },
+                      opacity: { duration: 0.5 },
+                      y: { type: "spring", stiffness: 200, damping: 20 }
+                    }}
                     onMouseEnter={() => setHoveredCard(m.id)}
                     onMouseLeave={() => setHoveredCard(null)}
-                    className={`w-full lg:w-[46%] rounded-[2rem] border border-gray-200/50 dark:border-white/10 bg-white/5 dark:bg-black/30 backdrop-blur-2xl p-6 md:p-8 shadow-xl transition-all duration-300 relative group overflow-hidden ${
+                    className={`w-full lg:w-[46%] rounded-[2.2rem] border border-lavender-300/10 dark:border-white/5 bg-gradient-to-br from-white/[0.03] to-transparent dark:from-white/[0.04] dark:to-transparent backdrop-blur-3xl p-6 md:p-8 shadow-[0_8px_32px_0_rgba(139,92,246,0.01)] transition-all duration-500 hover:-translate-y-1 relative group overflow-hidden ${
                       hoveredCard === m.id
-                        ? 'border-[#E9D5FF]/45 dark:border-[#E9D5FF]/20 shadow-[#E9D5FF]/5'
+                        ? 'border-[#E9D5FF]/30 dark:border-[#E9D5FF]/15 shadow-[0_16px_48px_0_rgba(139,92,246,0.06)]'
                         : ''
                     }`}
                   >
                     {/* Background glow strip */}
                     <div
                       style={{ backgroundColor: m.accentColor }}
-                      className="absolute top-0 left-0 right-0 h-1 opacity-20 group-hover:opacity-100 transition-opacity duration-300"
+                      className="absolute top-0 left-0 right-0 h-[2px] opacity-10 group-hover:opacity-100 transition-opacity duration-500"
                     />
 
                     {/* Card Header */}
                     <div className="flex justify-between items-start mb-4">
                       <div className="flex items-center gap-3">
                         <div
-                          style={{ color: m.accentColor, borderColor: `${m.accentColor}30` }}
-                          className="p-3 bg-black/40 border rounded-xl flex items-center justify-center"
+                          style={{ color: m.accentColor, borderColor: `${m.accentColor}20` }}
+                          className="p-2.5 bg-black/40 border rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105"
                         >
                           {m.icon}
                         </div>
                         <div>
-                          <span className="text-[10px] font-bold font-mono tracking-widest uppercase text-gray-500 dark:text-gray-400">
+                          <span className="text-[9px] font-bold font-mono tracking-widest uppercase text-gray-500 dark:text-gray-400">
                             {m.subtitle}
                           </span>
-                          <h3 className="text-xl md:text-2xl font-bold font-sans text-gray-900 dark:text-white mt-0.5 tracking-tight group-hover:text-[#E9D5FF] transition-colors duration-300">
+                          <h3 className="text-lg md:text-xl font-bold font-sans text-gray-900 dark:text-white mt-0.5 tracking-tight group-hover:text-[#E9D5FF] transition-colors duration-300">
                             {m.title}
                           </h3>
                         </div>
                       </div>
-                      <span className="font-mono font-black text-xs md:text-sm text-[#E9D5FF] border border-[#E9D5FF]/20 bg-[#E9D5FF]/10 px-3 py-1 rounded-full shadow-sm">
+                      <span className="font-mono font-bold text-[10px] md:text-xs text-[#E9D5FF] border border-[#E9D5FF]/15 bg-[#E9D5FF]/5 px-3 py-1 rounded-full shadow-sm">
                         {m.year}
                       </span>
                     </div>
 
-                    <p className="text-gray-600 dark:text-gray-400 text-sm font-sans font-light leading-relaxed mb-6">
+                    <p className="text-gray-600 dark:text-gray-400 text-xs md:text-sm font-sans font-light leading-relaxed mb-6">
                       {m.description}
                     </p>
 
                     {/* Tag list */}
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="flex flex-wrap gap-1.5 mb-2">
                       {m.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="text-[9px] font-bold font-mono tracking-wider uppercase bg-gray-200/40 dark:bg-white/5 text-gray-800 dark:text-gray-300 border border-gray-300/20 dark:border-white/5 px-2.5 py-1 rounded-md"
+                          className="text-[8px] font-bold font-mono tracking-wider uppercase bg-gray-200/30 dark:bg-white/5 text-gray-700 dark:text-gray-300 border border-gray-300/10 dark:border-white/5 px-2.5 py-0.5 rounded-md"
                         >
                           {tag}
                         </span>
@@ -253,20 +263,20 @@ export const AboutTimeline: React.FC = () => {
                         opacity: hoveredCard === m.id ? 1 : 0
                       }}
                       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden border-t border-gray-200/50 dark:border-white/10 mt-6 pt-6"
+                      className="overflow-hidden border-t border-gray-200/30 dark:border-white/5 mt-5 pt-5"
                     >
-                      <div className="grid grid-cols-3 gap-2">
+                      <div className="grid grid-cols-3 gap-2.5">
                         {m.stats.map((s, idx) => (
                           <div
                             key={idx}
-                            className="bg-black/20 border border-white/5 rounded-xl p-3 flex flex-col justify-center text-center backdrop-blur-md"
+                            className="bg-black/10 border border-white/5 rounded-xl p-2.5 flex flex-col justify-center text-center backdrop-blur-md"
                           >
-                            <span className="text-[8px] font-bold font-mono text-gray-500 dark:text-white/40 uppercase tracking-widest block">
+                            <span className="text-[7px] font-bold font-mono text-gray-500 dark:text-white/40 uppercase tracking-widest block">
                               {s.label}
                             </span>
                             <span
                               style={{ color: m.accentColor }}
-                              className="text-xs md:text-sm font-black tracking-wide block mt-1 uppercase"
+                              className="text-[10px] md:text-xs font-black tracking-wide block mt-0.5 uppercase"
                             >
                               {s.value}
                             </span>
@@ -276,8 +286,8 @@ export const AboutTimeline: React.FC = () => {
                     </motion.div>
 
                     {/* Micro hover interaction indicator */}
-                    <div className="flex justify-end items-center gap-1.5 mt-4 opacity-50 group-hover:opacity-100 transition-opacity duration-300 text-[10px] font-bold font-mono text-gray-500 dark:text-gray-400 select-none">
-                      <CheckCircle2 size={10} style={{ color: m.accentColor }} />
+                    <div className="flex justify-end items-center gap-1.5 mt-4 opacity-30 group-hover:opacity-100 transition-opacity duration-300 text-[9px] font-bold font-mono text-gray-500 dark:text-gray-400 select-none">
+                      <CheckCircle2 size={9} style={{ color: m.accentColor }} />
                       <span>{hoveredCard === m.id ? 'Active Focus' : 'Hover to Expand'}</span>
                     </div>
 
