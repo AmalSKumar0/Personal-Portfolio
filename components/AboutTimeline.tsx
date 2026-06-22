@@ -211,7 +211,7 @@ export const AboutTimeline: React.FC = () => {
                   }`}
                 >
                   
-                  {/* Pinned Card Assembly */}
+                  {/* Pin & Card Hanging Assembly Wrapper */}
                   <div className="relative w-full lg:w-[45%] flex flex-col items-center pt-10">
                     
                     {/* The Wall Anchor Pushpin */}
@@ -219,7 +219,11 @@ export const AboutTimeline: React.FC = () => {
 
                     {/* Hanging String (connects pin down to the card grommet) */}
                     <svg className="absolute top-1 left-0 right-0 w-full h-10 pointer-events-none" fill="none">
-                      <line
+                      <motion.line
+                        initial={{ pathLength: 0 }}
+                        whileInView={{ pathLength: 1 }}
+                        viewport={{ once: true, margin: '-100px' }}
+                        transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
                         x1="50%"
                         y1="0"
                         x2="50%"
@@ -234,7 +238,11 @@ export const AboutTimeline: React.FC = () => {
                     {/* Sequential Connector String (From this pin to the NEXT pin) */}
                     {hasNext && (
                       <svg className="absolute top-1 left-0 w-[220%] h-[340px] pointer-events-none hidden lg:block z-10" fill="none" style={{ left: isEven ? '50%' : 'auto', right: isEven ? 'auto' : '50%' }}>
-                        <path
+                        <motion.path
+                          initial={{ pathLength: 0 }}
+                          whileInView={{ pathLength: 1 }}
+                          viewport={{ once: true, margin: '-100px' }}
+                          transition={{ duration: 1.0, ease: 'easeInOut', delay: 0.3 }}
                           d={isEven 
                             ? "M 0 0 C 35 100, 65 200, 100% 300" // Curve from Left Pin to Right Pin (next row)
                             : "M 100% 0 C 65 100, 35 200, 0 300" // Curve from Right Pin to Left Pin (next row)
