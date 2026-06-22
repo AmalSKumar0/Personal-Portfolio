@@ -50,7 +50,7 @@ export const Projects: React.FC = () => {
                         <ScrollFade key={project.id} direction="up" delay={(idx % 3) * 0.1} amount={0.1}>
                             <div className="bg-white/80 dark:bg-white/5 rounded-3xl overflow-hidden border border-gray-100 dark:border-white/10 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group flex flex-col h-full">
                                 {/* Image Placeholder */}
-                                <div className="h-48 bg-gray-100 dark:bg-white/5 relative overflow-hidden">
+                                <div className="h-64 bg-gray-100 dark:bg-white/5 relative overflow-hidden">
                                     <img
                                         src={project.imageUrl}
                                         alt={project.title}

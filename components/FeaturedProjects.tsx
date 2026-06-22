@@ -203,7 +203,7 @@ export const FeaturedProjects: React.FC = () => {
                     </div>
 
                     {/* Image with rounded corners and bottom stack overlay */}
-                    <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden mt-3 mb-0 border border-lavender-200/45 dark:border-lavender-500/15 shadow-md">
+                    <div className="relative w-full aspect-[16/13.5] rounded-[2rem] overflow-hidden mt-3 mb-0 border border-lavender-200/45 dark:border-lavender-500/15 shadow-md">
                       <img
                         src={project.imageUrl}
                         alt={project.title}
