@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
-import { GraduationCap, Code2, Flame, Layers, Globe, Rocket, Award, CheckCircle2, ChevronRight } from 'lucide-react';
+import { GraduationCap, Code2, Flame, Layers, Globe, Rocket, Award, ChevronRight } from 'lucide-react';
 import { LavenderPetals } from './LavenderPetals';
 
 interface Milestone {
