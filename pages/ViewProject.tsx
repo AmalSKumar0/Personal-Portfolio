@@ -27,6 +27,7 @@ export const ViewProject: React.FC = () => {
             <SEO
                 title={`${project.title} | Case Study`}
                 description={project.shortDescription}
+                project={project}
             />
 
             <div className="absolute inset-0 z-0 bg-grid-pattern opacity-[0.16] pointer-events-none dark:opacity-[0.03]" />
