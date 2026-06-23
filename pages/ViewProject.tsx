@@ -1,84 +1,17 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { ArrowLeft, ArrowUpRight, Calendar, CheckCircle2, Github, Globe2, User } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import { projects } from '@/data/projects';
-
-const HEADER_LAPTOP_SCENE = '/pexels-introspectivedsgn-7484736.jpg';
+import { ScrollFade } from '../components/ScrollFade';
+import { MoreProjects } from '../components/MoreProjects';
 
 export const ViewProject: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const project = projects.find(p => p.id === id);
     const overviewRef = useRef<HTMLDivElement>(null);
     const shouldReduceMotion = useReducedMotion();
-
-    const [isAlignMode, setIsAlignMode] = useState(false);
-    const [pts, setPts] = useState([
-        { x: 10.08, y: 17.08 }, // TL
-        { x: 78.51, y: 10.25 }, // TR
-        { x: 80.45, y: 71.64 }, // BR
-        { x: 14.78, y: 77.20 }  // BL
-    ]);
-
-    useEffect(() => {
-        if (typeof window !== 'undefined' && window.location.search.includes('align=true')) {
-            setIsAlignMode(true);
-        }
-    }, []);
-
-    const containerRef = useRef<HTMLDivElement>(null);
-    const activePtRef = useRef<number | null>(null);
-
-    const handlePointerDown = (index: number) => (e: React.PointerEvent) => {
-        e.preventDefault();
-        activePtRef.current = index;
-        (e.target as HTMLElement).setPointerCapture(e.pointerId);
-    };
-
-    const handlePointerMove = (e: React.PointerEvent) => {
-        if (activePtRef.current === null || !containerRef.current) return;
-        const rect = containerRef.current.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        setPts(prev => {
-            const next = [...prev];
-            next[activePtRef.current!] = {
-                x: Math.max(0, Math.min(100, x)),
-                y: Math.max(0, Math.min(100, y))
-            };
-            return next;
-        });
-    };
-
-    const handlePointerUp = (e: React.PointerEvent) => {
-        if (activePtRef.current !== null) {
-            (e.target as HTMLElement).releasePointerCapture(e.pointerId);
-            activePtRef.current = null;
-        }
-    };
-
-    const minX = Math.min(pts[0].x, pts[3].x);
-    const maxX = Math.max(pts[1].x, pts[2].x);
-    const minY = Math.min(pts[0].y, pts[1].y);
-    const maxY = Math.max(pts[2].y, pts[3].y);
-    const width = maxX - minX;
-    const height = maxY - minY;
-    const left = minX;
-    const top = minY;
-
-    const TL_rel = width > 0 ? [(pts[0].x - left) / width * 100, (pts[0].y - top) / height * 100] : [0, 0];
-    const TR_rel = width > 0 ? [(pts[1].x - left) / width * 100, (pts[1].y - top) / height * 100] : [100, 0];
-    const BR_rel = width > 0 ? [(pts[2].x - left) / width * 100, (pts[2].y - top) / height * 100] : [100, 100];
-    const BL_rel = width > 0 ? [(pts[3].x - left) / width * 100, (pts[3].y - top) / height * 100] : [0, 100];
-
-    const customStyle = isAlignMode ? {
-        left: `${left}%`,
-        top: `${top}%`,
-        width: `${width}%`,
-        height: `${height}%`,
-        clipPath: `polygon(${TL_rel[0]}% ${TL_rel[1]}%, ${TR_rel[0]}% ${TR_rel[1]}%, ${BR_rel[0]}% ${BR_rel[1]}%, ${BL_rel[0]}% ${BL_rel[1]}%)`
-    } : undefined;
 
     const { scrollYProgress } = useScroll({
         target: overviewRef,
@@ -191,61 +124,20 @@ export const ViewProject: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Centered Showcase Mockup */}
+                    {/* Centered Showcase Screenshot */}
                     <div className="max-w-5xl mx-auto mb-12">
                         <motion.div 
-                            ref={containerRef}
-                            onPointerMove={isAlignMode ? handlePointerMove : undefined}
-                            className="project-device-viewer relative aspect-[2926/2081] w-full overflow-hidden rounded-[1.5rem] border border-lavender-200/60 bg-[#151815] shadow-2xl dark:border-white/10"
+                            className="relative aspect-video w-full overflow-hidden rounded-[1.5rem] border border-lavender-200/60 bg-[#151815] shadow-2xl dark:border-white/10"
                             initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.97 }}
                             animate={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         >
                             <img
-                                src={HEADER_LAPTOP_SCENE}
-                                alt=""
-                                aria-hidden="true"
-                                className="absolute inset-0 h-full w-full object-cover select-none pointer-events-none"
+                                src={project.imageUrl}
+                                alt={`${project.title} website preview`}
+                                className="w-full h-full object-cover select-none pointer-events-none"
                             />
-
-                            <div
-                                className="project-pexels-screen absolute overflow-hidden bg-black"
-                                style={customStyle}
-                            >
-                                <img
-                                    src={project.imageUrl}
-                                    alt={`${project.title} website preview inside laptop`}
-                                    className="h-full w-full object-cover select-none pointer-events-none"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-tr from-[#0c0a12]/[0.55] via-transparent to-white/[0.18] mix-blend-screen pointer-events-none" />
-                                <div className="absolute inset-0 ring-1 ring-inset ring-white/10 pointer-events-none" />
-                            </div>
-
-                            <div className="absolute inset-0 bg-gradient-to-br from-lavender-100/20 via-transparent to-tech-black/30 pointer-events-none" />
-
-                            {isAlignMode && (
-                                <>
-                                    <svg className="absolute inset-0 w-full h-full pointer-events-none z-[80]" viewBox="0 0 100 100" preserveAspectRatio="none">
-                                        <polygon 
-                                            points={pts.map(p => `${p.x},${p.y}`).join(' ')} 
-                                            fill="rgba(139, 92, 246, 0.2)"
-                                            stroke="#8b5cf6"
-                                            strokeWidth="0.5"
-                                        />
-                                    </svg>
-                                    {pts.map((pt, idx) => (
-                                        <div
-                                            key={idx}
-                                            className="absolute w-8 h-8 -ml-4 -mt-4 bg-neon-purple rounded-full border-2 border-white shadow-lg cursor-move z-[90] flex items-center justify-center text-[10px] text-white font-bold select-none touch-none"
-                                            style={{ left: `${pt.x}%`, top: `${pt.y}%` }}
-                                            onPointerDown={handlePointerDown(idx)}
-                                            onPointerUp={handlePointerUp}
-                                        >
-                                            {idx}
-                                        </div>
-                                    ))}
-                                </>
-                            )}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
                         </motion.div>
                     </div>
                 </div>
@@ -329,25 +221,10 @@ export const ViewProject: React.FC = () => {
                 </div>
             </section>
 
-            {isAlignMode && (
-                <div className="fixed bottom-4 left-4 z-[9999] bg-black/95 text-green-400 p-5 rounded-2xl font-mono text-xs max-w-md border border-green-500/40 shadow-2xl backdrop-blur-md">
-                    <div className="font-bold text-sm text-white mb-2">💻 Screen Aligner Tool</div>
-                    <div>p0 (TL): {pts[0].x.toFixed(2)}%, {pts[0].y.toFixed(2)}%</div>
-                    <div>p1 (TR): {pts[1].x.toFixed(2)}%, {pts[1].y.toFixed(2)}%</div>
-                    <div>p2 (BR): {pts[2].x.toFixed(2)}%, {pts[2].y.toFixed(2)}%</div>
-                    <div>p3 (BL): {pts[3].x.toFixed(2)}%, {pts[3].y.toFixed(2)}%</div>
-                    <div className="mt-4 font-bold text-white">Copy the CSS below:</div>
-                    <pre className="mt-2 select-all bg-gray-900/90 p-3 rounded-lg overflow-x-auto text-[10px] text-pink-400 border border-gray-800">
-{`.project-pexels-screen {
-  left: ${left.toFixed(2)}%;
-  top: ${top.toFixed(2)}%;
-  width: ${width.toFixed(2)}%;
-  height: ${height.toFixed(2)}%;
-  clip-path: polygon(${TL_rel[0].toFixed(2)}% ${TL_rel[1].toFixed(2)}%, ${TR_rel[0].toFixed(2)}% ${TR_rel[1].toFixed(2)}%, ${BR_rel[0].toFixed(2)}% ${BR_rel[1].toFixed(2)}%, ${BL_rel[0].toFixed(2)}% ${BL_rel[1].toFixed(2)}%);
-}`}
-                    </pre>
-                </div>
-            )}
+
+             <ScrollFade amount={0.1}>
+                            <MoreProjects />
+                        </ScrollFade>
         </div>
     );
 };

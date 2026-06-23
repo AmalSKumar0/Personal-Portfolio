@@ -1,0 +1,1011 @@
+momentum 
+link: https://momentum.amalskumar.dev
+git hub :https://github.com/AmalSKumar0/Momentum
+read me:
+# 🎮 Momentum | Gamified Habit Tracker & RPG Life Simulator
+
+[![Docker Support](https://img.shields.io/badge/Docker-Enabled-blue?logo=docker&logoColor=white)](https://www.docker.com/)
+[![PHP Version](https://img.shields.io/badge/PHP-%3E%3D%207.4-8892BF?logo=php&logoColor=white)](https://www.php.net/)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+
+**Momentum** is a premium, web-based gamified productivity platform that turns building habits and completing daily tasks into an engaging RPG experience. By leveraging behavioral psychology and gamification design patterns, Momentum helps users build long-term routines by rewarding consistent habits with **Gold** and **XP**, while penalizing missed tasks with **HP damage**.
+
+---
+
+
+## 🌟 Key Features
+
+### ⚔️ RPG Character progression
+* **Dynamic Level & XP System:** Earn XP by completing habits. Leveling up occurs dynamically when your XP reaches `Level * 100`. Leveling up automatically restores 25 HP.
+* **Tiered Titles:** Characters receive custom titles based on their level (*Novice Adventurer*, *Experienced Scholar*, *Elite Warrior*, *Grand Magus*, *Legendary Master*).
+* **Streak Multipliers:** Maintain consistency to build streak chains. Streaks grant escalating rewards multipliers (e.g. 1.1x at 5+ days, 1.25x at 10+ days, 1.5x at 30+ days).
+* **Scaling Difficulty & Penalty System:** Quests are categorized by difficulty (*Easy*, *Medium*, *Hard*). Failing a hard quest scales damage accordingly (reducing HP by 5, 10, or 20). If HP reaches 0, the player dies and must buy a resurrection potion to respawn.
+
+### 🧪 Apothecary Shop & Inventory
+* **Item Purchases:** Spend earned Gold Coins at the apothecary shop.
+* **Consumables catalog:**
+  * **Minor Health Potion (50g):** Heals 25 HP.
+  * **Major Health Potion (90g):** Heals 50 HP.
+  * **Elixir of Life (150g):** Restores HP to 100%.
+  * **Scroll of Wisdom (80g):** Instantly grants 100 XP.
+* **Inventory Tracking:** Items bought are placed in the character's inventory where they can be dynamically used. Using potions updates character stats instantly.
+
+### 📅 Date-Driven Calendar History
+* **Activity Viewer:** Select any date on the navigation strip to inspect historic quest completion logs.
+* **Interactive Date Strip**: Uses local-timezone neutral date calculations to bypass standard JS UTC-shifting browser bugs.
+* **Status Badges:**
+  * **Present Day**: Complete or Fail quests using active forms.
+  * **Past Days**: Actions are disabled, displaying historical states: **COMPLETED** (Green), **FAILED** (Red), or **MISSED** (Gray).
+  * **Future Days**: Displays dashed **UPCOMING** status placeholders.
+* **Week & Month Jumping**: Navigate weeks with chevrons or jump months instantly using the month selector.
+
+### 👤 Profile & Account Administration
+* **Character Card Visualizer**: Fully interactive visual sheet containing live progress bars for HP and XP.
+* **Account Settings**: Form validation allowing users to update their Username, Email, and Password securely with verification checks.
+
+### 🎨 Dark Glassmorphism Design
+* **Frosted Glass Cards:** Modern translucent paneling designed with rich gradient backdrops and glowing border highlights.
+* **Confetti Rewards:** Features high-framerate gold coin particles using `canvas-confetti` when checking off habits.
+* **Responsive Layout:** Optimized flex-and-grid alignments ensuring responsiveness across mobile viewports, tablets, and wide monitors.
+
+---
+
+## 🛠️ Architecture & Tech Stack
+
+* **Frontend:** HTML5, Vanilla CSS3 (Custom Variables, Flexbox, Grid), JavaScript (ES6+).
+* **Confetti Engine:** `canvas-confetti` (CDN integration).
+* **Backend Core:** PHP (Native), Output Buffering (`ob_start()`) handled globally to manage state-driven redirects.
+* **Database Engine:** MySQL 8.0 with transactional processing (`begin_transaction()`, `commit()`, `rollback()`) to ensure absolute data integrity.
+* **Environment Virtualization:** Docker & Docker Compose.
+
+---
+
+## 🚀 Getting Started (Local Development)
+
+### Run with Docker (Recommended)
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/AmalSKumar0/Momentum.git
+   cd Momentum
+   ```
+
+2. **Spin Up Containers**
+   Launch the web server and database:
+   ```bash
+   docker-compose up -d --build
+   ```
+   *This automatically builds the custom PHP image, provisions MySQL 8.0, and executes the database seed script `/docker-entrypoint-initdb.d/habit_tracker.sql`.*
+
+3. **Open the App**
+   Open your browser and navigate to:
+   ```
+   http://localhost:8080/
+   ```
+
+---
+
+## 🗄️ Database Schema
+
+The relational database is split into four primary tables:
+* `users`: Stores core credentials, password hashes, levels, XP, gold, current streaks, and active HP.
+* `habits`: Stores quest titles, difficulty ranks, XP/Gold reward scales, streak counters, and last-completed timestamps.
+* `activity`: Logs execution histories mapping timestamps (`completedDay`) and binary completion status (`isComplete = 1/0`) to users and habits.
+* `inventory`: Tracks quantities (`Quantity`) of items owned by a user linked to the store templates.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+
+
+swiftride 
+link :https://swiftride.amalskumar.dev
+https://github.com/AmalSKumar0/SwiftRide
+# SwiftRide 🚖
+
+> **A Modern, Full-Stack Taxi Booking & Ridesharing Application**
+
+SwiftRide is a comprehensive Django-based taxi-booking and ridesharing web application that connects passengers with drivers dynamically. It features a real-time fare calculator, administrator panels, driver verification flows, profile management, and live deployment on Render.
+
+**[🌐 Live Demo](https://swiftride.amalskumar.dev)** | **[📧 Contact](#author)**
+
+---
+
+## ✨ Features at a Glance
+
+### 👤 Passenger Portal
+- 📍 **Interactive Booking** with autocomplete address suggestion (OpenStreetMap Nominatim API)
+- 🚗 **Multiple Ride Options** with dynamic fare estimates
+- 📱 **Trip History & Tracking** with real-time driver information
+- ⭐ **Reviews & Feedback** system for rating drivers
+- 💰 **Transparent Pricing** with instant fare calculation
+
+### 🚗 Driver Portal
+- ✅ **Secure Registration & Verification** with document upload
+- 📊 **Trip Dashboard** showing nearby passenger requests
+- 💸 **Earnings Tracking** with real-time payment receipts
+- 🎉 **Visual Feedback** with confetti animations on trip acceptance
+- 📈 **Performance Metrics** showing acceptance rates and ratings
+
+### 👑 Administrator Dashboard
+- ⚙️ **Dynamic Pricing Controls** for base rates, km pricing, and commissions
+- 📊 **Data Visualizations** using Chart.js for analytics
+- 👥 **User & Driver Management** with approval/blocking capabilities
+- 💳 **Payment Management** and transaction tracking
+- 📋 **Ride Reports** with completion and cancellation statistics
+
+---
+
+## 🛠️ Tech Stack
+
+| Component | Technology | Purpose |
+|-----------|-----------|---------|
+| **Backend** | Python 3.14+, Django 6.0+ | Server-side logic & API |
+| **Frontend** | HTML5, CSS3, JavaScript (ES6+), Remix Icon | User interface |
+| **Database** | PostgreSQL (production), SQLite (dev) | Data persistence |
+| **APIs** | OpenStreetMap Nominatim | Address autocomplete |
+| **Visualizations** | Chart.js | Admin analytics |
+| **Effects** | Confetti.js | UX enhancements |
+| **Production** | Gunicorn, WhiteNoise | WSGI server & static files |
+| **Hosting** | Render.com | Cloud deployment |
+
+---
+
+## 🚀 Core Workflows
+
+### 📍 Booking Flow
+```
+1. Passenger enters pickup & dropoff locations
+2. System autocompletes addresses via Nominatim API
+3. Real-time fare calculated based on distance & vehicle type
+4. Passenger selects vehicle category (Economy, Premium, etc.)
+5. Trip request broadcast to nearby drivers
+6. Driver accepts → Order created
+7. Real-time tracking begins
+8. Driver arrives & completes trip
+9. Payment processed
+10. Passenger reviews driver
+```
+
+### 🚗 Driver Workflow
+```
+1. Driver registers with document verification
+2. Admin approves driver
+3. Driver goes online
+4. Sees nearby passenger requests
+5. Accepts trip → Starts navigation
+6. Completes ride
+7. Passenger payment automatically processed
+8. Earnings updated in real-time
+9. Rating received from passenger
+```
+
+### 💰 Pricing System
+```
+Fare = Base Rate + (Distance × Per-KM Rate) + (Surge Multiplier)
+Admin can configure:
+- Base fare per vehicle type
+- Rate per kilometer
+- Platform commission percentage
+- Surge pricing during peak hours
+```
+
+---
+
+## 🏗️ Architecture Overview
+
+### Key Models
+- **User**: Extended Django user with role-based access (passenger, driver, admin)
+- **Vehicle**: Driver's vehicle with type, registration, and availability status
+- **Trip**: Complete journey record with origin, destination, and fare
+- **Payment**: Transaction history with status tracking
+- **Rating**: Passenger ratings and reviews of drivers
+
+### Security Features
+- ✅ Django's built-in CSRF protection on all forms
+- ✅ Role-based access control (RBAC)
+- ✅ Secure password hashing with Django auth
+- ✅ SQL injection prevention via ORM
+- ✅ Session-based authentication
+- ✅ Environment variable management for sensitive keys
+
+---
+
+## 🎯 Key Features in Detail
+
+### Real-Time Fare Calculator
+```python
+# Dynamic calculation based on:
+- Distance (from Nominatim API)
+- Vehicle type (Economy, Premium, XL)
+- Time of day (surge pricing)
+- Demand metrics
+
+# Example:
+Base Fare: ₹50
+Distance: 5 km @ ₹10/km = ₹50
+Surge: 1.5x (peak hours)
+Total: ₹150
+```
+
+### Admin Pricing Panel
+- ✅ Real-time pricing configurator
+- ✅ Set different rates for vehicle types
+- ✅ Configure platform commission
+- ✅ View revenue analytics
+- ✅ Monitor completed/canceled rides
+
+### Driver Verification
+- 📄 Document upload (license, registration, insurance)
+- ✅ Admin review and approval workflow
+- ✅ Status tracking (Pending, Approved, Rejected)
+- ✅ Secure file handling
+
+### Analytics Dashboard
+- 📊 Completed rides count
+- 📊 Requested rides (pending)
+- 📊 Canceled rides with reasons
+- 📊 Revenue tracking
+- 📊 Popular routes
+- 📊 Peak hours analysis
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+```
+- Python 3.10+
+- PostgreSQL 12+ (or SQLite for development)
+- pip and virtualenv
+- Git
+```
+
+### Installation
+
+1. **Clone Repository**
+   ```bash
+   git clone https://github.com/AmalSKumar0/SwiftRide.git
+   cd SwiftRide
+   ```
+
+2. **Create Virtual Environment**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Windows: venv\Scripts\activate
+   ```
+
+3. **Install Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Configure Environment**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your database URL and settings
+   ```
+
+5. **Apply Database Migrations**
+   ```bash
+   python manage.py migrate
+   ```
+
+6. **Create Superuser (Admin Account)**
+   ```bash
+   python manage.py createsuperuser
+   ```
+
+7. **Run Development Server**
+   ```bash
+   python manage.py runserver
+   ```
+   Visit: `http://localhost:8000/`
+
+### First Steps
+- Register as Passenger: `/User-Signin/`
+- Register as Driver: `/driver/register/`
+- Admin Panel: `/admin/`
+
+---
+
+## 📦 Production Deployment
+
+### Deploy to Render
+
+1. **Connect GitHub Repository**
+   ```
+   Settings → Connect Git Provider → Select SwiftRide
+   ```
+
+2. **Set Environment Variables**
+   ```
+   DATABASE_URL=postgresql://user:password@host/dbname
+   SECRET_KEY=your-secret-key
+   DEBUG=False
+   ALLOWED_HOSTS=swiftride.amalskumar.dev,yourdomain.com
+   CSRF_TRUSTED_ORIGINS=https://swiftride.amalskumar.dev
+   ```
+
+3. **Configure Build & Start Commands**
+   ```
+   Build: pip install -r requirements.txt && python manage.py migrate
+   Start: gunicorn RideSwift.wsgi:application
+   ```
+
+4. **Enable Static File Serving**
+   - WhiteNoise is pre-configured
+   - No additional CDN needed
+
+---
+
+## 🗂️ Project Structure
+
+```
+SwiftRide/
+├── RideSwift/                 # Main Django project
+│   ├── settings.py           # Configuration
+│   ├── urls.py               # URL routing
+│   ├── wsgi.py               # WSGI config
+│   └── asgi.py               # ASGI config (WebSockets ready)
+│
+├── user/                      # Passenger app
+│   ├── models.py             # User, Trip models
+│   ├── views.py              # Passenger views
+│   ├── forms.py              # Booking forms
+│   └── urls.py               # Routes
+│
+├── driver/                    # Driver app
+│   ├── models.py             # Vehicle, Driver models
+│   ├── views.py              # Driver dashboard
+│   └── urls.py               # Routes
+│
+├── administrator/             # Admin app
+│   ├── models.py             # Pricing, Reports
+│   ├── views.py              # Admin dashboard
+│   └── urls.py               # Routes
+│
+├── static/
+│   ├── css/                  # Stylesheets
+│   ├── js/                   # JavaScript (cat.js, main.js)
+│   └── assets/               # Images, icons
+│
+├── templates/                 # HTML templates
+│   ├── base.html             # Layout template
+│   ├── user/                 # Passenger pages
+│   ├── driver/               # Driver pages
+│   └── administrator/        # Admin pages
+│
+├── manage.py                 # Django CLI
+└── requirements.txt          # Dependencies
+```
+
+---
+
+## 🔐 Security Considerations
+
+✅ **CSRF Protection**: All forms include CSRF tokens  
+✅ **Authentication**: Session-based with Django auth  
+✅ **Authorization**: Role-based access control (RBAC)  
+✅ **Input Validation**: Server-side validation on all inputs  
+✅ **SQL Injection**: Protected via Django ORM  
+✅ **Sensitive Data**: Environment variables for keys  
+✅ **File Uploads**: Secure handling with validation  
+
+---
+
+## 🎨 User Experience
+
+### Responsive Design
+- ✅ Mobile-first approach
+- ✅ Works on all screen sizes
+- ✅ Touch-friendly buttons
+- ✅ Fast load times with WhiteNoise
+
+### Interactive Elements
+- 🎉 Confetti animation on trip acceptance
+- 📍 Real-time location updates
+- 🚕 Animated cat mascot on homepage
+- ✨ Smooth scroll reveal animations
+- 📊 Live chart updates
+
+---
+
+## 📊 Analytics & Reporting
+
+### For Passengers
+- Trip history with details
+- Distance and fare information
+- Driver ratings and reviews
+- Saved favorite locations
+
+### For Drivers
+- Earnings breakdown
+- Trip acceptance rate
+- Performance metrics
+- Active/completed rides
+
+### For Admins
+- Revenue dashboards
+- User growth charts
+- Peak hours analysis
+- Vehicle utilization stats
+- Payment processing reports
+
+---
+
+## 🛠️ API Endpoints
+
+### Passenger
+```
+GET  /user-home/              # Booking page
+POST /search-taxi/            # Search available rides
+GET  /booking-status/         # Track current trip
+GET  /history-user/           # Trip history
+POST /user-review/            # Leave review
+```
+
+### Driver
+```
+GET  /driver/dashboard/       # Active trips
+POST /driver/accept/          # Accept trip
+GET  /driver/earnings/        # Earnings
+POST /driver/complete-trip/   # Mark trip complete
+```
+
+### Admin
+```
+GET  /admin/users/            # User management
+GET  /admin/drivers/          # Driver approvals
+GET  /admin/pricing/          # Pricing controls
+GET  /admin/reports/          # Analytics & reports
+```
+
+---
+
+## 🚀 Future Enhancements
+
+- [ ] Real-time WebSocket updates for live tracking
+- [ ] GPS-based driver matching algorithm
+- [ ] Surge pricing automation
+- [ ] Mobile app (React Native)
+- [ ] Payment gateway integration (Stripe, PayPal)
+- [ ] Driver background verification API
+- [ ] Insurance integration
+- [ ] Multi-language support
+- [ ] Dark mode UI
+- [ ] AI-based demand prediction
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+Please ensure:
+- Code follows PEP 8 style guide
+- Tests pass (`python manage.py test`)
+- New features have tests
+- Documentation is updated
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the LICENSE file for details.
+
+---
+
+## 🙋 FAQ
+
+**Q: Can I use this for my own taxi service?**  
+A: Yes! This is a full production-ready application. Just configure it for your region and deploy.
+
+**Q: How is pricing calculated?**  
+A: Admins set base rate, per-km rate, and surge multipliers. Formula: `Base + (Distance × Rate) × Surge`
+
+**Q: Can I deploy this on other platforms?**  
+A: Yes! It works on Heroku, Railway, AWS, DigitalOcean, etc. Docker support coming soon.
+
+**Q: Is payment integration included?**  
+A: Payment models are set up. Integrate Razorpay, Stripe, or PayPal via the `Payment` model.
+
+---
+
+## 📞 Support
+
+For questions or issues:
+- 📧 [Email Support](mailto:your.email@example.com)
+- 🐛 [Report Issues](https://github.com/AmalSKumar0/SwiftRide/issues)
+- 💬 [Discussions](https://github.com/AmalSKumar0/SwiftRide/discussions)
+
+---
+
+## 👨‍💻 Author
+
+**Amal S Kumar**  
+Full-Stack Developer | Django Specialist | Payment Systems Expert
+
+- 🔗 [Portfolio](https://www.amalskumar.dev)
+- 💼 [LinkedIn](https://linkedin.com/in/your-profile)
+- 🐙 [GitHub](https://github.com/AmalSKumar0)
+
+---
+
+**Built with ❤️ to revolutionize urban mobility**
+
+---
+
+## 📈 Project Stats
+
+- **Lines of Code**: 5000+
+- **Commits**: 50+
+- **Test Coverage**: 80%+
+- **Live Since**: 2025
+- **Users**: 100+
+- **Completed Rides**: 500+
+
+
+velora
+link: https://velora.amalskumar.dev/
+github :https://github.com/AmalSKumar0/Velora
+# Velora - Digital Art Commission Marketplace
+
+<div align="center">
+  <img src="documentation/screenshots/image.png" alt="Velora Digital Art Marketplace" width="100%" style="border-radius: 12px; border: 4px solid black; box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);">
+  <br>
+  <br>
+  <h1>Velora - Digital Art Marketplace</h1>
+  <p><strong>A Neo-Brutalist Platform Connecting Clients with Talented Digital Artists</strong></p>
+
+  <p>
+    <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white" alt="Django" />
+    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+    <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/Razorpay-02042B?style=for-the-badge&logo=razorpay&logoColor=3395FF" alt="Razorpay" />
+  </p>
+</div>
+
+---
+
+## 🌟 About The Project
+
+**Velora** is a fully-featured digital art commission marketplace built on a robust Django backend. It features a striking **Neo-Brutalist** design system and provides a secure, end-to-end workflow for artists and clients to collaborate on custom artwork. From initial request to final escrow payout, Velora handles the entire lifecycle securely and beautifully.
+
+## 🚀 Key Achievements & Features
+
+### 🎨 Seamless Neo-Brutalist Design
+- Transitioned entirely from React to server-side rendered Django HTML templates.
+- Designed an aesthetic interface characterized by stark contrasts, solid black borders, drop shadows, and vibrant accent colors using **Vanilla HTML and Tailwind CSS**.
+
+### 💼 Client & Artist Workflows
+- **Clients** can post detailed commission requests, specify budget constraints, upload references, and browse artist portfolios.
+- **Artists** have dedicated profiles, can showcase their past work, filter open requests by tag, and submit competitive proposals with delivery timelines.
+- Real-time order tracking: Visual pipelines from `Proposal` → `In Progress` → `Submitted` → `Revision Requested` → `Completed`.
+
+### 🛡️ Secure Escrow & Payments
+- Fully integrated with **Razorpay**.
+- **Buyer Protection:** When a proposal is accepted, the client's funds are captured and held securely in **Escrow**.
+- Funds are only released to the artist after the client explicitly reviews the watermarked preview and approves the final high-resolution delivery.
+- Comprehensive security implementations preventing CSRF attacks and state-machine bypass vulnerabilities.
+
+### ⚖️ Dispute Management System
+- If an order goes wrong, either the client or artist can freeze the workflow by **raising a dispute**.
+- An advanced administrative resolution engine allows admins to:
+  - Review the dispute reason, escrow details, and submission timeline.
+  - **Refund the Client**: Cancels the order and returns funds via Razorpay.
+  - **Release to Artist**: Bypasses the client and releases funds to the artist.
+  - **Dismiss Case**: Unfreezes the workflow to continue normally.
+
+### 📊 Admin Tools
+- Granular control over users, orders, and payments.
+- Financial dashboards and reporting (PDF export via WeasyPrint).
+- User verification and role-based access control.
+
+---
+
+## 🛠 Tech Stack
+
+| Category | Technologies |
+|----------|---------------|
+| **Backend** | Django 6.0+, Python 3.10+ |
+| **Frontend** | HTML5, Tailwind CSS, JavaScript (Vanilla ES6+) |
+| **Database** | PostgreSQL (SQLite for dev) |
+| **Payments** | Razorpay API |
+| **Authentication** | Django Auth + Role-Based Access Control |
+| **PDF Export** | WeasyPrint |
+| **Deployment** | Ready for Render, Heroku, AWS |
+
+---
+
+## 📋 Core Features
+
+### For Clients
+✅ Post detailed artwork commission requests  
+✅ Set budget and timeline preferences  
+✅ Browse artist portfolios and reviews  
+✅ Receive and review artist proposals  
+✅ Secure payment via Razorpay escrow  
+✅ Track order status in real-time  
+✅ Request revisions from artists  
+✅ Download final artwork after approval  
+
+### For Artists
+✅ Create professional portfolios with past work  
+✅ Discover commission opportunities  
+✅ Submit competitive proposals  
+✅ Upload watermarked previews for review  
+✅ Track earnings and completed orders  
+✅ Manage multiple active commissions  
+✅ Build reputation through reviews  
+
+### For Admins
+✅ Comprehensive dashboard  
+✅ User & artist management  
+✅ Payment and revenue tracking  
+✅ Dispute resolution tools  
+✅ Category and tag management  
+✅ PDF financial reports  
+
+---
+
+## 🏗 Architecture
+
+### Database Models
+- **User**: Extended Django user with role-based permissions (client, artist, admin)
+- **Workflow**: Commission request lifecycle management
+- **Proposal**: Artist proposals with pricing and timeline
+- **Order**: Binding contract between client and artist
+- **Execution**: Payment and fulfillment tracking
+- **Dispute**: Conflict resolution with resolution history
+
+### Security Features
+- CSRF token protection on all forms
+- State-machine validation to prevent workflow bypasses
+- Escrow-based payment system (funds never directly transferred)
+- Role-based access control (RBAC)
+- Secure file upload with verification
+- SQL injection prevention via Django ORM
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Python 3.10+
+- PostgreSQL 12+ (or SQLite for development)
+- pip and virtualenv
+
+### Installation
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/AmalSKumar0/Velora.git
+   cd Velora
+   ```
+
+2. **Create Virtual Environment**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. **Install Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Configure Environment**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your Razorpay API keys and database config
+   ```
+
+5. **Run Migrations**
+   ```bash
+   python manage.py migrate
+   ```
+
+6. **Create Superuser**
+   ```bash
+   python manage.py createsuperuser
+   ```
+
+7. **Run Development Server**
+   ```bash
+   python manage.py runserver
+   ```
+   Visit `http://localhost:8000/`
+
+---
+
+## 📊 Order Lifecycle
+
+```
+REQUEST OPEN
+    ↓
+ARTIST SUBMITS PROPOSAL
+    ↓
+CLIENT ACCEPTS PROPOSAL → ORDER CREATED
+    ↓
+CLIENT PAYS → FUNDS IN ESCROW
+    ↓
+ARTIST UPLOADS PREVIEW (watermarked)
+    ↓
+CLIENT REVIEW
+    ├→ APPROVE → FUNDS RELEASED TO ARTIST
+    ├→ REQUEST REVISION → Back to work phase
+    └→ DISPUTE → Admin resolution
+```
+
+---
+
+## 🔐 Payment Flow
+
+1. **Order Creation**: Client accepts artist's proposal
+2. **Payment Capture**: Razorpay captures funds into escrow (status: `held`)
+3. **Work Phase**: Artist works on commission
+4. **Submission**: Artist uploads preview with watermark
+5. **Approval**: Client reviews and approves
+6. **Release**: Funds automatically released to artist (status: `released`)
+7. **Download**: Client can now download final high-resolution artwork
+
+---
+
+## 🛡️ Dispute Resolution
+
+If issues arise:
+1. **Raise Dispute**: Either party freezes the workflow
+2. **Admin Review**: Admin reviews evidence, timeline, and reason
+3. **Resolution Options**:
+   - **Refund Client**: Cancel order, return funds via Razorpay
+   - **Release to Artist**: Award funds to artist despite disagreement
+   - **Dismiss**: Unlock workflow to continue normally
+
+---
+
+## 📦 Deployment
+
+### Render Deployment
+```bash
+# Requires these environment variables:
+RAZORPAY_KEY_ID=xxx
+RAZORPAY_KEY_SECRET=xxx
+DATABASE_URL=postgresql://...
+SECRET_KEY=xxx
+ALLOWED_HOSTS=yourdomain.com
+```
+
+The app is pre-configured with:
+- **WhiteNoise** for static file serving
+- **Gunicorn** as WSGI server
+- **PostgreSQL** as primary database
+
+---
+
+## 📚 Project Structure
+
+```
+Velora/
+├── core/                    # Main Django project config
+├── workflows/               # Core workflow logic
+│   ├── models.py           # Order, Proposal, Execution models
+│   ├── views.py            # API endpoints
+│   └── services/           # Business logic
+├── integrations/           # Razorpay & external services
+├── templates/              # HTML templates (Neo-Brutalist design)
+├── static/
+│   ├── css/               # Tailwind CSS
+│   └── js/                # Vanilla JavaScript
+├── management/            # Admin commands
+└── requirements.txt       # Dependencies
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions welcome! Please:
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the LICENSE file for details.
+
+---
+
+## 💡 Future Roadmap
+
+- [ ] Automated payment scheduling (retainers)
+- [ ] Portfolio analytics and insights
+- [ ] Referral program for artists
+- [ ] Mobile-friendly improvements
+- [ ] Real-time notifications via WebSockets
+- [ ] AI-powered commission matching
+- [ ] Subscription tiers for unlimited commissions
+- [ ] Integration with other payment gateways (Stripe, PayPal)
+
+---
+
+## 👨‍💻 Author
+
+**Amal S Kumar**  
+Full-Stack Developer | Payment Systems Specialist | Django Enthusiast
+
+📧 [Email](mailto:your.email@example.com)  
+🔗 [Portfolio](https://www.amalskumar.dev)  
+💼 [LinkedIn](https://linkedin.com/in/your-profile)  
+
+---
+
+## 📞 Support
+
+For questions or issues:
+- Open an issue on GitHub
+- Check existing documentation in `/docs` folder
+- Review architecture guide: `documentation/architecture.md`
+
+---
+
+**Built with ❤️ for digital artists and creators**
+
+copper
+github link: https://github.com/AmalSKumar0/Copper
+use same image as it already have 
+��# >ؙ� Copper Programming Language
+
+**Copper** is a simple, interpreted programming language built entirely in **C**   designed as a personal project to understand the **core principles of compiler and interpreter design**, from **lexing** and **parsing** to **AST evaluation**.
+
+This project represents a deep dive into how programming languages actually work under the hood.
+
+> =ا� **Project Status:** In Progress  
+> Core interpreter components are now functional.
+
+---
+
+## =�)� Core Components
+
+- **Lexer**   Reads raw source code and converts it into a stream of tokens.  
+- **Parser**   Takes the token stream and constructs an **Abstract Syntax Tree (AST)**.  
+- **AST**   A structured, tree-based representation of the program s logic.  
+- **Visitor (Interpreter)**   Walks the AST and executes the code (currently supports variable assignment and a `print()` function).  
+- **File I/O**   Reads `.cop` source files directly for execution.
+
+---
+
+## =���� Roadmap
+
+### ' Completed
+- [x] Lexer: Convert source text into tokens.  
+- [x] Parser: Build an AST from tokens.  
+- [x] Visitor (Evaluator): Execute AST nodes.  
+- [x] File input and execution support.
+
+### =؀� Upcoming Features
+- [ ] Arithmetic operations (`+`, `-`, `*`, `/`)  
+- [ ] Control flow (`if` / `else`)  
+- [ ] New data types (`number`, `boolean`, etc.)  
+- [ ] Error handling and debugging improvements  
+- [ ] REPL (interactive shell)
+
+---
+
+## �&� Getting Started
+
+### 1. Dependencies
+
+To build and run **Copper**, you ll need:
+
+- A C compiler (e.g., `gcc`)  
+- `make`
+
+**Windows Users:**  
+Install [MSYS2](https://www.msys2.org/)   it includes `gcc`, `make`, and a UNIX-like shell environment.
+
+---
+
+### 2. Building the Project
+
+Clone the repository and navigate to the project folder:
+
+```bash
+git clone https://github.com/AmalSKumar0/copper.git
+cd copper
+````
+
+Build using `make`:
+
+```bash
+make
+```
+
+This compiles all `.c` files, links them, and produces the `copper.exe` (or `./copper` on Linux/macOS).
+
+---
+
+### 3. Running a Copper Program
+
+To execute a Copper source file:
+
+```bash
+# Windows
+.\copper.exe test.cop
+
+# Linux / macOS
+./copper test.cop
+```
+
+#### Example: `test.cop`
+
+```copper
+var name = "Hello World!";
+print(name);
+```
+
+**Expected Output:**
+
+```
+Hello World!
+```
+
+---
+
+## >��� Makefile Commands
+
+| Command        | Description                                                                |
+| -------------- | -------------------------------------------------------------------------- |
+| `make`         | Build the `copper` executable                                              |
+| `make install` | (Windows) Copies `copper.exe` to `C:/tools`   add this folder to your PATH |
+| `make clean`   | Removes the compiled executable and object files                           |
+
+---
+
+### 4. Running a Copper Program After Installing
+
+To execute a Copper source file:
+
+```bash
+# Windows
+copper test.cop
+```
+
+#### Example: `test.cop`
+
+```copper
+var name = "Hello World!";
+print(name);
+```
+
+**Expected Output:**
+
+```
+Hello World!
+```
+
+---
+
+## >��� Learning Objective
+
+This project is primarily an educational experiment   to explore:
+
+* Tokenization and lexical analysis
+* Recursive descent parsing
+* AST construction and traversal
+* Interpreter evaluation model
+
+---
