@@ -16,7 +16,8 @@ export const SEO: React.FC<SEOProps> = ({
     description = "Portfolio of Amal S Kumar, Backend Engineer specializing in scalable APIs, distributed systems, database optimization, and high-performance server-side applications.",
     keywords = "Amal S Kumar, Backend Engineer, Systems Builder, Software Developer Kerala, Full Stack Developer India, React Developer, Django Expert, Systems Programmer, Python Django, C Interpreter, Developer Portfolio",
     image = "/portfolio.png",
-    url = "https://amalskumar.dev"
+    url = "https://amalskumar.dev",
+    project
 }) => {
     const siteTitle = title === "Amal S Kumar | Backend Engineer & Systems Builder" ? title : `${title} | Amal S Kumar`;
 
