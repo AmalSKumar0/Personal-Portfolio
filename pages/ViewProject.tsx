@@ -128,7 +128,7 @@ export const ViewProject: React.FC = () => {
                     {/* Centered Showcase Screenshot */}
                     <div className="max-w-5xl mx-auto mb-12">
                         <motion.div 
-                            className="relative aspect-video w-full overflow-hidden rounded-[1.5rem] border border-lavender-200/60 bg-[#151815] shadow-2xl dark:border-white/10"
+                            className="relative w-full overflow-hidden rounded-[1.5rem] border border-lavender-200/60 bg-[#151815] shadow-2xl dark:border-white/10"
                             initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.97 }}
                             animate={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
                             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -136,7 +136,9 @@ export const ViewProject: React.FC = () => {
                             <img
                                 src={project.imageUrl}
                                 alt={`${project.title} website preview`}
-                                className="w-full h-full object-cover select-none pointer-events-none"
+                                width={1480}
+                                height={1060}
+                                className="w-full h-auto block select-none pointer-events-none"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
                         </motion.div>
