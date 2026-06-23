@@ -15,9 +15,12 @@ import { LavenderPetals } from './components/LavenderPetals';
 import { ScrollFade } from './components/ScrollFade';
 import { BackToTop } from './components/BackToTop';
 import { Github, Linkedin, Mail } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 import { useVisitorTracker } from './hooks/useVisitorTracker';
 import { useLenisScroll } from './hooks/useLenisScroll';
+
+const MotionLink = motion(Link);
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -54,19 +57,19 @@ const App: React.FC = () => {
           >
             <div className="w-full max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 py-6 md:py-0">
               <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 text-base md:text-sm font-bold tracking-widest text-gray-800 dark:text-gray-200 uppercase w-full">
-                <Link to="/" className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors" onClick={() => setShowNavbar(false)}>Home</Link>
+                <MotionLink to="/" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors" onClick={() => setShowNavbar(false)}>Home</MotionLink>
                 <span className="hidden md:inline text-gray-300 dark:text-gray-700 font-light">|</span>
-                <Link to="/about" className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors" onClick={() => setShowNavbar(false)}>About</Link>
+                <MotionLink to="/about" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors" onClick={() => setShowNavbar(false)}>About</MotionLink>
                 <span className="hidden md:inline text-gray-300 dark:text-gray-700 font-light">|</span>
-                <Link to="/projects" className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors" onClick={() => setShowNavbar(false)}>Projects</Link>
+                <MotionLink to="/projects" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors" onClick={() => setShowNavbar(false)}>Projects</MotionLink>
                 <span className="hidden md:inline text-gray-300 dark:text-gray-700 font-light">|</span>
-                <Link to="/experience" className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors" onClick={() => setShowNavbar(false)}>Experience</Link>
+                <MotionLink to="/experience" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors" onClick={() => setShowNavbar(false)}>Experience</MotionLink>
                 <span className="hidden md:inline text-gray-300 dark:text-gray-700 font-light">|</span>
-                <Link to="/contact" className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors" onClick={() => setShowNavbar(false)}>Contact</Link>
+                <MotionLink to="/contact" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors" onClick={() => setShowNavbar(false)}>Contact</MotionLink>
               </div>
             </div>
           </div>
-
+ 
           {/* Main Layout Container - shifts down and rounds top corners when menu is open */}
           <div
             className={`min-h-screen bg-cream dark:bg-tech-black transition-all duration-500 ease-in-out flex flex-col relative z-20 shadow-2xl ${
@@ -82,18 +85,22 @@ const App: React.FC = () => {
             {/* Global Header */}
             <header className="w-full max-w-7xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between relative z-30">
               {/* Left: Branding logo */}
-              <Link
+              <MotionLink
                 to="/"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 className="text-gray-900 dark:text-white font-serif italic text-xl md:text-2xl font-bold tracking-tight hover:opacity-80 transition-opacity"
                 onClick={() => setShowNavbar(false)}
               >
                 Amal S Kumar
-              </Link>
+              </MotionLink>
 
               {/* Center: Menu Toggle Button */}
-              <button
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setShowNavbar(!showNavbar)}
-                className="inline-flex items-center gap-2 px-6 py-2 border border-gray-900/10 dark:border-white/10 hover:bg-gray-950/5 dark:hover:bg-white/5 rounded-full text-xs md:text-sm font-semibold tracking-wider uppercase text-gray-900 dark:text-white bg-transparent transition-all cursor-pointer shadow-sm hover:shadow-md hover:scale-105 active:scale-95"
+                className="inline-flex items-center gap-2 px-6 py-2 border border-gray-900/10 dark:border-white/10 hover:bg-gray-950/5 dark:hover:bg-white/5 rounded-full text-xs md:text-sm font-semibold tracking-wider uppercase text-gray-900 dark:text-white bg-transparent transition-all cursor-pointer shadow-sm hover:shadow-md"
               >
                 {showNavbar ? (
                   <>
@@ -106,34 +113,40 @@ const App: React.FC = () => {
                     <span className="text-[10px] md:text-xs">☰</span>
                   </>
                 )}
-              </button>
+              </motion.button>
 
               {/* Right: Theme Toggle & Social Links */}
               <div className="flex items-center gap-4">
                 <ThemeToggle />
                 <div className="hidden sm:flex items-center gap-4 text-gray-700 dark:text-gray-300">
-                  <a
+                  <motion.a
+                    whileHover={{ scale: 1.15, y: -2 }}
+                    whileTap={{ scale: 0.9 }}
                     href="https://www.linkedin.com/in/amal-fsd"
                     target="_blank"
                     rel="noreferrer"
                     className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors"
                   >
                     <Linkedin size={18} />
-                  </a>
-                  <a
+                  </motion.a>
+                  <motion.a
+                    whileHover={{ scale: 1.15, y: -2 }}
+                    whileTap={{ scale: 0.9 }}
                     href="https://github.com/AmalSKumar0"
                     target="_blank"
                     rel="noreferrer"
                     className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors"
                   >
                     <Github size={18} />
-                  </a>
-                  <a
+                  </motion.a>
+                  <motion.a
+                    whileHover={{ scale: 1.15, y: -2 }}
+                    whileTap={{ scale: 0.9 }}
                     href="mailto:amalskumardev@gmail.com"
                     className="hover:text-neon-purple dark:hover:text-neon-cyan transition-colors"
                   >
                     <Mail size={18} />
-                  </a>
+                  </motion.a>
                 </div>
               </div>
             </header>

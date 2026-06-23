@@ -31,6 +31,8 @@ const Word: React.FC<{
   );
 };
 
+const MotionLink = motion(Link);
+
 export const AboutSnapshot: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
@@ -176,13 +178,15 @@ export const AboutSnapshot: React.FC = () => {
                 transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
                 className="mt-16 text-center"
               >
-                <Link
+                <MotionLink
                   to="/about"
-                  className="inline-flex items-center gap-2.5 px-8 py-4 bg-lavender-100/40 dark:bg-white/5 border border-lavender-300/50 dark:border-white/10 text-lavender-900 dark:text-white rounded-full font-bold hover:bg-lavender-200/50 dark:hover:bg-white/10 backdrop-blur-md shadow-md hover:shadow-lg hover:scale-[1.03] transition-all cursor-pointer group"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-flex items-center gap-2.5 px-8 py-4 bg-lavender-100/40 dark:bg-white/5 border border-lavender-300/50 dark:border-white/10 text-lavender-900 dark:text-white rounded-full font-bold hover:bg-lavender-200/50 dark:hover:bg-white/10 backdrop-blur-md shadow-md hover:shadow-lg transition-all cursor-pointer group"
                 >
                   <span>View More</span>
                   <ArrowRight size={16} className="text-neon-purple dark:text-neon-cyan group-hover:translate-x-1 transition-transform" />
-                </Link>
+                </MotionLink>
               </motion.div>
             )}
 

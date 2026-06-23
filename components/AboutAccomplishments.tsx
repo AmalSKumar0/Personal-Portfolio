@@ -151,7 +151,9 @@ export const AboutAccomplishments: React.FC = () => {
                     <div className="max-w-3xl">
                         {/* Tab Pills */}
                         <div className="flex items-center gap-4 mb-8">
-                            <button
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
                                 onClick={() => setActiveTab('achievements')}
                                 className={`px-5 py-2.5 rounded-full text-[10px] md:text-xs font-mono font-bold tracking-wider transition-all duration-300 cursor-pointer ${
                                     activeTab === 'achievements'
@@ -160,8 +162,10 @@ export const AboutAccomplishments: React.FC = () => {
                                 }`}
                             >
                                 ACHIEVEMENTS
-                            </button>
-                            <button
+                            </motion.button>
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
                                 onClick={() => setActiveTab('skills')}
                                 className={`px-5 py-2.5 rounded-full text-[10px] md:text-xs font-mono font-bold tracking-wider transition-all duration-300 cursor-pointer ${
                                     activeTab === 'skills'
@@ -170,7 +174,7 @@ export const AboutAccomplishments: React.FC = () => {
                                 }`}
                             >
                                 CORE EXPERTISE
-                            </button>
+                            </motion.button>
                         </div>
 
                         {/* Title & Description with AnimatePresence */}
@@ -195,13 +199,15 @@ export const AboutAccomplishments: React.FC = () => {
                     </div>
 
                     {/* Scroll Down Button */}
-                    <button
+                    <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
                         onClick={handleScrollDown}
                         className="w-12 h-12 flex items-center justify-center rounded-full bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-gray-100 transition-all shadow-md group cursor-pointer self-start md:self-end"
                         aria-label="Scroll to Timeline"
                     >
                         <ArrowDown size={20} className="group-hover:translate-y-1 transition-transform duration-300" />
-                    </button>
+                    </motion.button>
                 </div>
 
                 {/* Cards Container with AnimatePresence for tab switching */}

@@ -176,7 +176,7 @@ export const FeaturedProjects: React.FC = () => {
                     }
                     navigate(`/projects/${project.id}`);
                   }}
-                  className="rounded-[2.5rem] border border-lavender-300/40 dark:border-lavender-500/10 bg-lavender-50/20 dark:bg-tech-dark/50 backdrop-blur-xl p-5 md:p-6 flex flex-col justify-between h-[385px] sm:h-[450px] shadow-lg hover:shadow-xl hover:border-lavender-400/60 dark:hover:border-lavender-400/25 transition-all duration-300 relative group overflow-hidden cursor-pointer"
+                  className="rounded-[1.8rem] sm:rounded-[2.5rem] border border-lavender-300/40 dark:border-lavender-500/10 bg-lavender-50/20 dark:bg-tech-dark/50 backdrop-blur-xl p-3.5 sm:p-5 md:p-6 flex flex-col justify-between h-[385px] sm:h-[450px] shadow-lg hover:shadow-xl hover:border-lavender-400/60 dark:hover:border-lavender-400/25 transition-all duration-300 relative group overflow-hidden cursor-pointer"
                 >
                   
                   {/* Subtle Lavender Glow on Card Hover */}
@@ -212,7 +212,7 @@ export const FeaturedProjects: React.FC = () => {
                     </div>
 
                     {/* Image with rounded corners and bottom stack overlay */}
-                    <div className="relative w-full aspect-[16/13.5] rounded-[2rem] overflow-hidden mt-3 mb-0 border border-lavender-200/45 dark:border-lavender-500/15 shadow-md">
+                    <div className="relative w-full aspect-[16/13.5] rounded-[1.2rem] sm:rounded-[2rem] overflow-hidden mt-2.5 mb-0 border border-lavender-200/45 dark:border-lavender-500/15 shadow-md">
                       <img
                         src={project.imageUrl}
                         alt={project.title}

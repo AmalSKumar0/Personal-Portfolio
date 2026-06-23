@@ -237,17 +237,25 @@ export const AboutIllustration: React.FC = () => {
 
                                     {/* Link Button */}
                                     <div className="mt-8">
-                                        <a
+                                        <motion.a
                                             href="https://github.com/AmalSKumar0"
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="inline-flex items-center justify-between w-full bg-lavender-50 hover:bg-lavender-100/50 dark:bg-white/10 dark:hover:bg-white/20 text-gray-900 dark:text-white px-5 py-3 rounded-full font-bold border border-lavender-200/40 dark:border-white/15"
+                                            whileHover="hover"
+                                            whileTap={{ scale: 0.98 }}
+                                            className="inline-flex items-center justify-between w-full bg-lavender-50 hover:bg-lavender-100/50 dark:bg-white/10 dark:hover:bg-white/20 text-gray-900 dark:text-white px-5 py-3 rounded-full font-bold border border-lavender-200/40 dark:border-white/15 cursor-pointer shadow-sm hover:shadow"
                                         >
                                             <span className="text-xs font-mono tracking-widest uppercase text-lavender-700 dark:text-[#E9D5FF]">github/AmalSKumar0</span>
-                                            <span className="p-1.5 bg-gray-900 dark:bg-black text-white rounded-full flex items-center justify-center">
+                                            <motion.span 
+                                                variants={{
+                                                    hover: { x: 4 }
+                                                }}
+                                                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                                                className="p-1.5 bg-gray-900 dark:bg-black text-white rounded-full flex items-center justify-center"
+                                            >
                                                 <ArrowRight size={14} className="text-[#E9D5FF]" />
-                                            </span>
-                                        </a>
+                                            </motion.span>
+                                        </motion.a>
                                     </div>
                                 </div>
                             </motion.div>

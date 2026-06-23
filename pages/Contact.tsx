@@ -182,7 +182,7 @@ ${systemInfo}
                             <ScrollFade direction="up" delay={0.2}>
                                 <div className="space-y-6 mt-16 lg:mt-32">
                                     <a
-                                        href="mailto:amalskumarofficialz@gmail.com"
+                                        href="mailto:amalskumardev@gmail.com"
                                         className="block text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-neon-purple dark:hover:text-neon-cyan transition-colors duration-300 break-all"
                                     >
                                         amalskumardev@gmail.com
