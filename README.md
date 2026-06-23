@@ -1,5 +1,5 @@
 <div align="center">
-<img width="1200" height="475" alt="Portfolio Banner" src="/public/image.png" />
+<img width="1200" height="475" alt="Portfolio Banner" src="/public/portfolio.png" />
 
 # Amal S Kumar — Personal Portfolio
 

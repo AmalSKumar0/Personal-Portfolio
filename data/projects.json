@@ -101,5 +101,31 @@
         ],
         "role": "Compiler Engineer",
         "date": "2025"
+    },
+    {
+        "id": "portfolio",
+        "title": "Portfolio",
+        "shortDescription": "A premium developer portfolio website with glassmorphism.",
+        "fullDescription": "A premium personal developer portfolio website designed with a custom Lavender Cherry Blossom aesthetic. It features glassmorphism UI elements, dark/light mode toggle, scroll-linked animations, falling petals on the home page, interactive 3D perspective cards, and timeline visualizations.",
+        "tags": [
+            "React",
+            "TypeScript",
+            "Framer Motion",
+            "Tailwind CSS",
+            "Vite"
+        ],
+        "imageUrl": "/project/portfolio.png",
+        "demoUrl": "https://amalskumar.dev",
+        "githubUrl": "https://github.com/AmalSKumar0/Personal-Portfolio",
+        "features": [
+            "Lavender Cherry Blossom Theme",
+            "Glassmorphism UI components",
+            "Falling Petals animation",
+            "3D Perspective identity cards",
+            "Interactive Timeline vertical spine",
+            "Dark/Light theme system-aware toggle"
+        ],
+        "role": "Frontend Architect",
+        "date": "2026"
     }
 ]
