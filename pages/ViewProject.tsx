@@ -1,228 +1,298 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowLeft, Github, Layers, Calendar, User, ArrowUpRight } from 'lucide-react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { ArrowLeft, ArrowUpRight, Calendar, CheckCircle2, Github, Globe2, User } from 'lucide-react';
 import { SEO } from '@/components/SEO';
 import { projects } from '@/data/projects';
 
-// ─── Feature Card colours (borrowed from AboutAccomplishments) ────────────────
-const CARD_THEMES = [
-    {
-        bg: 'bg-purple-100/70 dark:bg-[#201c38] text-purple-950 dark:text-purple-200 border border-purple-200/80 dark:border-purple-900/50 shadow-sm',
-        num: 'bg-white/50 dark:bg-white/10 text-purple-900 dark:text-purple-200',
-        arrow: 'text-purple-600 dark:text-purple-400',
-    },
-    {
-        bg: 'bg-[#f3f0ea]/80 dark:bg-[#1a1917] text-zinc-900 dark:text-zinc-300 border border-[#e5e1d7] dark:border-zinc-800 shadow-sm',
-        num: 'bg-black/5 dark:bg-white/5 text-zinc-800 dark:text-zinc-300',
-        arrow: 'text-zinc-500 dark:text-zinc-400',
-    },
-    {
-        bg: 'bg-zinc-900 dark:bg-[#0c0c0e] text-zinc-100 dark:text-zinc-300 border border-zinc-800 dark:border-zinc-900 shadow-sm',
-        num: 'bg-white/10 dark:bg-white/5 text-zinc-200 dark:text-zinc-300',
-        arrow: 'text-zinc-400 dark:text-zinc-500',
-    },
-    {
-        bg: 'bg-[#f3f0ea]/80 dark:bg-[#1a1917] text-zinc-900 dark:text-zinc-300 border border-[#e5e1d7] dark:border-zinc-800 shadow-sm',
-        num: 'bg-black/5 dark:bg-white/5 text-zinc-800 dark:text-zinc-300',
-        arrow: 'text-zinc-500 dark:text-zinc-400',
-    },
-];
-
-const TILT = ['lg:rotate-[-1.5deg]', 'lg:rotate-[1.5deg]', 'lg:rotate-[-2deg]', 'lg:rotate-[2deg]'];
+const HEADER_LAPTOP_SCENE = '/pexels-introspectivedsgn-7484736.jpg';
 
 export const ViewProject: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const project = projects.find(p => p.id === id);
     const overviewRef = useRef<HTMLDivElement>(null);
+    const shouldReduceMotion = useReducedMotion();
 
-    if (!project) return <Navigate to="/404" replace />;
+    const [isAlignMode, setIsAlignMode] = useState(false);
+    const [pts, setPts] = useState([
+        { x: 10.08, y: 17.08 }, // TL
+        { x: 78.51, y: 10.25 }, // TR
+        { x: 80.45, y: 71.64 }, // BR
+        { x: 14.78, y: 77.20 }  // BL
+    ]);
 
-    // Scroll-linked reveal for the overview paragraph (borrowed from AboutSnapshot)
+    useEffect(() => {
+        if (typeof window !== 'undefined' && window.location.search.includes('align=true')) {
+            setIsAlignMode(true);
+        }
+    }, []);
+
+    const containerRef = useRef<HTMLDivElement>(null);
+    const activePtRef = useRef<number | null>(null);
+
+    const handlePointerDown = (index: number) => (e: React.PointerEvent) => {
+        e.preventDefault();
+        activePtRef.current = index;
+        (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    };
+
+    const handlePointerMove = (e: React.PointerEvent) => {
+        if (activePtRef.current === null || !containerRef.current) return;
+        const rect = containerRef.current.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        setPts(prev => {
+            const next = [...prev];
+            next[activePtRef.current!] = {
+                x: Math.max(0, Math.min(100, x)),
+                y: Math.max(0, Math.min(100, y))
+            };
+            return next;
+        });
+    };
+
+    const handlePointerUp = (e: React.PointerEvent) => {
+        if (activePtRef.current !== null) {
+            (e.target as HTMLElement).releasePointerCapture(e.pointerId);
+            activePtRef.current = null;
+        }
+    };
+
+    const minX = Math.min(pts[0].x, pts[3].x);
+    const maxX = Math.max(pts[1].x, pts[2].x);
+    const minY = Math.min(pts[0].y, pts[1].y);
+    const maxY = Math.max(pts[2].y, pts[3].y);
+    const width = maxX - minX;
+    const height = maxY - minY;
+    const left = minX;
+    const top = minY;
+
+    const TL_rel = width > 0 ? [(pts[0].x - left) / width * 100, (pts[0].y - top) / height * 100] : [0, 0];
+    const TR_rel = width > 0 ? [(pts[1].x - left) / width * 100, (pts[1].y - top) / height * 100] : [100, 0];
+    const BR_rel = width > 0 ? [(pts[2].x - left) / width * 100, (pts[2].y - top) / height * 100] : [100, 100];
+    const BL_rel = width > 0 ? [(pts[3].x - left) / width * 100, (pts[3].y - top) / height * 100] : [0, 100];
+
+    const customStyle = isAlignMode ? {
+        left: `${left}%`,
+        top: `${top}%`,
+        width: `${width}%`,
+        height: `${height}%`,
+        clipPath: `polygon(${TL_rel[0]}% ${TL_rel[1]}%, ${TR_rel[0]}% ${TR_rel[1]}%, ${BR_rel[0]}% ${BR_rel[1]}%, ${BL_rel[0]}% ${BL_rel[1]}%)`
+    } : undefined;
+
     const { scrollYProgress } = useScroll({
         target: overviewRef,
         offset: ['start end', 'end start'],
     });
-    const overviewOpacity = useTransform(scrollYProgress, [0.05, 0.35], [0.08, 1]);
-    const overviewY = useTransform(scrollYProgress, [0.05, 0.35], [30, 0]);
+    const overviewOpacity = useTransform(scrollYProgress, [0.05, 0.35], [0.12, 1]);
+    const overviewY = useTransform(scrollYProgress, [0.05, 0.35], [24, 0]);
+
+    if (!project) return <Navigate to="/404" replace />;
 
     return (
-        <div className="pb-32 px-0 relative overflow-x-clip min-h-screen bg-cream dark:bg-tech-black transition-colors duration-300">
+        <div className="relative min-h-screen overflow-x-clip bg-cream pb-24 transition-colors duration-300 dark:bg-tech-black">
             <SEO
                 title={`${project.title} | Case Study`}
                 description={project.shortDescription}
             />
 
-            {/* Grid + ambient glows — same as About page */}
-            <div className="absolute inset-0 bg-grid-pattern dark:opacity-[0.03] opacity-[0.2] z-0 pointer-events-none transition-opacity duration-300" />
-            <div className="absolute top-[20%] right-[-10%] w-[500px] h-[500px] bg-pink-500/5 dark:bg-pink-500/2 rounded-full blur-[140px] pointer-events-none z-0" />
-            <div className="absolute bottom-[20%] left-[-10%] w-[500px] h-[500px] bg-neon-purple/5 dark:bg-neon-purple/2 rounded-full blur-[140px] pointer-events-none z-0" />
+            <div className="absolute inset-0 z-0 bg-grid-pattern opacity-[0.16] pointer-events-none dark:opacity-[0.03]" />
+            <div className="absolute right-[-14%] top-[10%] z-0 h-[520px] w-[520px] rounded-full bg-lavender-300/20 blur-[150px] pointer-events-none dark:bg-lavender-500/[0.05]" />
+            <div className="absolute bottom-[20%] left-[-14%] z-0 h-[480px] w-[480px] rounded-full bg-pink-200/25 blur-[140px] pointer-events-none dark:bg-neon-purple/[0.04]" />
 
-            {/* ──────────────────────────────────────────────────────────────────
-                HERO — ticket-cut glassmorphic card (AboutIllustration style)
-            ────────────────────────────────────────────────────────────────── */}
-            <section className="relative w-full pt-28 pb-0 px-4 md:px-8 flex flex-col items-center">
-                <div className="max-w-5xl w-full mx-auto relative z-10">
-
-                    {/* Back link */}
+            <section className="relative z-10 w-full px-4 pt-28 sm:px-6 lg:px-8">
+                <div className="mx-auto w-full max-w-5xl">
+                    {/* Back Button */}
                     <motion.div
                         initial={{ opacity: 0, x: -12 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.4 }}
-                        className="mb-8"
+                        className="mb-10"
                     >
                         <Link
                             to="/projects"
-                            className="inline-flex items-center gap-2 group text-sm font-bold text-gray-500 dark:text-gray-400 hover:text-neon-purple dark:hover:text-lavender-300 transition-colors duration-300"
+                            className="inline-flex items-center gap-2 text-sm font-bold text-gray-500 transition-colors duration-300 hover:text-neon-purple dark:text-gray-400 dark:hover:text-lavender-300"
                         >
-                            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                            <ArrowLeft size={16} />
                             Back to Projects
                         </Link>
                     </motion.div>
 
-                    {/* Ticket card (AboutIllustration middle-card style) */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        className="relative w-full bg-white/90 dark:bg-black/40 backdrop-blur-2xl border border-lavender-200/50 dark:border-white/10 rounded-[2.5rem] shadow-[0_8px_32px_0_rgba(139,92,246,0.04)] overflow-hidden"
-                    >
-                        {/* Ticket notch cuts on the left/right divider line */}
-                        <div className="absolute left-0 top-[62%] -translate-x-1/2 w-8 h-8 rounded-full bg-cream dark:bg-tech-black border border-lavender-200/50 dark:border-white/10 z-30 pointer-events-none" />
-                        <div className="absolute right-0 top-[62%] translate-x-1/2 w-8 h-8 rounded-full bg-cream dark:bg-tech-black border border-lavender-200/50 dark:border-white/10 z-30 pointer-events-none" />
-
-                        {/* Upper stub: metadata */}
-                        <div className="px-8 md:px-12 pt-10 pb-8">
-                            <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8">
-                                <div>
-                                    <span className="text-[10px] font-mono font-bold tracking-[0.3em] text-lavender-700 dark:text-[#E9D5FF] uppercase block mb-3">
-                                        CASE STUDY
-                                    </span>
-                                    <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-none">
-                                        {project.title}
-                                    </h1>
-                                </div>
-
-                                {/* CTA buttons */}
-                                <div className="flex flex-wrap gap-3 shrink-0 pt-1">
-                                    {project.githubUrl && (
-                                        <a
-                                            href={project.githubUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center justify-between gap-2 bg-lavender-50 hover:bg-lavender-100/50 dark:bg-white/10 dark:hover:bg-white/20 text-gray-900 dark:text-white px-5 py-3 rounded-full font-bold border border-lavender-200/40 dark:border-white/15 text-sm transition-all hover:scale-[1.02] active:scale-95 cursor-pointer"
-                                        >
-                                            <span className="font-mono text-xs tracking-widest uppercase text-lavender-700 dark:text-[#E9D5FF]">
-                                                Source Code
-                                            </span>
-                                            <span className="p-1.5 bg-gray-900 dark:bg-black text-white rounded-full flex items-center justify-center">
-                                                <Github size={12} className="text-[#E9D5FF]" />
-                                            </span>
-                                        </a>
-                                    )}
-                                    {project.demoUrl && (
-                                        <a
-                                            href={project.demoUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-neon-purple to-neon-blue text-white rounded-full hover:opacity-90 hover:scale-[1.02] active:scale-95 transition-all font-bold text-sm shadow-lg shadow-neon-purple/20 cursor-pointer"
-                                        >
-                                            <Layers size={16} /> Live Demo
-                                        </a>
-                                    )}
-                                </div>
-                            </div>
-
-                            {/* Meta pills */}
-                            <div className="flex flex-wrap gap-3">
-                                <div className="flex items-center gap-2 bg-lavender-50/60 dark:bg-white/5 px-4 py-2 rounded-full border border-lavender-200/50 dark:border-white/10">
-                                    <User size={14} className="text-neon-purple dark:text-lavender-300" />
-                                    <span className="text-xs font-bold tracking-wide uppercase text-gray-800 dark:text-gray-200">{project.role}</span>
-                                </div>
-                                <div className="flex items-center gap-2 bg-lavender-50/60 dark:bg-white/5 px-4 py-2 rounded-full border border-lavender-200/50 dark:border-white/10">
-                                    <Calendar size={14} className="text-neon-purple dark:text-lavender-300" />
-                                    <span className="text-xs font-bold tracking-wide uppercase text-gray-800 dark:text-gray-200">{project.date}</span>
-                                </div>
-                                {/* Tech tags inline */}
-                                {project.tags.map(tag => (
-                                    <span
-                                        key={tag}
-                                        className="px-3 py-2 bg-lavender-100/30 dark:bg-white/5 text-lavender-900/80 dark:text-lavender-200/80 rounded-full text-[10px] font-mono font-bold border border-lavender-200/50 dark:border-white/10 uppercase tracking-wider"
-                                    >
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Dashed divider (ticket tear) */}
-                        <div className="border-t border-dashed border-lavender-200/40 dark:border-white/10 mx-8 md:mx-12" />
-
-                        {/* Lower stub: featured image */}
-                        <div className="px-8 md:px-12 py-8">
-                            <div className="w-full rounded-[1.8rem] overflow-hidden border border-lavender-200/40 dark:border-white/10 shadow-xl">
-                                <img
-                                    src={project.imageUrl}
-                                    alt={project.title}
-                                    className="w-full h-64 md:h-96 object-cover"
-                                />
-                            </div>
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* ──────────────────────────────────────────────────────────────────
-                OVERVIEW — scroll-linked serif reveal (AboutSnapshot style)
-            ────────────────────────────────────────────────────────────────── */}
-            <section
-                ref={overviewRef}
-                className="relative bg-cream dark:bg-tech-black transition-colors duration-500 py-24 md:py-32 px-4 sm:px-8 md:px-12 flex flex-col justify-center overflow-hidden border-t border-gray-200/50 dark:border-white/10 mt-8"
-            >
-                <div className="absolute inset-0 bg-grid-pattern opacity-10 dark:opacity-[0.03] z-0 pointer-events-none" />
-                <div className="max-w-4xl w-full mx-auto relative z-10">
-                    <motion.p
-                        style={{ opacity: overviewOpacity, y: overviewY }}
-                        className="text-4xl sm:text-5xl md:text-6xl font-serif font-light leading-tight tracking-tight text-gray-900 dark:text-white text-center"
-                    >
-                        {project.fullDescription}
-                    </motion.p>
-                </div>
-            </section>
-
-            {/* ──────────────────────────────────────────────────────────────────
-                KEY FEATURES — numbered tilted cards (AboutAccomplishments style)
-            ────────────────────────────────────────────────────────────────── */}
-            <section className="relative w-full py-24 px-6 md:px-12 bg-cream dark:bg-tech-black transition-colors duration-500 border-t border-gray-200/50 dark:border-white/10 overflow-hidden">
-                <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neon-purple/5 dark:bg-neon-purple/2 rounded-full blur-[140px] pointer-events-none z-0" />
-
-                <div className="max-w-7xl mx-auto relative z-10">
-                    {/* Header */}
-                    <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-8 mb-16">
-                        <div className="max-w-3xl">
-                            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-gray-900 dark:text-white font-bold italic tracking-tight mb-4">
-                                Key Features
-                            </h2>
-                            <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 font-light leading-relaxed max-w-2xl">
-                                Core capabilities and architectural highlights built into {project.title}.
+                    {/* Minimalist Grid Header */}
+                    <div className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:gap-16 mb-16">
+                        <div>
+                            <span className="mb-3 block text-[10px] font-mono font-bold uppercase tracking-[0.32em] text-lavender-700 dark:text-lavender-300">
+                                Case Study
+                            </span>
+                            <h1 className="text-4xl font-extrabold leading-none tracking-tight text-gray-950 dark:text-white sm:text-5xl lg:text-6xl">
+                                {project.title}
+                            </h1>
+                            <p className="mt-6 text-lg leading-relaxed text-lavender-900/80 dark:text-lavender-100/70">
+                                {project.shortDescription}
                             </p>
+
+                            <div className="mt-8 flex flex-wrap gap-3">
+                                {project.githubUrl && (
+                                    <a
+                                        href={project.githubUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 rounded-full border border-lavender-300/60 bg-white/80 px-5 py-3 text-sm font-bold text-lavender-900 shadow-sm transition-all hover:-translate-y-0.5 hover:border-lavender-400 hover:bg-white dark:border-white/10 dark:bg-white/10 dark:text-white dark:hover:bg-white/[0.15]"
+                                    >
+                                        <Github size={16} />
+                                        Source Code
+                                        <ArrowUpRight size={14} />
+                                    </a>
+                                )}
+
+                                {project.demoUrl ? (
+                                    <a
+                                        href={project.demoUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-neon-purple to-neon-cyan px-5 py-3 text-sm font-bold text-white shadow-lg shadow-neon-purple/20 transition-all hover:-translate-y-0.5 hover:opacity-95"
+                                    >
+                                        <Globe2 size={16} />
+                                        Live Website
+                                        <ArrowUpRight size={14} />
+                                    </a>
+                                ) : (
+                                    <span className="inline-flex items-center gap-2 rounded-full border border-lavender-200/70 bg-white/50 px-5 py-3 text-sm font-bold text-lavender-900/40 dark:border-white/10 dark:bg-white/[0.04] dark:text-lavender-100/40">
+                                        <Globe2 size={16} />
+                                        Website pending
+                                    </span>
+                                )}
+                            </div>
                         </div>
 
-                        {/* GitHub CTA (matching AboutAccomplishments scroll-down btn style) */}
-                        {project.githubUrl && (
-                            <a
-                                href={project.githubUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-12 h-12 flex items-center justify-center rounded-full bg-zinc-950 dark:bg-white text-white dark:text-zinc-950 hover:bg-zinc-800 dark:hover:bg-gray-100 transition-all shadow-md group cursor-pointer self-start md:self-end shrink-0"
-                                aria-label="View source on GitHub"
-                            >
-                                <Github size={20} className="group-hover:rotate-12 transition-transform duration-300" />
-                            </a>
-                        )}
+                        {/* Sidebar Project Information */}
+                        <div className="flex flex-col gap-6 lg:border-l lg:border-lavender-200/50 lg:pl-12 dark:lg:border-white/10">
+                            <div>
+                                <h4 className="text-[10px] font-mono font-bold uppercase tracking-wider text-lavender-600 dark:text-lavender-400 mb-1">Role</h4>
+                                <p className="text-sm font-bold text-gray-800 dark:text-gray-200">{project.role}</p>
+                            </div>
+                            <div>
+                                <h4 className="text-[10px] font-mono font-bold uppercase tracking-wider text-lavender-600 dark:text-lavender-400 mb-1">Timeline</h4>
+                                <p className="text-sm font-bold text-gray-800 dark:text-gray-200">{project.date}</p>
+                            </div>
+                            <div>
+                                <h4 className="text-[10px] font-mono font-bold uppercase tracking-wider text-lavender-600 dark:text-lavender-400 mb-2">Technologies</h4>
+                                <div className="flex flex-wrap gap-1.5">
+                                    {project.tags.map(tag => (
+                                        <span
+                                            key={tag}
+                                            className="rounded-full border border-lavender-200/40 bg-white/40 px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider text-lavender-900/70 dark:border-white/5 dark:bg-white/[0.03] dark:text-lavender-100/60"
+                                        >
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    {/* Cards grid */}
+                    {/* Centered Showcase Mockup */}
+                    <div className="max-w-5xl mx-auto mb-12">
+                        <motion.div 
+                            ref={containerRef}
+                            onPointerMove={isAlignMode ? handlePointerMove : undefined}
+                            className="project-device-viewer relative aspect-[2926/2081] w-full overflow-hidden rounded-[1.5rem] border border-lavender-200/60 bg-[#151815] shadow-2xl dark:border-white/10"
+                            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.97 }}
+                            animate={shouldReduceMotion ? undefined : { opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                            <img
+                                src={HEADER_LAPTOP_SCENE}
+                                alt=""
+                                aria-hidden="true"
+                                className="absolute inset-0 h-full w-full object-cover select-none pointer-events-none"
+                            />
+
+                            <div
+                                className="project-pexels-screen absolute overflow-hidden bg-black"
+                                style={customStyle}
+                            >
+                                <img
+                                    src={project.imageUrl}
+                                    alt={`${project.title} website preview inside laptop`}
+                                    className="h-full w-full object-cover select-none pointer-events-none"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-tr from-[#0c0a12]/[0.55] via-transparent to-white/[0.18] mix-blend-screen pointer-events-none" />
+                                <div className="absolute inset-0 ring-1 ring-inset ring-white/10 pointer-events-none" />
+                            </div>
+
+                            <div className="absolute inset-0 bg-gradient-to-br from-lavender-100/20 via-transparent to-tech-black/30 pointer-events-none" />
+
+                            {isAlignMode && (
+                                <>
+                                    <svg className="absolute inset-0 w-full h-full pointer-events-none z-[80]" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                        <polygon 
+                                            points={pts.map(p => `${p.x},${p.y}`).join(' ')} 
+                                            fill="rgba(139, 92, 246, 0.2)"
+                                            stroke="#8b5cf6"
+                                            strokeWidth="0.5"
+                                        />
+                                    </svg>
+                                    {pts.map((pt, idx) => (
+                                        <div
+                                            key={idx}
+                                            className="absolute w-8 h-8 -ml-4 -mt-4 bg-neon-purple rounded-full border-2 border-white shadow-lg cursor-move z-[90] flex items-center justify-center text-[10px] text-white font-bold select-none touch-none"
+                                            style={{ left: `${pt.x}%`, top: `${pt.y}%` }}
+                                            onPointerDown={handlePointerDown(idx)}
+                                            onPointerUp={handlePointerUp}
+                                        >
+                                            {idx}
+                                        </div>
+                                    ))}
+                                </>
+                            )}
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Overview Section */}
+            <section
+                ref={overviewRef}
+                className="relative z-10 w-full px-4 py-16 sm:px-6 lg:px-8"
+            >
+                <div className="mx-auto w-full max-w-5xl border-t border-lavender-200/30 pt-16 dark:border-white/5">
+                    <div className="grid gap-8 md:grid-cols-[0.3fr_0.7fr] md:items-start">
+                        <div>
+                            <span className="text-[10px] font-mono font-bold uppercase tracking-[0.28em] text-neon-purple dark:text-lavender-300">
+                                Overview
+                            </span>
+                            <h2 className="mt-2 text-2xl font-serif font-bold italic tracking-tight text-gray-950 dark:text-white sm:text-3xl">
+                                What it does
+                            </h2>
+                        </div>
+                        <motion.p
+                            style={{ opacity: overviewOpacity, y: overviewY }}
+                            className="text-xl font-serif font-light leading-relaxed tracking-wide text-gray-800 dark:text-lavender-100 sm:text-2xl"
+                        >
+                            {project.fullDescription}
+                        </motion.p>
+                    </div>
+                </div>
+            </section>
+
+            {/* Key Features Section */}
+            <section className="relative z-10 w-full px-4 py-16 sm:px-6 lg:px-8">
+                <div className="mx-auto w-full max-w-5xl border-t border-lavender-200/30 pt-16 dark:border-white/5">
+                    <div className="mb-12 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                        <div>
+                            <span className="text-[10px] font-mono font-bold uppercase tracking-[0.28em] text-neon-purple dark:text-lavender-300">
+                                Details
+                            </span>
+                            <h2 className="mt-2 text-2xl font-serif font-bold italic tracking-tight text-gray-950 dark:text-white sm:text-3xl">
+                                Key features
+                            </h2>
+                        </div>
+                        <p className="max-w-md text-sm text-lavender-900/60 dark:text-lavender-100/50">
+                            Core capabilities and architectural highlights built into {project.title}.
+                        </p>
+                    </div>
+
                     <motion.div
                         initial="hidden"
                         whileInView="visible"
@@ -230,47 +300,54 @@ export const ViewProject: React.FC = () => {
                         variants={{
                             visible: { transition: { staggerChildren: 0.08 } }
                         }}
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+                        className="grid grid-cols-1 gap-6 md:grid-cols-2"
                     >
-                        {project.features.map((feature, index) => {
-                            const theme = CARD_THEMES[index % CARD_THEMES.length];
-                            const tilt = TILT[index % TILT.length];
-                            const num = String(index + 1).padStart(2, '0');
-
-                            return (
-                                <motion.div
-                                    key={index}
-                                    variants={{
-                                        hidden: { opacity: 0, y: 30 },
-                                        visible: { opacity: 1, y: 0 },
-                                    }}
-                                    transition={{ duration: 0.5, ease: 'easeOut' }}
-                                    whileHover={{
-                                        scale: 1.03,
-                                        rotate: 0,
-                                        y: -8,
-                                        boxShadow: '0 20px 30px -10px rgba(0,0,0,0.15)',
-                                    }}
-                                    className={`rounded-3xl p-6 md:p-8 flex flex-col justify-between min-h-[260px] transition-all duration-500 ease-out z-10 ${tilt} ${theme.bg}`}
-                                >
-                                    {/* Card header */}
-                                    <div className="flex justify-between items-center mb-8">
-                                        <div className={`w-10 h-10 flex items-center justify-center rounded-full text-xs font-mono font-bold ${theme.num}`}>
-                                            {num}
-                                        </div>
-                                        <ArrowUpRight size={18} className={theme.arrow} />
-                                    </div>
-
-                                    {/* Feature text */}
-                                    <h3 className="text-xl sm:text-2xl font-bold font-sans tracking-tight leading-tight text-inherit">
+                        {project.features.map((feature, index) => (
+                            <motion.div
+                                key={feature}
+                                variants={{
+                                    hidden: { opacity: 0, y: 12 },
+                                    visible: { opacity: 1, y: 0 },
+                                }}
+                                transition={{ duration: 0.45, ease: 'easeOut' }}
+                                className="flex items-start gap-4 rounded-2xl border border-lavender-200/30 bg-white/40 p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-lavender-300/40 dark:border-white/5 dark:bg-white/[0.02] dark:hover:border-lavender-500/20"
+                            >
+                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-lavender-200/40 bg-lavender-50/50 text-neon-purple dark:border-white/5 dark:bg-white/[0.04] dark:text-lavender-300">
+                                    <CheckCircle2 size={18} />
+                                </div>
+                                <div>
+                                    <span className="text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-lavender-500 dark:text-lavender-400">
+                                        {String(index + 1).padStart(2, '0')}
+                                    </span>
+                                    <h3 className="mt-1 text-lg font-bold leading-tight tracking-tight text-gray-950 dark:text-white">
                                         {feature}
                                     </h3>
-                                </motion.div>
-                            );
-                        })}
+                                </div>
+                            </motion.div>
+                        ))}
                     </motion.div>
                 </div>
             </section>
+
+            {isAlignMode && (
+                <div className="fixed bottom-4 left-4 z-[9999] bg-black/95 text-green-400 p-5 rounded-2xl font-mono text-xs max-w-md border border-green-500/40 shadow-2xl backdrop-blur-md">
+                    <div className="font-bold text-sm text-white mb-2">💻 Screen Aligner Tool</div>
+                    <div>p0 (TL): {pts[0].x.toFixed(2)}%, {pts[0].y.toFixed(2)}%</div>
+                    <div>p1 (TR): {pts[1].x.toFixed(2)}%, {pts[1].y.toFixed(2)}%</div>
+                    <div>p2 (BR): {pts[2].x.toFixed(2)}%, {pts[2].y.toFixed(2)}%</div>
+                    <div>p3 (BL): {pts[3].x.toFixed(2)}%, {pts[3].y.toFixed(2)}%</div>
+                    <div className="mt-4 font-bold text-white">Copy the CSS below:</div>
+                    <pre className="mt-2 select-all bg-gray-900/90 p-3 rounded-lg overflow-x-auto text-[10px] text-pink-400 border border-gray-800">
+{`.project-pexels-screen {
+  left: ${left.toFixed(2)}%;
+  top: ${top.toFixed(2)}%;
+  width: ${width.toFixed(2)}%;
+  height: ${height.toFixed(2)}%;
+  clip-path: polygon(${TL_rel[0].toFixed(2)}% ${TL_rel[1].toFixed(2)}%, ${TR_rel[0].toFixed(2)}% ${TR_rel[1].toFixed(2)}%, ${BR_rel[0].toFixed(2)}% ${BR_rel[1].toFixed(2)}%, ${BL_rel[0].toFixed(2)}% ${BL_rel[1].toFixed(2)}%);
+}`}
+                    </pre>
+                </div>
+            )}
         </div>
     );
 };

@@ -13,6 +13,7 @@ import { Resume } from './pages/Resume';
 import { ThemeToggle } from './components/ThemeToggle';
 import { LavenderPetals } from './components/LavenderPetals';
 import { ScrollFade } from './components/ScrollFade';
+import { BackToTop } from './components/BackToTop';
 import { Github, Linkedin, Mail } from 'lucide-react';
 
 import { useVisitorTracker } from './hooks/useVisitorTracker';
@@ -152,6 +153,7 @@ const App: React.FC = () => {
             <ScrollFade amount={0.05}>
               <Footer showCTA={location.pathname !== '/contact'} />
             </ScrollFade>
+            <BackToTop />
           </div>
         </div>
       )}
