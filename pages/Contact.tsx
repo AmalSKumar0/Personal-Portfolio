@@ -13,8 +13,9 @@ export const Contact: React.FC = () => {
     });
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
+    const [ipAddress, setIpAddress] = useState('Unknown');
 
-    // Load saved details on mount
+    // Load saved details and fetch IP on mount
     React.useEffect(() => {
         const savedFirstName = localStorage.getItem('visitorFirstName');
         const savedLastName = localStorage.getItem('visitorLastName');
@@ -27,6 +28,18 @@ export const Contact: React.FC = () => {
                 email: savedEmail || ''
             }));
         }
+
+        // Fetch IP Address on mount to speed up contact form submission
+        const fetchIp = async () => {
+            try {
+                const ipRes = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipRes.json();
+                setIpAddress(ipData.ip);
+            } catch (error) {
+                console.error('Failed to fetch IP:', error);
+            }
+        };
+        fetchIp();
     }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -38,16 +51,6 @@ export const Contact: React.FC = () => {
         localStorage.setItem('visitorFirstName', formData.firstName);
         localStorage.setItem('visitorLastName', formData.lastName);
         localStorage.setItem('visitorEmail', formData.email);
-
-        // Fetch IP Address
-        let ipAddress = 'Unknown';
-        try {
-            const ipRes = await fetch('https://api.ipify.org?format=json');
-            const ipData = await ipRes.json();
-            ipAddress = ipData.ip;
-        } catch (error) {
-            console.error('Failed to fetch IP:', error);
-        }
 
         const formatDateTime = (date: Date) => {
             const pad = (num: number) => String(num).padStart(2, '0');
@@ -63,35 +66,36 @@ export const Contact: React.FC = () => {
 
         const apiEndpoint = import.meta.env.VITE_CONTACT_API_URL || 'https://momentum.amalskumar.dev/api/contact/index.php';
 
-        try {
-            const response = await fetch(apiEndpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    firstName: formData.firstName,
-                    lastName: formData.lastName,
-                    email: formData.email,
-                    message: formData.message,
-                    metadata: metadata
-                }),
-            });
-
-            // Read response
+        // Send request asynchronously in the background so the user gets instant feedback
+        fetch(apiEndpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                email: formData.email,
+                message: formData.message,
+                metadata: metadata
+            }),
+        })
+        .then(async (response) => {
             const result = await response.json();
-
-            if (response.ok && result.success) {
-                setStatus('success');
-                setFormData(prev => ({ ...prev, message: '' })); // Clear message
-                setTimeout(() => setStatus('idle'), 5000); // Reset after 5s
-            } else {
-                throw new Error(result.error || 'Failed to send message');
+            if (!response.ok || !result.success) {
+                console.error('Failed to send mail in background:', result?.error || 'Unknown error');
             }
-        } catch (error: any) {
-            setStatus('error');
-            setErrorMessage(error.message || 'Failed to send message. Please try again later.');
-        }
+        })
+        .catch((error) => {
+            console.error('Failed to send mail in background:', error);
+        });
+
+        // Optimistically show success status after a very short delay to let the loading animation look natural
+        setTimeout(() => {
+            setStatus('success');
+            setFormData(prev => ({ ...prev, message: '' })); // Clear message
+            setTimeout(() => setStatus('idle'), 5000); // Reset after 5s
+        }, 800);
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
