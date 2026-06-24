@@ -49,14 +49,19 @@ export const Contact: React.FC = () => {
             console.error('Failed to fetch IP:', error);
         }
 
+        const formatDateTime = (date: Date) => {
+            const pad = (num: number) => String(num).padStart(2, '0');
+            return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+        };
+
         const metadata = {
             ip: ipAddress,
             os: navigator.platform || 'Unknown',
             browser: navigator.userAgent || 'Unknown',
-            time: new Date().toLocaleString()
+            time: formatDateTime(new Date())
         };
 
-        const apiEndpoint = import.meta.env.VITE_CONTACT_API_URL || 'https://momentum.amalskumar.dev/api/contact/';
+        const apiEndpoint = import.meta.env.VITE_CONTACT_API_URL || 'https://momentum.amalskumar.dev/api/contact/index.php';
 
         try {
             const response = await fetch(apiEndpoint, {
