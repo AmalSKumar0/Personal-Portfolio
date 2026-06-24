@@ -1,84 +1,5 @@
 [
     {
-        "id": "tictactoe",
-        "title": "Real-Time WebSocket Game Engine",
-        "shortDescription": "High-concurrency full-stack multiplayer gaming platform with real-time lobbies and chat.",
-        "fullDescription": "A high-performance, full-stack multiplayer gaming platform featuring a decoupled Django-React architecture. Utilizing Django Channels, Daphne ASGI server, and Redis as a message broker, the platform powers sub-second gameplay synchronization and real-time user presence tracking. Secure custom JWT authentication protects the global chat lobbies and private game rooms, with persistent user statistics and chat history stored in PostgreSQL.",
-        "tags": [
-            "Python",
-            "Django Channels",
-            "Redis",
-            "React",
-            "WebSockets",
-            "PostgreSQL"
-        ],
-        "imageUrl": "/project/tictactoe.png",
-        "demoUrl": "https://tictactoe.amalskumar.dev",
-        "githubUrl": "https://github.com/AmalSKumar0/tic-tac-toe-MultiPlayer",
-        "features": [
-            "Bi-Directional WebSocket Sync",
-            "Global Lobby & Live Chat",
-            "Real-Time Presence Indicators",
-            "Game Invitation & Challenge Flow",
-            "Isolated Private Room Channels",
-            "Persistent PostgreSQL Chat History"
-        ],
-        "role": "Lead Full-Stack Architect",
-        "date": "2026"
-    },
-    {
-        "id": "momentum",
-        "title": "Momentum",
-        "shortDescription": "RPG-style gamified habit tracker & life simulator.",
-        "fullDescription": "A premium, web-based gamified productivity platform that turns building habits and completing daily tasks into an engaging RPG experience. Rewards consistency with Gold and XP, while penalizing missed tasks with HP damage.",
-        "tags": [
-            "PHP",
-            "MySQL",
-            "Docker",
-            "Vanilla CSS",
-            "JavaScript",
-            "Gamification"
-        ],
-        "imageUrl": "/project/momentum.png",
-        "combinedImageUrl": "/project/momentum_combined.jpg",
-        "demoUrl": "https://momentum.amalskumar.dev",
-        "githubUrl": "https://github.com/AmalSKumar0/Momentum",
-        "features": [
-            "RPG Character Progression",
-            "Apothecary Shop & Inventory",
-            "Date-Driven Calendar History",
-            "Dark Glassmorphism Design"
-        ],
-        "role": "Lead Developer",
-        "date": "2025"
-    },
-    {
-        "id": "swift-ride",
-        "title": "SwiftRide",
-        "shortDescription": "A modern, full-stack taxi booking & ridesharing platform.",
-        "fullDescription": "A comprehensive Django-based taxi-booking and ridesharing web application connecting passengers and drivers dynamically. Features a real-time fare calculator, driver portal, passenger portal, and an analytics dashboard.",
-        "tags": [
-            "Python",
-            "Django",
-            "PostgreSQL",
-            "JavaScript",
-            "Nominatim API",
-            "Chart.js"
-        ],
-        "imageUrl": "/project/swiftride.png",
-        "combinedImageUrl": "/project/swiftride_combined.jpg",
-        "demoUrl": "https://swiftride.amalskumar.dev",
-        "githubUrl": "https://github.com/AmalSKumar0/SwiftRide",
-        "features": [
-            "Interactive Taxi Booking",
-            "Driver portal & approvals",
-            "Real-time fare calculator",
-            "Admin dashboard with charts"
-        ],
-        "role": "Full Stack Developer",
-        "date": "2025"
-    },
-    {
         "id": "velora",
         "title": "Velora",
         "shortDescription": "Digital art commission marketplace in neo-brutalist style.",
@@ -128,6 +49,85 @@
         ],
         "role": "Compiler Engineer",
         "date": "2025"
+    },
+    {
+        "id": "swift-ride",
+        "title": "SwiftRide",
+        "shortDescription": "A modern, full-stack taxi booking & ridesharing platform.",
+        "fullDescription": "A comprehensive Django-based taxi-booking and ridesharing web application connecting passengers and drivers dynamically. Features a real-time fare calculator, driver portal, passenger portal, and an analytics dashboard.",
+        "tags": [
+            "Python",
+            "Django",
+            "PostgreSQL",
+            "JavaScript",
+            "Nominatim API",
+            "Chart.js"
+        ],
+        "imageUrl": "/project/swiftride.png",
+        "combinedImageUrl": "/project/swiftride_combined.jpg",
+        "demoUrl": "https://swiftride.amalskumar.dev",
+        "githubUrl": "https://github.com/AmalSKumar0/SwiftRide",
+        "features": [
+            "Interactive Taxi Booking",
+            "Driver portal & approvals",
+            "Real-time fare calculator",
+            "Admin dashboard with charts"
+        ],
+        "role": "Full Stack Developer",
+        "date": "2025"
+    },
+    {
+        "id": "momentum",
+        "title": "Momentum",
+        "shortDescription": "RPG-style gamified habit tracker & life simulator.",
+        "fullDescription": "A premium, web-based gamified productivity platform that turns building habits and completing daily tasks into an engaging RPG experience. Rewards consistency with Gold and XP, while penalizing missed tasks with HP damage.",
+        "tags": [
+            "PHP",
+            "MySQL",
+            "Docker",
+            "Vanilla CSS",
+            "JavaScript",
+            "Gamification"
+        ],
+        "imageUrl": "/project/momentum.png",
+        "combinedImageUrl": "/project/momentum_combined.jpg",
+        "demoUrl": "https://momentum.amalskumar.dev",
+        "githubUrl": "https://github.com/AmalSKumar0/Momentum",
+        "features": [
+            "RPG Character Progression",
+            "Apothecary Shop & Inventory",
+            "Date-Driven Calendar History",
+            "Dark Glassmorphism Design"
+        ],
+        "role": "Lead Developer",
+        "date": "2025"
+    },
+    {
+        "id": "tictactoe",
+        "title": "Real-Time WebSocket Game Engine",
+        "shortDescription": "High-concurrency full-stack multiplayer gaming platform with real-time lobbies and chat.",
+        "fullDescription": "A high-performance, full-stack multiplayer gaming platform featuring a decoupled Django-React architecture. Utilizing Django Channels, Daphne ASGI server, and Redis as a message broker, the platform powers sub-second gameplay synchronization and real-time user presence tracking. Secure custom JWT authentication protects the global chat lobbies and private game rooms, with persistent user statistics and chat history stored in PostgreSQL.",
+        "tags": [
+            "Python",
+            "Django Channels",
+            "Redis",
+            "React",
+            "WebSockets",
+            "PostgreSQL"
+        ],
+        "imageUrl": "/project/tictactoe.png",
+        "demoUrl": "https://tictactoe.amalskumar.dev",
+        "githubUrl": "https://github.com/AmalSKumar0/tic-tac-toe-MultiPlayer",
+        "features": [
+            "Bi-Directional WebSocket Sync",
+            "Global Lobby & Live Chat",
+            "Real-Time Presence Indicators",
+            "Game Invitation & Challenge Flow",
+            "Isolated Private Room Channels",
+            "Persistent PostgreSQL Chat History"
+        ],
+        "role": "Lead Full-Stack Architect",
+        "date": "2026"
     },
     {
         "id": "portfolio",
