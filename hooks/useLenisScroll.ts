@@ -11,8 +11,7 @@ export const useLenisScroll = () => {
     const lenis = new Lenis({
       duration: 1.6, // Soft, slow scrolling speed
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing for buttery flow
-      direction: 'vertical',
-      gestureDirection: 'vertical',
+      gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 0.9, // Deliberate and controlled scroll response
       touchMultiplier: 1.5,

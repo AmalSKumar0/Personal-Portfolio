@@ -8,10 +8,8 @@ export const Contact: React.FC = () => {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
-        service: 'Backend Architecture',
         email: '',
-        message: '',
-        subscribe: false
+        message: ''
     });
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
@@ -36,21 +34,10 @@ export const Contact: React.FC = () => {
         setStatus('sending');
         setErrorMessage('');
 
-        const fullName = `${formData.firstName} ${formData.lastName}`.trim();
-
         // Save details for next time
         localStorage.setItem('visitorFirstName', formData.firstName);
         localStorage.setItem('visitorLastName', formData.lastName);
         localStorage.setItem('visitorEmail', formData.email);
-
-        const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
-        const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
-
-        if (!botToken || !chatId) {
-            setStatus('error');
-            setErrorMessage('Configuration Error: Telegram credentials missing.');
-            return;
-        }
 
         // Fetch IP Address
         let ipAddress = 'Unknown';
@@ -62,50 +49,43 @@ export const Contact: React.FC = () => {
             console.error('Failed to fetch IP:', error);
         }
 
-        // Gather System Metadata
-        const systemInfo = `
---------------------------------
-*System Info:*
-*IP:* \`${ipAddress}\`
-*OS:* ${navigator.platform}
-*Browser:* ${navigator.userAgent}
-*Time:* ${new Date().toLocaleString()}
-        `;
+        const metadata = {
+            ip: ipAddress,
+            os: navigator.platform || 'Unknown',
+            browser: navigator.userAgent || 'Unknown',
+            time: new Date().toLocaleString()
+        };
 
-        const text = `
-*New Client Contact Request*
-*Name:* ${fullName}
-*Email:* ${formData.email}
-*Service:* ${formData.service}
-*Subscribe to Updates:* ${formData.subscribe ? 'Yes' : 'No'}
-*Message:*
-${formData.message}
-${systemInfo}
-        `;
+        const apiEndpoint = import.meta.env.VITE_CONTACT_API_URL || 'http://localhost:8080/api/contact/';
 
         try {
-            const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            const response = await fetch(apiEndpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    chat_id: chatId,
-                    text: text,
-                    parse_mode: 'Markdown',
+                    firstName: formData.firstName,
+                    lastName: formData.lastName,
+                    email: formData.email,
+                    message: formData.message,
+                    metadata: metadata
                 }),
             });
 
-            if (response.ok) {
+            // Read response
+            const result = await response.json();
+
+            if (response.ok && result.success) {
                 setStatus('success');
-                setFormData(prev => ({ ...prev, message: '', subscribe: false })); // Clear message & reset subscribe
+                setFormData(prev => ({ ...prev, message: '' })); // Clear message
                 setTimeout(() => setStatus('idle'), 5000); // Reset after 5s
             } else {
-                throw new Error('Failed to send message');
+                throw new Error(result.error || 'Failed to send message');
             }
-        } catch (error) {
+        } catch (error: any) {
             setStatus('error');
-            setErrorMessage('Failed to send message. Please try again later.');
+            setErrorMessage(error.message || 'Failed to send message. Please try again later.');
         }
     };
 
@@ -113,13 +93,6 @@ ${systemInfo}
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
-        });
-    };
-
-    const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.checked
         });
     };
 
