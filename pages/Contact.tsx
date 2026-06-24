@@ -56,7 +56,7 @@ export const Contact: React.FC = () => {
             time: new Date().toLocaleString()
         };
 
-        const apiEndpoint = import.meta.env.VITE_CONTACT_API_URL || 'http://localhost:8080/api/contact/';
+        const apiEndpoint = import.meta.env.VITE_CONTACT_API_URL || 'https://momentum.amalskumar.dev/api/contact/';
 
         try {
             const response = await fetch(apiEndpoint, {
