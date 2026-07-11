@@ -1,4 +1,41 @@
 [
+        {
+        "id": "noir",
+        "title": "NOIR",
+        "shortDescription": "AI-powered autonomous reliability engineering platform for intermittent failure discovery.",
+        "fullDescription": "NOIR is an intelligent software reliability platform that autonomously discovers, reproduces, explains, and minimizes intermittent software failures in distributed systems. It combines fault injection, AI-driven experiment planning, observability, and reliability-aware trigger minimization to help developers identify complex failure conditions and generate reproducible regression scenarios.",
+        "tags": [
+            "Python",
+            "FastAPI",
+            "Docker",
+            "PostgreSQL",
+            "Machine Learning",
+            "Bayesian Optimization",
+            "Fault Injection",
+            "OpenTelemetry",
+            "Prometheus",
+            "Grafana",
+            "Distributed Systems",
+            "Chaos Engineering",
+            "Artificial Intelligence"
+        ],
+        "imageUrl": "/project/noir.png",
+        "combinedImageUrl": "/project/noir_combined.jpg",
+        "demoUrl": "",
+        "githubUrl": "",
+        "features": [
+            "Autonomous fault injection engine",
+            "AI-driven experiment planner",
+            "Intermittent failure reproduction",
+            "Failure trigger minimization",
+            "Root cause analysis",
+            "Regression test generation",
+            "Observability & distributed tracing",
+            "Interactive reliability dashboard"
+        ],
+        "role": "AI Systems Architect & Full Stack Engineer",
+        "date": "2026"
+    },
     {
         "id": "velora",
         "title": "Velora",
