@@ -64,31 +64,43 @@ export const Contact: React.FC = () => {
             time: formatDateTime(new Date())
         };
 
-        const apiEndpoint = import.meta.env.VITE_CONTACT_API_URL || 'https://momentum.amalskumar.dev/api/contact/index.php';
+        const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
+        const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
 
-        // Send request asynchronously in the background so the user gets instant feedback
-        fetch(apiEndpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                firstName: formData.firstName,
-                lastName: formData.lastName,
-                email: formData.email,
-                message: formData.message,
-                metadata: metadata
-            }),
-        })
-        .then(async (response) => {
-            const result = await response.json();
-            if (!response.ok || !result.success) {
-                console.error('Failed to send mail in background:', result?.error || 'Unknown error');
-            }
-        })
-        .catch((error) => {
-            console.error('Failed to send mail in background:', error);
-        });
+        if (botToken && chatId) {
+            const telegramMessage = `📩 New Contact Message
+Name: ${formData.firstName} ${formData.lastName}
+Email: ${formData.email}
+Message: ${formData.message}
+
+Metadata:
+ IP: ${ipAddress}
+ OS: ${metadata.os}
+ Browser: ${metadata.browser}
+ Time: ${metadata.time}`;
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: telegramMessage
+                }),
+            })
+            .then(async (response) => {
+                const result = await response.json();
+                if (!response.ok || !result.ok) {
+                    console.error('Failed to send Telegram message in background:', result?.description || 'Unknown error');
+                }
+            })
+            .catch((error) => {
+                console.error('Failed to send Telegram message in background:', error);
+            });
+        } else {
+            console.error('Telegram bot token or chat ID is missing in environment variables.');
+        }
 
         // Optimistically show success status after a very short delay to let the loading animation look natural
         setTimeout(() => {
