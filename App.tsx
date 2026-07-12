@@ -70,11 +70,11 @@ const App: React.FC = () => {
             </div>
           </div>
  
-          {/* Main Layout Container - shifts down and rounds top corners when menu is open */}
+          {/* Main Layout Container - shifts down */}
           <div
             className={`min-h-screen bg-cream dark:bg-tech-black transition-all duration-500 ease-in-out flex flex-col relative z-20 shadow-2xl ${
               showNavbar
-                ? 'rounded-t-[32px] border-t border-gray-200/50 dark:border-white/10'
+                ? 'border-gray-200/50 dark:border-white/10'
                 : 'rounded-t-none'
             }`}
           >
