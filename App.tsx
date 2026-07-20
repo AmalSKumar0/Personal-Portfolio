@@ -16,6 +16,7 @@ import { ScrollFade } from './components/ScrollFade';
 import { BackToTop } from './components/BackToTop';
 import { Github, Linkedin, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 import { useVisitorTracker } from './hooks/useVisitorTracker';
 import { useLenisScroll } from './hooks/useLenisScroll';
@@ -43,6 +44,7 @@ const App: React.FC = () => {
 
   return (
     <>
+      <SpeedInsights />
       {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
       {!isLoading && (
         <div className="min-h-screen bg-white dark:bg-black font-sans overflow-x-clip transition-colors duration-500">
