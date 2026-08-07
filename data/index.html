@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Dense ASCII Field</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000; /* Pure black background */
+            display: block;
+            overflow: hidden;
+            font-family: monospace;
+        }
+
+        canvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="particleCanvas"></canvas>
+
+<script>
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    let particlesArray = [];
+    
+    // Mouse interaction object
+    let mouse = {
+        x: null,
+        y: null,
+        radius: 100 // Area of effect for the cursor
+    };
+
+    window.addEventListener('mousemove', function(event) {
+        mouse.x = event.x;
+        mouse.y = event.y;
+    });
+
+    window.addEventListener('mouseleave', function() {
+        mouse.x = null;
+        mouse.y = null;
+    });
+
+    // Expanded collection of characters for maximum variety
+    const characters = ['@', '#', '$', '&', '%', '*', '+', '=', '-', ':', '.', 'x', 'o', 'c', '0', '1', '8', '?', '/', '\\', 'A', 'B', 'X'];
+
+    class Particle {
+        constructor(x, y, color) {
+            this.x = x + (Math.random() * 2 - 1); 
+            this.y = y + (Math.random() * 2 - 1);
+            this.baseX = x;
+            this.baseY = y;
+            this.size = 10; // Smaller size for denser, finer letter packing
+            this.color = color;
+            this.char = characters[Math.floor(Math.random() * characters.length)];
+            
+            // Physics variables
+            this.vx = 0;
+            this.vy = 0;
+            this.friction = 0.85; // Smooth damping
+            this.spring = 0.06;   // Snap-back strength
+            this.repulse = 4.5;   // Repulsion force
+        }
+
+        update() {
+            let dx = mouse.x - this.x;
+            let dy = mouse.y - this.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < mouse.radius && mouse.x !== null) {
+                let forceDirectionX = dx / distance;
+                let forceDirectionY = dy / distance;
+                let force = (mouse.radius - distance) / mouse.radius;
+                
+                this.vx -= forceDirectionX * force * this.repulse;
+                this.vy -= forceDirectionY * force * this.repulse;
+            }
+
+            this.vx += (this.baseX - this.x) * this.spring;
+            this.vy += (this.baseY - this.y) * this.spring;
+
+            this.vx *= this.friction;
+            this.vy *= this.friction;
+
+            this.x += this.vx;
+            this.y += this.vy;
+        }
+
+        draw() {
+            ctx.fillStyle = this.color;
+            ctx.font = `${this.size}px monospace`;
+            ctx.fillText(this.char, this.x, this.y);
+        }
+    }
+
+    function init() {
+        particlesArray = [];
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        // Reduced step size to drastically increase the number of letters
+        const step = 9; 
+
+        for (let y = 0; y < canvas.height; y += step) {
+            for (let x = 0; x < canvas.width; x += step) {
+                // Pure white letters with slight random opacity variations for texture
+                const opacity = (Math.random() * 0.4 + 0.6).toFixed(2);
+                const color = `rgba(255, 255, 255, ${opacity})`;
+                
+                particlesArray.push(new Particle(x, y, color));
+            }
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        for (let i = 0; i < particlesArray.length; i++) {
+            particlesArray[i].update();
+            particlesArray[i].draw();
+        }
+        requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+    
+    window.addEventListener('resize', function() {
+        init();
+    });
+</script>
+</body>
+</html>
