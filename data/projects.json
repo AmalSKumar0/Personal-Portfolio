@@ -1,4 +1,46 @@
-[    
+[
+    {
+        "id": "noir",
+        "title": "NOIR",
+        "shortDescription": "Autonomous software reliability and chaos engineering platform with a high-speed Go CLI agent, Docker fault injection, and real-time telemetry streaming.",
+        "fullDescription": "NOIR is an enterprise-grade autonomous reliability and chaos engineering platform designed for containerized microservices. Engineered with a zero-dependency, statically-linked Go CLI agent (<8ms startup latency, ~9MB memory footprint), NOIR combines deterministic Docker fault injection (Linux Traffic Control netem, cgroup CPU/memory stressors, and container lifecycle) with continuous steady-state HTTP health probing. It enforces strict sample-count statistical gating (P95/P99 latency, 3-sigma anomaly spike detection), validates Recovery Time Objectives (RTO) against consecutive healthy confirmations, and streams live telemetry over Django Channels WebSockets to an interactive React 19 dashboard with automated resilience scoring and remediation roadmaps.",
+        "tags": [
+            "Go",
+            "Python",
+            "Django Channels",
+            "WebSockets",
+            "React 19",
+            "TypeScript",
+            "Docker",
+            "PostgreSQL",
+            "Redis",
+            "Chaos Engineering",
+            "Fault Injection",
+            "Traffic Control (netem)",
+            "Systems Programming",
+            "Tailwind CSS",
+            "Recharts"
+        ],
+        "imageUrl": "/project/noir.png",
+        "combinedImageUrl": "/project/noir.jpg",
+        "demoUrl": "https://noir.amalskumar.dev",
+        "githubUrl": "https://github.com/AmalSKumar0/noir",
+        "features": [
+            "Native Go CLI Agent (<8ms startup, ~9MB memory footprint, zero-dependency binary with cross-compilation for Linux, macOS & Windows)",
+            "Embedded local OAuth server (127.0.0.1:53145) & dual-layer OS Keyring / ~/.noir/credentials.json storage",
+            "Lynx AST Profiler with parallel goroutine directory scanning for sub-50ms tech-stack & Docker container discovery",
+            "Multi-stack automated test runner supporting Pytest, Django, Jest, Vitest, Go test, Cargo test, and Maven",
+            "Deterministic Docker fault injection (CPU/memory stress, netem latency & packet loss, container restarts/stops)",
+            "Failsafe automated rollback & kernel cleanup guaranteed even upon interruption or unexpected crash",
+            "Continuous steady-state HTTP health probing with sub-millisecond RTO measurement",
+            "Strict sample-count confidence gating (P95/P99 latency, 3-sigma anomaly classification, burst-failure tracking)",
+            "Algorithmic resilience scoring (0–100 scale, letter grades A–F, and formal hypothesis verification)",
+            "Real-time bi-directional WebSocket telemetry streaming to a React 19 + Recharts terminal dashboard",
+            "One-line automated shell & PowerShell installers (`curl -fsSL https://noir.amalskumar.dev/install.sh | bash`)"
+        ],
+        "role": "Systems Architect & Lead Engineer",
+        "date": "2026"
+    },
     {
         "id": "velora",
         "title": "Velora",
@@ -26,6 +68,36 @@
         "date": "2025"
     },
     {
+        "id": "botfence",
+        "title": "BotFence",
+        "shortDescription": "Universal WordPress anti-spam & autonomous bot defense engine without visual puzzles.",
+        "fullDescription": "An enterprise-grade, zero-configuration WordPress security and anti-spam plugin engineered to block automated spam, credential stuffing, and bot attacks across all forms without annoying visual CAPTCHAs or third-party subscriptions. Built with a modular adapter architecture supporting 10+ major form builders, BotFence combines dynamic rotating honeypots and HMAC-SHA256 tokens with server-side composite risk scoring (0–100), atomic rate limiting, full page-caching compatibility via REST/AJAX token hydration, and an executive threat defense analytics dashboard.",
+        "tags": [
+            "PHP",
+            "WordPress",
+            "Cybersecurity",
+            "Anti-Spam",
+            "React",
+            "TypeScript",
+            "Tailwind CSS",
+            "PHPUnit"
+        ],
+        "imageUrl": "/project/botfence.png",
+        "combinedImageUrl": "/project/botfence.jpg",
+        "demoUrl": "https://bot-fence.vercel.app/",
+        "githubUrl": "https://github.com/AmalSKumar0/BotFence",
+        "features": [
+            "Dynamic rotating honeypot traps & HMAC-SHA256 cryptographic tokens",
+            "Multi-signal composite risk scoring engine (0–100 scale)",
+            "Zero-configuration adapter support across 10+ WordPress form builders",
+            "Atomic IP and form-level rate limiting with SHA-256 privacy hashing",
+            "Interactive Threat Defense & Analytics dashboard with CSV audit exports",
+            "Fully tested test suite with 84 automated PHPUnit tests & 444 assertions"
+        ],
+        "role": "Security Engineer & Plugin Architect",
+        "date": "2026"
+    },
+    {
         "id": "copper",
         "title": "Copper",
         "shortDescription": "A custom interpreted programming language built in C.",
@@ -49,6 +121,38 @@
         ],
         "role": "Compiler Engineer",
         "date": "2025"
+    },
+    {
+        "id": "paralax",
+        "title": "Paralax",
+        "shortDescription": "IoT dual-button push-to-talk AI voice translator edge device with real-time bidirectional WebSocket streaming.",
+        "fullDescription": "Paralax is an IoT push-to-talk two-way voice translation edge device and cloud platform. Powered by an ESP32 microcontroller with digital I2S audio peripherals (INMP441 MEMS mic & MAX98357A amp), it streams raw 16 kHz PCM audio over bidirectional WebSockets to a Node.js/Hono gateway. The pipeline chains Groq Whisper STT, LLaMA-3.3-70B translation, and Edge-TTS for sub-500ms voice-to-voice translation, paired with a React 19 fleet telemetry dashboard and automated provider fallback resilience.",
+        "tags": [
+            "ESP32",
+            "TypeScript",
+            "Node.js",
+            "Hono",
+            "React 19",
+            "WebSockets",
+            "Tailwind CSS",
+            "Groq AI",
+            "PostgreSQL",
+            "IoT"
+        ],
+        "imageUrl": "/project/paralax.png",
+        "combinedImageUrl": "/project/paralax.jpg",
+        "demoUrl": "https://paralax.amalskumar.dev",
+        "githubUrl": "https://github.com/AmalSKumar0/Paralax",
+        "features": [
+            "Dual-button physical push-to-talk interface for seamless two-way dialogue",
+            "Full-duplex WebSocket audio streaming removing edge SRAM buffer limits",
+            "Sub-500ms pipeline powered by Groq Whisper, LLaMA 3.3, and Edge-TTS",
+            "Pure digital I2S audio architecture (INMP441 MEMS mic & MAX98357A amp)",
+            "Multi-provider automated fallback resilience (Groq Cloud & xAI Grok)",
+            "Real-time React 19 fleet management & live telemetry dashboard"
+        ],
+        "role": "IoT Systems Architect & Full Stack Engineer",
+        "date": "2026"
     },
     {
         "id": "swift-ride",
@@ -153,7 +257,7 @@
         ],
         "role": "Frontend Specialist",
         "date": "2026"
-        },
+    },
     {
         "id": "portfolio",
         "title": "Portfolio",
